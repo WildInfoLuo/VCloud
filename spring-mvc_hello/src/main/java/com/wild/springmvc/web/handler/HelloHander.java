@@ -9,6 +9,7 @@ public class HelloHander {
 	@RequestMapping("/hello")
 	public String hello(){
 		System.out.println("进来了...");
+		System.out.println("进来了...");
 		return "success";
 	}
 }
