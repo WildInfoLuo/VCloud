@@ -1,0 +1,256 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>百度云——云上的日子 你我共享</title>
+<link rel="short icon" href="../images/vcloud.png" />
+<style type="text/css">
+	*{
+		margin:0;
+		padding:0;
+	}
+	body{
+		color: #333;
+    	font: 12px/1.5 arial,simsun;
+	}
+	.bg_top .bg_bottom{
+		position:relative;
+	}
+	.bg_top .bg_bottom img{
+		border: 0 none;
+		outline: medium none;
+	}
+	.bg{
+		left: 0;
+    	position: absolute;
+    	top: 0;
+    	width: 100%;
+    	z-index: 0;
+	}
+	.gif{
+		width: 1000px;
+		position:relative;
+		margin:0 auto;
+	}
+	.gif img{
+		position:absolute;
+		z-index:10;
+	}
+	
+	.logo{
+		width:400px;
+		height:450px;
+		position:absolute;
+		z-index:12;
+		margin-top:65px;
+		margin-left:875px;
+		background-color:#FFF;
+		opacity:0.9;
+	}
+	.logo_2{
+		left: 0;
+		position: absolute;
+		top: 0;
+		z-index: 1;
+	}
+	.logo_top{
+		font-family: "Microsoft Yahei",simsun,arial;
+		font-size: 22px;
+		height: 45px;
+		line-height: 45px;
+		padding: 20px 0 0 22px;
+	}
+	.bd-logo {
+		background: rgba(0, 0, 0, 0) url("../images/bg_logo.jpg") no-repeat scroll 0 0;
+		display: inline-block;
+		height: 25px;
+		position: relative;
+		top: 3px;
+		width: 25px;
+	}
+	.logo_center{
+		margin-left:10px;
+		position: relative;
+   		z-index: 50;
+	}
+	
+	.logo_center form {
+		padding-left: 20px;
+		position: relative;
+	}
+	.errorMSG{
+		color:red;
+		margin-bottom:5px;
+	}
+	.MSG {
+		border:1px solid #999;
+		width:338px;
+		height:124px;
+	}
+	.username input{
+		width:277px;
+		height:21px;
+		font-size: 14px;
+		margin-left: 15px;
+		padding: 20px 0 20px 35px;
+		border-style:none;
+		border-bottom:1px solid #999;
+	}
+	.password input{
+		width:277px;
+		height:21px;
+		font-size: 14px;
+		margin-left: 15px;
+		padding: 20px 0 20px 35px;
+		border-style:none;
+	}
+	.userpic{
+		height: 18px;
+		left: 42px;
+		position: absolute;
+		text-indent: -9999em;
+		top: 44px;
+		width: 18px;
+		z-index: 1;
+		background-image:url(../images/user.png);
+	}
+	.pwdpic{
+		height: 18px;
+		left: 42px;
+		position: absolute;
+		text-indent: -9999em;
+		top: 106px;
+		width: 18px;
+		z-index: 1;
+		background-image:url(../images/pwd.png);
+	}
+	.autologin{
+		margin-top:10px;
+	}
+	.autologin input{
+		margin: 0px 5px 0 0;
+		position: relative;
+		top: -1px;
+		vertical-align: middle;
+	}
+	.submit {
+		margin-top:10px;
+	}
+	.submit input{
+		background-position: 0 0;
+		border: 0 none;
+		cursor: pointer;
+		display: block;
+		height: 52px;
+		width: 100%;
+		background-color:#C00;
+		border-radius:5px;
+		color:#FFF;
+		font-size:20px;
+		font-family:"宋体";
+		font-weight:bolder;
+	}
+	.morelogin{
+		width:120px;
+		margin-top:100px;
+		margin-left:30px;
+		float:left;
+	}
+	.loginchoose{
+		margin-top:70px;
+		width:220px;
+		float:left;
+	}
+	.zc{
+		margin-top:400px;
+	}
+	.zc input{
+		background-position: 0 0;
+		border: 0 none;
+		cursor: pointer;
+		display: block;
+		width: 100%;
+		border-radius:5px;
+		color:#FFF;
+		font-size:24px;
+		font-family:"宋体";
+		font-weight:bolder;
+		height:77px;
+		background-color:#333;
+	}
+	#submit:hover{
+		opacity:0.7;
+	}
+	#zc:hover{
+		opacity:0.7;
+	}
+	#sina:hover{
+		opacity:0.7;
+	}
+	#qq:hover{
+		opacity:0.7;
+	}
+</style>
+</head>
+
+    <body>
+    <div class="bg">
+        <div class="bg_top">
+            <img width="100%" tabindex="1" style="display: block;" src="../images/bg_shad_top_2.jpg"/>
+        </div>
+        <div class="bg_bottom">
+        <img width="100%" tabindex="1" style="display: block;" src="../images/bg_shad_bottom_2.jpg" height="289px;"/>
+        </div>
+    </div>
+    <div class="gif">
+        <img  class="top_gif" src="../images/tab_3_slog.gif" style="width: 84.3125px; height: 91.3385px; left: 550.169px; top: 236.778px;">
+        <img  class="left_gif" src="../images/tab_1_slog.gif" style="width: 263.477px; height: 49.1823px; left: 124.012px; top: 113.119px;">
+    </div>
+    <div class="logo">
+    	<div class="logo_2">
+            <div class="logo_top">
+               <img style="	display: inline-block;position: relative;top: 3px;"  width="25px;" height="25px;" src="../images/vcloud.png" />
+                登录VCloud帐号
+            </div>
+            <div class="logo_center"> 
+            	<form action="" method="">
+                  <div class="errorMSG">请输入您的账号密码</div>
+                	<div class="MSG">
+                        <p class="username">
+                           <label class="userpic"></label>
+                            <input autocomplete="off"  type="text" name="userName" placeholder="手机/邮箱/用户名"/>
+                        </p>
+                        <p class="password">
+                          <label class="pwdpic"></label>
+                            <input autocomplete="off" type="password" name="password" placeholder="密码"/>
+                        </p>
+                        <p	class="autologin" >
+                        	<input style="margin-top:5px;"  type="checkbox" checked="checked" name="memberPass">
+                            <label>下次自动登录</label>
+                            <a style="float:right;" href="">登录遇到问题</a>
+                        </p>
+                        <p class="submit">
+                        	<input id="submit"   type="submit" value="登 录">
+                        </p>
+                    </div>
+                </form> 
+  			</div>
+            <div>
+                <div class="morelogin">
+                    可以使用以下方式登录
+                </div>
+                <div class="loginchoose">
+                    <a id="sina" href=""><img src="../images/sina.png" href=""/></a>
+                    <a id="qq" href=""><img src="../images/qq.png" href=""/></a>
+                </div>
+           </div>
+        </div>
+        <div class="zc">
+        	<input id="zc"  type="submit" value="立即注册VCloud账号">
+        </div>
+    </div>
+
+
+</body>
+</html>
+

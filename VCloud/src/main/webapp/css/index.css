@@ -1,0 +1,19 @@
+@CHARSET "UTF-8";
+
+#navbar{width:100%;height:50px;background:rgb(32,100,116);}
+#navbar #navbar_left{height:100%;float:left;}
+#navbar #navbar_left img{width:130px;height:50px;float:left;}
+#navbar #navbar_left ul{padding-left:10px;float:left;}
+#navbar #navbar_left ul #left_li{list-style: none;float:left;width:70px;height:50px;line-height:50px;text-align: center;}
+#navbar #navbar_left ul #left_li a{color:white;font-size:20px;text-decoration: none;}
+
+#navbar #navbar_right{height:100%;float:right;}
+#navbar #navbar_right ul li{list-style: none;float:left;width:50px;height:50px;line-height:50px;text-align: center;}
+#navbar #navbar_right ul li a{color:white;font-size:14px;text-decoration: none;}
+#navbar #navbar_right ul li:hover{background:rgb(30,36,36)}
+#navbar #navbar_left ul #left_li:hover{background:rgb(30,36,36)}
+
+#middle{float:left;margin-top:30px;width:100%;margin-left: 125px;}
+#navbar_left #navbar_hidden{margin-top:-5px;display:none;z-index: 100;position: absolute;background-color: rgb(66,177,242);}
+
+#sharePart{width:300px;height:80px;z-index: 90;float:left;margin-left:1000px;position: absolute;margin-top:10px;}
