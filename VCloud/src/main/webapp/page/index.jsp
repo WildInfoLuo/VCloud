@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html  class="no-js">
 <head>
-<meta charset=UTF-8">
+<meta charset="UTF-8">
 
 <title>VCloud主页</title>
 
