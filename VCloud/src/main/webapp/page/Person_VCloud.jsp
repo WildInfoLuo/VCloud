@@ -5,14 +5,38 @@
 <head>
 <meta charset=UTF-8">
 <title>VCloud__网盘</title>
+
+<!--右键菜单样式-->
+<link rel="stylesheet" href="../css/base.css" />
+<link rel="stylesheet" href="../css/gizmoMenu.css" />
+
 <link type="text/css" rel="stylesheet" href="../css/vclound.css"/>
 <link type="text/css" rel="stylesheet" href="../css/index.css">
+
 <link href="../images/云准备.gif" rel="shortcut icon">
 <script src="../js/jquery-1.11.3.min.js">
 </script><script src="../js/vclound.js"></script>
 <script type="text/javascript" src="../js/index.js"></script>
+	
+<script type="text/javascript" src="../js/gizmoMenu.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+	$('body').gizmoMenu({
+		'menu':'gizmoDropDown'	
+	});
+	
+	$('#hamburger_example').gizmoMenu({
+		'menu':'gizmoBurger'
+	});
+	
+	$('#horizontal_example').gizmoMenu({
+		'menu':'gizmoHorizontal'
+	});			
+});
+</script>  
 </head>
 <body>
+
 <div id="navbar">
 		<div id="navbar_left">
 			<img alt="千度云盘" src="../images/logo2.png">
@@ -68,7 +92,7 @@
 <div class="module-aside">
     <ul class="menu-list">
         <li class="list-item-all">
-            <a class="b-no-ln" href="#">
+            <a class="b-no-ln" href="javascript:chageBg(this,'list-item-all')">
                 <span class="text">
                     <span class="img-ico-disk"></span>
                     <span class="item-title">全部</span>
@@ -76,7 +100,7 @@
             </a>
         </li>
             <li class="list-item-pic">
-                <a class="b-no-ln" href="pic_timeline_empty.jsp">
+                <a class="b-no-ln" href="javascript:chageBg(this,'list-item-pic')">
                     <span class="text">
                         <span class="img-ico-pic"></span>
                         <span class="item-title">图片</span>
@@ -84,7 +108,7 @@
                 </a>
             </li>
         <li class="list-item-doc">
-            <a class="b-no-ln" href="#">
+            <a class="b-no-ln" href="javascript:chageBg(this,'list-item-doc')">
                 <span class="text">
                     <span class="img-ico-doc"></span>
                     <span class="item-title">文档</span>
@@ -92,7 +116,7 @@
             </a>
         </li>
         <li class="list-item-video">
-            <a class="b-no-ln">
+            <a class="b-no-ln" href="javascript:chageBg(this,'list-item-video')">
                 <span class="text">
                     <span class="img-ico-video"></span>
                     <span class="item-title">视频</span>
@@ -100,7 +124,7 @@
             </a>
         </li>
         <li class="list-item-bt">
-            <a class="b-no-ln" href="#">
+            <a class="b-no-ln" href="javascript:chageBg(this,'list-item-bt')">
                 <span class="text">
                     <span class="img-ico-bt"></span>
                     <span class="item-title">种子</span>
@@ -108,7 +132,7 @@
             </a>
         </li>
         <li class="list-item-music">
-            <a class="b-no-ln" href="#">
+            <a class="b-no-ln" href="javascript:chageBg(this,'list-item-music')">
                 <span class="text">
                     <span class="img-ico-music"></span>
                     <span class="item-title">音乐</span>
@@ -116,7 +140,7 @@
             </a>
         </li>
         <li class="list-item-oth">
-            <a class="b-no-ln" href="#">
+            <a class="b-no-ln" href="javascript:chageBg(this,'list-item-oth')">
                 <span class="text">
                     <span class="img-ico-oth"></span>
                     <span class="item-title">其它</span>
@@ -157,7 +181,7 @@
                 <span class="menu" style="width: 64px;">
                     <a class="g-button-menu g-menu-hasIcon" href="javascript:void(0);" data-menu-id="b-menu0" style="display:none;">
                         <em class="icon icon-aside-recyclebin"></em>
-                        回收站
+                       		 回收站
                     </a>
             	</span>
             </span>
@@ -193,31 +217,97 @@
         	<span class="history-list-dir">全部文件</span>
 			<span class="history-list-tips">已全部加载，共6个</span>
         </div>
-        
-        <div class="list-view-header">
+       <div class="list-view-header">
             <div class="list-header">
                 <ul class="list-cols">
                     <li class="first-col" style="width:60%;">
                         <div class="check">
                             <span class="check-icon" onClick="checkIcon()"></span>
-                            <span class="text">文件名</span>
-                            <div class="list-header-operatearea global-clearfix">
-                                <span class="count-tips">已选中6个文件/文件夹</span>
-                            </div>
+                            <span class="textCla">文件名</span>
+                            <span class="list-header-operatearea">
+                                <span class="textCla">已选中6个文件/文件夹</span>
+                                <a class="lg-button" href="javascript:void(0);">
+                                <span class="lg-button-right">
+                                    <em class="icon-share-gray" title="分享"></em>
+                                    <span class="text" style="width: auto;">分享</span>
+                                </span>
+                                </a>
+                                <a class="lg-button" href="javascript:void(0);">
+                                    <span class="lg-button-right">
+                                        <em class="icon-download-gray" title="下载"></em>
+                                        <span class="text" style="width: auto;">下载</span>
+                                	</span>
+                                </a>
+                                <a class="lg-button" href="javascript:void(0);">
+                                    <span class="lg-button-right">
+                                        <em class="icon-del-gray" title="删除"></em>
+                                        <span class="text" style="width: auto;">删除</span>
+                                	</span>
+                                </a>
+                                <a class="lg-button" href="javascript:void(0);">
+                                    <span class="lg-button-right">
+                                        <span class="text" style="width: auto;">复制</span>
+                                	</span>
+                                </a>
+                                <a class="lg-button" href="javascript:void(0);">
+                                    <span class="lg-button-right">
+                                        <span class="text" style="width: auto;">移动</span>
+                                	</span>
+                                </a>
+                           </span>
                         </div>       
 					</li>
-                    
-                    <!--<li class="col" style="width:16%;">
-                        <span class="text">大小</span>
+                    <li class="col" style="width:15%;">
+                        <span class="textCla">大小</span>
                         <span class="order-icon"></span>
                     </li>
-                    <li class="last-col" style="width:23%;cursor:pointer;" onClick="lastColicon()">
-                        <span class="text">修改日期</span>
+                    <li class="last-col" style="width:21%;cursor:pointer;" onClick="lastColicon()">
+                        <span class="textCla">修改日期</span>
                         <span class="order-icon"></span>
-                    </li>-->
+                    </li>
                 </ul>
             </div>
 		</div>
-</div> 
+		
+		<div class="list-view-container">
+            <div class="module-list-view">
+                <div class="list-view">
+                    <dd class="open-enable">
+                    <span class="check-icon"></span>
+                        <div class="fileicon"></div>
+                        <div class="file-name">
+                            <div class="text">
+                            <a class="filename" href="javascript:void(0);" title="文件接收柜">文件接收柜</a>
+                            </div>
+                        </div>
+                    <div class="file-size">-</div>
+                    <div class="ctime">2015-11-15 11:31</div>
+                    </dd>
+               </div>
+            </div>
+    	</div>
+		<!-- 右键菜单 -->
+		<div class="container"></div>
+		
+		<div class="gizmoMenu gizmoDropDown">
+	<ul>
+		<li><i class="fa fa-camera-retro"></i><a href="#">查看</a><img style="margin-top:5px; margin-left:70px;" src="../images/jian.png"/>
+			<ul>
+				<li><i class="fa fa-bullseye"></i><a href="#">列表</a></li>
+				<li><i class="fa fa-cubes"></i><a href="#">缩略图</a></li>
+			</ul>
+		</li>
+		<li><i class="fa fa-camera-retro"></i><a href="#">排序方式</a><img style="margin-top:5px; margin-left:38px;" src="../images/jian.png"/>
+			<ul>
+				<li><i class="fa fa-bullseye"></i><a href="#">名称</a></li>
+				<li><i class="fa fa-cubes"></i><a href="#">大小</a></li>
+				<li><i class="fa fa-bullseye"></i><a href="#">修改日期</a></li>
+			</ul>
+		</li>            
+		<li><i class="fa fa-arrow-right"></i><a href="#">刷新</a></li>
+		<li><i class="fa fa-arrow-right"></i><a href="#">重新加载页面</a></li>
+		<li id="file"><img  src="../images/yfile.png" /><i class="fa fa-arrow-right"></i><a href="#">新建文件夹</a></li>
+	</ul>
+</div>
 </body>
 </html>

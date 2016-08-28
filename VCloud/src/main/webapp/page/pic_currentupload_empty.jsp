@@ -67,7 +67,7 @@
 <div class="module-aside">
     <ul class="menu-list">
         <li class="list-item-all">
-            <a class="b-no-ln" href="#">
+            <a class="b-no-ln" href="javascript:chageBg(this,'list-item-all')">
                 <span class="text">
                     <span class="img-ico-disk"></span>
                     <span class="item-title">全部</span>
@@ -75,7 +75,7 @@
             </a>
         </li>
             <li class="list-item-pic">
-                <a class="b-no-ln" href="page/pic_timeline_empty.jsp">
+                <a class="b-no-ln" href="javascript:chageBg(this,'list-item-pic')">
                     <span class="text">
                         <span class="img-ico-pic"></span>
                         <span class="item-title">图片</span>
@@ -83,7 +83,7 @@
                 </a>
             </li>
         <li class="list-item-doc">
-            <a class="b-no-ln" href="#">
+            <a class="b-no-ln" href="javascript:chageBg(this,'list-item-doc')">
                 <span class="text">
                     <span class="img-ico-doc"></span>
                     <span class="item-title">文档</span>
@@ -91,7 +91,7 @@
             </a>
         </li>
         <li class="list-item-video">
-            <a class="b-no-ln">
+            <a class="b-no-ln" href="javascript:chageBg(this,'list-item-video')">
                 <span class="text">
                     <span class="img-ico-video"></span>
                     <span class="item-title">视频</span>
@@ -99,7 +99,7 @@
             </a>
         </li>
         <li class="list-item-bt">
-            <a class="b-no-ln" href="#">
+            <a class="b-no-ln" href="javascript:chageBg(this,'list-item-bt')">
                 <span class="text">
                     <span class="img-ico-bt"></span>
                     <span class="item-title">种子</span>
@@ -107,7 +107,7 @@
             </a>
         </li>
         <li class="list-item-music">
-            <a class="b-no-ln" href="#">
+            <a class="b-no-ln" href="javascript:chageBg(this,'list-item-music')">
                 <span class="text">
                     <span class="img-ico-music"></span>
                     <span class="item-title">音乐</span>
@@ -115,7 +115,7 @@
             </a>
         </li>
         <li class="list-item-oth">
-            <a class="b-no-ln" href="#">
+            <a class="b-no-ln" href="javascript:chageBg(this,'list-item-oth')">
                 <span class="text">
                     <span class="img-ico-oth"></span>
                     <span class="item-title">其它</span>
