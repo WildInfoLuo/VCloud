@@ -267,6 +267,18 @@
 			<div class="module-list-view">
 				<div class="list-view">
 					<dd class="open-enable">
+						<span class="check-icon" onclick="filenameIcon('')"></span>
+						<div class="fileicon"></div>
+						<li class="file-name" style="width: 60%;">
+							<div class="text">
+								<div class="filenameicon"></div>
+								<a class="filename" style="padding-left: 6px;" href="javascript:void(0);" title="文件接收柜">文件接收柜</a>
+							</div>
+						</li>
+						<li class="file-size" style="width: 16%;">-</li>
+						<li class="ctime" style="width: 21%;">2015-11-15 11:31</li>
+					</dd>
+					<dd class="open-enable">
 						<span class="check-icon" onclick="checkIcon()"></span>
 						<div class="fileicon"></div>
 						<li class="file-name" style="width: 60%;">
