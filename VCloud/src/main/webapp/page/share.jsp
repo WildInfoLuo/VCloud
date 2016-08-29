@@ -6,36 +6,15 @@
 <meta charset=UTF-8">
 <title>VCloud__网盘</title>
 
-<!--右键菜单样式-->
-<link rel="stylesheet" href="../css/base.css" />
-<link rel="stylesheet" href="../css/gizmoMenu.css" />
-
 <link type="text/css" rel="stylesheet" href="../css/vclound.css" />
 <link type="text/css" rel="stylesheet" href="../css/index.css">
-
+<link type="text/css" rel="stylesheet" href="../css/share.css">
 <link href="../images/云准备.gif" rel="shortcut icon">
 <script src="../js/jquery-1.11.3.min.js">
 	
 </script>
 <script src="../js/vclound.js"></script>
 <script type="text/javascript" src="../js/index.js"></script>
-
-<script type="text/javascript" src="../js/gizmoMenu.js"></script>
-<script type="text/javascript">
-	$(document).ready(function() {
-		$('body').gizmoMenu({
-			'menu' : 'gizmoDropDown'
-		});
-
-		$('#hamburger_example').gizmoMenu({
-			'menu' : 'gizmoBurger'
-		});
-
-		$('#horizontal_example').gizmoMenu({
-			'menu' : 'gizmoHorizontal'
-		});
-	});
-</script>
 </head>
 <body>
 
@@ -89,13 +68,6 @@
 				<li><a href="#">注销</a></li>
 				<li><a href="#">通知</a></li>
 				<li><a href="#">更多>></a></li>
-			</ul>
-		</div>
-		<div id="search">
-			<ul>
-				<li><input type="text" name="searchkey" id="searchkey"
-					placeholder="请输入您要搜索的关键字" /><input type="button" name="searchbu"
-					id="searchbu" value="搜索" /></li>
 			</ul>
 		</div>
 	</div>
@@ -184,128 +156,43 @@
 		<div class="item-separator" style="display: block;"></div>
 		<div
 			style="width: 100%; height: 236px; background: transparent none repeat scroll 0% 0%;">
-			<div class="aside-absolute-container"
-				style="visibility: visible; position: absolute; width: 100%; height: 155px; top: 460px; bottom: auto;">
-			</div>
 		</div>
 	</div>
-	<!--上传文件、新建文件夹-->
-	<div id="layoutMain" class="frame-main">
-		<div class="module-toolbar">
-			<form action="javascript:void(0);">
-				<div>
-					<ul class="upfileds">
-						<li>
-							<div class="time-upfileimg">
-								<input id="h5Input0" type="file"
-									style="width: 154px; height: 39px; position: absolute; opacity: 0; cursor: pointer;"
-									name="html5uploader" accept="*/*" multiple title="点击选择文件">
-							</div>
-						</li>
-						<li class="upfileInputjia">
-							<div>
-								<div class="upfileimgjia"></div>
-								<span class="upfileSpanjia">新建文件夹</span>
-							</div>
-						</li>
-					</ul>
-				</div>
-			</form>
+	
+	<!-- 分享 -->
+	<div id="shareCon"></div>
+	<div id="sharebut" onclick="javascript:showShare()"></div>
+	<div id="shareshow">
+		<h3 id="shareh3">文件列表</h3>
+		<div id="showall">
+			<span>全部文件</span>
 		</div>
-		<!--控制lay块的隐藏与显示  -->
-		<div class="list-grid-switch">
-			<a class="list-switch" href="javascript:void(0)" onClick="lswitch()"></a>
-			<a class="grid-switch" href="javascript:void(0)" onClick="gswitch()"></a>
-		</div>
-	</div>
-	<div class="content">
-		<div class="module-list">
-			<span class="history-list-dir">全部文件</span> <span
-				class="history-list-tips">已全部加载，共6个</span>
-			<div class="list-view-header">
-				<div class="list-header">
-					<ul class="list-cols">
-						<li class="first-col" style="width: 60%;">
-							<div class="check">
-								<span class="check-icon" onClick="checkIcon()"></span> <span
-									class="textCla" style="line-height: 43px;">文件名</span> <span
-									class="list-header-operatearea"> <span
-									class="count-tips" style="line-height: 43px;">已选中6个文件/文件夹</span>
-									<a class="lg-button" href="javascript:void(0);"> <span
-										class="lg-button-right"> <em class="icon-share-gray"
-											title="分享"></em> <span class="text" style="width: auto;">分享</span>
-									</span>
-								</a> <a class="lg-button" href="javascript:void(0);"> <span
-										class="lg-button-right"> <em class="icon-download-gray"
-											title="下载"></em> <span class="text" style="width: auto;">下载</span>
-									</span>
-								</a> <a class="lg-button" href="javascript:void(0);"> <span
-										class="lg-button-right"> <em class="icon-del-gray"
-											title="删除"></em> <span class="text" style="width: auto;">删除</span>
-									</span>
-								</a> <a class="lg-button" href="javascript:void(0);"> <span
-										class="lg-button-right"> <span class="text"
-											style="width: auto;">复制</span>
-									</span>
-								</a> <a class="lg-button" href="javascript:void(0);"> <span
-										class="lg-button-right"> <span class="text"
-											style="width: auto;">移动</span>
-									</span>
-								</a>
-								</span>
-							</div>
-						</li>
-						<li class="col" style="width: 15%; line-height: 43px;"><span
-							class="text">大小</span> <span class="order-icon"></span></li>
-						<li class="last-col"
-							style="width: 21%; cursor: pointer; line-height: 43px;"
-							onClick="lastColicon()"><span class="text">修改日期</span> <span
-							class="order-icon"></span></li>
-					</ul>
-				</div>
+		<div id="name">
+			<div style="width:60%;height:40px;float:left;">
+				<span class="check-icon2" onClick="checkIcon()"></span> 
+				<span>文件名</span>
 			</div>
-			<div class="list-view-container">
-				<div class="module-list-view">
-					<div class="list-view">
-						<dd class="open-enable">
-							<span class="check-icon"></span>
-							<div class="fileicon"></div>
-							<div class="file-name">
-								<div class="text">
-									<a class="filename" href="javascript:void(0);" title="文件接收柜">文件接收柜</a>
-								</div>
-							</div>
-							<div class="file-size">-</div>
-							<div class="ctime">2015-11-15 11:31</div>
-						</dd>
-					</div>
-				</div>
+			<div style="width:20%;float:left;">
+				<span class="text">大小</span>
+			</div>
+			<div  style="width:20%;float:left;">
+				<span class="text" onClick="lastColicon()" style="margin-left:7px;">修改日期</span> <span class="order-icon"></span>
 			</div>
 		</div>
-	</div>
-	<!-- 右键菜单 -->
-	<div class="container"></div>
-
-	<div class="gizmoMenu gizmoDropDown">
-		<ul>
-			<li><i class="fa fa-camera-retro"></i><a href="#">查看</a><img
-				style="margin-top: 5px; margin-left: 70px;" src="../images/jian.png" />
-				<ul>
-					<li><i class="fa fa-bullseye"></i><a href="#">列表</a></li>
-					<li><i class="fa fa-cubes"></i><a href="#">缩略图</a></li>
-				</ul></li>
-			<li><i class="fa fa-camera-retro"></i><a href="#">排序方式</a><img
-				style="margin-top: 5px; margin-left: 38px;" src="../images/jian.png" />
-				<ul>
-					<li><i class="fa fa-bullseye"></i><a href="#">名称</a></li>
-					<li><i class="fa fa-cubes"></i><a href="#">大小</a></li>
-					<li><i class="fa fa-bullseye"></i><a href="#">修改日期</a></li>
-				</ul></li>
-			<li><i class="fa fa-arrow-right"></i><a href="#">刷新</a></li>
-			<li><i class="fa fa-arrow-right"></i><a href="#">重新加载页面</a></li>
-			<li id="file"><img src="../images/yfile.png" /><i
-				class="fa fa-arrow-right"></i><a href="#">新建文件夹</a></li>
-		</ul>
+		
+		<div id="name">
+			<div style="width:60%;height:40px;float:left;">
+				<span class="check-icon2" onClick="checkIcon()"></span> 
+				<span>我的资源</span>
+			</div>
+			<div style="width:20%;float:left;">
+				<span class="text">-</span>
+			</div>
+			<div  style="width:20%;float:left;">
+				<span class="text" onClick="lastColicon()">2016-06-06</span>
+			</div>
+			
+		</div>
 	</div>
 </body>
 </html>
