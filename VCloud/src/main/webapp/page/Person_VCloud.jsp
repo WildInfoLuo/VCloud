@@ -13,7 +13,7 @@
 <link type="text/css" rel="stylesheet" href="../css/vclound.css" />
 <link type="text/css" rel="stylesheet" href="../css/index.css">
 
-<link href="../images/云准备.gif" rel="shortcut icon">
+<link href="../images/yun.gif" rel="shortcut icon">
 <script src="../js/jquery-1.11.3.min.js">
 	
 </script>
@@ -49,8 +49,6 @@
 					<!--" --> <a href="Person_VCloud.jsp">网盘</a> <a><img
 						id="f-icon" src="../images/down.png"
 						style="width: 11px; height: 11px; margin-top: 20px; margin-left: 3px; position: absolute;"></a>
-					<a
-					style="background-image: url(images/down.png); width: 10px; height: 10px;"></a>
 					<div id="navbar_hidden" onmouseout="hiddenH()">
 						<table id="navbar_table" style="width: 300px; height: 70px;"
 							cellspacing="0" cellpadding="8">
@@ -198,7 +196,7 @@
 						<li>
 							<div class="time-upfileimg">
 								<input id="h5Input0" type="file"
-									style="width: 154px; height: 39px; position: absolute; opacity: 0; cursor: pointer;"
+									style="width: 100px; height: 39px; position: absolute; opacity: 0; cursor: pointer;"
 									name="html5uploader" accept="*/*" multiple title="点击选择文件">
 							</div>
 						</li>
@@ -224,6 +222,7 @@
 				class="history-list-tips">已全部加载，共6个</span>
 			<div class="list-view-header">
 				<div class="list-header">
+				<!-- 中间的导航栏 -->
 					<ul class="list-cols">
 						<li class="first-col" style="width: 60%;">
 							<div class="check">
@@ -268,15 +267,16 @@
 			<div class="module-list-view">
 				<div class="list-view">
 					<dd class="open-enable">
-						<span class="check-icon"></span>
+						<span class="check-icon" onclick="checkIcon()"></span>
 						<div class="fileicon"></div>
-						<div class="file-name">
+						<li class="file-name" style="width: 60%;">
 							<div class="text">
-								<a class="filename" href="javascript:void(0);" title="文件接收柜">文件接收柜</a>
+								<div class="filenameicon"></div>
+								<a class="filename" style="padding-left: 6px;" href="javascript:void(0);" title="文件接收柜">文件接收柜</a>
 							</div>
-						</div>
-						<div class="file-size">-</div>
-						<div class="ctime">2015-11-15 11:31</div>
+						</li>
+						<li class="file-size" style="width: 16%;">-</li>
+						<li class="ctime" style="width: 21%;">2015-11-15 11:31</li>
 					</dd>
 				</div>
 			</div>
