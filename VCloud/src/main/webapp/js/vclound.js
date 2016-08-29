@@ -21,7 +21,7 @@
 		$(".grid-switch").css(divcss1);
 		$(".list-switch").css(divcss2);
 		/*开始变幻界面*/
-		$(".module-list").html("列表界面");
+		$(".list-view-container").html("列表界面");
 	}
 	/*设置布局的样式*/
 	function gswitch(){
@@ -43,7 +43,7 @@
 		$(".list-switch").css(divcss1);
 		
 		//<!--开始变幻界面-->
-		$(".module-list").html("详细界面");
+		$(".list-view-container").html("详细界面");
 	}
 	//<!--点击改变时间排序-->
 	var icon=true;
