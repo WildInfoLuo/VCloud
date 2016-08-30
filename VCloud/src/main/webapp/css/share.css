@@ -1,0 +1,36 @@
+@CHARSET "UTF-8";
+
+#shareCon{width:750px;height:345px;background-image: url(../images/share.jpg);margin-left:200px;margin-top:50px;;float:left;}
+#sharebut{cursor:pointer;float:left;width:199px;height:44px;background-image:url(../images/sharebut.png);margin-left:450px;margin-top:30px;}
+#sharebut:hover{opacity:0.7;}
+#certain:hover{opacity:0.7;}
+
+
+
+#shareshow{display:none;width:750px;min-height:500px;border:3px solid rgb(209,209,211);z-index:200;position: absolute;margin-top:20px;margin-left:360px;background-color: white;}
+#shareshow #close{width:22px;height:22px;float:right;margin-right:5px;margin-top:9px;cursor:pointer;}
+#shareshow #shareh3{border-bottom:1px solid rgb(210,210,210);height:40px;line-height:40px;width:100%;color: #333;font-size: 14px;font-weight: 700;text-indent: 1em;background: url("http://s1.pan.bdstatic.com/yun-static/common-cdn/images/dialog/globe-dlg-hd.png?t=1470210528913");}
+#shareshow .share-grid-switch{width:10%;float:right;margin-right:0px;margin-top:11px;}
+#shareshow #showall{border-bottom:1px solid rgb(210,210,210);height:50px;background: #fafafa none repeat scroll 0 0;}
+#shareshow #showall span{height:50px;line-height: 50px;display:block;text-indent: 1em;}
+#shareshow #showall #search #search-key{border: 1px solid #c6c6c6;border-radius: 2px;color: #999;display: inline-block;height: 26px;margin: 11px 12px 0 0;outline: 0 none;padding: 0 30px 0 35px;width: 132px;}
+#shareshow #showall #search #search-icon{height: 16px;margin-left: 10px;position: absolute;margin-top: 17px; width: 17px;}
+#shareshow #showall #search #search-enter{height: 13px;margin-left:-35px;position: absolute;margin-top: 19px;width: 15px}
+
+#shareshow #name{height:40px;width:100%;border-bottom:1px solid rgb(210,210,210);}
+.order-icon {background: rgba(0, 0, 0, 0) url("../images/list-view_4e60b0c.png") no-repeat scroll -50px -45px;position:absolute; height: 10px;vertical-align: middle;width: 9px;margin:18px 10px;float:left;}
+#name .check-icon0,#sharefile .check-icon1{background: rgba(0, 0, 0, 0) url("../images/list-view_4e60b0c.png") no-repeat scroll -9px -12px;float: left;left: 11px;margin: 15px 10px;top: 20px;width:14px;height:14px;}
+#shareshow span,a{height:40px;line-height: 40px;}
+.filenameicon {background: rgba(0, 0, 0, 0) url("../images/icon_743d29d.png") no-repeat scroll 0 -205px;float: left;height: 16px;margin-top: 14px;width: 20px;}
+#shareshow #sharefoot{position: absolute;bottom: 0px;width:100%;height:51px;border-top: 1px solid rgb(210,210,210);}
+#shareshow #sharefile{height:40px;width:100%;border-bottom:1px solid rgb(210,210,210);}
+#shareshow #file:hover{background-color: rgb(240,248,253)}
+#shareshow #file1:hover{background-color: rgb(240,248,253)}
+
+#shareshow #sharefoot #certain{cursor:pointer;width:89px;height:37px;float:right;margin-right:20px;margin-top:7px;background-image: url(../images/sure.png);}
+#shareshow #sharefoot #localup{border:1px solid gray;cursor:pointer;width:115px;height:36px;float:left;margin-left:20px;margin-top:7px;background-image: url(../images/localup.png);}
+#close:hover{opacity:0.7;}
+#localup:hover{opacity:0.7;}
+
+
+

@@ -19,15 +19,15 @@
 		<div id="navbar_left">
 			<img alt="千度云盘" src="../images/logo2.png">
 			<ul>
-				<li id="left_li"><a href="#">主页</a></li>
+				<li id="left_li"><a href="index.jsp">主页</a></li>
 				<li class="cjh"  id="left_li" onmouseover="showH()" onmouseout="hiddenH()" > <!--" -->
 					
-					<a href="page/Person_VCloud.jsp">网盘</a>
+					<a href="Person_VCloud.jsp">网盘</a>
 					<a><img id="f-icon" src="../images/down.png" style="width:11px;height:11px;margin-top:20px;margin-left:3px;position: absolute;"></a>
 					<div id="navbar_hidden" onmouseout="hiddenH()">
 						<table id="navbar_table" style="width:300px;height:70px;" cellspacing="0" cellpadding="8">
 							<tr>
-								<td><a href="#">
+								<td><a href="Person_VCloud.jsp">
 									<i style="display:block;width:40px;height:40px;background:url(../images/cloud.png);background-size:cover;margin-left:15px;"></i>
 									<span style="font-size:15px;margin-left:-15px;color:rgb(225,230,246);">网盘</span></a>
 								</td>
@@ -39,7 +39,7 @@
 									<i style="display:block;width:40px;height:40px;background:url(../images/word.png);background-size:cover;"></i>
 									<span style="font-size:15px;margin-left:-20px;color:rgb(225,230,246);">文档</span></a>
 								</td>
-								<td><a href="#">
+								<td><a href="pic_currentupload_empty.jsp">
 									<i style="display:block;width:40px;height:40px;background:url(../images/pic.png);background-size:cover;"></i>
 									<span style="font-size:15px;margin-left:-15px;color:rgb(225,230,246);">图片</span></a>
 								</td>
@@ -47,7 +47,7 @@
 						</table>
 					</div>
 				</li>
-				<li  id="left_li"><a href="#">分享</a></li>
+				<li  id="left_li"><a href="share.jsp">分享</a></li>
 				<li  id="left_li"><a href="#">应用</a></li>
 			</ul>
 		</div>
@@ -65,7 +65,7 @@
 		<table id="navbar_table" style="width: 300px; height: 70px;"
 			cellspacing="0" cellpadding="8">
 			<tr>
-				<td><a href="#"> <i
+				<td><a href="share.jsp"> <i
 						style="display: block; width: 40px; height: 40px; background: url(../images/picred.png); background-size: cover;"></i>
 						<span style="font-size: 14px; margin-left: -8px;color:rgb(225,230,246);">分享图片</span></a></td>
 				<td><a href="#"> <i
