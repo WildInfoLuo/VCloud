@@ -180,10 +180,11 @@
 			</div>
 		</div>
 		
-		<div id="name">
+		<div id="sharefile">
 			<div style="width:60%;height:40px;float:left;">
 				<span class="check-icon2" onClick="checkIcon()"></span> 
-				<span>我的资源</span>
+				<div class="filenameicon"></div>
+				<a href="#" style="margin-left:8px;">我的资源</a>
 			</div>
 			<div style="width:20%;float:left;">
 				<span class="text">-</span>
@@ -191,6 +192,8 @@
 			<div  style="width:20%;float:left;">
 				<span class="text" onClick="lastColicon()">2016-06-06</span>
 			</div>
+		</div>
+		<div id="sharefoot">
 			
 		</div>
 	</div>
