@@ -17,7 +17,8 @@
 	list-style-type:none;
 	text-decoration:none;
 	font-size:100%;
-	outline:none; }
+	outline:none;
+	 }
 	
 .gizmoMenu { display:none; }
 
@@ -39,7 +40,7 @@
     background-color:#FFFFFF;
 	color:#222;
     width:150px;
-    cursor:pointer;
+    cursor:default;
  }
  
 #file{
