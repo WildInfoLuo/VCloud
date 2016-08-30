@@ -166,7 +166,12 @@
 	<div id="shareshow">
 		<h3 id="shareh3">文件列表<img id="close" src="../images/close.png" onclick="closeShare()"></h3>
 		<div id="showall">
-			<span style="width:60%;float:left;">全部文件</span>
+			<span style="width:40%;float:left;">全部文件</span>
+			<div id="search" style="float:left;margin-left:163px;">
+				<img id="search-icon" src="../images/search.png">
+				<input type="text" id="search-key" placeholder="搜索我的网盘文件">
+				<img id="search-enter" src="../images/enter.png">
+			</div>
 			<!--控制lay块的隐藏与显示  -->
 			<div class="share-grid-switch">
 				<a class="list-switch" href="javascript:void(0)" onClick="lswitch()"></a>
@@ -174,29 +179,29 @@
 			</div>
 		</div>
 		<div id="name">
-			<div style="width:60%;height:40px;float:left;">
-				<span class="check-icon2" onClick="checkIcon()"></span> 
+			<div style="width:60%;height:40px;float:left;"  id="file">
+				<span class="check-icon0" onclick="filenameIcon(0)"></span> 
 				<span>文件名</span>
 			</div>
-			<div style="width:20%;float:left;">
+			<div style="width:20%;float:left;"  id="file">
 				<span class="text">大小</span>
 			</div>
-			<div  style="width:20%;float:left;">
+			<div  style="width:20%;float:left;"  id="file">
 				<span class="text" onClick="lastColicon()" style="margin-left:7px;">修改日期</span> <span class="order-icon"></span>
 			</div>
 		</div>
 		
 		<div id="sharefile">
-			<div id="file">
-				<div style="width: 60%; height: 40px; float: left;">
-					<span class="check-icon2" onClick="checkIcon()"></span>
+			<div id="file2">
+				<div style="width: 60%; height: 40px; float: left;" id="file1">
+					<span class="check-icon1" onclick="filenameIcon(1)" ></span>
 					<div class="filenameicon"></div>
 					<a href="#" style="margin-left: 8px;">我的资源</a>
 				</div>
-				<div style="width: 20%; float: left;">
+				<div style="width: 20%; float: left;"  id="file1">
 					<span class="text">-</span>
 				</div>
-				<div style="width: 20%; float: left;">
+				<div style="width: 20%; float: left;" id="file1">
 					<span class="text" onClick="lastColicon()">2016-06-06</span>
 				</div>
 			</div>

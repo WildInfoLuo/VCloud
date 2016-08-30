@@ -56,6 +56,17 @@ init:function(options){
 		////////////////////////////////////////////
 		$this.on('mousedown',function(e){
 			if(e.which!==3 && $(e.target).parents('.gizmoMenu').length < 1 && settings.click_to_close){
+				$('.gizmoMenu').css('display','none').find('.active').removeClass('active').next().stop(true,true).slideUp('normal');
+				$this.find('.gizmoMenu').stop(true,false).animate({opacity:0},{duration:100,queue:false,complete:function(){
+					// CLOSE ANY OPEN gizmoMENUS
+					$(this).css('display','none').find('.active').removeClass('active').next().stop(true,true).slideUp('normal');
+				}});
+			};
+		});
+		
+		$('body').on('mousedown',function(e){
+			if(e.which!==3 && $(e.target).parents('.gizmoMenu').length < 1 && settings.click_to_close){
+				$('.gizmoMenu').css('display','none').find('.active').removeClass('active').next().stop(true,true).slideUp('normal');
 				$this.find('.gizmoMenu').stop(true,false).animate({opacity:0},{duration:100,queue:false,complete:function(){
 					// CLOSE ANY OPEN gizmoMENUS
 					$(this).css('display','none').find('.active').removeClass('active').next().stop(true,true).slideUp('normal');
@@ -82,14 +93,29 @@ init:function(options){
 			var top=Coords.clientY, 
 				left=($('body')[0]===e.target) ? Coords.clickX : Coords.clientX;
 
-			if((left+180)>document.body.clientWidth){
-				left=document.body.clientWidth-310;
+//			if((left+180)>document.body.clientWidth){
+//				left=document.body.clientWidth-310;
+//			}
+//			if((top+265)>document.body.clientHeight){
+//				if((top-265)<0){
+//					top=document.body.offsetHeight+10;
+//				}else{
+//					top=top-165;
+//				}
+//			}
+			
+//			if((top+165)>document.body.clientHeight){
+//				top=document.body.clientHeight-165;
+//			}
+//			if((left+310)>document.body.clientWidth){
+//				left=document.body.clientWidth-310;
+//			}
+			if((left+310-160) > $(".container").width()){
+				left=$(".container").width()-260+160;
 			}
-			if((top+265)>document.body.clientHeight){
-				if((top-265)<0){
-					top=10;
-				}else{
-					top=top-165;
+			if((top+165-183)>$(".container").height()){
+				if(($(".container").height()-165)>0){
+					top=$(".container").height()-165+183;
 				}
 			}
 			// SHOW AND POSITION CONTEXTMENU

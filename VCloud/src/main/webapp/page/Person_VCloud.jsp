@@ -23,7 +23,7 @@
 <script type="text/javascript" src="../js/gizmoMenu.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
-		$('body').gizmoMenu({
+		$('.container').gizmoMenu({
 			'menu' : 'gizmoDropDown'
 		});
 
@@ -265,8 +265,8 @@
 					</ul>
 				</div>
 			</div>
-			<div class="list-view-container">
-				<div class="module-list-view">
+			<div class="list-view-container ">
+				<div class="module-list-view  container">
 					<div class="list-view">
 						<dd class="module-edit-name">
 							<li class="file-names" style="width: 60%;left: 0px; top: 73px;"><span
