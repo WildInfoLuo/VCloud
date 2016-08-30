@@ -103,11 +103,20 @@ init:function(options){
 //					top=top-165;
 //				}
 //			}
-			if((top+165)>document.body.clientHeight){
-				top=document.body.clientHeight-165;
+			
+//			if((top+165)>document.body.clientHeight){
+//				top=document.body.clientHeight-165;
+//			}
+//			if((left+310)>document.body.clientWidth){
+//				left=document.body.clientWidth-310;
+//			}
+			if((left+310-160) > $(".container").width()){
+				left=$(".container").width()-260+160;
 			}
-			if((left+310)>document.body.clientWidth){
-				left=document.body.clientWidth-310;
+			if((top+165-183)>$(".container").height()){
+				if(($(".container").height()-165)>0){
+					top=$(".container").height()-165+183;
+				}
 			}
 			// SHOW AND POSITION CONTEXTMENU
 			$menu.css({ top:top+'px', left:left+'px', display:'block'})
