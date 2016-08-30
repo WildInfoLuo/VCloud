@@ -14,9 +14,12 @@
 <link type="text/css" rel="stylesheet" href="../css/index.css">
 
 <link href="../images/云准备.gif" rel="shortcut icon">
-<script src="../js/jquery-1.11.3.min.js"></script>
+<script src="../js/jquery-1.11.3.min.js">
+
+</script>
 <script src="../js/vclound.js"></script>
 <script type="text/javascript" src="../js/index.js"></script>
+
 <script type="text/javascript" src="../js/gizmoMenu.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
