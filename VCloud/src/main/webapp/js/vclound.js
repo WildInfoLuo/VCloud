@@ -3,6 +3,8 @@ $(function() {
 	$(".list-header-operatearea").hide();
 	/* 新建文件夹的隐藏 */
 	$(".module-edit-name").hide();
+	/*详细内容列表界面隐藏*/
+	$(".content-view").hide();
 });
 /* 新建文件夹 */
 function upfileSpanjia() {
@@ -33,7 +35,8 @@ function lswitch() {
 	$(".list-switch").css(divcss1);
 	$(".grid-switch").css(divcss2);
 	/* 开始变幻界面 */
-	$(".list-view-container").show();
+	$(".list-view").hide();
+	$(".content-view").show();
 }
 /* 设置布局的样式 */
 function gswitch() {
@@ -55,7 +58,8 @@ function gswitch() {
 	$(".grid-switch").css(divcss2);
 
 	// <!--开始变幻界面-->
-	$(".list-view-container").show();
+	$(".list-view").show();
+	$(".content-view").hide();
 }
 // <!--点击改变时间排序-->
 var icon = true;
@@ -89,7 +93,6 @@ function lastColicon() {
 }
 var tcheckIcon = new Array();
 function filenameIcon(id) {
-	// alert(tcheckIcon);
 	if (id == 0) {
 		if (tcheckIcon[id] == true) {
 			/* 已选择check */

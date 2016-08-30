@@ -265,8 +265,9 @@
 					</ul>
 				</div>
 			</div>
-			<div class="list-view-container ">
-				<div class="module-list-view  container">
+			<div class="list-view-container">
+				<div class="module-list-view" >
+				<!-- 先设置隐藏的样式 -->
 					<div class="list-view">
 						<dd class="module-edit-name">
 							<li class="file-names" style="width: 60%;left: 0px; top: 73px;"><span
@@ -325,6 +326,58 @@
 					</div>
 					</div>
 				</div>
+				<div class="content-view">
+					<div class="grid-view" style="margin-top: 0px;">
+						<dd class="g-clearfix">
+							<div class="grid-view-item1" style="display: block;height: 122px;margin: 4px 4px 0 0; text-align: center; width: 142px;float: left;" onclick="filenameIcon(1)">
+								<div class="dir-large" title="">
+									<img class="thumb" >
+									<span class="checkbox"></span>
+								</div>
+								<div class="file-name">
+									<a class="filename" title="文件接收柜" href="javascript:void(0);">文件接收柜</a>
+								</div>
+							</div>
+							<div class="grid-view-item2" style="display: block;height: 122px;margin: 4px 4px 0 0; text-align: center; width: 142px;float: left;"onclick="filenameIcon(2)">
+								<div class="dir-large" title="">
+									<img class="thumb" >
+									<span class="checkbox"></span>
+								</div>
+								<div class="file-name">
+									<a class="filename" title="我的数据" href="javascript:void(0);">我的数据</a>
+								</div>
+							</div>
+							<div class="grid-view-item3" style="display: block;height: 122px;margin: 4px 4px 0 0; text-align: center; width: 142px;float: left;" onclick="filenameIcon(3)">
+								<div class="dir-large" title="">
+									<img class="thumb" >
+									<span class="checkbox"></span>
+								</div>
+								<div class="file-name">
+									<a class="filename" title="我的资源" href="javascript:void(0);">我的资源</a>
+								</div>
+							</div>
+							<div class="grid-view-item4" style="display: block;height: 122px;margin: 4px 4px 0 0; text-align: center; width: 142px;float: left;" onclick="filenameIcon(4)">
+								<div class="dir-large fileicon-large-xls" title="">
+									<img class="thumb" >
+									<span class="checkbox"></span>
+								</div>
+								<div class="file-name">
+									<a class="filename" title="xls文件" href="javascript:void(0);">VCloud.xls</a>
+								</div>
+							</div>
+							<div class="grid-view-item5" style="display: block;height: 122px;margin: 4px 4px 0 0; text-align: center; width: 142px;float: left;" onclick="filenameIcon(5)">
+								<div class="dir-large fileicon-large-doc" title="">
+									<img class="thumb" >
+									<span class="checkbox"></span>
+								</div>
+								<div class="file-name">
+									<a class="filename" title="doc文件" href="javascript:void(0);">VCloud.doc</a>
+								</div>
+							</div>
+						</dd>
+					</div>
+				</div>
+				
 			</div>
 		</div>
 	</div>
