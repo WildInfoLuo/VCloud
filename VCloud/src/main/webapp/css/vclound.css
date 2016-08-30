@@ -78,9 +78,6 @@ a {
 	margin-left: 25px;
 	margin-top: 6px;
 }
-/*.module-aside a:hover{
-	background-color:#666;
-}*/
 .item-title {
 	padding-left: 20px;
 	line-height: 33px;
@@ -235,7 +232,46 @@ a {
 	line-height: 40px;
 	text-align: left;
 }
+/*新建文件夹*/
+.module-edit-name{
+	display: block;
+	position: relative;
+	height: 43px;
+	line-height: 43px;
+	border-bottom: 1px solid #ebebeb;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	background: #FFF;
+}
+.module-edit-name li {
+	float: left;
+}
 
+.module-edit-name:hover {
+	background-color: #F0F8FD;
+}
+
+.module-edit-name a:hover {
+	text-decoration: underline;
+}
+.module-edit-name .sure {
+    background: url(../images/icon_743d29d.png) -0px -512px;
+    width: 22px;
+    height: 22px;
+    display: inline-block;
+    vertical-align: middle;
+    margin: 8px 5px;
+    cursor: pointer;
+}
+.module-edit-name .cancel {
+    background: url(../images/icon_743d29d.png) -27px -512px;
+    width: 22px;
+    height: 22px;
+    display: inline-block;
+    vertical-align: middle;
+    margin: 8px 0 8px 2px;
+    cursor: pointer;
+}
 .module-toolbar {
 	height: 28px;
 	width: 1000px;
@@ -250,7 +286,6 @@ a {
 	width: 100px;
 	background: url("../images/upload.png") no-repeat scroll 0 0;
 }
-
 .upfileds li {
 	height: 30px;
 	float: left;
@@ -372,6 +407,10 @@ a {
 	height: 28px;
 	width: 100%;
 }
+
+.list-cols:hover {
+	background-color: #F0F8FD;
+}
 /*li的浮动*/
 .first-col {
 	float: left;
@@ -398,7 +437,6 @@ a {
 	margin: 15px 10px;
 	float: left;
 }
-
 .last-col .order-icon {
 	background: rgba(0, 0, 0, 0) url("../images/list-view_4e60b0c.png")
 		no-repeat scroll -50px -45px;
@@ -495,9 +533,12 @@ a {
 	text-overflow: ellipsis;
 	background: #FFF;
 }
-
 .open-enable li {
 	float: left;
+}
+
+.open-enable:hover {
+	background-color: #F0F8FD;
 }
 
 .open-enable a:hover {
@@ -507,40 +548,11 @@ a {
 .open-enable .filenameicon {
 	background: rgba(0, 0, 0, 0) url("../images/icon_743d29d.png") no-repeat
 		scroll 0 -205px;
-	width:20px;
-	height:16px;
-	float:left;
+	width: 20px;
+	height: 16px;
+	float: left;
 	margin-top: 14px;
 }
-/*
-.module-list-view .checkbox {
-    background: rgba(0, 0, 0, 0) url("../iamges/checkbox_8c741da.png") no-repeat scroll 9px 12px;
-    cursor: default;
-    display: block;
-    height: 38px;
-    left: 3px;
-    line-height: 38px;
-    position: absolute;
-    text-align: left;
-    text-indent: 10px;
-    top: 0;
-    width: 32px;
-    z-index: 1;
-}
-.module-list-view .scrollbar {
-    top: 0!important;
-    display: none;
-}
-.scrollbar {
-    width: 16px;
-    padding: 13px 0;
-    background: #fff;
-    border-width: 0 1px;
-    position: absolute;
-    right: 0;
-    top: 129px;
-    z-index: 11;
-}*/
 /*导航lan*/
 #navbar #search {
 	height: 100%;
