@@ -19,7 +19,7 @@
 		<div id="navbar_left">
 			<img alt="千度云盘" src="../images/logo2.png">
 			<ul>
-				<li id="left_li"><a href="../index.jsp">主页</a></li>
+				<li id="left_li"><a href="index.jsp">主页</a></li>
 				<li class="cjh"  id="left_li" onmouseover="showH()" onmouseout="hiddenH()" > <!--" -->
 					<a href="Person_VCloud.jsp">网盘</a>
 					<a><img id="f-icon" src="../images/down.png" style="width:11px;height:11px;margin-top:20px;margin-left:3px;position: absolute;"></a>
@@ -46,7 +46,7 @@
 						</table>
 					</div>
 				</li>
-				<li  id="left_li"><a href="#">分享</a></li>
+				<li  id="left_li"><a href="share.jsp">分享</a></li>
 				<li  id="left_li"><a href="#">应用</a></li>
 			</ul>
 		</div>
@@ -170,8 +170,8 @@
         <div class="module-list">
         	<div class="module-timeline-list">
             	<ul class="clearfix">
-                	<li><a href="#" data-val="0" hidefocus="true">时光轴</a></li>
-                    <li  class="selected"><a data-val="1" href="#" hidefocus="true">最近上传</a></li>
+                	<li><a href="pic_timeline_empty.jsp" data-val="0" hidefocus="true">时光轴</a></li>
+                    <li  class="selected"><a data-val="1" href="pic_currentupload_empty.jsp" hidefocus="true">最近上传</a></li>
                 </ul>
             </div>
             

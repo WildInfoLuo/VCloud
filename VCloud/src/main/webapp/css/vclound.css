@@ -541,7 +541,10 @@ a {
 	background-color: #F0F8FD;
 }
 
-.open-enable a:hover {
+.open-enable, a:hover {
+	text-decoration: underline;
+}
+.dir-large a:hover {
 	text-decoration: underline;
 }
 /*设置文件夹标志*/
@@ -552,6 +555,48 @@ a {
 	height: 16px;
 	float: left;
 	margin-top: 14px;
+}
+/*详细内容视图*/
+.grid-view-item{
+	display: block;
+    height: 122px;
+    margin: 4px 4px 0 0;
+    text-align: center;
+    width: 142px;
+	float: left;
+}
+.dir-large {
+    background: rgba(0, 0, 0, 0) url("../images/gridIcon_7165cae.png") no-repeat scroll 16px -77px;
+    background-repeat: no-repeat;
+    border: 2px solid #fff;
+    height: 92px;
+    margin: 0 auto;
+    overflow: hidden;
+    position: relative;
+    width: 90px;
+    cursor: pointer;
+}
+.grid-view-item .checkbox {
+    background: rgba(0, 0, 0, 0) url("../images/checkbox_8c741da.png") no-repeat scroll 6px -36px;
+    display: none;/*显示选择框*/
+    background-position: -30px -36px;
+    height: 30px;
+    left: -8px;
+    position: absolute;
+    top: -8px;
+    width: 30px;
+}
+ .dir-large:hover {
+    border: 2px solid #2e80dc;
+}
+.fileicon-large-xls {
+    background-position: -180px 17px;
+}
+.fileicon-large-doc {
+    background-position: -280px 17px;
+}
+.fileicon-large-doc, .fileicon-large-pdf, .fileicon-large-ppt, .fileicon-large-txt, .fileicon-large-xls {
+    background-image: url("../images/gridIcon_2a39f1a.png");
 }
 /*导航lan*/
 #navbar #search {

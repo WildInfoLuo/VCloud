@@ -9,6 +9,8 @@ function hiddenH(){
 
 //修改背景颜色
 function chageBg(part,type){
+	location.href="pic_currentupload_empty.jsp"
 	$(".menu-list li").css({"background-image":"url(../images/bg2.jpg)","border":"0"});
 	$("."+type).css({"background-image":"url(../images/changebg.jpg)","border":"1px solid rgb(52,116,188)"});
+	
 }
