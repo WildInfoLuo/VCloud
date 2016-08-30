@@ -23,7 +23,7 @@
 		<div id="navbar_left">
 			<img alt="千度云盘" src="../images/logo2.png">
 			<ul>
-				<li id="left_li"><a href="../index.jsp">主页</a></li>
+				<li id="left_li"><a href="index.jsp">主页</a></li>
 				<li class="cjh" id="left_li" onmouseover="showH()"
 					onmouseout="hiddenH()">
 					<!--" --> <a href="Person_VCloud.jsp">网盘</a> <a><img
@@ -59,7 +59,7 @@
 						</table>
 					</div>
 				</li>
-				<li id="left_li"><a href="#">分享</a></li>
+				<li id="left_li"><a href="share.jsp">分享</a></li>
 				<li id="left_li"><a href="#">应用</a></li>
 			</ul>
 		</div>

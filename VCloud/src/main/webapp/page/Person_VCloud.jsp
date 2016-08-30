@@ -43,7 +43,7 @@
 		<div id="navbar_left">
 			<img alt="千度云盘" src="../images/logo2.png">
 			<ul>
-				<li id="left_li"><a href="../index.jsp">主页</a></li>
+				<li id="left_li"><a href="index.jsp">主页</a></li>
 				<li class="cjh" id="left_li" onmouseover="showH()"
 					onmouseout="hiddenH()">
 					<!--" --> <a href="Person_VCloud.jsp">网盘</a> <a><img
@@ -77,7 +77,7 @@
 						</table>
 					</div>
 				</li>
-				<li id="left_li"><a href="#">分享</a></li>
+				<li id="left_li"><a href="share.jsp">分享</a></li>
 				<li id="left_li"><a href="#">应用</a></li>
 			</ul>
 		</div>
@@ -266,7 +266,7 @@
 				</div>
 			</div>
 			<div class="list-view-container">
-				<div class="module-list-view" >
+				<div class="module-list-view  container" >
 				<!-- 先设置隐藏的样式 -->
 					<div class="list-view">
 						<dd class="module-edit-name">
@@ -381,9 +381,7 @@
 			</div>
 		</div>
 	</div>
-	<!-- 右键菜单 -->
-	<div class="container"></div>
-
+	
 	<div class="gizmoMenu gizmoDropDown">
 		<ul>
 			<li><i class="fa fa-camera-retro"></i><a href="#">查看</a><img

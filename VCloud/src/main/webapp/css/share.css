@@ -7,7 +7,7 @@
 
 
 
-#shareshow{display:block;width:750px;min-height:500px;border:3px solid rgb(209,209,211);z-index:200;position: absolute;margin-top:20px;margin-left:360px;background-color: white;}
+#shareshow{display:none;width:750px;min-height:500px;border:3px solid rgb(209,209,211);z-index:200;position: absolute;margin-top:20px;margin-left:360px;background-color: white;}
 #shareshow #close{width:22px;height:22px;float:right;margin-right:5px;margin-top:9px;cursor:pointer;}
 #shareshow #shareh3{border-bottom:1px solid rgb(210,210,210);height:40px;line-height:40px;width:100%;color: #333;font-size: 14px;font-weight: 700;text-indent: 1em;background: url("http://s1.pan.bdstatic.com/yun-static/common-cdn/images/dialog/globe-dlg-hd.png?t=1470210528913");}
 #shareshow .share-grid-switch{width:10%;float:right;margin-right:0px;margin-top:11px;}
