@@ -17,8 +17,8 @@ pre, code { color:#FFF;
 
 .container { 
 	margin:0 auto; 
-	width:1120px;
-	height:500px;
+	width:100%;
+	height:100%;
 	float: left;
 }
 

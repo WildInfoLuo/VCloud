@@ -23,7 +23,7 @@
 <script type="text/javascript" src="../js/gizmoMenu.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
-		$('body').gizmoMenu({
+		$('.container').gizmoMenu({
 			'menu' : 'gizmoDropDown'
 		});
 
