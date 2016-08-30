@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset=UTF-8">
-<title>VCloud__网盘</title>
+<title>VCloud__分享</title>
 
 <link type="text/css" rel="stylesheet" href="../css/vclound.css" />
 <link type="text/css" rel="stylesheet" href="../css/index.css">
@@ -15,6 +15,7 @@
 </script>
 <script src="../js/vclound.js"></script>
 <script type="text/javascript" src="../js/index.js"></script>
+<script type="text/javascript" src="../js/share.js"></script>
 </head>
 <body>
 
@@ -163,9 +164,14 @@
 	<div id="shareCon"></div>
 	<div id="sharebut" onclick="javascript:showShare()"></div>
 	<div id="shareshow">
-		<h3 id="shareh3">文件列表</h3>
+		<h3 id="shareh3">文件列表<img id="close" src="../images/close.png" onclick="closeShare()"></h3>
 		<div id="showall">
-			<span>全部文件</span>
+			<span style="width:60%;float:left;">全部文件</span>
+			<!--控制lay块的隐藏与显示  -->
+			<div class="share-grid-switch">
+				<a class="list-switch" href="javascript:void(0)" onClick="lswitch()"></a>
+				<a class="grid-switch" href="javascript:void(0)" onClick="gswitch()"></a>
+			</div>
 		</div>
 		<div id="name">
 			<div style="width:60%;height:40px;float:left;">
@@ -181,20 +187,23 @@
 		</div>
 		
 		<div id="sharefile">
-			<div style="width:60%;height:40px;float:left;">
-				<span class="check-icon2" onClick="checkIcon()"></span> 
-				<div class="filenameicon"></div>
-				<a href="#" style="margin-left:8px;">我的资源</a>
-			</div>
-			<div style="width:20%;float:left;">
-				<span class="text">-</span>
-			</div>
-			<div  style="width:20%;float:left;">
-				<span class="text" onClick="lastColicon()">2016-06-06</span>
+			<div id="file">
+				<div style="width: 60%; height: 40px; float: left;">
+					<span class="check-icon2" onClick="checkIcon()"></span>
+					<div class="filenameicon"></div>
+					<a href="#" style="margin-left: 8px;">我的资源</a>
+				</div>
+				<div style="width: 20%; float: left;">
+					<span class="text">-</span>
+				</div>
+				<div style="width: 20%; float: left;">
+					<span class="text" onClick="lastColicon()">2016-06-06</span>
+				</div>
 			</div>
 		</div>
 		<div id="sharefoot">
-			
+			<div id="localup"></div>
+			<div id="certain"></div>
 		</div>
 	</div>
 </body>
