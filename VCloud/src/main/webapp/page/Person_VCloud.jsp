@@ -265,6 +265,7 @@
 					</ul>
 				</div>
 			</div>
+			<%this.doGet(request, response); %>
 			<div class="list-view-container">
 				<div class="module-list-view" >
 				<!-- 先设置隐藏的样式 -->
