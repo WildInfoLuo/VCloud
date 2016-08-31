@@ -46,9 +46,7 @@
 				<li id="left_li"><a href="index.jsp">主页</a></li>
 				<li class="cjh" id="left_li" onmouseover="showH()"
 					onmouseout="hiddenH()">
-					<!--" --> <a href="Person_VCloud.jsp">网盘</a> <a><img
-						id="f-icon" src="../images/down.png"
-						style="width: 11px; height: 11px; margin-top: 20px; margin-left: 3px; position: absolute;"></a>
+					<a href="Person_VCloud.jsp">网盘</a>
 					<div id="navbar_hidden" onmouseout="hiddenH()">
 						<table id="navbar_table" style="width: 300px; height: 70px;"
 							cellspacing="0" cellpadding="8">
