@@ -161,4 +161,19 @@ function filenameIcon(id) {
 		$(".check-icon" + id).css(divcss2);
 		return;
 	}
+	
+	// 判断
+	/*var Index=0;
+	for (var i = 1; i < tcheckIcon.length; i++){
+		if(tcheckIcon[i] == true){
+			Index++;
+			$(".textCla").hide();
+			$(".list-header-operatearea").show();
+		}
+	}
+	if (Index==(tcheckIcon.length-1)) {
+		tcheckIcon[0] = true;
+		$(".check-icon0").css(divcss2);
+	}
+	$(".count-tips").text('已选中 '+Index+' 个文件/文件夹');*/
 }

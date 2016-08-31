@@ -1,0 +1,90 @@
+.bar {
+	background: #f7f7f7  repeat-x scroll left -53px;
+    border-bottom: 1px solid #d2d2d2;
+    height: 50px;
+    line-height: 50px;
+    padding: 0 19px 0 0;
+    text-align: right;
+}
+
+.bar .clear-btn{
+	background: rgba(0, 0, 0, 0)  no-repeat scroll 0 -144px;
+    color: #333;
+    display: inline-block;
+    font-size: 12px;
+    height: 35px;
+    line-height: 35px;
+    outline: 0 none;
+    padding-left: 35px;
+    position: relative;
+    text-decoration: none;
+    vertical-align: middle;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.module-crumbs {
+    padding: 5px 0;
+    position: relative;
+    z-index: 95;
+}
+
+.global-clearfix::after {
+    clear: both;
+    content: ".";
+    display: block;
+    font-size: 0;
+    height: 0;
+    line-height: 0;
+    visibility: hidden;
+}
+
+.module-crumbs .title .crumbs {
+    color: #333;
+    float: left;
+    padding: 0 0 0 25px;
+}
+
+.module-crumbs .title .loaded {
+    float: right;
+    margin-right: 20px;
+}
+
+.module-recyclebin-empty {
+    text-align: center;
+}
+
+.module-recyclebin-empty .img {
+    background: rgba(0, 0, 0, 0) url("http://s1.pan.bdstatic.com/yun-static/clouddisk-ui-cdn/widget/recyclebin-empty/img/emptypic_e871fef.png") no-repeat scroll -4px -450px;
+    display: inline-block;
+    height: 160px;
+    margin: 110px 0 35px;
+    width: 130px;
+}
+
+
+.module-recyclebin-empty .text {
+    color: #9f9a99;
+    font-size: 14px;
+    line-height: 25px;
+}
+
+.icon-return-gray {
+	display: inline-block;
+	vertical-align: middle;
+	height: 20px;
+	width: 20px;
+	background: url("../images/img/return_grey.png")  no-repeat;
+}
+
+.icon-return-gray:hover{
+	background: url("../images/img/return_blue.png")  no-repeat;
+}
+
+.text img{
+	cursor: pointer;
+}
+
+.text img:hover {
+	opacity:0.7;
+}

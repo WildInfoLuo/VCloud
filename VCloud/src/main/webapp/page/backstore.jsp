@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset=UTF-8">
-<title>VCloud__网盘</title>
+<title>回收站</title>
 
 <!--右键菜单样式-->
 <link rel="stylesheet" href="../css/base.css" />
@@ -12,6 +12,8 @@
 
 <link type="text/css" rel="stylesheet" href="../css/vclound.css" />
 <link type="text/css" rel="stylesheet" href="../css/index.css">
+
+<link rel="stylesheet" href="../css/backstroe.css" />
 
 <link href="../images/yun.gif" rel="shortcut icon">
 <script src="../js/jquery-1.11.3.min.js">
@@ -36,6 +38,7 @@
 		});
 	});
 </script>
+<script type="text/javascript" src="../js/backstroe.js"></script>
 </head>
 <body>
 
@@ -43,10 +46,12 @@
 		<div id="navbar_left">
 			<img alt="千度云盘" src="../images/logo2.png">
 			<ul>
-				<li id="left_li"><a href="index.jsp">主页</a></li>
+				<li id="left_li"><a href="../index.jsp">主页</a></li>
 				<li class="cjh" id="left_li" onmouseover="showH()"
 					onmouseout="hiddenH()">
-					<a href="Person_VCloud.jsp">网盘</a>
+					<!--" --> <a href="Person_VCloud.jsp">网盘</a> <a><img
+						id="f-icon" src="../images/down.png"
+						style="width: 11px; height: 11px; margin-top: 20px; margin-left: 3px; position: absolute;"></a>
 					<div id="navbar_hidden" onmouseout="hiddenH()">
 						<table id="navbar_table" style="width: 300px; height: 70px;"
 							cellspacing="0" cellpadding="8">
@@ -75,7 +80,7 @@
 						</table>
 					</div>
 				</li>
-				<li id="left_li"><a href="share.jsp">分享</a></li>
+				<li id="left_li"><a href="#">分享</a></li>
 				<li id="left_li"><a href="#">应用</a></li>
 			</ul>
 		</div>
@@ -158,7 +163,7 @@
 		</ul>
 		<div class="item-separator" style="display: block;"></div>
 		<ul class="bottom-button-container">
-			<a class="g-button" href="backstore.jsp" data-button-index="9"
+			<a class="g-button" href="/disk/recyclebin" data-button-index="9"
 				data-button-id="b5" style=""> <span class="g-button-right">
 					<em class="icon-aside-recyclebin" title="回收站"></em> <span
 					class="text" style="width: auto;">回收站</span>
@@ -185,116 +190,78 @@
 			</div>
 		</div>
 	</div>
-	<!--上传文件、新建文件夹-->
-	<div id="layoutMain" class="frame-main">
-		<div class="module-toolbar">
-			<form action="javascript:void(0);">
-				<div>
-					<ul class="upfileds">
-						<li>
-							<div class="time-upfileimg">
-								<input id="h5Input0" type="file"
-									style="width: 100px; height: 39px; position: absolute; opacity: 0; cursor: pointer;"
-									name="html5uploader" accept="*/*" multiple title="点击选择文件">
-							</div>
-						</li>
-						<li class="upfileInputjia">
-							<div>
-								<div class="upfileimgjia"></div>
-								<a href="javascript:upfileSpanjia()" style="width: 80px;"><span
-									class="upfileSpanjia">新建文件夹</span></a>
-							</div>
-						</li>
-					</ul>
-				</div>
-			</form>
+	<div style="float:left; width:1186px;">
+		 <div class="bar">
+			<span class="clear-btn" >
+				<img  alt="清空回收站" src="../images/img/clearback.png">
+			</span>
+		 </div>
+		 
+		 <div class="module-crumbs" >
+			<div class="title global-clearfix">
+				<span class="crumbs" >回收站</span>
+				<span class="loaded">已加载0个</span>
+			</div>
 		</div>
-		<!--控制lay块的隐藏与显示  -->
-		<div class="list-grid-switch">
-			<a class="list-switch" href="javascript:void(0)" onClick="lswitch()"></a>
-			<a class="grid-switch" href="javascript:void(0)" onClick="gswitch()"></a>
+		
+		<div class="module-recyclebin-empty" style="display: none;">
+			<p class="img records records-17"></p>
+			<p class="text">
+			回收站为你保存10天内删除的文件
+			</p>
 		</div>
-	</div>
-	<div class="content">
-		<div class="module-list">
-			<span class="history-list-dir">全部文件</span> <span
-				class="history-list-tips">已全部加载，共6个</span>
+		
+		<div class="list-view-home" style="display: block;"  >
 			<div class="list-view-header">
 				<div class="list-header">
 					<!-- 中间的导航栏 -->
 					<ul class="list-cols">
-						<li class="first-col" style="width: 60%;">
+						<li class="first-col" style="width: 40%; ">
 							<div class="check">
 								<span class="check-icon0" onclick="filenameIcon(0)"
 									style="background: rgba(0, 0, 0, 0) url('../images/list-view_4e60b0c.png') no-repeat scroll -9px -12px; height: 14px; left: 11px; width: 14px; top: 20px; margin: 15px 10px; float: left;"></span>
-								<span class="textCla" style="line-height: 43px;">文件名</span> <span
-									class="list-header-operatearea"> <span
+								<span class="textCla" style="line-height: 43px;">文件名</span> <span class="list-header-operatearea"> <span
 									class="count-tips" style="line-height: 43px;">已选中6个文件/文件夹</span>
-									<a class="lg-button" href="javascript:void(0);"> <span
-										class="lg-button-right"> <em class="icon-share-gray"
-											title="分享"></em> <span class="text" style="width: auto;">分享</span>
+									  <a class="lg-button" href="javascript:void(0);"> <span
+										class="lg-button-right"> <em class="icon-return-gray"
+											title="还原"></em> <span class="text" style="width: auto;">还原</span>
 									</span>
-								</a> <a class="lg-button" href="javascript:void(0);"> <span
-										class="lg-button-right"> <em class="icon-download-gray"
-											title="下载"></em> <span class="text" style="width: auto;">下载</span>
-									</span>
-								</a> <a class="lg-button" href="javascript:void(0);"> <span
-										class="lg-button-right"> <em class="icon-del-gray"
-											title="删除"></em> <span class="text" style="width: auto;">删除</span>
-									</span>
-								</a> <a class="lg-button" href="javascript:void(0);"> <span
-										class="lg-button-right"> <span class="text"
-											style="width: auto;">复制</span>
-									</span>
-								</a> <a class="lg-button" href="javascript:void(0);"> <span
-										class="lg-button-right"> <span class="text"
-											style="width: auto;">移动</span>
-									</span>
-								</a>
-								</span>
+								</a> 
 							</div>
 						</li>
 						<li class="col" style="width: 15%; line-height: 43px;"><span
-							class="text">大小</span> <span class="order-icon"></span></li>
-						<li class="last-col"
-							style="width: 21%; cursor: pointer; line-height: 43px;"
-							onClick="lastColicon()"><span class="text">修改日期</span> <span
-							class="order-icon"></span></li>
+							class="text">大小</span> <span class="order-icon"></span>
+						</li>
+						<li class="col" style="width: 15%; line-height: 43px;"><span
+							class="text">删除时间</span> <span class="order-icon"></span>
+						</li>
+						<li class="col" style="width: 15%; line-height: 43px;"><span
+							class="text">有效时间</span> <span class="order-icon"></span>
+						</li>
 					</ul>
 				</div>
 			</div>
-			<div class="list-view-container">
-				<div class="module-list-view  container" >
-				<!-- 先设置隐藏的样式 -->
+			<div class="list-view-container ">
+				<div class="module-list-view  container">
 					<div class="list-view">
-						<dd class="module-edit-name">
-							<li class="file-names" style="width: 60%;left: 0px; top: 73px;"><span
-								class="check-icon6" onclick="filenameIcon(6)" style="background: rgba(0, 0, 0, 0) url('../images/list-view_4e60b0c.png') no-repeat scroll -9px -12px; height: 14px; left: 11px; width: 14px; top: 20px; margin: 15px 10px; float: left;"></span>
-								<div class="fileicon"></div>
-								<div class="new-dir-item" >
-									<input class="box" type="text" value="">
-									<span class="sure" onclick="editSure()"></span>
-									<span class="cancel" onclick="editCancel()"></span>
-								</div>
-							<li class="file-size" style="width: 16%;">-</li>
-							<li class="ctime" style="width: 21%;">-</li>
-						</dd>
-						<dd class="open-enable">
-							<li class="file-name" style="width: 60%;">
-								<!--  --> <span class="check-icon1" onclick="filenameIcon(1)"
+						<dd class="open-enable" onmouseenter="showimg(1)"  onmouseleave="hideimg(1)">
+							<li class="file-name" style="width: 42%;">
+								<span class="check-icon1" onclick="filenameIcon(1)"
 								style="background: rgba(0, 0, 0, 0) url('../images/list-view_4e60b0c.png') no-repeat scroll -9px -12px; height: 14px; left: 11px; width: 14px; top: 20px; margin: 15px 10px; float: left;"></span>
 								<div class="fileicon"></div>
 								<div class="text">
 									<div class="filenameicon"></div>
 									<a class="filename" style="padding-left: 6px;"
 										href="javascript:void(0);" title="文件接收柜">文件接收柜</a>
+								<img class="img_show1" style="margin-left: 250px; display:none; " width="20px;" src="../images/img/return.png"/><img class="img_show1" style="margin-left: 20px; display:none;" src="../images/img/rubbish.png"  width="20px;" />
 								</div>
 							</li>
-							<li class="file-size" style="width: 16%;">-</li> 
-							<li>2015-11-15 11:31</li>
+							<li class="file-size" style="width: 17%;">2kb</li> 
+							<li style="width: 17%;">2015-11-15 11:31</li>
+							<li>10天</li>
 						</dd>
-						<dd class="open-enable">
-							<li class="file-name" style="width: 60%;"><span
+						<dd class="open-enable" onmouseenter="showimg(2)"  onmouseleave="hideimg(2)">
+							<li class="file-name" style="width: 42%;"><span
 								class="check-icon2" onclick="filenameIcon(2)"
 								style="background: rgba(0, 0, 0, 0) url('../images/list-view_4e60b0c.png') no-repeat scroll -9px -12px; height: 14px; left: 11px; width: 14px; top: 20px; margin: 15px 10px; float: left;"></span>
 								<div class="fileicon"></div>
@@ -302,12 +269,15 @@
 									<div class="filenameicon"></div>
 									<a class="filename" style="padding-left: 6px;"
 										href="javascript:void(0);" title="我的项目">我的项目</a>
-								</div></li>
-							<li class="file-size" style="width: 16%;">-</li>
-							<li class="ctime" style="width: 21%;">2015-11-15 11:31</li>
+								<img class="img_show2" style="margin-left: 250px; display:none; " width="20px;" src="../images/img/return.png"/><img class="img_show2" style="margin-left: 20px; display:none;" src="../images/img/rubbish.png"  width="20px;" />
+								</div>
+								</li>
+							<li class="file-size" style="width: 17%;">2kb</li> 
+							<li style="width: 17%;">2015-11-15 11:31</li>
+							<li>10天</li>
 						</dd>
-						<dd class="open-enable">
-							<li class="file-name" style="width: 60%;"><span
+						<dd class="open-enable" onmouseenter="showimg(3)"  onmouseleave="hideimg(3)">
+							<li class="file-name" style="width: 42%;"><span
 								class="check-icon3" onclick="filenameIcon(3)"
 								style="background: rgba(0, 0, 0, 0) url('../images/list-view_4e60b0c.png') no-repeat scroll -9px -12px; height: 14px; left: 11px; width: 14px; top: 20px; margin: 15px 10px; float: left;"></span>
 								<div class="fileicon"></div>
@@ -315,91 +285,19 @@
 									<div class="filenameicon"></div>
 									<a class="filename" style="padding-left: 6px;"
 										href="javascript:void(0);" title="我的资源">我的资源</a>
+									<img class="img_show3" style="margin-left: 250px; display:none; " width="20px;" src="../images/img/return.png"/><img class="img_show3" style="margin-left: 20px; display:none;" src="../images/img/rubbish.png"  width="20px;" />
 								</div></li>
-							<li class="file-size" style="width: 16%;">-</li>
-							<li class="ctime" style="width: 21%;">2015-11-15 11:31</li>
+							<li class="file-size" style="width: 17%;">2kb</li> 
+							<li style="width: 17%;">2015-11-15 11:31</li>
+							<li>10天</li>
 						</dd>
 						<div class="list-empty-tips" style="display: none;">
 						<div class="tip-text">正在加载，请稍候…</div>
 					</div>
 					</div>
 				</div>
-				<div class="content-view">
-					<div class="grid-view" style="margin-top: 0px;">
-						<dd class="g-clearfix">
-							<div class="grid-view-item1" style="display: block;height: 122px;margin: 4px 4px 0 0; text-align: center; width: 142px;float: left;" onclick="filenameIcon(1)">
-								<div class="dir-large" title="">
-									<img class="thumb" >
-									<span class="checkbox"></span>
-								</div>
-								<div class="file-name">
-									<a class="filename" title="文件接收柜" href="javascript:void(0);">文件接收柜</a>
-								</div>
-							</div>
-							<div class="grid-view-item2" style="display: block;height: 122px;margin: 4px 4px 0 0; text-align: center; width: 142px;float: left;"onclick="filenameIcon(2)">
-								<div class="dir-large" title="">
-									<img class="thumb" >
-									<span class="checkbox"></span>
-								</div>
-								<div class="file-name">
-									<a class="filename" title="我的数据" href="javascript:void(0);">我的数据</a>
-								</div>
-							</div>
-							<div class="grid-view-item3" style="display: block;height: 122px;margin: 4px 4px 0 0; text-align: center; width: 142px;float: left;" onclick="filenameIcon(3)">
-								<div class="dir-large" title="">
-									<img class="thumb" >
-									<span class="checkbox"></span>
-								</div>
-								<div class="file-name">
-									<a class="filename" title="我的资源" href="javascript:void(0);">我的资源</a>
-								</div>
-							</div>
-							<div class="grid-view-item4" style="display: block;height: 122px;margin: 4px 4px 0 0; text-align: center; width: 142px;float: left;" onclick="filenameIcon(4)">
-								<div class="dir-large fileicon-large-xls" title="">
-									<img class="thumb" >
-									<span class="checkbox"></span>
-								</div>
-								<div class="file-name">
-									<a class="filename" title="xls文件" href="javascript:void(0);">VCloud.xls</a>
-								</div>
-							</div>
-							<div class="grid-view-item5" style="display: block;height: 122px;margin: 4px 4px 0 0; text-align: center; width: 142px;float: left;" onclick="filenameIcon(5)">
-								<div class="dir-large fileicon-large-doc" title="">
-									<img class="thumb" >
-									<span class="checkbox"></span>
-								</div>
-								<div class="file-name">
-									<a class="filename" title="doc文件" href="javascript:void(0);">VCloud.doc</a>
-								</div>
-							</div>
-						</dd>
-					</div>
-				</div>
-				
 			</div>
 		</div>
-	</div>
-	
-	<div class="gizmoMenu gizmoDropDown">
-		<ul>
-			<li><i class="fa fa-camera-retro"></i><a href="#">查看</a><img
-				style="margin-top: 5px; margin-left: 70px;" src="../images/jian.png" />
-				<ul>
-					<li><i class="fa fa-bullseye"></i><a href="#">列表</a></li>
-					<li><i class="fa fa-cubes"></i><a href="#">缩略图</a></li>
-				</ul></li>
-			<li><i class="fa fa-camera-retro"></i><a href="#">排序方式</a><img
-				style="margin-top: 5px; margin-left: 38px;" src="../images/jian.png" />
-				<ul>
-					<li><i class="fa fa-bullseye"></i><a href="#">名称</a></li>
-					<li><i class="fa fa-cubes"></i><a href="#">大小</a></li>
-					<li><i class="fa fa-bullseye"></i><a href="#">修改日期</a></li>
-				</ul></li>
-			<li><i class="fa fa-arrow-right"></i><a href="#">刷新</a></li>
-			<li><i class="fa fa-arrow-right"></i><a href="#">重新加载页面</a></li>
-			<li id="file"><img src="../images/yfile.png" /><i
-				class="fa fa-arrow-right"></i><a href="#">新建文件夹</a></li>
-		</ul>
 	</div>
 </body>
 </html>

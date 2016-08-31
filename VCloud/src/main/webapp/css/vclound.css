@@ -544,9 +544,9 @@ a {
 .open-enable, a:hover {
 	text-decoration: underline;
 }
-.dir-large a:hover {
+/* .dir-large a:hover {
 	text-decoration: underline;
-}
+} */
 /*设置文件夹标志*/
 .open-enable .filenameicon {
 	background: rgba(0, 0, 0, 0) url("../images/icon_743d29d.png") no-repeat
