@@ -20,7 +20,7 @@ public class VCUserServiceImpl implements VCUserService {
 		// 密码加密 的操作
 		user.setUpwd(Encrypt.md5AndSha(user.getUpwd()));
 		try {
-			return vcmapper.add(user);
+			return vcmapper.register(user);
 
 		} catch (Exception e) {
 			e.printStackTrace();

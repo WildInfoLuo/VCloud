@@ -12,8 +12,20 @@ public class VCUser {
 	private String temp2;
 
 	public VCUser() {
+		
 	}
 
+	public VCUser(String utel, String upwd){
+		this.utel = utel;
+		this.upwd = upwd;
+	}
+	public VCUser( String uname, String utel, String upwd, String gender,String address){
+		this.uname = uname;
+		this.utel = utel;
+		this.upwd = upwd;
+		this.gender = gender;
+		this.address=address;
+	}
 	public VCUser(int userid, String uname, String utel, String upwd, String gender, String address, int status,
 			String temp1, String temp2) {
 		this.userid = userid;

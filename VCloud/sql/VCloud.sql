@@ -12,11 +12,12 @@ create table VCUser(
 	temp1 varchar2(200),		--备用字段
 	temp2 varchar2(200)			--备用字段  
 );
-insert into vcuser values(seq_userid.nextval,'V1','1519742069','a','male','192.168.14.254',0,'','');
+insert into vcuser values(seq_userid.nextval,'V1','15197462069','a','male','192.168.14.254',0,'','');
 create sequence seq_userid start with 10001;
 alter table VCUser modify address varchar2(100);--增加字段的大小
 
 select * from VCUser;
+select * from VCUser where utel='15197462069' and upwd='a';
 
 --管理员表
 create table VCAdmin(

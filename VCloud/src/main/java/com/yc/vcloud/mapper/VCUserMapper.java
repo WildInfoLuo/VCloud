@@ -15,7 +15,7 @@ public interface VCUserMapper {
 	 * @param address：登录地址
 	 * @return
 	 */
-	public int add( VCUser user);
+	public int register( VCUser user);
 	
 	/**
 	 * 登录用户
