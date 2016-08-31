@@ -5,6 +5,41 @@ function showShare(){
 function closeShare(){
 	$("#shareshow").css({"display":"none"});
 }
+function closeSharePath(){
+	$("#sharepath").css({"display":"none"});
+}
+
+function closepublicsuc(){
+	$("#publicsuc").css({"display":"none"});
+}
+
+function closepersonsuc(){
+	$("#personsuc").css({"display":"none"});
+}
+
+function showpath(){
+	$("#shareshow").css({"display":"none"});
+	$("#sharepath").css({"display":"block"});
+}
+
+function showpublic(){
+	$("#sharepath").css({"display":"none"});
+	$("#publicsuc").css({"display":"block"});
+}
+
+function showperson(){
+	$("#sharepath").css({"display":"none"});
+	$("#personsuc").css({"display":"block"});
+}
+
+//复制链接到粘贴板中
+function copypublicpath(){
+	/*alert(window.clipboardData.getData("text"));*/
+	var text=$("#publicpath-text").val();
+	window.location=text;
+	/*window.clipboardData.clearData();
+	window.clipboardData.setData("Text",text);*/
+}
 
 var tcheckIcon = new Array();
 function filenameIcon(id) {

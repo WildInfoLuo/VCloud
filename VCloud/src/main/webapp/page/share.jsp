@@ -208,7 +208,46 @@
 		</div>
 		<div id="sharefoot">
 			<div id="localup"></div>
-			<div id="certain"></div>
+			<div id="certain" onclick="showpath()"></div>
+		</div>
+	</div>
+	<div id="sharepath">
+		<img id="close" src="../images/close.png" onclick="closeSharePath()">
+		<a id="publicpath" onclick="showpublic()"></a>
+		<span>(任何复制使用此链接的人均可查看下载该文件...)</span>
+		<a id="personpath"  onclick="showperson()"></a>
+		<span>(只有拥有密钥的人复制使用此链接才可查看下载该文件...)</span>
+	</div>
+	
+	<div id="publicsuc">
+		<img id="close" src="../images/close.png" onclick="closepublicsuc()">
+		<img src="../images/success.png" style="width:30px;height:30px;float:left;margin-left:10px;margin-top:20px;">
+		<span style="color: rgb(49,173,238);font-size:18px;font-family:monospace;margin-left:10px;margin-top:20px;display: inline-block;">成功创建公开链接</span>
+		<div>
+			<br><input id="publicpath-text" type="text" readonly="readonly" value="sd" style="width:380px;height:30px;margin-top:10px;margin-left:10px;"/>
+			<a id="copypath" onclick="copypublicpath()"></a>  <br>
+			<span style="margin-left:10px;font-size:14px;font-family: cursive;margin-top:10px;display: inline-block;">
+			 1.生成文件下载链接</span> <br>
+			 <span style="margin-left:10px;font-size:14px;font-family: cursive;margin-top:8px;display: inline-block;">
+			 2.把链接通过QQ、微博、人人网、QQ空间等方式分享给好友
+			</span>
+		</div>
+		
+	</div>
+	<div id="personsuc">
+		<img id="close" src="../images/close.png" onclick="closepersonsuc()">
+		<img src="../images/success.png" style="width:30px;height:30px;float:left;margin-left:10px;margin-top:20px;">
+		<span style="color: rgb(49,173,238);font-size:18px;font-family:monospace;margin-left:10px;margin-top:20px;display: inline-block;">成功创建私密链接</span>
+		<div>
+			<br><input type="text" readonly="readonly" style="width:483px;height:30px;margin-top:10px;margin-left:10px;"/>
+			<span style="margin-left:10px;font-size:12px;margin-top:10px;display: inline-block;font-family: monospace;">
+				提取密码
+			</span>
+			<br><input type="text" readonly="readonly" style="width:83px;height:28px;margin-top:10px;margin-left:10px;"/>
+			<a id="copypath2"></a>  <br>
+			<span style="margin-left:10px;font-size:14px;font-family: cursive;margin-top:10px;display: inline-block;">
+				可以将链接发送给你的QQ好友等
+			</span>
 		</div>
 	</div>
 </body>
