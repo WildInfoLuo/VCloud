@@ -31,7 +31,7 @@
 
 	<!-- 配制映射接口 -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer"
-		p:sqlSessionFactoryBeanName="sqlSessionFactory" p:basePackage="com.yc.vote.mapper" />
+		p:sqlSessionFactoryBeanName="sqlSessionFactory" p:basePackage="com.yc.vcloud.mapper" />
 
 
 	<!-- 1.配制事务管理器 -->

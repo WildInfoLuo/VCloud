@@ -162,9 +162,8 @@ function filenameIcon(id) {
 		return;
 	}
 	
-	/*
-	// 判断选择个数
-	var Index=0;
+	// 判断
+	/*var Index=0;
 	for (var i = 1; i < tcheckIcon.length; i++){
 		if(tcheckIcon[i] == true){
 			Index++;
@@ -176,6 +175,5 @@ function filenameIcon(id) {
 		tcheckIcon[0] = true;
 		$(".check-icon0").css(divcss2);
 	}
-	$(".count-tips").text('已选中 '+Index+' 个文件/文件夹');
-	 * */
+	$(".count-tips").text('已选中 '+Index+' 个文件/文件夹');*/
 }

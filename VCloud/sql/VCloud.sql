@@ -7,14 +7,17 @@ create table VCUser(
 	utel varchar2(20) not null unique, 
 	upwd varchar2(50),
 	gender varchar2(10),
-	address varchar2(10),			--登录地址
-	status int,						--状态(是否被锁定)
-	temp1 varchar2(200),			--备用字段
-	temp2 varchar2(200)				--备用字段  
+	address varchar2(100),		--登录地址
+	status int,					--状态(是否被锁定)
+	temp1 varchar2(200),		--备用字段
+	temp2 varchar2(200)			--备用字段  
 );
-
+insert into vcuser values(seq_userid.nextval,'V1','1519742069','a','male','192.168.14.254',0,'','');
 create sequence seq_userid start with 10001;
-select * from VCUSER;
+alter table VCUser modify address varchar2(100);--增加字段的大小
+
+select * from VCUser;
+
 --管理员表
 create table VCAdmin(
        aid int primary key,
@@ -46,11 +49,10 @@ create table VCUploadFile(
 	filePathOra varchar2(100),  	--文件最初路径
 	filePathNew varchar2(100),  	--文件最新路径
 	fileSize int,  					--文件大小
-	fileUpCount int,  				--文件下载次数
 	uploadDate date,  				--文件上传时间
 	fileStatus varchar2(10),  		--文件状态(上传完成  上传中断  上传失败  已删除)
 	stoppoingPath varchar2(50),  	--断点文件路径
-	fileCheck varvhar2(10),  		--文件审核字段
+	fileCheck varchar2(10),  		--文件审核字段
 	temp1 varchar2(200),			--备用字段
     temp2 varchar2(200)				--备用字段 
 );
@@ -59,12 +61,12 @@ create sequence seq_ufid start with 40001;
 --回收站表
 create table VCRecyle(
 	rid int primary key,
-	ufid int   						--文件id
+	ufid int   --文件id
 		constraint FK_VCUploadFile_id references VCUploadFile(ufid),
-	deletedate date, 				--删除时间
-	lefttime int,  					--可存放天数
-	temp1 varchar2(200),			--备用字段
-    temp2 varchar2(200)				--备用字段 
+	deletedate date, --删除时间
+	lefttime int,  --可存放天数
+	temp1 varchar2(200),		--备用字段
+    temp2 varchar2(200)			--备用字段 
 );
 create sequence seq_rid start with 50001;
 
@@ -72,14 +74,14 @@ create sequence seq_rid start with 50001;
 create table VCFileList(
 	listid int primary key,
 	userid int
-		constraint FK_VCUser_id references VCUCser(userid),
+		constraint FK_VCUser_id_list references VCUser(userid),
 	ufid int   --文件id
-		constraint FK_VCUploadFile_id references VCUploadFile(ufid),--文件id，用户修改文件或文件夹名
-	listgrade int ,					--目录级别
-	listParentid int, 				--上级目录id  没有就为空
+		constraint FK_VCUploadFile_id_list references VCUploadFile(ufid),--文件id，用户修改文件或文件夹名
+	listgrade int ,				--目录级别
+	listParentid int, 			--上级目录id  没有就为空
 	listName varchar2(50),
-	temp1 varchar2(200),			--备用字段
-    temp2 varchar2(200)				--备用字段 
+	temp1 varchar2(200),		--备用字段
+  temp2 varchar2(200)			--备用字段 
 );
 
 create sequence seq_listid start with 60001;
@@ -88,15 +90,20 @@ create sequence seq_listid start with 60001;
 create table VCShare(
 	shareid int primary key,
 	userid int
-		constraint FK_VCUser_id references VCUCser(userid),
+		constraint FK_VCUser_id_share references VCUser(userid),
 	filepath varchar2(100),  		--文件链接
-	spwd varchar2(50)    			--提取密码
+	password varchar2(50),    		--提取密码
 	temp1 varchar2(200),			--备用字段
-    temp2 varchar2(200)				--备用字段
+  temp2 varchar2(200)				--备用字段
 );
-
 create sequence seq_shareid start with 70001;
 
+
+--解决文件服务器端至客户端下载 			将本机作为服务器，其他作为客户端直接输入localhost进行访问与下载
+--回收站的删除与还原、清空回收站
+--分享--创建连接，权限问题，（有时间做分享给本地好友）
+--视频--视频在线播放
+--文件处理--文件的上传、下载、断点上传与下载
 
 
 
