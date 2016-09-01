@@ -1,0 +1,185 @@
+*{
+		margin:0;
+		padding:0;
+	}
+	body{
+		color: #333;
+    	font: 12px/1.5 arial,simsun;
+	}
+	.bg_top .bg_bottom{
+		position:relative;
+	}
+	.bg_top .bg_bottom img{
+		border: 0 none;
+		outline: medium none;
+	}
+	.bg{
+		left: 0;
+    	position: absolute;
+    	top: 0;
+    	width: 100%;
+    	z-index: 0;
+	}
+	.gif{
+		width: 1000px;
+		position:relative;
+		margin:0 auto;
+	}
+	.gif img{
+		position:absolute;
+		z-index:10;
+	}
+	
+	.logo{
+		width:400px;
+		height:450px;
+		position:absolute;
+		z-index:12;
+		margin-top:65px;
+		margin-left:875px;
+		background-color:#FFF;
+		opacity:0.9;
+	}
+	.logo_2{
+		left: 0;
+		position: absolute;
+		top: 0;
+		z-index: 1;
+	}
+	.logo_top{
+		font-family: "Microsoft Yahei",simsun,arial;
+		font-size: 22px;
+		height: 45px;
+		line-height: 45px;
+		padding: 20px 0 0 22px;
+	}
+	.bd-logo {
+		background: rgba(0, 0, 0, 0) url("../images/bg_logo.jpg") no-repeat scroll 0 0;
+		display: inline-block;
+		height: 25px;
+		position: relative;
+		top: 3px;
+		width: 25px;
+	}
+	.logo_center{
+		margin-left:10px;
+		position: relative;
+   		z-index: 50;
+	}
+	
+	.logo_center form {
+		padding-left: 20px;
+		position: relative;
+	}
+	.errorMSG{
+		color:red;
+		margin-bottom:5px;
+	}
+	.MSG {
+		border:1px solid #999;
+		width:338px;
+		height:124px;
+	}
+	.username input{
+		width:277px;
+		height:21px;
+		font-size: 14px;
+		margin-left: 15px;
+		padding: 20px 0 20px 35px;
+		border-style:none;
+		border-bottom:1px solid #999;
+	}
+	.password input{
+		width:277px;
+		height:21px;
+		font-size: 14px;
+		margin-left: 15px;
+		padding: 20px 0 20px 35px;
+		border-style:none;
+	}
+	.userpic{
+		height: 18px;
+		left: 42px;
+		position: absolute;
+		text-indent: -9999em;
+		top: 44px;
+		width: 18px;
+		z-index: 1;
+		background-image:url(../images/user.png);
+	}
+	.pwdpic{
+		height: 18px;
+		left: 42px;
+		position: absolute;
+		text-indent: -9999em;
+		top: 106px;
+		width: 18px;
+		z-index: 1;
+		background-image:url(../images/pwd.png);
+	}
+	.autologin{
+		margin-top:10px;
+	}
+	.autologin input{
+		margin: 0px 5px 0 0;
+		position: relative;
+		top: -1px;
+		vertical-align: middle;
+	}
+	.submit {
+		margin-top:10px;
+	}
+	.submit input{
+		background-position: 0 0;
+		border: 0 none;
+		cursor: pointer;
+		display: block;
+		height: 52px;
+		width: 100%;
+		background-color:#C00;
+		border-radius:5px;
+		color:#FFF;
+		font-size:20px;
+		font-family:"宋体";
+		font-weight:bolder;
+	}
+	.morelogin{
+		width:120px;
+		margin-top:100px;
+		margin-left:30px;
+		float:left;
+	}
+	.loginchoose{
+		margin-top:70px;
+		width:220px;
+		float:left;
+	}
+	.zc{
+		margin-top:400px;
+	}
+	.zc input{
+		background-position: 0 0;
+		border: 0 none;
+		cursor: pointer;
+		display: block;
+		width: 100%;
+		border-radius:5px;
+		color:#FFF;
+		font-size:24px;
+		font-family:"宋体";
+		font-weight:bolder;
+		height:77px;
+		background-color:#333;
+	}
+	#submit:hover{
+		opacity:0.7;
+	}
+	#zc:hover{
+		opacity:0.7;
+	}
+	#sina:hover{
+		opacity:0.7;
+	}
+	#qq:hover{
+		opacity:0.7;
+	}

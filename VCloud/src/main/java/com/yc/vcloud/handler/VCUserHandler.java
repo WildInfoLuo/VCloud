@@ -9,7 +9,6 @@ import javax.validation.Valid;
 import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -48,8 +47,7 @@ public class VCUserHandler {
 	 * @param out
 	 */
 	@RequestMapping(value = "/message", method = RequestMethod.POST)
-	public void MessageResiter(PrintWriter out,
-			HttpServletRequest request) {
+	public void MessageResiter(PrintWriter out, HttpServletRequest request) {
 		CouldMessage cl = new CouldMessage();
 		String tel = request.getParameter("tel");
 		String num = getCharAndNumr(4);
@@ -58,6 +56,20 @@ public class VCUserHandler {
 		out.println(gson.toJson(num));
 		out.flush();
 		out.close();
+	}
+
+	@RequestMapping(value = "login", method = RequestMethod.POST)
+	public String Login(@Valid @ModelAttribute("user") VCUser user, BindingResult result, HttpServletRequest request,
+			PrintWriter out) {
+		// 如果有错误的话，那么将返回注册页面
+		if (result.hasErrors()) {
+			return "login";
+		}
+		if (service.login(user).size()>0) {
+			System.out.println("登录成功");
+			return "index";
+		}
+		return "login";
 	}
 
 	/**

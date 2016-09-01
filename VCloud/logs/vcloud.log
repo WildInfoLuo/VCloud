@@ -1,2 +1,17 @@
 信息: DEBUG CouldMessage (CouldMessage.java:32) - 短信发送情况为：{"alibaba_aliqin_fc_sms_num_send_response":{"result":{"err_code":"0","model":"102783845363^1103509509625","success":true},"request_id":"3erb17o0undd"}}
 信息: 2016-09-01 15:50:20,368  DEBUG CouldMessage (CouldMessage.java:32) - 短信发送情况为：{"alibaba_aliqin_fc_sms_num_send_response":{"result":{"err_code":"0","model":"102783794555^1103509611396","success":true},"request_id":"3gu1tu00jtzz"}}
+信息: 2016-09-01 20:44:31,678  DEBUG BaseJdbcLogger (BaseJdbcLogger.java:145) - ==>  Preparing: select * from VCUser where utel=? and upwd=? 
+信息: 2016-09-01 20:44:32,109  DEBUG BaseJdbcLogger (BaseJdbcLogger.java:145) - ==> Parameters: 1519742069(String), 6f9b0a55df8ac28564cb9f63a10be8af6ab3f7c2(String)
+信息: 2016-09-01 20:44:32,349  DEBUG BaseJdbcLogger (BaseJdbcLogger.java:145) - <==      Total: 0
+信息: 2016-09-01 20:45:01,373  DEBUG BaseJdbcLogger (BaseJdbcLogger.java:145) - ==>  Preparing: select * from VCUser where utel=? and upwd=? 
+信息: 2016-09-01 20:45:01,800  DEBUG BaseJdbcLogger (BaseJdbcLogger.java:145) - ==> Parameters: 1519742069(String), 3207c5b7f39532e0ca9008b428ed420e54e91227(String)
+信息: 2016-09-01 20:45:02,054  DEBUG BaseJdbcLogger (BaseJdbcLogger.java:145) - <==      Total: 0
+信息: 2016-09-01 20:45:28,127  DEBUG BaseJdbcLogger (BaseJdbcLogger.java:145) - ==>  Preparing: select * from VCUser where utel=? and upwd=? 
+信息: 2016-09-01 20:45:28,551  DEBUG BaseJdbcLogger (BaseJdbcLogger.java:145) - ==> Parameters: 1519742069(String), 6f9b0a55df8ac28564cb9f63a10be8af6ab3f7c2(String)
+信息: 2016-09-01 20:45:28,801  DEBUG BaseJdbcLogger (BaseJdbcLogger.java:145) - <==      Total: 0
+信息: 2016-09-01 20:47:29,447  DEBUG BaseJdbcLogger (BaseJdbcLogger.java:145) - ==>  Preparing: select * from VCUser where utel=? and upwd=? 
+信息: 2016-09-01 20:47:29,893  DEBUG BaseJdbcLogger (BaseJdbcLogger.java:145) - ==> Parameters: 1519742069(String), a(String)
+信息: 2016-09-01 20:47:30,157  DEBUG BaseJdbcLogger (BaseJdbcLogger.java:145) - <==      Total: 1
+信息: 2016-09-01 20:48:44,994  DEBUG BaseJdbcLogger (BaseJdbcLogger.java:145) - ==>  Preparing: select * from VCUser where utel=? and upwd=? 
+信息: 2016-09-01 20:48:45,494  DEBUG BaseJdbcLogger (BaseJdbcLogger.java:145) - ==> Parameters: 15616647284(String), 6f9b0a55df8ac28564cb9f63a10be8af6ab3f7c2(String)
+信息: 2016-09-01 20:48:45,809  DEBUG BaseJdbcLogger (BaseJdbcLogger.java:145) - <==      Total: 1
