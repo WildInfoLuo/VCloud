@@ -36,4 +36,14 @@ public class VCUserServiceImpl implements VCUserService {
 		return vcmapper.login(user);
 	}
 
+	@Override
+	public VCUser checkUsername(String username) {
+		return vcmapper.checkUsername(username);
+	}
+
+	@Override
+	public VCUser checkPhone(String phone) {
+		return vcmapper.checkPhone(phone);
+	}
+
 }

@@ -16,11 +16,3 @@ $(function() {
 
 });
 
-/* 点击发送短信 */
-function MessageResiter() {
-	alert($(".phone_number").val());
-	$(".email").val();
-	$.post("user/message", function(data) {
-		alert(JSON.stringify(data));
-	}, "json");
-}

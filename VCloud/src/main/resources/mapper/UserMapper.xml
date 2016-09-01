@@ -14,4 +14,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from VCUser where utel=#{utel} and
 		upwd=#{upwd}
 	</select>
+	
+	<select id="checkUsername" parameterType="String"  resultType="VCUser">
+		select *
+		from VCUser where uname=#{uname}
+	</select>
+	
+	<select id="checkPhone" parameterType="String"  resultType="VCUser">
+		select *
+		from VCUser where utel=#{utel}
+	</select>
 </mapper>
