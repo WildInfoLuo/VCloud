@@ -1,26 +1,28 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
+<base href="/VCloud/">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>VCloud注册</title>
-<link rel="short icon" href="../images/vcloud.png" />
-<link rel="stylesheet" href="../css/register-style.css" />
-<script src="../js/jquery-1.11.3.min.js"></script>
-<script src="../js/common.js"></script>
+<link rel="short icon" href="images/vcloud.png" />
+<link rel="stylesheet" href="css/register-style.css" />
+<script src="js/jquery-1.11.3.min.js"></script>
+<script src="js/common.js"></script>
+<script type="text/javascript" src="js/login.js"></script>
 <!--背景图片自动更换-->
-<script src="../js/supersized.3.2.7.min.js"></script>
-<script src="../js/supersized-init.js"></script>
+<script src="js/supersized.3.2.7.min.js"></script>
+<script src="js/supersized-init.js"></script>
 </head>
 <body>
-<div class="register-container">
-	<h1>Welcome</h1>
-	
-	<div class="connect">
-		<p>Link the world. Share to world.</p>
-	</div>
-	
-	<form action="" method="post" id="registerForm">
-		<div>
+	<div class="register-container">
+		<h1>Welcome</h1>
+		<div class="connect">
+			<p>Link the world. Share to world.</p>
+		</div>
+		<form action="user/register" method="post" id="registerForm">
+			<div>
 			<input type="text" name="username" class="username" placeholder="您的用户名" autocomplete="off"/>
 			<div id="nameError"></div>
 			<div id="nameSure"></div>
@@ -46,14 +48,12 @@
 			<div id="codeError" ></div>
 			<div id="codeSure" ></div>
 		</div>
-		<!--<label style=" float:left;" class="error">-->
-		<button id="submit" type="submit">注 册</button>
-	</form>
-	<a href="login.html">
-		<button type="button">已经有账号？</button>
-	</a>
-
-</div>
-
+			<button id="submit" type="submit">注 册</button>
+		</form>
+		<div class="error">这里显示错误信息</div>
+		<a href="login.html">
+			<button type="button">已经有账号？</button>
+		</a>
+	</div>
 </body>
 </html>
