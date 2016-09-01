@@ -27,9 +27,8 @@ public class VCUserHandler {
 	private VCUserService service;
 
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
-	public String register(@Valid @ModelAttribute("user") VCUser user, BindingResult result, ModelMap map,
+	public String register(@Valid @ModelAttribute("user") VCUser user, BindingResult result,
 			HttpServletRequest request) {
-		System.out.println("进来了.." + user.getUpwd());
 		// 如果有错误的话，那么将返回注册页面
 		if (result.hasErrors()) {
 			return "register";
@@ -39,16 +38,24 @@ public class VCUserHandler {
 			// 成功注册，发送邮件，激活帐号
 			return "login";
 		}
-		map.put("regErrorMsg", "注册失败!!!");
 		return "register";
 	}
 
+	/**
+	 * 获取电话号码得出验证码
+	 * 
+	 * @param user
+	 * @param out
+	 */
 	@RequestMapping(value = "/message", method = RequestMethod.POST)
-	public void MessageResiter(@Valid @ModelAttribute("user") VCUser user, PrintWriter out) {
+	public void MessageResiter(PrintWriter out,
+			HttpServletRequest request) {
 		CouldMessage cl = new CouldMessage();
-		cl.CouldMessageContent(user.getUtel(), getCharAndNumr(4));
+		String tel = request.getParameter("tel");
+		String num = getCharAndNumr(4);
+		cl.CouldMessageContent(tel, num);
 		Gson gson = new Gson();
-		out.println(gson.toJson(getCharAndNumr(4)));
+		out.println(gson.toJson(num));
 		out.flush();
 		out.close();
 	}

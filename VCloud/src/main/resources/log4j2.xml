@@ -13,7 +13,7 @@
 		<Logger name="com.yc" level="debug" />
 
 		<!-- 日志级别总开头 -->
-		<Root level="debug">
+		<Root level="error">
 			<AppenderRef ref="STDOUT" />
 			<AppenderRef ref="fileLog" />
 		</Root>
