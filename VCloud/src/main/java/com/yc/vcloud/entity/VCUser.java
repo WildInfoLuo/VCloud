@@ -5,7 +5,6 @@ public class VCUser {
 	private String uname;
 	private String utel;
 	private String upwd;
-	private String gender;
 	private String address;
 	private int status;
 	private String temp1;
@@ -19,20 +18,18 @@ public class VCUser {
 		this.utel = utel;
 		this.upwd = upwd;
 	}
-	public VCUser( String uname, String utel, String upwd, String gender,String address){
+	public VCUser( String uname, String utel, String upwd,String address){
 		this.uname = uname;
 		this.utel = utel;
 		this.upwd = upwd;
-		this.gender = gender;
 		this.address=address;
 	}
-	public VCUser(int userid, String uname, String utel, String upwd, String gender, String address, int status,
+	public VCUser(int userid, String uname, String utel, String upwd, String address, int status,
 			String temp1, String temp2) {
 		this.userid = userid;
 		this.uname = uname;
 		this.utel = utel;
 		this.upwd = upwd;
-		this.gender = gender;
 		this.address = address;
 		this.status = status;
 		this.temp1 = temp1;
@@ -71,14 +68,6 @@ public class VCUser {
 		this.upwd = upwd;
 	}
 
-	public String getGender() {
-		return gender;
-	}
-
-	public void setGender(String gender) {
-		this.gender = gender;
-	}
-
 	public String getAddress() {
 		return address;
 	}
@@ -113,8 +102,7 @@ public class VCUser {
 
 	@Override
 	public String toString() {
-		return "VCUser [userid=" + userid + ", uname=" + uname + ", utel=" + utel + ", upwd=" + upwd + ", gender="
-				+ gender + ", address=" + address + ", status=" + status + ", temp1=" + temp1 + ", temp2=" + temp2
-				+ "]";
+		return "VCUser [userid=" + userid + ", uname=" + uname + ", utel=" + utel + ", upwd=" + upwd + ", address="
+				+ address + ", status=" + status + ", temp1=" + temp1 + ", temp2=" + temp2 + "]";
 	}
 }
