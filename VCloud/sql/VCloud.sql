@@ -1,6 +1,7 @@
 --新建一个用户____VCloud
 
 --用户表
+drop table VCUser
 create table VCUser(
 	userid int primary key,
 	uname varchar2(20) not null,

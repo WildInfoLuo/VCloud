@@ -235,16 +235,19 @@
 		<img src="../images/success.png" style="width:30px;height:30px;float:left;margin-left:10px;margin-top:20px;">
 		<span style="color: rgb(49,173,238);font-size:18px;font-family:monospace;margin-left:10px;margin-top:20px;display: inline-block;">成功创建私密链接</span>
 		<div>
-			<br><input type="text" readonly="readonly" style="width:483px;height:30px;margin-top:10px;margin-left:10px;"/>
+			<br><input id="personpath-text" type="text" value="sdfsd" readonly="readonly" style="width:483px;height:30px;margin-top:10px;margin-left:10px;"/>
 			<span style="margin-left:10px;font-size:12px;margin-top:10px;display: inline-block;font-family: monospace;">
 				提取密码
 			</span>
-			<br><input type="text" readonly="readonly" style="width:83px;height:28px;margin-top:10px;margin-left:10px;"/>
-			<a id="copypath2"></a>  <br>
+			<br><input id="personpwd" type="text" readonly="readonly" style="width:83px;height:28px;margin-top:10px;margin-left:10px;"/>
+			<a id="copypath2" onclick="copypersonpath()"></a>  <br>
 			<span style="margin-left:10px;font-size:14px;font-family: cursive;margin-top:10px;display: inline-block;">
 				可以将链接发送给你的QQ好友等
 			</span>
 		</div>
 	</div>
 </body>
+
+<script type="text/javascript" src="../js/jquery.zclip.min.js"></script>
+
 </html>
