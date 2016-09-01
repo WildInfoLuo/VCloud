@@ -77,23 +77,16 @@ function checkzcphone() {
 var id;
 var codeid;
 function sendcheckcode(){
-	var phone=$.trim($("#phone_number").val());
+	var tel=$.trim($("#phone_number").val());
 	if(checkphone){
-		$.post("user/message", function(data) {
-			alert(JSON.stringify(data));
+		id=window.setInterval("setCodeTime()",1000);
+		$.post("user/message", {tel: tel},function(data) {
+			if(data){
+				codeid=window.setInterval("clearcode()",300000);
+			}
 		}, "json");
 	}else{
 		alert("请确认手机号是否正确!")
-	}
-	if( checkzcemail && flag){
-		id=window.setInterval("setCodeTime()",1000);
-		$.post("../userServlet",{op:"sendcheckcode",email:email},function(data){
-			if(data==1 ){
-				codeid=window.setInterval("clearcode()",300000);
-			}
-		});
-	}else{
-		$("#zcemailp").html("请输入邮箱号码...").css("color", "#F00");
 	}
 }
 var time=60;
@@ -101,13 +94,8 @@ function setCodeTime(){
 	$("#getCode").html("<span style='font-size:12px;'>"+time+"秒后可重新获取验证码</span>");
 	time--;
 	if(time==0){
-		$("#getCode").html("<input type='button' value='获取验证码'  class='check' id='check' onclick='sendcheckcode()'/>");
+		$("#getCode").html('<button style="float:left; width:110px; margin-left:10px; " type="button" onclick="sendcheckcode()">点击获取验证码</button>');
 		window.clearInterval(id);
 		time=60;
 	}
-}
-
-/* 点击发送短信 */
-function MessageResiter() {
-	
 }

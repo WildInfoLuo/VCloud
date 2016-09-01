@@ -41,7 +41,7 @@
 		</div>
 		<div>
 			<input  type="text" name="code" class="code" id="code" placeholder="输入验证码" oncontextmenu="return false" onpaste="return false" />
-			<button style="float:left; width:110px; margin-left:10px; " type="button">点击获取验证码</button>
+			<div id="getCode"><button style="float:left; width:110px; margin-left:10px; " type="button" onclick="sendcheckcode()">点击获取验证码</button></div>
 			<div id="codeError" ></div>
 		</div>
 			<button id="submit" type="submit">注 册</button>
