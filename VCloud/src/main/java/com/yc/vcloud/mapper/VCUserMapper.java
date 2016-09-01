@@ -24,4 +24,18 @@ public interface VCUserMapper {
 	 * @return
 	 */
 	public List<VCUser> login(VCUser user);
+
+	/**
+	 * 验证用户名是否使用
+	 * @param username
+	 * @return
+	 */
+	public VCUser checkUsername(String username);
+
+	/**
+	 * 验证手机号是否使用
+	 * @param phone
+	 * @return
+	 */
+	public VCUser checkPhone(String phone);
 }

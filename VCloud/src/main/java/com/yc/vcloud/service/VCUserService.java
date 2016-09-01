@@ -18,4 +18,18 @@ public interface VCUserService {
 	 * @return
 	 */
 	public List<VCUser> login(VCUser user);
+	
+	/**
+	 * 验证用户名是否存在
+	 * @param username  用户名
+	 * @return
+	 */
+	public VCUser checkUsername(String username);
+	
+	/**
+	 * 验证手机号是否被使用
+	 * @param phone
+	 * @return
+	 */
+	public VCUser checkPhone(String phone);
 }

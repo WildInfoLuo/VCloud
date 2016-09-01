@@ -16,10 +16,3 @@ $(function() {
 
 });
 
-/* 点击发送短信 */
-function MessageResiter() {
-	var tel=$(".phone_number").val();
-	$.post("user/message",{tel:tel}, function(data) {
-		alert(JSON.stringify(data));
-	}, "json");
-}

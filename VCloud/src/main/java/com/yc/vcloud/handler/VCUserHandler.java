@@ -97,4 +97,31 @@ public class VCUserHandler {
 		}
 		return val;
 	}
+	
+	@RequestMapping(value ="/checkzcname",method=RequestMethod.POST)
+	public void checkname(HttpServletRequest request,PrintWriter out){
+		String username=(String) request.getParameter("usname");
+		VCUser user=service.checkUsername(username);
+		if(user==null){
+			out.println(1);
+		}else{
+			out.println(0);
+		}
+		out.flush();
+		out.close();
+	}
+	
+	@RequestMapping(value ="/checkzcphone",method=RequestMethod.POST)
+	public void checkzcphone(HttpServletRequest request,PrintWriter out){
+		String phone=(String) request.getParameter("phone");
+		VCUser user=service.checkPhone(phone);
+		if(user==null){
+			out.println(1);
+		}else{
+			out.println(0);
+		}
+		out.flush();
+		out.close();
+	}
+	
 }
