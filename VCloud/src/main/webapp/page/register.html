@@ -12,43 +12,50 @@
 <script src="../js/supersized-init.js"></script>
 </head>
 <body>
-<div class="register-container">
-	<h1>Welcome</h1>
-	
-	<div class="connect">
-		<p>Link the world. Share to world.</p>
+	<div class="register-container">
+		<h1>Welcome</h1>
+		<div class="connect">
+			<p>Link the world. Share to world.</p>
+		</div>
+		<form action="" method="post" id="registerForm">
+			<div>
+				<input type="text" name="username" class="username"
+					placeholder="您的用户名" autocomplete="off" />
+				<div id="nameError"></div>
+			</div>
+			<div>
+				<input type="password" name="password" class="password"
+					placeholder="输入密码" oncontextmenu="return false"
+					onpaste="return false" />
+				<div id="pwdError"></div>
+			</div>
+			<div>
+				<input type="password" name="confirm_password"
+					class="confirm_password" placeholder="再次输入密码"
+					oncontextmenu="return false" onpaste="return false" />
+				<div id="confirmpwdError">
+				</div>
+			</div>
+			<div>
+				<input type="text" name="phone_number" class="phone_number"
+					placeholder="输入手机号码" autocomplete="off" id="number" />
+				<div id="phoneError">
+				</div>
+			</div>
+			<div>
+				<input type="email" name="email" class="email" placeholder="输入验证码"
+					oncontextmenu="return false" onpaste="return false" />
+				<button style="float: left; width: 110px; margin-left: 10px;"
+					type="button">点击获取验证码</button>
+				<div id="codeError">
+				</div>
+			</div>
+			<!--<label style=" float:left;" class="error">-->
+			<button id="submit" type="submit">注 册</button>
+		</form>
+		<a href="login.html">
+			<button type="button">已经有账号？</button>
+		</a>
 	</div>
-	
-	<form action="" method="post" id="registerForm">
-		<div>
-			<input type="text" name="username" class="username" placeholder="您的用户名" autocomplete="off"/>
-			<div id="nameError"></div>
-		</div>
-		<div>
-			<input type="password" name="password" class="password" placeholder="输入密码" oncontextmenu="return false" onpaste="return false" />
-			<div id="pwdError"></div>
-		</div>
-		<div>
-			<input type="password" name="confirm_password" class="confirm_password" placeholder="再次输入密码" oncontextmenu="return false" onpaste="return false" />
-			<div id="confirmpwdError"></label></div>
-		</div>
-		<div>
-			<input type="text" name="phone_number" class="phone_number" placeholder="输入手机号码" autocomplete="off" id="number"/>
-			<div id="phoneError"></label></div>
-		</div>
-		<div>
-			<input  type="email" name="email" class="email" placeholder="输入验证码" oncontextmenu="return false" onpaste="return false" />
-			<button style="float:left; width:110px; margin-left:10px; " type="button">点击获取验证码</button>
-			<div id="codeError" ></label></div>
-		</div>
-		<!--<label style=" float:left;" class="error">-->
-		<button id="submit" type="submit">注 册</button>
-	</form>
-	<a href="login.html">
-		<button type="button">已经有账号？</button>
-	</a>
-
-</div>
-
 </body>
 </html>
