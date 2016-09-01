@@ -17,7 +17,6 @@ public class VCUserServiceImpl implements VCUserService {
 
 	@Override
 	public int register(VCUser user) {
-		System.out.println("在UserService"+user.getUpwd());
 		// 密码加密 的操作
 		user.setUpwd(Encrypt.md5AndSha(user.getUpwd()));
 		try {

@@ -25,7 +25,7 @@ public class VCUserServiceImplTest {
 	
 	@Test
 	public void testLogin() {
-		List<VCUser> user = service.login(new VCUser("15197462069", "a"));
+		List<VCUser> user = service.login(new VCUser("15616647284", "a"));
 		System.out.println("用户名为：" + user);
 	}
 
