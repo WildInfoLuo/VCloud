@@ -8,7 +8,7 @@
 
 
 #shareshow{display:none;width:750px;min-height:500px;border:3px solid rgb(209,209,211);z-index:200;position: absolute;margin-top:20px;margin-left:360px;background-color: white;}
-#shareshow #close{width:22px;height:22px;float:right;margin-right:5px;margin-top:9px;cursor:pointer;}
+#close{width:22px;height:22px;float:right;margin-right:5px;margin-top:9px;cursor:pointer;}
 #shareshow #shareh3{border-bottom:1px solid rgb(210,210,210);height:40px;line-height:40px;width:100%;color: #333;font-size: 14px;font-weight: 700;text-indent: 1em;background: url("http://s1.pan.bdstatic.com/yun-static/common-cdn/images/dialog/globe-dlg-hd.png?t=1470210528913");}
 #shareshow .share-grid-switch{width:10%;float:right;margin-right:0px;margin-top:11px;}
 #shareshow #showall{border-bottom:1px solid rgb(210,210,210);height:50px;background: #fafafa none repeat scroll 0 0;}
@@ -31,6 +31,24 @@
 #shareshow #sharefoot #localup{border:1px solid gray;cursor:pointer;width:115px;height:36px;float:left;margin-left:20px;margin-top:7px;background-image: url(../images/localup.png);}
 #close:hover{opacity:0.7;}
 #localup:hover{opacity:0.7;}
+
+#sharepath{display:none;width:510px;min-height:200px;border:3px solid rgb(209,209,211);z-index:300;position: absolute;margin-top:120px;margin-left:460px;background-color: white;}
+#sharepath #publicpath{display:inline-block;cursor:pointer;width:186px;height:37px;background-image: url(../images/publicpath.png);margin-left:30px;margin-top:50px;}
+#sharepath #personpath{display:inline-block;cursor:pointer;width:186px;height:37px;background-image: url(../images/personpath.png);margin-left:30px;margin-top:30px;}
+#sharepath #personpath:hover{opacity:0.7;}
+#sharepath #publicpath:hover{opacity:0.7;}
+#sharepath span{font-size:11px;margin-top:20px;}
+
+#publicsuc{display:none;width:510px;min-height:200px;border:3px solid rgb(209,209,211);z-index:300;position: absolute;margin-top:120px;margin-left:460px;background-color: white;}
+#personsuc{display:none;width:510px;min-height:200px;border:3px solid rgb(209,209,211);z-index:300;position: absolute;margin-top:120px;margin-left:460px;background-color: white;}
+#copypath{cursor:pointer;width:79px;height:29px;background-image: url(../images/copypath.png);position: absolute;margin-top:10px;margin-left:20px;}
+#copypath:hover{opacity:0.7;}
+
+#copypath2{cursor:pointer;width:115px;height:28px;background-image: url(../images/copypathsec.png);position: absolute;margin-top:10px;margin-left:260px;}
+#copypath2:hover{opacity:0.7;}
+
+
+
 
 
 
