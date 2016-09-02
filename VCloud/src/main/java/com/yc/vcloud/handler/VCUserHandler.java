@@ -4,11 +4,13 @@ import java.io.PrintWriter;
 import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,17 +28,30 @@ public class VCUserHandler {
 	private VCUserService service;
 
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
-	public String register(@Valid @ModelAttribute("user") VCUser user, BindingResult result,
-			HttpServletRequest request) {
-		// 如果有错误的话，那么将返回注册页面
-		if (result.hasErrors()) {
+	public String register(@Valid @ModelAttribute("user") VCUser user, BindingResult result,HttpSession session,
+			HttpServletRequest request,ModelMap map) {
+		System.out.println(user.getCode());
+		System.out.println("asd"+session.getAttribute("code"));
+		user.setAddress(request.getRemoteAddr());
+		if(session.getAttribute("code")==null){
+			map.put("regErrorMsg", "验证码已失效");
 			return "register";
 		}
-		if (service.register(user) > 0) {
-			LogManager.getLogger().debug("注册成功，注册信息为：" + service.register(user));
-			// 成功注册，发送邮件，激活帐号
-			return "login";
+		if(user.getCode().equals(session.getAttribute("code"))){
+			if (service.register(user) > 0) {
+				// 成功注册，发送邮件，激活帐号
+				return "login";
+			}
+		}else{
+			map.put("regErrorMsg", "验证码不正确");
+			return "register";
 		}
+		// 如果有错误的话，那么将返回注册页面
+		if (result.hasErrors()) {
+			map.put("regErrorMsg", "注册失败");
+			return "register";
+		}
+		
 		return "register";
 	}
 
@@ -47,10 +62,11 @@ public class VCUserHandler {
 	 * @param out
 	 */
 	@RequestMapping(value = "/message", method = RequestMethod.POST)
-	public void MessageResiter(PrintWriter out, HttpServletRequest request) {
+	public void MessageResiter(PrintWriter out, HttpServletRequest request,HttpSession session) {
 		CouldMessage cl = new CouldMessage();
 		String tel = request.getParameter("tel");
 		String num = getCharAndNumr(4);
+		session.setAttribute("code", num);
 		cl.CouldMessageContent(tel, num);
 		Gson gson = new Gson();
 		out.println(gson.toJson(num));
@@ -118,6 +134,15 @@ public class VCUserHandler {
 		}else{
 			out.println(0);
 		}
+		out.flush();
+		out.close();
+	}
+	
+	//定时清除验证码
+	@RequestMapping(value ="/clearcode",method=RequestMethod.POST)
+	public void clearcode(HttpSession session,PrintWriter out){
+		session.removeAttribute("code");
+		out.println(1);
 		out.flush();
 		out.close();
 	}

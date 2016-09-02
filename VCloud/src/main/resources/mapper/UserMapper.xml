@@ -5,8 +5,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.yc.vcloud.mapper.VCUserMapper">
 	<insert id="register"  parameterType="VCUser">
 		insert into VCUser
-		(userid,uname,utel,upwd,gender,address,status)
-		values(seq_userid.nextval,#{uname},#{utel},#{upwd},#{gender},#{address},1)
+		(userid,uname,utel,upwd,address,status)
+		values(seq_userid.nextval,#{uname},#{utel},#{upwd},#{address},1)
 	</insert>
 
 	<select id="login" parameterType="VCUser" resultType="VCUser">

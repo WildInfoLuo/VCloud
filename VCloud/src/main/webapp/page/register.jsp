@@ -22,13 +22,13 @@
 		<div class="connect">
 			<p>Link the world. Share to world.</p>
 		</div>
-		<form action="user/register" method="post" id="registerForm">
+		<form action="user/register" method="post" id="registerForm" onsubmit="checkcode()">
 			<div>
-				<input type="text" name="username" class="username" id="username" placeholder="您的用户名" autocomplete="off" onblur="checkzcuname()"/>
+				<input type="text" name="uname" class="username" id="username" placeholder="您的用户名" autocomplete="off" onblur="checkzcuname()"/>
 				<div id="nameError"></div>
 			</div>
 		<div>
-			<input type="password" name="password" class="password" id="password" placeholder="输入密码" oncontextmenu="return false" onblur="checkzcpwd()"/>
+			<input type="password" name="upwd" class="password" id="password" placeholder="输入密码" oncontextmenu="return false" onblur="checkzcpwd()"/>
 			<div id="pwdError"></div>
 		</div>
 		<div>
@@ -36,7 +36,7 @@
 			<div id="confirmpwdError"></div>
 		</div>
 		<div>
-			<input type="text" name="phone_number" class="phone_number" id="phone_number" placeholder="输入手机号码" autocomplete="off" onblur="checkzcphone()"/>
+			<input type="text" name="utel" class="phone_number" id="phone_number" placeholder="输入手机号码" autocomplete="off" onblur="checkzcphone()"/>
 			<div id="phoneError"></div>
 		</div>
 		<div>
@@ -44,9 +44,9 @@
 			<div id="getCode"><button style="float:left; width:110px; margin-left:10px; " type="button" onclick="sendcheckcode()">点击获取验证码</button></div>
 			<div id="codeError" ></div>
 		</div>
-			<button id="submit" type="submit">注 册</button>
+			<button id="submit" >注 册</button>
 		</form>
-		<div class="error">这里显示错误信息</div>
+		<div class="error" >${regErrorMsg }</div>
 		<a href="login.html">
 			<button type="button">已经有账号？</button>
 		</a>

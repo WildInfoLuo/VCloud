@@ -9,7 +9,7 @@ public class VCUser {
 	private int status;
 	private String temp1;
 	private String temp2;
-
+	private String code;
 	public VCUser() {
 		
 	}
@@ -98,6 +98,14 @@ public class VCUser {
 
 	public void setTemp2(String temp2) {
 		this.temp2 = temp2;
+	}
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
 	}
 
 	@Override
