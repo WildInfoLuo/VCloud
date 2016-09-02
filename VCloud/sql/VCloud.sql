@@ -7,13 +7,13 @@ create table VCUser(
 	uname varchar2(20) not null,
 	utel varchar2(20) not null unique, 
 	upwd varchar2(50),
-	gender varchar2(10),
 	address varchar2(100),		--登录地址
 	status int,					--状态(是否被锁定)
 	temp1 varchar2(200),		--备用字段
 	temp2 varchar2(200)			--备用字段  
 );
-insert into vcuser values(seq_userid.nextval,'V1','15197462069','a','male','192.168.14.254',0,'','');
+
+insert into vcuser values(seq_userid.nextval,'V1','15197462069','a','192.168.14.254',0,'','');
 create sequence seq_userid start with 10001;
 alter table VCUser modify address varchar2(100);--增加字段的大小
 

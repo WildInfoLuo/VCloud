@@ -19,13 +19,13 @@ public class VCUserServiceImplTest {
 
 	@Test
 	public void testRegister() {
-		int user = service.register(new VCUser("V3","15616647284","a","mail","192.168.15.254"));
+		int user = service.register(new VCUser("V3","15616647284","a","192.168.15.254"));
 		System.out.println("用户名为：" + user);
 	}
 	
 	@Test
 	public void testLogin() {
-		List<VCUser> user = service.login(new VCUser("15197462069", "a"));
+		List<VCUser> user = service.login(new VCUser("15616647284", "a"));
 		System.out.println("用户名为：" + user);
 	}
 
