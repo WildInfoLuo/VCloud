@@ -4,6 +4,7 @@ import java.io.PrintWriter;
 import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.apache.logging.log4j.LogManager;
@@ -14,6 +15,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.google.gson.Gson;
 import com.yc.vcloud.entity.VCUser;
@@ -22,6 +24,7 @@ import com.yc.vcloud.utils.CouldMessage;
 
 @Controller
 @RequestMapping("/user")
+@SessionAttributes("users")
 public class VCUserHandler {
 	@Autowired
 	private VCUserService service;
@@ -66,12 +69,18 @@ public class VCUserHandler {
 		if (result.hasErrors()) {
 			return "login";
 		}
-		System.out.println("用户名"+map.get("uname"));
 		if (service.login(user).size()>0) {
-			System.out.println("登录成功");
+			map.put("users", user);
+			LogManager.getLogger().debug("user==>"+user);
 			return "index";
 		}
 		return "login";
+	}
+	
+	@RequestMapping(value = "/logout", method = RequestMethod.GET)
+	public String LogOut(HttpSession session) {
+		session.removeAttribute("users");
+		return "index";
 	}
 
 	/**
