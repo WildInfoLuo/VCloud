@@ -5,26 +5,26 @@
 <html  class="no-js">
 <head>
 <meta charset="UTF-8">
-
+<base href="/VCloud/">
 <title>VCloud主页</title>
 
-	<link type="text/css" rel="stylesheet" href="../css/index.css">
-	<link type="text/css" rel="stylesheet" href="../css/vclound.css">
-	<link rel="stylesheet" href="../css/nheader.css">
-	<link rel="stylesheet" href="../css/nstyle.css">
-	<script type="text/javascript" src="../js/index.js"></script>
+	<link type="text/css" rel="stylesheet" href="css/index.css">
+	<link type="text/css" rel="stylesheet" href="css/vclound.css">
+	<link rel="stylesheet" href="css/nheader.css">
+	<link rel="stylesheet" href="css/nstyle.css">
+	<script type="text/javascript" src="js/index.js"></script>
 	
 </head>
 <body>
 	<div id="navbar">
 		<div id="navbar_left">
-			<img alt="千度云盘" src="../images/logo2.png">
+			<img alt="千度云盘" src="images/logo2.png">
 			<ul>
 				<li id="left_li"><a href="index.jsp">主页</a></li>
 				<li class="cjh"  id="left_li" onmouseover="showH()" onmouseout="hiddenH()" > <!--" -->
 					
 					<a href="Person_VCloud.jsp">网盘</a>
-					<a><img id="f-icon" src="../images/down.png" style="width:11px;height:11px;margin-top:20px;margin-left:3px;position: absolute;"></a>
+					<a><img id="f-icon" src="images/down.png" style="width:11px;height:11px;margin-top:20px;margin-left:3px;position: absolute;"></a>
 					<div id="navbar_hidden" onmouseout="hiddenH()">
 						<table id="navbar_table" style="width:300px;height:70px;" cellspacing="0" cellpadding="8">
 							<tr>
@@ -74,16 +74,16 @@
 			cellspacing="0" cellpadding="8">
 			<tr>
 				<td><a href="share.jsp"> <i
-						style="display: block; width: 40px; height: 40px; background: url(../images/picred.png); background-size: cover;"></i>
+						style="display: block; width: 40px; height: 40px; background: url(images/picred.png); background-size: cover;"></i>
 						<span style="font-size: 14px; margin-left: -8px;color:rgb(225,230,246);">分享图片</span></a></td>
 				<td><a href="#"> <i
-						style="display: block; width: 40px; height: 40px; background: url(../images/vedio.png); background-size: cover;"></i>
+						style="display: block; width: 40px; height: 40px; background: url(images/vedio.png); background-size: cover;"></i>
 						<span style="font-size: 14px; margin-left: -8px;color:rgb(225,230,246);">分享视频</span></a></td>
 				<td><a href="#"> <i
-						style="display: block; width: 40px; height: 40px; background: url(../images/wordblue.png); background-size: cover;"></i>
+						style="display: block; width: 40px; height: 40px; background: url(images/wordblue.png); background-size: cover;"></i>
 						<span style="font-size: 14px; margin-left: -8px;color:rgb(225,230,246);">分享文档</span></a></td>
 				<td><a href="#"> <i
-						style="display: block; width: 41px; height: 40px; background: url(../images/music.png); background-size: cover;"></i>
+						style="display: block; width: 41px; height: 40px; background: url(images/music.png); background-size: cover;"></i>
 						<span style="font-size: 14px; margin-left: -8px;color:rgb(225,230,246);">分享音乐</span></a></td>
 			</tr>
 		</table>
@@ -201,7 +201,7 @@
     <div class="product_list" id="product_list">
       <div class="product_box shoulei show">
         <div class="bg_box">
-          <img src="../images/img/bg_shoulei.jpg">
+          <img src="images/img/bg_shoulei.jpg">
         </div>
         <div class="content">
           <div class="main_box">
@@ -226,7 +226,7 @@
       </div>
       <div class="product_box xnet">
          <div class="bg_box">
-          <img src="../images/img/bg_xnet.jpg">
+          <img src="images/img/bg_xnet.jpg">
         </div>
         <div class="content">
           <div class="main_box">
@@ -247,7 +247,7 @@
       </div>
       <div class="product_box member">
         <div class="bg_box">
-          <img src="../images/img/bg_member.jpg">
+          <img src="images/img/bg_member.jpg">
         </div>
         <div class="content">
           <div class="main_box">
@@ -281,6 +281,6 @@
   </div>
 </div>
 </body>
-<script type="text/javascript" src="../js/jquery-1.11.3.min.js"></script>
-<script type="text/javascript" src="../js/chajian.js"></script>
+<script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="js/chajian.js"></script>
 </html>

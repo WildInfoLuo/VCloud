@@ -92,7 +92,7 @@ public class VCUserHandler {
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String LogOut(HttpSession session) {
 		session.removeAttribute("users");
-		return "index";
+		return "login";
 	}
 
 	/**

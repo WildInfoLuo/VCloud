@@ -68,5 +68,11 @@
 		</div>
 	</div>
 </body>
+<script type="text/javascript">
+
+function resiterLogin(){
+	location.href="page/register.jsp";
+}
+</script>
 </html>
 
