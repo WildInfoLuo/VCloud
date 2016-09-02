@@ -30,8 +30,6 @@ public class VCUserHandler {
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public String register(@Valid @ModelAttribute("user") VCUser user, BindingResult result,HttpSession session,
 			HttpServletRequest request,ModelMap map) {
-		System.out.println(user.getCode());
-		System.out.println("asd"+session.getAttribute("code"));
 		user.setAddress(request.getRemoteAddr());
 		if(session.getAttribute("code")==null){
 			map.put("regErrorMsg", "验证码已失效");
