@@ -91,11 +91,30 @@ function sendcheckcode(){
 }
 var time=60;
 function setCodeTime(){
-	$("#getCode").html("<span style='font-size:12px;'>"+time+"秒后可重新获取验证码</span>");
+	$("#getCode").html("<span style='font-size:14px; float:left; width:170px; margin-left:10px; margin-top:40px;'>"+time+"秒后可重新获取验证码</span>");
 	time--;
 	if(time==0){
 		$("#getCode").html('<button style="float:left; width:110px; margin-left:10px; " type="button" onclick="sendcheckcode()">点击获取验证码</button>');
 		window.clearInterval(id);
 		time=60;
+	}
+}
+
+function clearcode(){
+	$.post("user/clearcode",function(data){
+		if(data==1){
+			window.clearInterval(codeid);
+		}
+	});
+}
+
+function checkcode(){
+	var code=$("#code").val();
+	if(checkzcuname&&checkzcpwd&&checkpwd&&checkphone ){
+		if(code==null){
+		    $("#codeError").html('<label style=" float:left;" class="error">验证码不能为空</label>');
+		}
+	}else{
+		alert("请确保所有信息已经正确填写");
 	}
 }
