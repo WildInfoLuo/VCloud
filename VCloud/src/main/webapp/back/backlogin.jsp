@@ -1,9 +1,11 @@
-
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<html>
+<head>
+<meta charset=UTF-8">
 <base href="/VCloud/">
-<meta charset="UTF-8">
-<title>行业智慧能力平台</title>
+<title>VCloud后台管理系统</title>
 <link rel="stylesheet" type="text/css" href="back/css/style2.0.css">
 <style type="text/css">
 	ul li{font-size: 30px;color:#2ec0f6;}
