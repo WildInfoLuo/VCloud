@@ -76,11 +76,12 @@ public class VCUserHandler {
 
 	@RequestMapping(value = "login", method = RequestMethod.POST)
 	public String Login(@Valid @ModelAttribute("user") VCUser user, BindingResult result, HttpServletRequest request,
-			PrintWriter out) {
+			PrintWriter out,ModelMap map) {
 		// 如果有错误的话，那么将返回注册页面
 		if (result.hasErrors()) {
 			return "login";
 		}
+		System.out.println("用户名"+map.get("uname"));
 		if (service.login(user).size()>0) {
 			System.out.println("登录成功");
 			return "index";
