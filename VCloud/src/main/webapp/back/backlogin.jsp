@@ -92,13 +92,13 @@
 </div>
 <div class="tyg-div-denglv">
 	<div class="tyg-div-form">
-		<form action="">
+		<form action="admin/login" method="post">
 			<h2>登录</h2><p class="tyg-p">欢迎访问  VCloud</p>
 			<div style="margin:5px 0px;">
-				<input type="text" placeholder="请输入账号..."/>
+				<input type="text" placeholder="请输入账号..." name="atel"/>
 			</div>
 			<div style="margin:5px 0px;">
-				<input type="text" placeholder="请输入密码..."/>
+				<input type="text" placeholder="请输入密码..." name="apwd"/>
 			</div>
 			<div style="margin:5px 0px;">
 				<input type="text" style="width:150px;" placeholder="请输入验证码..."/>
