@@ -5,7 +5,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.yc.vcloud.mapper.VCAdminMapper">
 	<select id="adminLogin" parameterType="VCadmin" resultType="VCadmin">
 		select *
-		from VCAdmin where atel=#{atel} and
+		from VCAdmin where atel=#{atel} or aname=#{atel} and
 		apwd=#{apwd}
 	</select>
 </mapper>

@@ -17,7 +17,7 @@ import com.yc.vcloud.service.VCAdminService;
 
 @Controller
 @RequestMapping("/admin")
-@SessionAttributes("admins")
+@SessionAttributes("admin")
 public class VCAdminHandler {
 	
 	@Autowired
@@ -29,7 +29,7 @@ public class VCAdminHandler {
 			return "backlogin";
 		}
 		if(vCAdminService.backLogin(admin) != null){
-			map.put("admins", admin);
+			map.put("admin", admin);
 			LogManager.getLogger().debug("admin==>"+admin);
 			return "";
 		}
