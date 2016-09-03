@@ -65,11 +65,7 @@
 }
 </style>
 <body>
-<%
-	String yzm=(String)session.getAttribute("rand");
-	System.out.println(yzm);
 
-%>
 <div class="tyg-div">
 	<ul>
     	<li>让</li>
@@ -101,13 +97,12 @@
 			<h2>登录</h2><p class="tyg-p">欢迎访问  VCloud</p>
 			<div style="margin:5px 0px;">
 				<input type="text" placeholder="请输入账号..." name="atel"/>
-				<input type="hidden" onblur="yzm()">
 			</div>
 			<div style="margin:5px 0px;">
 				<input type="text" placeholder="请输入密码..." name="apwd"/>
 			</div>
 			<div style="margin:5px 0px;">
-				<input type="text" style="width:150px;" placeholder="请输入验证码..."/>
+				<input id="yzm" type="text" style="width:150px;" placeholder="请输入验证码..." onkeyup="checkCode()"/>
 				<img src="back/image.jsp" name="randImage" id="randImage" style="vertical-align:bottom;" alt="验证码"/>
 				<a href="javascript:loadimage();">点击刷新</a>
 			</div>
