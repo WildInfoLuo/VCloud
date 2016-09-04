@@ -65,6 +65,7 @@
 }
 </style>
 <body>
+
 <div class="tyg-div">
 	<ul>
     	<li>让</li>
@@ -101,8 +102,9 @@
 				<input type="text" placeholder="请输入密码..." name="apwd"/>
 			</div>
 			<div style="margin:5px 0px;">
-				<input type="text" style="width:150px;" placeholder="请输入验证码..."/>
-				<img src="back/img/1.png" style="vertical-align:bottom;" alt="验证码"/>
+				<input id="yzm" type="text" style="width:150px;" placeholder="请输入验证码..." onkeyup="checkCode()"/>
+				<img src="back/image.jsp" name="randImage" id="randImage" style="vertical-align:bottom;" alt="验证码"/>
+				<a href="javascript:loadimage();">点击刷新</a>
 			</div>
 			<button type="submit" >登<span style="width:20px;"></span>录</button>
 		</form>
@@ -112,13 +114,12 @@
 
 <script type="text/javascript" src="back/js/jquery-1.8.0.min.js"></script>
 <script type="text/javascript" src="back/js/com.js"></script>
+<script type="text/javascript" src="back/js/backlogin.js"></script>
 <!--[if IE 6]>
 <script language="javascript" type="text/javascript" src="./script/ie6_png.js"></script>
 <script language="javascript" type="text/javascript">
 DD_belatedPNG.fix(".png");
 </script>
 <![endif]-->
-
-
 </body>
 </html>

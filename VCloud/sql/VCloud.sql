@@ -31,6 +31,7 @@ create table VCAdmin(
 );
 create sequence seq_aid start with 20001;
 insert into VCAdmin values(seq_aid.nextval,'V1','15197462069','a','','');
+select * from Vcadmin where atel='15197462069' or aname='15197462069' and apwd='a'
 --文件类型表
 create table VCFileType(
 	ftid int primary key,
