@@ -4,8 +4,6 @@
     <param-name>contextConfigLocation</param-name>
     <param-value>classpath:spring.xml</param-value>
   </context-param>
-  
-  
   <!-- 使用字符编码集过滤器 -->
 	<filter>
 		<filter-name>CharacterEncodingFilter</filter-name>
