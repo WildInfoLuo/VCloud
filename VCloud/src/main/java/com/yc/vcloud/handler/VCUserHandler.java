@@ -1,6 +1,7 @@
 package com.yc.vcloud.handler;
 
 import java.io.PrintWriter;
+import java.util.List;
 import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
@@ -29,6 +30,11 @@ import com.yc.vcloud.utils.SessionAttribute;
 public class VCUserHandler {
 	@Autowired
 	private VCUserService service;
+	
+	@ModelAttribute
+	public void getModel(ModelMap map){
+		map.put(SessionAttribute.USERLOGIN, new VCUser());
+	}
 
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public String register(@Valid @ModelAttribute("user") VCUser user, BindingResult result,HttpSession session,
@@ -75,17 +81,18 @@ public class VCUserHandler {
 		out.close();
 	}
 
-	@RequestMapping(value = "login", method = RequestMethod.POST)
-	public String Login(@Valid @ModelAttribute("user") VCUser user, BindingResult result, HttpServletRequest request,
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	public String Login(VCUser userLogin, BindingResult result, HttpServletRequest request,
 			PrintWriter out,ModelMap map) {
 		// 如果有错误的话，那么将返回注册页面
+		 List<VCUser> users = service.login(userLogin);
+		if (users.size()>0) {
+			map.put(SessionAttribute.USERLOGIN, users.get(0));
+			LogManager.getLogger().debug("user==>"+userLogin);
+			return "index";
+		}
 		if (result.hasErrors()) {
 			return "login";
-		}
-		if (service.login(user).size()>0) {
-			map.put(SessionAttribute.USERLOGIN, user);
-			LogManager.getLogger().debug("user==>"+user);
-			return "index";
 		}
 		return "login";
 	}
