@@ -21,7 +21,7 @@
 	<!--导入外部的属性文件 -->
 	<context:property-placeholder location="classpath:db.properties" />
 	<!-- 登录拦截 -->
-	<mvc:interceptors>
+	<!-- <mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/**" />
 			<mvc:exclude-mapping path="/js/**" />
@@ -29,7 +29,7 @@
 			<mvc:exclude-mapping path="/image/**" />
 			<bean id="loginInterceptor" class="com.yc.vcloud.utils.LoginInterceptor" />
 		</mvc:interceptor>
-	</mvc:interceptors>
+	</mvc:interceptors> -->
 
 	<!--配置数据源：数据库仓库，不用关闭或连接数据库，典型用空间换取时间的操作 -->
 	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
