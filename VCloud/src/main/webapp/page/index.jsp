@@ -60,7 +60,7 @@
 						<a>${userLogin.uname }</a>
 					</c:if>
 					<c:if test="${userLogin == null }">
-						<a>未登录</a>
+						<a href="page/login.jsp">未登录</a>
 					</c:if>
 				</li>
 				<li><a href="user/logout">注销</a></li>
