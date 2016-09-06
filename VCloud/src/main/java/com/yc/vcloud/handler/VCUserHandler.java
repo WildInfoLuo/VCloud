@@ -32,9 +32,9 @@ import com.yc.vcloud.utils.SessionAttribute;
 public class VCUserHandler {
 	@Autowired
 	private VCUserService service;
-	
+
 	@ModelAttribute
-	public void getModel(ModelMap map){
+	public void getModel(ModelMap map) {
 		map.put(SessionAttribute.USERLOGIN, new VCUser());
 	}
 
@@ -83,17 +83,16 @@ public class VCUserHandler {
 		out.close();
 	}
 
-
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String Login(VCUser userLogin, BindingResult result, HttpServletRequest request,
-			PrintWriter out,ModelMap map) {
+	public String Login(VCUser userLogin, BindingResult result, HttpServletRequest request, PrintWriter out,
+			ModelMap map) {
 		// 如果有错误的话，那么将返回注册页面
-		 List<VCUser> users = service.login(userLogin);
-		if (users.size()>0) {
+		List<VCUser> users = service.login(userLogin);
+		if (users.size() > 0) {
 			map.put(SessionAttribute.USERLOGIN, users.get(0));
-			LogManager.getLogger().debug("user==>"+userLogin);
+			LogManager.getLogger().debug("user==>" + userLogin);
 			return "index";
-		}else{
+		} else {
 			map.put("logErrorMsg", "用户名或密码输入不正确");
 			return "login";
 		}
@@ -166,20 +165,29 @@ public class VCUserHandler {
 
 	@ResponseBody
 	@RequestMapping(value = "/findAllUsersByPages", method = RequestMethod.POST)
-	public List<VCUser> findAllUsersByPages(ModelMap map){
+	public List<VCUser> findAllUsersByPages(ModelMap map) {
 		LogManager.getLogger().debug("/findAllUsersByPages请求成功到达处理方法中....");
 		return service.findAllUsersByPages();
 	}
-	
+
 	@RequestMapping(value = "/updateUserMsg", method = RequestMethod.POST)
-	public void updateUserMsg(HttpServletRequest request, PrintWriter out){
+	public void updateUserMsg(HttpServletRequest request, PrintWriter out) {
 		String usid = (String) request.getParameter("usid");
 		String status = (String) request.getParameter("status");
-		VCUser user=new VCUser();
+		VCUser user = new VCUser();
 		user.setStatus(Integer.valueOf(status));
 		user.setUserid(Integer.valueOf(usid));
-		int result=service.updateUserMsg(user);
+		int result = service.updateUserMsg(user);
 		out.print(result);
+		out.flush();
+		out.close();
+	}
+
+	// 用户注销
+	@RequestMapping(value = "/Userquit", method = RequestMethod.POST)
+	public void Userquit(HttpSession session, PrintWriter out) {
+		session.removeAttribute("admins");
+		out.println(1);
 		out.flush();
 		out.close();
 	}

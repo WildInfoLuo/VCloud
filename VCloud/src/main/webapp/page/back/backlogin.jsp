@@ -33,6 +33,11 @@
 	    height: 30px;
 	    margin: 25px 10px 0px 0px;
 	}
+	.tyg-div-form form input[type="password"]{
+		width: 270px;
+	    height: 30px;
+	    margin: 25px 10px 0px 0px;
+	}
 	.tyg-div-form form button {
 		background: #2ec0f6 none repeat scroll 0 0;
 	    cursor: pointer;

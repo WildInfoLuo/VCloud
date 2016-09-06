@@ -15,11 +15,11 @@
 <script type="text/javascript" src="js/index.js"></script>
 <script type="text/javascript">
 		function quit(){
-			$.post("../../userServlet",{op:"quit"},function(data){
+			$.post("../../user/Userquit",function(data){
 				if(data>0){
-					location.href="index.jsp";
+					location.href="backlogin.jsp";
 				}
-			});
+			},"json");
 		}
 	</script>
 </head>
