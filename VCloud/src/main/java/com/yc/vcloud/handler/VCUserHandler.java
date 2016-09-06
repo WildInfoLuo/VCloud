@@ -90,11 +90,11 @@ public class VCUserHandler {
 			map.put(SessionAttribute.USERLOGIN, users.get(0));
 			LogManager.getLogger().debug("user==>"+userLogin);
 			return "index";
-		}
-		if (result.hasErrors()) {
+		}else{
+			map.put("logErrorMsg", "用户名或密码输入不正确");
 			return "login";
 		}
-		return "login";
+		
 	}
 	
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
