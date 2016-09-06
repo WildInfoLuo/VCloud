@@ -1,8 +1,7 @@
 //加载验证码
 function loadimage() {
-	document.getElementById("randImage").src = "back/image.jsp?" + Math.random();
+	document.getElementById("randImage").src = "page/back/image.jsp?" + Math.random();
 }
-
 
 function pwd(){
 	var account = $("#apwd").val();
