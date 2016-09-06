@@ -31,8 +31,8 @@ public class VCUserServiceImpl implements VCUserService {
 	@Override
 	public List<VCUser> login(VCUser user) {
 		// 密码加密 的操作
-		System.out.println(Encrypt.md5AndSha(user.getUpwd()));
 		user.setUpwd(Encrypt.md5AndSha(user.getUpwd()));
+		System.out.println(user);
 		return vcmapper.login(user);
 	}
 
