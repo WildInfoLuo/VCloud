@@ -21,7 +21,7 @@
 		z-index:1000;float:right;position:absolute;right:3%;top:10%;
 	}
 	.tyg-div-form{
-		page/background-color: #23305a;
+		background-color: #23305a;
 		width:300px;
 		height:auto;
 		margin:120px auto 0 auto;
@@ -40,7 +40,6 @@
 	    height: 44px;
 	    margin-top: 25px;
 	    padding: 0;
-	    page/background: #2ec0f6;
 	    -moz-border-radius: 6px;
 	    -webkit-border-radius: 6px;
 	    border-radius: 6px;
