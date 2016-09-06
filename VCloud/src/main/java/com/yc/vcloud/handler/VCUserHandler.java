@@ -21,10 +21,11 @@ import com.google.gson.Gson;
 import com.yc.vcloud.entity.VCUser;
 import com.yc.vcloud.service.VCUserService;
 import com.yc.vcloud.utils.CouldMessage;
+import com.yc.vcloud.utils.SessionAttribute;
 
 @Controller
 @RequestMapping("/user")
-@SessionAttributes("users")
+@SessionAttributes(SessionAttribute.USERLOGIN)
 public class VCUserHandler {
 	@Autowired
 	private VCUserService service;
@@ -33,11 +34,11 @@ public class VCUserHandler {
 	public String register(@Valid @ModelAttribute("user") VCUser user, BindingResult result,HttpSession session,
 			HttpServletRequest request,ModelMap map) {
 		user.setAddress(request.getRemoteAddr());
-		if(session.getAttribute("code")==null){
+		if(session.getAttribute(SessionAttribute.TELRLOGIN)==null){
 			map.put("regErrorMsg", "验证码已失效");
 			return "register";
 		}
-		if(user.getCode().equals(session.getAttribute("code"))){
+		if(user.getCode().equals(session.getAttribute(SessionAttribute.TELRLOGIN))){
 			if (service.register(user) > 0) {
 				// 成功注册，发送邮件，激活帐号
 				return "login";
@@ -66,7 +67,7 @@ public class VCUserHandler {
 		CouldMessage cl = new CouldMessage();
 		String tel = request.getParameter("tel");
 		String num = getCharAndNumr(4);
-		session.setAttribute("code", num);
+		session.setAttribute(SessionAttribute.TELRLOGIN, num);
 		cl.CouldMessageContent(tel, num);
 		Gson gson = new Gson();
 		out.println(gson.toJson(num));
@@ -82,7 +83,7 @@ public class VCUserHandler {
 			return "login";
 		}
 		if (service.login(user).size()>0) {
-			map.put("users", user);
+			map.put(SessionAttribute.USERLOGIN, user);
 			LogManager.getLogger().debug("user==>"+user);
 			return "index";
 		}
@@ -91,7 +92,7 @@ public class VCUserHandler {
 	
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String LogOut(HttpSession session) {
-		session.removeAttribute("users");
+		session.removeAttribute(SessionAttribute.USERLOGIN);
 		return "login";
 	}
 
@@ -148,7 +149,7 @@ public class VCUserHandler {
 	//定时清除验证码
 	@RequestMapping(value ="/clearcode",method=RequestMethod.POST)
 	public void clearcode(HttpSession session,PrintWriter out){
-		session.removeAttribute("code");
+		session.removeAttribute(SessionAttribute.TELRLOGIN);
 		out.println(1);
 		out.flush();
 		out.close();

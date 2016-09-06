@@ -55,10 +55,10 @@
 		<div id="navbar_right">
 			<ul>
 				<li style="width:120px;">
-					<c:if test="${users != null }">
+					<c:if test="${userLogin != null }">
 						<a>${user.utel }</a>
 					</c:if>
-					<c:if test="${users == null }">
+					<c:if test="${userLogin == null }">
 						<a>未登录</a>
 					</c:if>
 				</li>
