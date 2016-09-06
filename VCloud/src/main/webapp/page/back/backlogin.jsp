@@ -6,7 +6,7 @@
 <meta charset=UTF-8">
 <base href="/VCloud/">
 <title>VCloud后台管理系统</title>
-<link rel="stylesheet" type="text/css" href="back/css/style2.0.css">
+<link rel="stylesheet" type="text/css" href="page/back/css/style2.0.css">
 <style type="text/css">
 	ul li{font-size: 30px;color:#2ec0f6;}
 	.tyg-div{z-index:-1000;float:left;position:absolute;left:5%;top:20%;}
@@ -21,7 +21,7 @@
 		z-index:1000;float:right;position:absolute;right:3%;top:10%;
 	}
 	.tyg-div-form{
-		background-color: #23305a;
+		page/background-color: #23305a;
 		width:300px;
 		height:auto;
 		margin:120px auto 0 auto;
@@ -34,12 +34,13 @@
 	    margin: 25px 10px 0px 0px;
 	}
 	.tyg-div-form form button {
+		background: #2ec0f6 none repeat scroll 0 0;
 	    cursor: pointer;
 	    width: 270px;
 	    height: 44px;
 	    margin-top: 25px;
 	    padding: 0;
-	    background: #2ec0f6;
+	    page/background: #2ec0f6;
 	    -moz-border-radius: 6px;
 	    -webkit-border-radius: 6px;
 	    border-radius: 6px;
@@ -83,28 +84,31 @@
 		<div class="title1">微云，享受站在云端的日子</div>
 		<div class="imgGroug">
 			<ul>
-				<img alt="" class="img0 png" src="back/img/page1_0.png">
-				<img alt="" class="img1 png" src="back/img/page1_1.png">
-				<img alt="" class="img2 png" src="back/img/page1_2.png">
+				<img alt="" class="img0 png" src="page/back/img/page1_0.png">
+				<img alt="" class="img1 png" src="page/back/img/page1_1.png">
+				<img alt="" class="img2 png" src="page/back/img/page1_2.png">
 			</ul>
 		</div>
-		<img alt="" class="img3 png" src="back/img/page1_3.jpg">
+		<img alt="" class="img3 png" src="page/back/img/page1_3.jpg">
 	</div>
 </div>
 <div class="tyg-div-denglv">
 	<div class="tyg-div-form">
-		<form action="admin/login" method="post">
+		<form action="admin/login" method="post" onsubmit="return checkin()">
 			<h2>登录</h2><p class="tyg-p">欢迎访问  VCloud</p>
 			<div style="margin:5px 0px;">
-				<input type="text" placeholder="请输入账号..." name="atel"/>
+				<input type="text" placeholder="请输入账号..." name="atel" id="account" onblur="checkAccount()"/>
+				<span style="color:red;display:none;" id="accountspan">请输入账号...</span>
 			</div>
 			<div style="margin:5px 0px;">
-				<input type="text" placeholder="请输入密码..." name="apwd"/>
+				<input type="text" placeholder="请输入密码..." name="apwd" id="apwd" onblur="checkPwd()"/>
+				<span style="color:red;display:none;" id="pwdspan">请输入密码...</span>
 			</div>
 			<div style="margin:5px 0px;">
-				<input id="yzm" type="text" style="width:150px;" placeholder="请输入验证码..." onkeyup="checkCode()"/>
-				<img src="back/image.jsp" name="randImage" id="randImage" style="vertical-align:bottom;" alt="验证码"/>
-				<a href="javascript:loadimage();">点击刷新</a>
+				<input id="yzm" type="text" style="width:100px;" placeholder="请输入验证码..." onkeyup="checkCode()"/>
+				<img src="page/back/image.jsp" name="randImage" id="randImage" style="vertical-align:bottom;" alt="验证码"/>
+				<a href="javascript:loadimage();">点击刷新</a><br />
+				<span style="color:red; display:none;" id="yzmspan">请输入验证码...</span>
 			</div>
 			<button type="submit" >登<span style="width:20px;"></span>录</button>
 		</form>
@@ -112,9 +116,9 @@
 </div>
 
 
-<script type="text/javascript" src="back/js/jquery-1.8.0.min.js"></script>
-<script type="text/javascript" src="back/js/com.js"></script>
-<script type="text/javascript" src="back/js/backlogin.js"></script>
+<script type="text/javascript" src="page/back/js/jquery-1.8.0.min.js"></script>
+<script type="text/javascript" src="page/back/js/com.js"></script>
+<script type="text/javascript" src="page/back/js/backlogin.js"></script>
 <!--[if IE 6]>
 <script language="javascript" type="text/javascript" src="./script/ie6_png.js"></script>
 <script language="javascript" type="text/javascript">
