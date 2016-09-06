@@ -1,37 +1,69 @@
 package com.yc.vcloud.utils;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import org.springframework.web.servlet.HandlerInterceptor;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.filter.OncePerRequestFilter;
 
-public class LoginInterceptor implements HandlerInterceptor {
-
-	@SuppressWarnings("unused")
-	private static final String LOGIN_URL = "login.jsp";// 设置登录的界面
-
+/**
+ * 登录过滤
+ * 
+ * @author Luo_dawei
+ *
+ */
+public class LoginInterceptor extends OncePerRequestFilter {
 	@Override
-	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
-			throws Exception {
-		HttpSession session = request.getSession(true);
-		// 从session 里面获取用户名的信息
-		Object obj = session.getAttribute(SessionAttribute.USERLOGIN);
-		// 判断如果没有取到用户信息，就跳转到登陆页面，提示用户进行登陆
-		if (obj == null || "".equals(obj.toString())) {
-			// response.sendRedirect(LOGIN_URL);先注释掉，要不然登录不上
+	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
+			throws ServletException, IOException {
+		// 不过滤的uri
+		String[] notFilter = new String[] { "login.jsp", "index.html" };
+		// 请求的uri
+		String uri = request.getRequestURI();
+		// uri中包含background时才进行过滤
+		if (uri.indexOf("page") != -1) {
+			// 是否过滤
+			boolean doFilter = true;
+			for (String s : notFilter) {
+				if (uri.indexOf(s) != -1) {
+					// 如果uri中包含不过滤的uri，则不进行过滤
+					doFilter = false;
+					break;
+				}
+			}
+			if (doFilter) {
+				// 执行过滤
+				// 从session中获取登录者实体
+				Object obj = request.getSession().getAttribute(SessionAttribute.USERLOGIN);
+				if (null == obj) {
+					// 如果session中不存在登录者实体，则弹出框提示重新登录
+					// 设置request和response的字符集，防止乱码
+					request.setCharacterEncoding("UTF-8");
+					response.setCharacterEncoding("UTF-8");
+					response.setContentType("text/html;charset=utf-8");
+					PrintWriter out = response.getWriter();
+					StringBuilder builder = new StringBuilder();
+					builder.append("<script type=\"text/javascript\">");
+					builder.append("alert('您好,请登录!');");
+					builder.append("window.top.location.href='login.jsp");
+					builder.append("';");
+					builder.append("</script>");
+					out.print(builder.toString());
+				} else {
+					// 如果session中存在登录者实体，则继续
+					filterChain.doFilter(request, response);
+				}
+			} else {
+				// 如果不执行过滤，则继续
+				filterChain.doFilter(request, response);
+			}
+		} else {
+			// 如果uri中不包含background，则继续
+			filterChain.doFilter(request, response);
 		}
-		return true;
-	}
-
-	@Override
-	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
-			ModelAndView modelAndView) throws Exception {
-	}
-
-	@Override
-	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
-			throws Exception {
 	}
 }

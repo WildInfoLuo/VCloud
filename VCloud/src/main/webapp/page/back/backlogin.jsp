@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset=UTF-8">
+<meta charset="UTF-8">
 <base href="/VCloud/">
 <title>VCloud后台管理系统</title>
 <link rel="stylesheet" type="text/css" href="page/back/css/style2.0.css">
