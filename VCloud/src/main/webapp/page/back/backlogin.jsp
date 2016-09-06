@@ -33,6 +33,11 @@
 	    height: 30px;
 	    margin: 25px 10px 0px 0px;
 	}
+	.tyg-div-form form input[type="password"]{
+		width: 270px;
+	    height: 30px;
+	    margin: 25px 10px 0px 0px;
+	}
 	.tyg-div-form form button {
 		background: #2ec0f6 none repeat scroll 0 0;
 	    cursor: pointer;
@@ -100,7 +105,7 @@
 				<span style="color:red;display:none;" id="accountspan">请输入账号...</span>
 			</div>
 			<div style="margin:5px 0px;">
-				<input type="text" placeholder="请输入密码..." name="apwd" id="apwd" onblur="checkPwd()"/>
+				<input type="password" placeholder="请输入密码..." name="apwd" id="apwd" onblur="checkPwd()"/>
 				<span style="color:red;display:none;" id="pwdspan">请输入密码...</span>
 			</div>
 			<div style="margin:5px 0px;">
