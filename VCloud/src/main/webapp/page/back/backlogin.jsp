@@ -100,7 +100,7 @@
 				<span style="color:red;display:none;" id="accountspan">请输入账号...</span>
 			</div>
 			<div style="margin:5px 0px;">
-				<input type="text" placeholder="请输入密码..." name="apwd" id="apwd" onblur="checkPwd()"/>
+				<input type="password" placeholder="请输入密码..." name="apwd" id="apwd" onblur="checkPwd()"/>
 				<span style="color:red;display:none;" id="pwdspan">请输入密码...</span>
 			</div>
 			<div style="margin:5px 0px;">
