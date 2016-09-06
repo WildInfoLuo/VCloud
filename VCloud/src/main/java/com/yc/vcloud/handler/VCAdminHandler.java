@@ -41,7 +41,7 @@ public class VCAdminHandler {
 		if(vCAdminService.backLogin(admin) != null){
 			map.put("admins", admin2);
 			LogManager.getLogger().debug("admin==>"+admin);
-			return "";
+			return "back/index";
 		}
 		
 		if(result.hasErrors()){
