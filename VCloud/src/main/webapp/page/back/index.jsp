@@ -5,6 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<base href="/VCloud/page/back/">
 <title>VCloud后台管理系统</title>
 <link rel="stylesheet" type="text/css" href="css/easyui.css">
 <link rel="stylesheet" type="text/css" href="css/icon.css">
@@ -25,7 +26,7 @@
 <body class="easyui-layout">
 	<div data-options="region:'north',border:false"
 		style="height: 60px; background: #B3DFDA; padding: 10px">
-		欢迎您,${admin.usname} <a href="javascript:quit()">注销</a>
+		欢迎您,${admins.aname} <a href="javascript:quit()">注销</a>
 	</div>
 	<div data-options="region:'west',split:true,title:'菜单'"
 		style="width: 200px; padding: 10px;">

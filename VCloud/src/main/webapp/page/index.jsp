@@ -55,8 +55,9 @@
 		<div id="navbar_right">
 			<ul>
 				<li style="width:120px;">
+				<%System.out.println(session.getAttribute("userLogin")); %>
 					<c:if test="${userLogin != null }">
-						<a>${user.utel }</a>
+						<a>${userLogin.uname }</a>
 					</c:if>
 					<c:if test="${userLogin == null }">
 						<a href="page/login.jsp">未登录</a>

@@ -93,7 +93,7 @@
 </div>
 <div class="tyg-div-denglv">
 	<div class="tyg-div-form">
-		<form action="admin/login" method="post" onsubmit="return checkin()">
+		<form action="admin/login" method="post" onsubmit="return checkin()" modelAttribute="admin">
 			<h2>登录</h2><p class="tyg-p">欢迎访问  VCloud</p>
 			<div style="margin:5px 0px;">
 				<input type="text" placeholder="请输入账号..." name="atel" id="account" onblur="checkAccount()"/>

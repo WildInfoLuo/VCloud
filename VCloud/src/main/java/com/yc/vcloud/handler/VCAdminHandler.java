@@ -23,25 +23,32 @@ import com.yc.vcloud.service.VCAdminService;
 
 @Controller
 @RequestMapping("/admin")
-@SessionAttributes("admin")
+@SessionAttributes("admins")
 public class VCAdminHandler {
 	
 	@Autowired
 	private VCAdminService vCAdminService;
+	
+	@ModelAttribute
+	public void getModel(ModelMap map){
+		map.put("admins", new VCadmin());
+	}
 
 	//后台登录
 	@RequestMapping(value="/login",method=RequestMethod.POST)
-	public String adminLogin(@Valid VCadmin admin,BindingResult result,ModelMap map){
-		System.out.println("==>"+admin);
-		if(result.hasErrors()){
-			return "backlogin";
-		}
+	public String adminLogin(@Valid @ModelAttribute("admin") VCadmin admin,BindingResult result,ModelMap map){
+		 VCadmin admin2 = vCAdminService.backLogin(admin);
 		if(vCAdminService.backLogin(admin) != null){
-			map.put("admin", admin);
+			map.put("admins", admin2);
 			LogManager.getLogger().debug("admin==>"+admin);
-			return "";
+			return "back/index";
 		}
-		return "backlogin";
+		
+		if(result.hasErrors()){
+			return "back/backlogin";
+		}
+		
+		return "back/backlogin";
 	}
 	
 	//检验验证码的正确性

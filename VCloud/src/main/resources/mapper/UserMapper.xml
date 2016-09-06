@@ -11,8 +11,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<select id="login" parameterType="VCUser" resultType="VCUser">
 		select *
-		from VCUser where utel=#{utel} and
-		upwd=#{upwd}
+		from VCUser where utel=#{utel} or uname=#{utel} and upwd=#{upwd}
 	</select>
 	
 	<select id="checkUsername" parameterType="String"  resultType="VCUser">
@@ -24,4 +23,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select *
 		from VCUser where utel=#{utel}
 	</select>
+	
+	<select id="findAllUsersByPages" resultType="VCUser">
+		select  userid,uname,status from VCUser
+	</select>
+	
+	<update id="updateUserMsg" parameterType="VCUser">
+		update VCUser set status=#{status}  where userid=#{userid} 
+	</update>
 </mapper>

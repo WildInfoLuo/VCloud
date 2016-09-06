@@ -1,13 +1,14 @@
 <!-- 用户管理 -->
-<table id="user"></table>
+<table id="file"></table>
 
 <!--修改用户信息 update_user -->
-<div id="update_user" class="easyui-dialog" title="修改用户信息" data-options="iconCls:'icon-edit',resizable:true,model:true,closed:true,fit:true">
+<div id="update_file" class="easyui-dialog" title="修改用户信息" data-options="iconCls:'icon-edit',resizable:true,model:true,closed:true,fit:true">
 	<br />
 	<form action="" style="float:left;padding-left:20px;">
-		<label>用户编号:</label><span id="user_upid"  ></span><br /><br />
-		<label>用户名:</label><span  id="user_upname"  ></span><br /><br />
-		<label>状态:</label><select id="user_upstatus" name="upstatus" ></select><br /><br />
+		<label>文件编号:</label><span id="file_upid"  ></span><br /><br />
+		<label>文件名:</label><span  id="file_upname"  ></span><br /><br />
+		<label>文件路径:</label><input  id="file_upname" type="file"  /><br /><br />
+		<label>状态:</label><select id="file_upstatus" name="upstatus" ></select><br /><br />
 		<a href="javascript:updateUserInfo()"  class="easyui-linkbutton" data-options="iconCls:'icon-edit'" >修改</a>
 	</form>
 </div>
@@ -15,10 +16,11 @@
 
 <script>
 	var editRow=undefined; //记录当期正在编辑的行
-	var userObj;
+	var fileObj;
+	var picPath;//图片的路径
 	
-	userObj = $('#user').datagrid({
-		url : '../../user/findAllUsersByPages',
+	userObj = $('#file').datagrid({
+		url : '../../file/findAllFilesByPages',
 		fitColumns : true,//true将自动扩展/收缩columns大小适应grid的宽度,防止水平滚动.
 		striped : true,//显示条纹所在行
 		loadMsg : "数据加载中...",//当从远程服务器加载数据的时候,显示的提示消息.

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
 <html>
 <head>
@@ -33,8 +34,16 @@
 					width="25px;" height="25px;" src="images/vcloud.png" /> 登录VCloud帐号
 			</div>
 			<div class="logo_center">
-				<form action="user/login" method="post">
-					<div class="errorMSG">请输入您的账号密码</div>
+				<form action="user/login" method="post" modelAttribute="userLogin">
+					<div class="errorMSG">
+						<c:if test="${logErrorMsg == null }">
+							<span style="color:green;">请输入用户名和密码</span>
+						</c:if>
+						<c:if test="${logErrorMsg != null }">
+							${logErrorMsg }
+						</c:if>
+						
+					</div>
 					<div class="MSG">
 						<p class="username">
 							<label class="userpic"></label> <input autocomplete="off"

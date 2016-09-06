@@ -38,4 +38,18 @@ public interface VCUserMapper {
 	 * @return
 	 */
 	public VCUser checkPhone(String phone);
+
+	/**
+	 * 查询所有用户
+	 * @return
+	 */
+	public List<VCUser> findAllUsersByPages();
+
+	/**
+	 * 跟新用户信息
+	 * @param userid
+	 * @param status
+	 * @return
+	 */
+	public int updateUserMsg(VCUser user);
 }
