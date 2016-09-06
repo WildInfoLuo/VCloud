@@ -47,7 +47,7 @@
 			<button id="submit" >注 册</button>
 		</form>
 		<div class="error" >${regErrorMsg }</div>
-		<a href="login.html">
+		<a href="login.jsp">
 			<button type="button">已经有账号？</button>
 		</a>
 	</div>
