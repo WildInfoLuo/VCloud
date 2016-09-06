@@ -97,8 +97,6 @@
 			<h2>登录</h2><p class="tyg-p">欢迎访问  VCloud</p>
 			<div style="margin:5px 0px;">
 				<input type="text" placeholder="请输入账号..." name="atel" id="account" onblur="checkAccount()"/>
-				<input type="hidden" name="aname">
-				<input type="hidden" name="aid">
 				<span style="color:red;display:none;" id="accountspan">请输入账号...</span>
 			</div>
 			<div style="margin:5px 0px;">
