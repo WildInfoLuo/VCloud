@@ -29,4 +29,19 @@ public class VCUserServiceImplTest {
 		System.out.println("用户名为：" + user);
 	}
 
+	//查询所有用户的测试
+	@Test
+	public void findAllUsersByPages(){
+		List<VCUser> user=service.findAllUsersByPages();
+		System.out.println(user.size());
+	}
+	
+	//更新用户信息
+	@Test
+	public void updateUserMsg(){
+		VCUser user=new VCUser();
+		user.setStatus(0);
+		user.setUserid(1001);
+		service.updateUserMsg(user);
+	}
 }
