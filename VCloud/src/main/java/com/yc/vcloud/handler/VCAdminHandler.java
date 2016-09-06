@@ -2,6 +2,7 @@ package com.yc.vcloud.handler;
 
 import java.io.PrintWriter;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -45,9 +46,10 @@ public class VCAdminHandler {
 	
 	//检验验证码的正确性
 	@RequestMapping(value="/checkcode/{code}")
-	public void checkCode(@PathVariable String code,HttpSession session,PrintWriter out){
+	public void checkCode(@PathVariable String code,HttpSession session,PrintWriter out,HttpServletResponse response){
 		String yzm = (String) session.getAttribute("rand");
-		System.out.println("yzm==>"+yzm+"   code==>"+code);
+		response.setContentType("text/html");
+		//Response.ContentType = "text/html"; 
 		if(yzm.equalsIgnoreCase(code)){
 			out.print(1);
 		}else{
