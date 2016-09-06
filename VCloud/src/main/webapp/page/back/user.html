@@ -1,72 +1,15 @@
 <!-- 用户管理 -->
 <table id="user"></table>
 
-<!-- 条件查询 -->
-<div style="position:absolute; top:60px; left:250px; margin-top:3px;">
-	<label>用户名:</label><input type="text" id="user_name" name="searchuname" />&nbsp;&nbsp;&nbsp;&nbsp;
-	<label>性别:</label><select id="user_sex" name="searchsex" ></select>&nbsp;&nbsp;&nbsp;&nbsp;
-	<label>角色:</label><select id="user_role" name="searchrole" ></select>&nbsp;&nbsp;&nbsp;&nbsp;
-	<label>邮箱:</label><input type="text" id="user_email" name="searchemail" />&nbsp;&nbsp;&nbsp;&nbsp;
-	<!-- <label>联系方式:</label><input type="text" id="user_phone" name="searchphone" />&nbsp;&nbsp; -->
-	<label>状态:</label><select id="user_status" name="searchstatus" ></select>&nbsp;&nbsp;&nbsp;&nbsp;
-	<a href="javascript:findUser()" class="easyui-linkbutton" data-options="iconCls:'icon-search'">搜索</a>
-</div>
-
-<!-- 添加用户 add_user -->
-<div id="add_user" class="easyui-dialog" title="添加用户" data-options="iconCls:'icon-add',resizable:true,model:true,closed:true,fit:true">
-	<br />
-	<form action="" style="float:left;padding-left:20px;">
-		<label>用户名:</label><input type="text" id="user_adname" name="adduname" /><br /><br />
-		<label>用户性别:</label><select id="user_adsex" name="addsex" ></select><br /><br />
-		<label>密码:</label><input type="text" id="user_adpwd" name="addpwd" /><br /><br />
-		<label>邮箱:</label><input type="email" id="user_addemail" name="addemail" /><br /><br />
-		<label>角色名:</label><select id="user_adrole" name="addrole" ></select><br /><br />
-		<label>联系方式:</label><input type="text" id="user_addphone" name="addphone" /><br /><br />
-		<label>状态:</label><select id="user_addstatus" name="addstatus" ></select><br /><br />
-		<label>头像：</label><input type="file" id="user_pics" name="pics" required="required" onchange="previewMultipleImage(this,'user_pic_show')"/> <br /><br />
-		<label>状态说明：</label>
-		
-		<div>
-			<script id="addUserEditor" type="text/plain" style="width:800px;height:300px;"></script>
-		</div>
-		
-		<a href="javascript:addUserInfo()"  class="easyui-linkbutton" data-options="iconCls:'icon-add'" >添加</a>
-	</form>
-
-	<div style="float:right;width:360px;margin-right:20px;">
-		<fieldset id="user_pic_show">
-			<legend>图片预览</legend>
-		</fieldset>
-	</div>
-</div>
-
 <!--修改用户信息 update_user -->
 <div id="update_user" class="easyui-dialog" title="修改用户信息" data-options="iconCls:'icon-edit',resizable:true,model:true,closed:true,fit:true">
 	<br />
 	<form action="" style="float:left;padding-left:20px;">
-		<label>用户编号:</label><select id="user_upid" name="upsex" ></select><br /><br />
-		<label>用户名:</label><input type="text" id="user_upname" name="upuname" /><br /><br />
-		<label>用户性别:</label><select id="user_upsex" name="upsex" ></select><br /><br />
-		<label>密码:</label><input type="text" id="user_uppwd" name="uppwd" /><br /><br />
-		<label>邮箱:</label><input type="email" id="user_upemail" name="upemail" /><br /><br />
-		<label>角色名:</label><select id="user_uprole" name="uprole" ></select><br /><br />
-		<label>联系方式:</label><input type="text" id="user_upphone" name="upphone" /><br /><br />
+		<label>用户编号:</label><span id="user_upid"  ></span><br /><br />
+		<label>用户名:</label><span  id="user_upname"  ></span><br /><br />
 		<label>状态:</label><select id="user_upstatus" name="upstatus" ></select><br /><br />
-		<label>头像：</label><input type="file" id="user_uppics" name="pics" required="required" onchange="previewMultipleImage(this,'user_pic_show1')"/> <br /><br />
-		<label>状态说明：</label>
-		
-		<div>
-			<script id="upUserEditor" type="text/plain" style="width:800px;height:300px;"></script>
-		</div>
-		
 		<a href="javascript:updateUserInfo()"  class="easyui-linkbutton" data-options="iconCls:'icon-edit'" >修改</a>
 	</form>
-
-	<div style="float:right;width:360px;margin-right:20px;">
-		<fieldset id="user_pic_show1">
-			<legend>图片预览</legend>
-		</fieldset>
-	</div>
 </div>
 
 
@@ -75,15 +18,8 @@
 	var userObj;
 	var picPath;//图片的路径
 	
-	//实例化编辑器
-	var addUe=UE.getEditor('addUserEditor');
-	var upUe=UE.getEditor('upUserEditor');
-	 
 	userObj = $('#user').datagrid({
-		url : '../../userServlet',
-		queryParams : {//请求远程服务器数据时候, 并且发送的额外的参数. 
-			op : 'findAllUsersByPage'
-		},
+		url : '../../user/findAllUsersByPages',
 		fitColumns : true,//true将自动扩展/收缩columns大小适应grid的宽度,防止水平滚动.
 		striped : true,//显示条纹所在行
 		loadMsg : "数据加载中...",//当从远程服务器加载数据的时候,显示的提示消息.
@@ -92,89 +28,28 @@
 		pageNumber : 1,//初始页码
 		pageSize : 10,//分页大小
 		pageList : [ 10, 20, 30, 40, 50 ],//设置属性
-		sortName : 'usid',//定义那个列可以排序.
+		sortName : 'userid',//定义那个列可以排序.
 		sortOrder : 'asc',
 		remoteSort : false,//定义是否远程排序.对数据库进行操作
 		columns : [ [ {
-			field : 'uusid',
-			title : '',
-			width : 60,
-			align : 'center',
-			checkbox : true
-		}, {
-			field : 'usid',
+			field : 'userid',
 			title : '用户编号',
 			width : 60,
 			align : 'center',
 			sortable:true
 		}, {
-			field : 'usname',
+			field : 'uname',
 			title : '用户名',
 			width : 60,
 			align : 'center'
 		}, {
-			field : 'usex',
-			title : '用户性别',
-			width : 60,
-			align : 'center'
-		}, {
-			field : 'upwd',
-			title : '密码',
-			width : 100,
-			align : 'center'
-		}, {
-			field : 'uemail',
-			title : '邮箱',
-			width : 150,
-			align : 'center'
-		}, {
-			field : 'law_role_id',
-			title : '角色编号',
-			width : 60,
-			align : 'center'
-		}, {
-			field : 'law_role_name',
-			title : '角色名',
-			width : 60,
-			align : 'center'
-		}, {
-			field : 'picpath',
-			title : '头像',
-			width : 80,
-			align : 'center',
-			formatter: function(value,rowData,index){
-				if(value!=null && value!="" && value!="NULL"){
-					return showPrePic(value);
-				}else{
-					return;
-				}
-			}
-		}, {
-			field : 'tel',
-			title : '联系方式',
-			width : 100,
-			align : 'center'
-		
-		}, {
-			field : 'law_user_status',
+			field : 'status',
 			title : '用户状态',
 			width : 50,
 			align : 'center'
 		
-		}, {
-			field : 'law_user_status_explain',
-			title : '状态说明',
-			width : 150,
-			align : 'center'
-		
 		} ] ],
 		toolbar:[{
-			text:"添加",
-			iconCls:"icon-add",
-			handler:function(){
-				$('#add_user').dialog('open');
-			}
-		},{
 			text:"修改",
 			iconCls:"icon-edit",
 			handler:function(){
@@ -190,202 +65,52 @@
 							editRow=undefined;
 						}
 					}else{
-						var option="<option value='"+row.usid+"'>"+row.usid+"</option>";
-						$("#user_upid").append($(option));
-						$('#user_upname').val(row.usname);
-						$('#user_uppwd').val(row.upwd);
-						$('#user_upemail').val(row.uemail);
-						$('#user_upphone').val(row.tel);
-						upUe.setContent(row.law_user_status_explain);
-						//修改的图片路径
-						picPath = row.picpath;
-						if( null != picPath && "" != picPath){
-							$('#user_pic_show1').html(showPrePic(picPath));
+						$("#user_upid").html(row.userid);
+						$('#user_upname').html(row.uname);
+						var count=$("#user_upstatus option").length;
+						for(var i=0;i<count;i++){
+							if(row.status=="0"){
+								if($("#user_upstatus").get(0).options[i].text=='已锁定'){
+									$("#user_upstatus").get(0).options[i].selected=true;
+								}
+							}else{
+								if($("#user_upstatus").get(0).options[i].text=='未锁定'){
+									$("#user_upstatus").get(0).options[i].selected=true;
+								}
+							}
 						}
 						$('#update_user').dialog('open');
 					}
 				}
 			}
-		},{
-			text:"删除",
-			iconCls:"icon-remove",
-			handler:function(){
-				//获取选中的行   可以删除多行
-				var rows=userObj.datagrid("getChecked");
-				if(rows.length>=1){
-					$.messager.confirm('信息确认','您确定要删除选中的用户吗？',function(rs){  
-					    if (rs){  
-					        var usids="";
-					        for(var i=0;i<rows.length-1;i++){
-					        	usids+=rows[i].usid+",";
-					        }
-					        usids+=rows[i].usid;
-					        
-					        //发请求到数据库删除
-					        $.post("../../userServlet",{op:"delUser",usid:usids},function(data){
-					        	if(data>0){
-					        		$.messager.show({
-										title:'成功提示',
-										msg:'用户删除成功！！！',
-										timeout:2000,
-										showType:'slide'
-									});
-					        		rows=null;
-					        		userObj.datagrid("reload");//刷新表格
-					        	}else{
-					        		$.messager.alert('失败提示','用户删除失败！！！','error');
-					        	}
-					        });
-					    }else{
-					    	return;
-					    }
-					});
-					
-				}else{
-					$.messager.alert('友情提示','请至少选择一行数据进行删除操作','error');
-				}
-			}
-		},{
-			text:"撤销",
-			iconCls:"icon-redo",
-			handler:function(){
-				userObj.datagrid("rejectChanges");//回滚所有数据
-			}
 		}]
 	});
 	
 	$(function(){
-		//拼接性别  拼接角色  拼接状态  都是可选的
-		var opt = "<option value=''>请选择</option><option value='男'>男</option><option value='女'>女</option>";
-		$("#user_adsex").append($(opt));
-		$("#user_sex").append($(opt));
-		$("#user_upsex").append($(opt));
-		
-		var opt1 = "<option value=''>请选择</option><option value='1002'>用户</option><option value='1003'>律师</option>";
-		$("#user_role").append($(opt1));
-		$("#user_adrole").append($(opt1));
-		$("#user_uprole").append($(opt1));
-		
-		var opt2 = "<option value=''>请选择</option><option value='可用'>可用</option><option value='不可用'>不可用</option>";
-		$("#user_status").append($(opt2));
-		$("#user_addstatus").append($(opt2));
+		var opt2 = "<option value='0'>已锁定</option><option value='1'>未锁定</option>";
 		$("#user_upstatus").append($(opt2));
 	});
 	
-	//隐藏密码列
-	$('#user').datagrid('hideColumn','upwd');
-	
-	//添加用户
-	function addUserInfo(){
-		var uname=$.trim($("#user_adname").val());
-		var usex=$.trim($("#user_adsex").val());//置顶
-		var upwd=$.trim($("#user_adpwd").val());
-		var email=$.trim($("#user_addemail").val());
-		var rname=$.trim($("#user_adrole").val());//置顶
-		var tel=$.trim($("#user_addphone").val());
-		var status=$.trim($("#user_addstatus").val());//置顶
-		var intro=addUe.getContent();
-		
-		if("" == uname || "" == usex || upwd == "" || email=="" || rname=="" || status ==""){
-			$.messager.alert("错误提示","姓名、性别、邮箱、角色、状态不能为空...\n","error");
-		}else{
-			$.ajaxFileUpload({
-				url:"../../userServlet?op=addUserInfo",//只有把op的值放在链接里  才能保证不乱码
-				secureuri:false,
-				fileElementId:"user_pics",
-				dataType:"json",
-				data:{uname:uname,usex:usex,upwd:upwd,email:email,rname:rname,tel:tel,status:status,intro:intro},
-				success:function(data,status){
-					if(data>0){
-						$.messager.show({title:'成功提示',msg:"用户添加成功...",timeout:2000,showType:'slide'});
-						$("#user_adname").val("");
-						$("#user_addemail").val("");
-						$("#user_adpwd").val("");
-						$("#user_addphone").val("");
-						$("#user_adsex").prop('selectedIndex', 0);
-						$("#user_adrole").prop('selectedIndex', 0);
-						$("#user_addstatus").prop('selectedIndex', 0);
-						addUe.setContent("");
-						var file = $("#user_pics")
-						file.after(file.clone().val(""));
-						file.remove();
-						$("#user_pic_show").html("");//图片预览置空
-						$('#user').datagrid("reload");//数据重新加载
-						$("#add_user").dialog('close');//关闭添加新闻页面
-					}else{
-						$.messager.alert("错误提示","用户添加失败...\n","error");
-					}
-				},
-				error:function(data,status,e){
-					$.messager.alert("错误信息","用户添加失败...\n"+e,"error");
-				}
-			});		
-			
-		}
-	}
-	
 	//修改用户信息
 	function updateUserInfo(){
-		var usid=$.trim($("#user_upid").val());
-		var uname=$.trim($("#user_upname").val());
-		var usex=$.trim($("#user_upsex").val());
-		var upwd=$.trim($("#user_uppwd").val());
-		var email=$.trim($("#user_upemail").val());
-		var rid=$.trim($("#user_uprole").val());
-		var tel=$.trim($("#user_upphone").val());
+		var usid=$.trim($("#user_upid").html());
 		var status=$.trim($("#user_upstatus").val());
-		var intro=upUe.getContent();
-		$.ajaxFileUpload({
-			url:"../../userServlet?op=updateUserInfo",
-			secureuri:false,
-			fileElementId:"user_uppics",
-			dataType:"json",
-			data:{usid:usid,uname:uname,usex:usex,upwd:upwd,email:email,rid:rid,tel:tel,status:status,intro:intro},
-			success:function(data,status){
-				if(data>0){
-					$.messager.show({title:'成功提示',msg:"用户信息更新成功",timeout:2000,showType:'slide'});
-					$("#user_upid").val("");
-					$("#user_uptitle").val("");
-					$("#user_upleader").val("");
-					$("#user_upsex").prop('selectedIndex', 0);
-					$("#user_uprole").prop('selectedIndex', 0);
-					$("#user_upstatus").prop('selectedIndex', 0);
-					upUe.setContent("");
-					$("#user_pic_show1").html("");
-					picPath="";
-					$("#user").datagrid("reload");
-					$("#update_user").dialog('close');
-				}else{
-					$.messager.alert("错误提示","用户信息更新失败\n","error");
-				}
-			},
-			error:function(data,status,e){
-				$.messager.alert("错误提示","用户信息更新失败\n"+e,"error");
+		$.post("../../user/updateUserMsg",{usid:usid,status:status},function(data){
+			if(data>0){
+				$.messager.show({
+					title:'成功提示',
+					msg:'用户信息更新成功',
+					timeout:2000,
+					showType:'slide'
+				});
+				$('#update_user').dialog('close');
+				row=null;
+				userObj.datagrid("reload");
+			}else{
+				$.messager.alert('失败提示','用户信息更新失败','error');
 			}
-		});
+		},"json");
+		
 	}
 	
-	//设置预览和修改时的图片显示
-	function showPrePic(value){
-		var str="";
-		var pics=value.split(",");
-		for(var i=0;i<pics.length;i++){
-			str+="<img src='../../"+pics[i]+"' width='60px' height='60px'/>&nbsp;";
-		}
-		return str;
-	}
-	
-	//多条件查找
-	function findUser(){
-		var uname = $.trim($('#user_name').val());
-		var sex = $.trim($('#user_sex').val());
-		var rid = $.trim($('#user_role').val());
-		var email = $.trim($('#user_email').val());
-		var status = $.trim($('#user_status').val());
-		userObj=$('#user').datagrid({  
-	    	url:'../../userServlet',  
-	    	queryParams:{//请求远程服务器数据时候, 并且发送的额外的参数. 
-				op:'findUsersBy',uname:uname,sex:sex,rid:rid,email:email,status:status} 
-		});
-	}
 </script>

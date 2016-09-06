@@ -24,4 +24,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select *
 		from VCUser where utel=#{utel}
 	</select>
+	
+	<select id="findAllUsersByPages" resultType="VCUser">
+		select  userid,uname,status from VCUser
+	</select>
+	
+	<update id="updateUserMsg" parameterType="VCUser">
+		update VCUser set status=#{status}  where userid=#{userid} 
+	</update>
 </mapper>

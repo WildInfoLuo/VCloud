@@ -45,4 +45,14 @@ public class VCUserServiceImpl implements VCUserService {
 		return vcmapper.checkPhone(phone);
 	}
 
+	@Override
+	public List<VCUser> findAllUsersByPages() {
+		return vcmapper.findAllUsersByPages();
+	}
+
+	@Override
+	public int updateUserMsg(VCUser user) {
+		return vcmapper.updateUserMsg(user);
+	}
+
 }
