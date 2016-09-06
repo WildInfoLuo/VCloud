@@ -33,7 +33,7 @@
 					width="25px;" height="25px;" src="images/vcloud.png" /> 登录VCloud帐号
 			</div>
 			<div class="logo_center">
-				<form action="user/login" method="post">
+				<form action="user/login" method="post" modelAttribute="userLogin">
 					<div class="errorMSG">请输入您的账号密码</div>
 					<div class="MSG">
 						<p class="username">
