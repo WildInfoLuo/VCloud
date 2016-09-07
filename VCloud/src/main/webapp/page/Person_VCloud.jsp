@@ -281,7 +281,7 @@
 						</dd>
 						<dd class="open-enable">
 							<li class="file-name" style="width: 60%;">
-								<!--  --> <span class="check-icon1" onclick="filenameIcon(1)"
+								 <span class="check-icon1" onclick="filenameIcon(1)"
 								style="background: rgba(0, 0, 0, 0) url('../images/list-view_4e60b0c.png') no-repeat scroll -9px -12px; height: 14px; left: 11px; width: 14px; top: 20px; margin: 15px 10px; float: left;"></span>
 								<div class="fileicon"></div>
 								<div class="text">
@@ -293,7 +293,7 @@
 							<li class="file-size" style="width: 16%;">-</li> 
 							<li>2015-11-15 11:31</li>
 						</dd>
-						<dd class="open-enable">
+						<!-- <dd class="open-enable">
 							<li class="file-name" style="width: 60%;"><span
 								class="check-icon2" onclick="filenameIcon(2)"
 								style="background: rgba(0, 0, 0, 0) url('../images/list-view_4e60b0c.png') no-repeat scroll -9px -12px; height: 14px; left: 11px; width: 14px; top: 20px; margin: 15px 10px; float: left;"></span>
@@ -318,7 +318,7 @@
 								</div></li>
 							<li class="file-size" style="width: 16%;">-</li>
 							<li class="ctime" style="width: 21%;">2015-11-15 11:31</li>
-						</dd>
+						</dd> -->
 						<div class="list-empty-tips" style="display: none;">
 						<div class="tip-text">正在加载，请稍候…</div>
 					</div>

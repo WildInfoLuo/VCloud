@@ -7,13 +7,11 @@
 <meta charset="UTF-8">
 <base href="/VCloud/">
 <title>VCloud主页</title>
-
 	<link type="text/css" rel="stylesheet" href="css/index.css">
 	<link type="text/css" rel="stylesheet" href="css/vclound.css">
 	<link rel="stylesheet" href="css/nheader.css">
 	<link rel="stylesheet" href="css/nstyle.css">
 	<script type="text/javascript" src="js/index.js"></script>
-	
 </head>
 <body>
 	<div id="navbar">
@@ -29,19 +27,19 @@
 						<table id="navbar_table" style="width:300px;height:70px;" cellspacing="0" cellpadding="8">
 							<tr>
 								<td><a href="Person_VCloud.jsp">
-									<i style="display:block;width:40px;height:40px;background:url(../images/cloud.png);background-size:cover;margin-left:15px;"></i>
+									<i style="display:block;width:40px;height:40px;background:url(images/cloud.png);background-size:cover;margin-left:15px;"></i>
 									<span style="font-size:15px;margin-left:-15px;color:rgb(225,230,246);">网盘</span></a>
 								</td>
 								<td><a href="#">
-									<i style="display:block;width:40px;height:40px;background:url(../images/tv.png);background-size:cover;"></i>
+									<i style="display:block;width:40px;height:40px;background:url(images/tv.png);background-size:cover;"></i>
 									<span style="font-size:15px;margin-left:-20px;color:rgb(225,230,246);">视频</span></a>
 								</td>
 								<td><a href="#">
-									<i style="display:block;width:40px;height:40px;background:url(../images/word.png);background-size:cover;"></i>
+									<i style="display:block;width:40px;height:40px;background:url(images/word.png);background-size:cover;"></i>
 									<span style="font-size:15px;margin-left:-20px;color:rgb(225,230,246);">文档</span></a>
 								</td>
 								<td><a href="pic_currentupload_empty.jsp">
-									<i style="display:block;width:40px;height:40px;background:url(../images/pic.png);background-size:cover;"></i>
+									<i style="display:block;width:40px;height:40px;background:url(images/pic.png);background-size:cover;"></i>
 									<span style="font-size:15px;margin-left:-15px;color:rgb(225,230,246);">图片</span></a>
 								</td>
 							</tr>
@@ -55,9 +53,8 @@
 		<div id="navbar_right">
 			<ul>
 				<li style="width:120px;">
-				<%System.out.println(session.getAttribute("userLogin")); %>
 					<c:if test="${userLogin != null }">
-						<a>${userLogin.uname }</a>
+						<a>${userLogin.uname }，您好</a>
 					</c:if>
 					<c:if test="${userLogin == null }">
 						<a href="page/login.jsp">未登录</a>

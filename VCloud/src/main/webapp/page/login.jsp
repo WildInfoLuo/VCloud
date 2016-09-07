@@ -42,7 +42,6 @@
 						<c:if test="${logErrorMsg != null }">
 							${logErrorMsg }
 						</c:if>
-						
 					</div>
 					<div class="MSG">
 						<p class="username">

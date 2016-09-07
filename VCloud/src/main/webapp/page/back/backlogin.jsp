@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset=UTF-8">
+<meta charset="UTF-8">
 <base href="/VCloud/">
 <title>VCloud后台管理系统</title>
 <link rel="stylesheet" type="text/css" href="page/back/css/style2.0.css">
@@ -29,6 +29,11 @@
 	}
 	.tyg-div-form form {padding:10px;}
 	.tyg-div-form form input[type="text"]{
+		width: 270px;
+	    height: 30px;
+	    margin: 25px 10px 0px 0px;
+	}
+	.tyg-div-form form input[type="password"]{
 		width: 270px;
 	    height: 30px;
 	    margin: 25px 10px 0px 0px;
@@ -100,7 +105,7 @@
 				<span style="color:red;display:none;" id="accountspan">请输入账号...</span>
 			</div>
 			<div style="margin:5px 0px;">
-				<input type="text" placeholder="请输入密码..." name="apwd" id="apwd" onblur="checkPwd()"/>
+				<input type="password" placeholder="请输入密码..." name="apwd" id="apwd" onblur="checkPwd()"/>
 				<span style="color:red;display:none;" id="pwdspan">请输入密码...</span>
 			</div>
 			<div style="margin:5px 0px;">

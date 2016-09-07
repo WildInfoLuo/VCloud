@@ -30,7 +30,6 @@
 			<bean id="loginInterceptor" class="com.yc.vcloud.utils.LoginInterceptor" />
 		</mvc:interceptor>
 	</mvc:interceptors> -->
-
 	<!--配置数据源：数据库仓库，不用关闭或连接数据库，典型用空间换取时间的操作 -->
 	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
 		<property name="driverClassName" value="${jdbc.driverClassName}" />
