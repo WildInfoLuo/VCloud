@@ -9,8 +9,6 @@ public class VCadmin {
 	private String temp1;
 	private String temp2;
 	
-	
-
 	public VCadmin() {
 	}
 
