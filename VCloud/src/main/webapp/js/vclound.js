@@ -5,6 +5,24 @@ $(function() {
 	$(".module-edit-name").hide();
 	/*详细内容列表界面隐藏*/
 	$(".content-view").hide();
+	var str = "";
+	$.post("uploadFile/getUserFiles",function(data){
+		
+		for(var i=0;i<data.length;i++){
+			var path = parseFilePath(data[i].filepath,1);
+			str += '<dd class="open-enable">'+
+			'<li class="file-name" style="width: 60%;"><span '+
+			'class="check-icon1" onclick="filenameIcon(1)"'+
+			'style="background: rgba(0, 0, 0, 0) url(images/list-view_4e60b0c.png) no-repeat scroll -9px -12px; height: 14px; left: 11px; width: 14px; top: 20px; margin: 15px 10px; float: left;"></span>'+
+			'<div class="fileicon"></div>'+
+			'<div class="text"><div class="filenameicon"></div>'+
+			'<a class="filename" style="padding-left: 6px;"'+
+			'href="javascript:getNextPath('+'\''+data[i].filepath+'\''+','+'\''+path+'\''+')" title='+path+'>'+path+'</a></div></li>'+
+			'<li class="file-size" style="width: 16%;">-</li>'+
+			'<li>'+data[i].uploaddate+'</li></dd>';
+		}
+		$(".list-view").append($(str));
+	},"json");
 });
 
 var isdir=0;
@@ -17,18 +35,11 @@ function upfileSpanjia() {
 //确定新建文件夹
 function editSure() {
 	var name = $(".box").val();
+	alert(name);
 	var date = getDate();
-	var str = '<dd class="open-enable">'+
-				'<li class="file-name" style="width: 60%;"><span'+
-				'class="check-icon1" onclick="filenameIcon(1)"'+
-				'style="background: rgba(0, 0, 0, 0) url("../images/list-view_4e60b0c.png") no-repeat scroll -9px -12px; height: 14px; left: 11px; width: 14px; top: 20px; margin: 15px 10px; float: left;"></span>'+
-				'<div class="fileicon"></div>'+
-				'<div class="text"><div class="filenameicon"></div>'+
-				'<a class="filename" style="padding-left: 6px;"'+
-				'href="javascript:void(0);" title='+name+'>'+name+'</a></div></li>'+
-				'<li class="file-size" style="width: 16%;">-</li>'+
-				'<li>'+date+'</li></dd>';
-	$(".list-view").append($(str));
+	$.post("uploadFile/addDir/"+name+"/"+date,function(data){
+		
+	});
 	$(".module-edit-name").css("display","none");
 }
 
@@ -204,6 +215,20 @@ function getDate(){
 			date.getHours()+":"+date.getMinutes());
 }
 
+//解析路径          路径      目录级别
+function parseFilePath(filePath,num){
+	var paths = new Array();
+	paths = filePath.split("/");
+	if(paths.length == 1){
+		return paths[0];
+	}
+	return paths[num];
+}
 
+//获取下一级路径
+function getNextPath(filePath,path){
+	var num = filePath.indexOf(path);
+	alert(num);
+}
 
 

@@ -61,6 +61,10 @@ create sequence seq_ufid start with 40001;
 
 insert into uploadfile values(seq_ufid.nextval,10041,'/我的资源/新建文件夹',0,sysdate,1,null,1,1,null,null);
 insert into uploadfile values(seq_ufid.nextval,10041,'/来自百度手机浏览器/hello/hello.doc',0,sysdate,1,null,1,1,null,null);
+select * from UPLOADFILE;
+
+select ufid,userid,filepath,filesize,to_char(uploaddate,'yyyy-mm-dd HH:MI:ss'),filestatus,stoppoingpath,status,isdir
+		 from uploadfile
 
 --回收站表
 create table VCRecyle(
