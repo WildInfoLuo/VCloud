@@ -21,11 +21,11 @@ public class LoginInterceptor extends OncePerRequestFilter {
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
 			throws ServletException, IOException {
 		// 不过滤的uri
-		String[] notFilter = new String[] { "login.jsp", "index.html" };
+		String[] notFilter = new String[] { "login.jsp", "index.html","backlogin.jsp" };
 		// 请求的uri
 		String uri = request.getRequestURI();
 		// uri中包含background时才进行过滤
-		if (uri.indexOf("page") != -1) {
+		if (uri.indexOf("page") != -1 || uri.indexOf("page/back") != -1 ) {
 			// 是否过滤
 			boolean doFilter = true;
 			for (String s : notFilter) {
