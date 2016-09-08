@@ -37,12 +37,13 @@ public class VCUloadFileHandler {
 	}
 	
 	@RequestMapping(value="/addDir/{name}/{date}",method=RequestMethod.POST)
-	public String addDir(@PathVariable("name")String name,@PathVariable String date,HttpSession session){
+	public String addDir(@PathVariable("name")String name,@PathVariable String date,HttpSession session,PrintWriter out){
 		VCUser user = (VCUser) session.getAttribute(SessionAttribute.USERLOGIN);
 		VCUploadFile file = new VCUploadFile(user.getUserid(), name, date);
 		boolean flag = vCUploadFileService.insertDir(file);
-		System.out.println(name);
-		System.out.println(flag);
+		out.print(flag);
+		out.flush();
+		out.close();
 		return "Person_VCloud";
 	}
 	
