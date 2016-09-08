@@ -21,15 +21,10 @@
 	<!--导入外部的属性文件 -->
 	<context:property-placeholder location="classpath:db.properties" />
 	<!-- 登录拦截 -->
-	<!-- <mvc:interceptors>
-		<mvc:interceptor>
-			<mvc:mapping path="/**" />
-			<mvc:exclude-mapping path="/js/**" />
-			<mvc:exclude-mapping path="/css/**" />
-			<mvc:exclude-mapping path="/image/**" />
-			<bean id="loginInterceptor" class="com.yc.vcloud.utils.LoginInterceptor" />
-		</mvc:interceptor>
-	</mvc:interceptors> -->
+	<!-- <mvc:interceptors> <mvc:interceptor> <mvc:mapping path="/**" /> <mvc:exclude-mapping 
+		path="/js/**" /> <mvc:exclude-mapping path="/css/**" /> <mvc:exclude-mapping 
+		path="/image/**" /> <bean id="loginInterceptor" class="com.yc.vcloud.utils.LoginInterceptor" 
+		/> </mvc:interceptor> </mvc:interceptors> -->
 	<!--配置数据源：数据库仓库，不用关闭或连接数据库，典型用空间换取时间的操作 -->
 	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
 		<property name="driverClassName" value="${jdbc.driverClassName}" />
@@ -60,6 +55,14 @@
 		<!--请求拦截后，交给对应 请求处理操作后，根据返回结果，拼接响应页面路径 prefix+返回值+suffix ==>/page/success.html -->
 		<property name="prefix" value="/page/"></property>
 		<property name="suffix" value=".jsp"></property>
+	</bean>
+
+	<!-- 多部分文件上传 -->
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="104857600" />
+		<property name="maxInMemorySize" value="4096" />
+		<property name="defaultEncoding" value="UTF-8"></property>
 	</bean>
 	<!--默认静态资源的请求处理 可以处理js文件 -->
 	<mvc:default-servlet-handler />
