@@ -119,7 +119,6 @@
 	</div>
 </div>
 
-
 <script type="text/javascript" src="page/back/js/jquery-1.8.0.min.js"></script>
 <script type="text/javascript" src="page/back/js/com.js"></script>
 <script type="text/javascript" src="page/back/js/backlogin.js"></script>

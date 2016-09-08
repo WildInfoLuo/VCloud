@@ -21,7 +21,7 @@ public class LoginInterceptor extends OncePerRequestFilter {
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
 			throws ServletException, IOException {
 		// 不过滤的uri
-		String[] notFilter = new String[] { "login.jsp", "index.html" };
+		String[] notFilter = new String[] { "login.jsp", "index.html","back/backlogin.jsp"};
 		// 请求的uri
 		String uri = request.getRequestURI();
 		// uri中包含background时才进行过滤
@@ -49,8 +49,7 @@ public class LoginInterceptor extends OncePerRequestFilter {
 					StringBuilder builder = new StringBuilder();
 					builder.append("<script type=\"text/javascript\">");
 					builder.append("alert('您好,请登录!');");
-					builder.append("window.top.location.href='login.jsp");
-					builder.append("';");
+					builder.append("location.href='login.jsp';");
 					builder.append("</script>");
 					out.print(builder.toString());
 				} else {
