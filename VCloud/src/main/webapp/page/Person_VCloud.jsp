@@ -3,24 +3,25 @@
 <!DOCTYPE html>
 <html>
 <head>
+<base href="/VCloud/">
 <meta charset=UTF-8">
 <title>VCloud__网盘</title>
 
 <!--右键菜单样式-->
-<link rel="stylesheet" href="../css/base.css" />
-<link rel="stylesheet" href="../css/gizmoMenu.css" />
+<link rel="stylesheet" href="css/base.css" />
+<link rel="stylesheet" href="css/gizmoMenu.css" />
 
-<link type="text/css" rel="stylesheet" href="../css/vclound.css" />
-<link type="text/css" rel="stylesheet" href="../css/index.css">
+<link type="text/css" rel="stylesheet" href="css/vclound.css" />
+<link type="text/css" rel="stylesheet" href="css/index.css">
 
-<link href="../images/yun.gif" rel="shortcut icon">
-<script src="../js/jquery-1.11.3.min.js">
+<link href="images/yun.gif" rel="shortcut icon">
+<script src="js/jquery-1.11.3.min.js">
 	
 </script>
-<script src="../js/vclound.js"></script>
-<script type="text/javascript" src="../js/index.js"></script>
+<script src="js/vclound.js"></script>
+<script type="text/javascript" src="js/index.js"></script>
 
-<script type="text/javascript" src="../js/gizmoMenu.js"></script>
+<script type="text/javascript" src="js/gizmoMenu.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
 		$('.container').gizmoMenu({
@@ -41,35 +42,31 @@
 
 	<div id="navbar">
 		<div id="navbar_left">
-			<img alt="千度云盘" src="../images/logo2.png">
+			<img alt="千度云盘" src="images/logo2.png">
 			<ul>
 				<li id="left_li"><a href="index.jsp">主页</a></li>
-				<li class="cjh" id="left_li" onmouseover="showH()"
-					onmouseout="hiddenH()">
-					<a href="Person_VCloud.jsp">网盘</a>
+				<li class="cjh"  id="left_li" onmouseover="showH()" onmouseout="hiddenH()" > <!--" -->
+					
+					<a href="page/Person_VCloud.jsp">网盘</a>
+					<a><img id="f-icon" src="images/down.png" style="width:11px;height:11px;margin-top:20px;margin-left:3px;position: absolute;"></a>
 					<div id="navbar_hidden" onmouseout="hiddenH()">
-						<table id="navbar_table" style="width: 300px; height: 70px;"
-							cellspacing="0" cellpadding="8">
+						<table id="navbar_table" style="width:300px;height:70px;" cellspacing="0" cellpadding="8">
 							<tr>
-								<td><a href="#"> <i
-										style="display: block; width: 40px; height: 40px; background: url(../images/cloud.png); background-size: cover; margin-left: 15px;"></i>
-										<span
-										style="font-size: 15px; margin-left: -15px; color: rgb(225, 230, 246);">网盘</span></a>
+								<td><a href="page/Person_VCloud.jsp">
+									<i style="display:block;width:40px;height:40px;background:url(images/cloud.png);background-size:cover;margin-left:15px;"></i>
+									<span style="font-size:15px;margin-left:-15px;color:rgb(225,230,246);">网盘</span></a>
 								</td>
-								<td><a href="#"> <i
-										style="display: block; width: 40px; height: 40px; background: url(../images/tv.png); background-size: cover;"></i>
-										<span
-										style="font-size: 15px; margin-left: -20px; color: rgb(225, 230, 246);">视频</span></a>
+								<td><a href="#">
+									<i style="display:block;width:40px;height:40px;background:url(images/tv.png);background-size:cover;"></i>
+									<span style="font-size:15px;margin-left:-20px;color:rgb(225,230,246);">视频</span></a>
 								</td>
-								<td><a href="#"> <i
-										style="display: block; width: 40px; height: 40px; background: url(../images/word.png); background-size: cover;"></i>
-										<span
-										style="font-size: 15px; margin-left: -20px; color: rgb(225, 230, 246);">文档</span></a>
+								<td><a href="#">
+									<i style="display:block;width:40px;height:40px;background:url(images/word.png);background-size:cover;"></i>
+									<span style="font-size:15px;margin-left:-20px;color:rgb(225,230,246);">文档</span></a>
 								</td>
-								<td><a href="#"> <i
-										style="display: block; width: 40px; height: 40px; background: url(../images/pic.png); background-size: cover;"></i>
-										<span
-										style="font-size: 15px; margin-left: -15px; color: rgb(225, 230, 246);">图片</span></a>
+								<td><a href="pic_currentupload_empty.jsp">
+									<i style="display:block;width:40px;height:40px;background:url(images/pic.png);background-size:cover;"></i>
+									<span style="font-size:15px;margin-left:-15px;color:rgb(225,230,246);">图片</span></a>
 								</td>
 							</tr>
 						</table>
@@ -226,7 +223,7 @@
 						<li class="first-col" style="width: 60%;">
 							<div class="check">
 								<span class="check-icon0" onclick="filenameIcon(0)"
-									style="background: rgba(0, 0, 0, 0) url('../images/list-view_4e60b0c.png') no-repeat scroll -9px -12px; height: 14px; left: 11px; width: 14px; top: 20px; margin: 15px 10px; float: left;"></span>
+									style="background: rgba(0, 0, 0, 0) url('images/list-view_4e60b0c.png') no-repeat scroll -9px -12px; height: 14px; left: 11px; width: 14px; top: 20px; margin: 15px 10px; float: left;"></span>
 								<span class="textCla" style="line-height: 43px;">文件名</span> <span
 									class="list-header-operatearea"> <span
 									class="count-tips" style="line-height: 43px;">已选中6个文件/文件夹</span>
@@ -264,109 +261,76 @@
 				</div>
 			</div>
 			<div class="list-view-container">
-				<div class="module-list-view  container" >
-				<!-- 先设置隐藏的样式 -->
+				<div class="module-list-view  container">
+					<!-- 先设置隐藏的样式 -->
 					<div class="list-view">
 						<dd class="module-edit-name">
-							<li class="file-names" style="width: 60%;left: 0px; top: 73px;"><span
-								class="check-icon6" onclick="filenameIcon(6)" style="background: rgba(0, 0, 0, 0) url('../images/list-view_4e60b0c.png') no-repeat scroll -9px -12px; height: 14px; left: 11px; width: 14px; top: 20px; margin: 15px 10px; float: left;"></span>
+							<li class="file-names" style="width: 60%; left: 0px; top: 73px;"><span
+								class="check-icon6" onclick="filenameIcon(6)"
+								style="background: rgba(0, 0, 0, 0) url('images/list-view_4e60b0c.png') no-repeat scroll -9px -12px; height: 14px; left: 11px; width: 14px; top: 20px; margin: 15px 10px; float: left;"></span>
 								<div class="fileicon"></div>
-								<div class="new-dir-item" >
-									<input class="box" type="text" value="">
-									<span class="sure" onclick="editSure()"></span>
-									<span class="cancel" onclick="editCancel()"></span>
+								<div class="new-dir-item">
+									<input class="box" type="text" value="新建文件夹"> <span
+										class="sure" onclick="editSure()"></span> <span class="cancel"
+										onclick="editCancel()"></span>
 								</div>
 							<li class="file-size" style="width: 16%;">-</li>
 							<li class="ctime" style="width: 21%;">-</li>
 						</dd>
-						<dd class="open-enable">
-							<li class="file-name" style="width: 60%;">
-								 <span class="check-icon1" onclick="filenameIcon(1)"
-								style="background: rgba(0, 0, 0, 0) url('../images/list-view_4e60b0c.png') no-repeat scroll -9px -12px; height: 14px; left: 11px; width: 14px; top: 20px; margin: 15px 10px; float: left;"></span>
-								<div class="fileicon"></div>
-								<div class="text">
-									<div class="filenameicon"></div>
-									<a class="filename" style="padding-left: 6px;"
-										href="javascript:void(0);" title="文件接收柜">文件接收柜</a>
-								</div>
-							</li>
-							<li class="file-size" style="width: 16%;">-</li> 
-							<li>2015-11-15 11:31</li>
-						</dd>
-						<!-- <dd class="open-enable">
-							<li class="file-name" style="width: 60%;"><span
-								class="check-icon2" onclick="filenameIcon(2)"
-								style="background: rgba(0, 0, 0, 0) url('../images/list-view_4e60b0c.png') no-repeat scroll -9px -12px; height: 14px; left: 11px; width: 14px; top: 20px; margin: 15px 10px; float: left;"></span>
-								<div class="fileicon"></div>
-								<div class="text">
-									<div class="filenameicon"></div>
-									<a class="filename" style="padding-left: 6px;"
-										href="javascript:void(0);" title="我的项目">我的项目</a>
-								</div></li>
-							<li class="file-size" style="width: 16%;">-</li>
-							<li class="ctime" style="width: 21%;">2015-11-15 11:31</li>
-						</dd>
-						<dd class="open-enable">
-							<li class="file-name" style="width: 60%;"><span
-								class="check-icon3" onclick="filenameIcon(3)"
-								style="background: rgba(0, 0, 0, 0) url('../images/list-view_4e60b0c.png') no-repeat scroll -9px -12px; height: 14px; left: 11px; width: 14px; top: 20px; margin: 15px 10px; float: left;"></span>
-								<div class="fileicon"></div>
-								<div class="text">
-									<div class="filenameicon"></div>
-									<a class="filename" style="padding-left: 6px;"
-										href="javascript:void(0);" title="我的资源">我的资源</a>
-								</div></li>
-							<li class="file-size" style="width: 16%;">-</li>
-							<li class="ctime" style="width: 21%;">2015-11-15 11:31</li>
-						</dd> -->
+
 						<div class="list-empty-tips" style="display: none;">
-						<div class="tip-text">正在加载，请稍候…</div>
-					</div>
+							<div class="tip-text">正在加载，请稍候…</div>
+						</div>
 					</div>
 				</div>
 				<div class="content-view">
 					<div class="grid-view" style="margin-top: 0px;">
 						<dd class="g-clearfix">
-							<div class="grid-view-item1" style="display: block;height: 122px;margin: 4px 4px 0 0; text-align: center; width: 142px;float: left;" onclick="filenameIcon(1)">
+							<div class="grid-view-item1"
+								style="display: block; height: 122px; margin: 4px 4px 0 0; text-align: center; width: 142px; float: left;"
+								onclick="filenameIcon(1)">
 								<div class="dir-large" title="">
-									<img class="thumb" >
-									<span class="checkbox"></span>
+									<img class="thumb"> <span class="checkbox"></span>
 								</div>
 								<div class="file-name">
 									<a class="filename" title="文件接收柜" href="javascript:void(0);">文件接收柜</a>
 								</div>
 							</div>
-							<div class="grid-view-item2" style="display: block;height: 122px;margin: 4px 4px 0 0; text-align: center; width: 142px;float: left;"onclick="filenameIcon(2)">
+							<div class="grid-view-item2"
+								style="display: block; height: 122px; margin: 4px 4px 0 0; text-align: center; width: 142px; float: left;"
+								onclick="filenameIcon(2)">
 								<div class="dir-large" title="">
-									<img class="thumb" >
-									<span class="checkbox"></span>
+									<img class="thumb"> <span class="checkbox"></span>
 								</div>
 								<div class="file-name">
 									<a class="filename" title="我的数据" href="javascript:void(0);">我的数据</a>
 								</div>
 							</div>
-							<div class="grid-view-item3" style="display: block;height: 122px;margin: 4px 4px 0 0; text-align: center; width: 142px;float: left;" onclick="filenameIcon(3)">
+							<div class="grid-view-item3"
+								style="display: block; height: 122px; margin: 4px 4px 0 0; text-align: center; width: 142px; float: left;"
+								onclick="filenameIcon(3)">
 								<div class="dir-large" title="">
-									<img class="thumb" >
-									<span class="checkbox"></span>
+									<img class="thumb"> <span class="checkbox"></span>
 								</div>
 								<div class="file-name">
 									<a class="filename" title="我的资源" href="javascript:void(0);">我的资源</a>
 								</div>
 							</div>
-							<div class="grid-view-item4" style="display: block;height: 122px;margin: 4px 4px 0 0; text-align: center; width: 142px;float: left;" onclick="filenameIcon(4)">
+							<div class="grid-view-item4"
+								style="display: block; height: 122px; margin: 4px 4px 0 0; text-align: center; width: 142px; float: left;"
+								onclick="filenameIcon(4)">
 								<div class="dir-large fileicon-large-xls" title="">
-									<img class="thumb" >
-									<span class="checkbox"></span>
+									<img class="thumb"> <span class="checkbox"></span>
 								</div>
 								<div class="file-name">
 									<a class="filename" title="xls文件" href="javascript:void(0);">VCloud.xls</a>
 								</div>
 							</div>
-							<div class="grid-view-item5" style="display: block;height: 122px;margin: 4px 4px 0 0; text-align: center; width: 142px;float: left;" onclick="filenameIcon(5)">
+							<div class="grid-view-item5"
+								style="display: block; height: 122px; margin: 4px 4px 0 0; text-align: center; width: 142px; float: left;"
+								onclick="filenameIcon(5)">
 								<div class="dir-large fileicon-large-doc" title="">
-									<img class="thumb" >
-									<span class="checkbox"></span>
+									<img class="thumb"> <span class="checkbox"></span>
 								</div>
 								<div class="file-name">
 									<a class="filename" title="doc文件" href="javascript:void(0);">VCloud.doc</a>
@@ -375,21 +339,21 @@
 						</dd>
 					</div>
 				</div>
-				
+
 			</div>
 		</div>
 	</div>
-	
+
 	<div class="gizmoMenu gizmoDropDown">
 		<ul>
 			<li><i class="fa fa-camera-retro"></i><a href="#">查看</a><img
-				style="margin-top: 5px; margin-left: 70px;" src="../images/jian.png" />
+				style="margin-top: 5px; margin-left: 70px;" src="images/jian.png" />
 				<ul>
 					<li><i class="fa fa-bullseye"></i><a href="#">列表</a></li>
 					<li><i class="fa fa-cubes"></i><a href="#">缩略图</a></li>
 				</ul></li>
 			<li><i class="fa fa-camera-retro"></i><a href="#">排序方式</a><img
-				style="margin-top: 5px; margin-left: 38px;" src="../images/jian.png" />
+				style="margin-top: 5px; margin-left: 38px;" src="images/jian.png" />
 				<ul>
 					<li><i class="fa fa-bullseye"></i><a href="#">名称</a></li>
 					<li><i class="fa fa-cubes"></i><a href="#">大小</a></li>
@@ -397,7 +361,7 @@
 				</ul></li>
 			<li><i class="fa fa-arrow-right"></i><a href="#">刷新</a></li>
 			<li><i class="fa fa-arrow-right"></i><a href="#">重新加载页面</a></li>
-			<li id="file"><img src="../images/yfile.png" /><i
+			<li id="file"><img src="images/yfile.png" /><i
 				class="fa fa-arrow-right"></i><a href="#">新建文件夹</a></li>
 		</ul>
 	</div>
