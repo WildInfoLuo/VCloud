@@ -41,25 +41,30 @@ create table VCFileType(
 );
 create sequence seq_ftid start with 30001;
 
-
+drop table uploadfile;
 --文件表
-create table VCUploadFile(
+create table uploadfile(
 	ufid int primary key,
-	ftid int       					--文件类型id
-		constraint FK_VCFileType_id references VCFileType(ftid),
-	userid int     					--用户id
-		constraint FK_VCUser_id references VCUser(userid),
-	filePathOra varchar2(100),  	--文件最初路径
-	filePathNew varchar2(100),  	--文件最新路径
-	fileSize int,  					--文件大小
-	uploadDate date,  				--文件上传时间
-	fileStatus varchar2(10),  		--文件状态(上传完成  上传中断  上传失败  已删除)
-	stoppoingPath varchar2(50),  	--断点文件路径
-	fileCheck varchar2(10),  		--文件审核字段
-	temp1 varchar2(200),			--备用字段
-    temp2 varchar2(200)				--备用字段 
+	userid int     --用户id
+		constraint FK_VUser_id references VCUser(userid),
+	filepath varchar2(1000),  --文件路径
+	filesize int,  --文件大小
+	uploaddate date,  --文件上传时间
+	filestatus varchar2(10),  --文件状态(上传完成1  上传中断2  上传失败3  已删除4)
+	stoppoingpath varchar2(50),  --断点文件路径
+	status varchar2(10),  --文件审核字段     1.通过，0.不通过
+	isdir int, --判断是否为文件夹   1.文件夹  0.文件
+	temp1 varchar2(200),		--备用字段
+    temp2 varchar2(200)		
 );
 create sequence seq_ufid start with 40001;
+
+insert into uploadfile values(seq_ufid.nextval,10041,'/我的资源/新建文件夹',0,sysdate,1,null,1,1,null,null);
+insert into uploadfile values(seq_ufid.nextval,10041,'/来自百度手机浏览器/hello/hello.doc',0,sysdate,1,null,1,1,null,null);
+select * from UPLOADFILE;
+
+select ufid,userid,filepath,filesize,to_char(uploaddate,'yyyy-mm-dd HH:MI:ss'),filestatus,stoppoingpath,status,isdir
+		 from uploadfile
 
 --回收站表
 create table VCRecyle(
@@ -72,22 +77,6 @@ create table VCRecyle(
     temp2 varchar2(200)			--备用字段 
 );
 create sequence seq_rid start with 50001;
-
---文件目录索引表
-create table VCFileList(
-	listid int primary key,
-	userid int
-		constraint FK_VCUser_id_list references VCUser(userid),
-	ufid int   --文件id
-		constraint FK_VCUploadFile_id_list references VCUploadFile(ufid),--文件id，用户修改文件或文件夹名
-	listgrade int ,				--目录级别
-	listParentid int, 			--上级目录id  没有就为空
-	listName varchar2(50),
-	temp1 varchar2(200),		--备用字段
-  temp2 varchar2(200)			--备用字段 
-);
-
-create sequence seq_listid start with 60001;
 
 --分享表
 create table VCShare(

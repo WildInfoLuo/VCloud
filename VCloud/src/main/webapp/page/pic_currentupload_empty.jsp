@@ -3,43 +3,43 @@
 <!DOCTYPE html>
 <html  class="no-js">
 <head>
-<meta charset=UTF-8">
-
+<meta charset="UTF-8">
+<base href="/VCloud/">
 <title>VClound -最近上传</title>
-<link type="text/css" rel="stylesheet" href="../css/piv_currentupload_empty.css"/>
-<link type="text/css" rel="stylesheet" href="../css/index.css">
-<link type="text/css" rel="stylesheet" href="../css/vclound.css">
-<link href="../images/云准备.gif" rel="shortcut icon">
-<script src="../js/jquery-1.11.3.min.js"></script>
-<script type="text/javascript" src="../js/index.js"></script>
-<script src="../js/vclound.js"></script>
+<link type="text/css" rel="stylesheet" href="css/piv_currentupload_empty.css"/>
+<link type="text/css" rel="stylesheet" href="css/index.css">
+<link type="text/css" rel="stylesheet" href="css/vclound.css">
+<link href="images/云准备.gif" rel="shortcut icon">
+<script src="js/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="js/index.js"></script>
+<script src="js/vclound.js"></script>
 </head>
 <body>
 <div id="navbar">
 		<div id="navbar_left">
-			<img alt="千度云盘" src="../images/logo2.png">
+			<img alt="千度云盘" src="images/logo2.png">
 			<ul>
 				<li id="left_li"><a href="index.jsp">主页</a></li>
 				<li class="cjh"  id="left_li" onmouseover="showH()" onmouseout="hiddenH()" > <!--" -->
 					<a href="Person_VCloud.jsp">网盘</a>
-					<a><img id="f-icon" src="../images/down.png" style="width:11px;height:11px;margin-top:20px;margin-left:3px;position: absolute;"></a>
+					<a><img id="f-icon" src="images/down.png" style="width:11px;height:11px;margin-top:20px;margin-left:3px;position: absolute;"></a>
 					<div id="navbar_hidden" onmouseout="hiddenH()">
 						<table id="navbar_table" style="width:300px;height:70px;" cellspacing="0" cellpadding="8">
 							<tr>
 								<td><a href="#">
-									<i style="display:block;width:40px;height:40px;background:url(../images/cloud.png);background-size:cover;margin-left:15px;"></i>
+									<i style="display:block;width:40px;height:40px;background:url(images/cloud.png);background-size:cover;margin-left:15px;"></i>
 									<span style="font-size:15px;margin-left:-15px;color:rgb(225,230,246);">网盘</span></a>
 								</td>
 								<td><a href="#">
-									<i style="display:block;width:40px;height:40px;background:url(../images/tv.png);background-size:cover;"></i>
+									<i style="display:block;width:40px;height:40px;background:url(images/tv.png);background-size:cover;"></i>
 									<span style="font-size:15px;margin-left:-20px;color:rgb(225,230,246);">视频</span></a>
 								</td>
 								<td><a href="#">
-									<i style="display:block;width:40px;height:40px;background:url(../images/word.png);background-size:cover;"></i>
+									<i style="display:block;width:40px;height:40px;background:url(images/word.png);background-size:cover;"></i>
 									<span style="font-size:15px;margin-left:-20px;color:rgb(225,230,246);">文档</span></a>
 								</td>
 								<td><a href="#">
-									<i style="display:block;width:40px;height:40px;background:url(../images/pic.png);background-size:cover;"></i>
+									<i style="display:block;width:40px;height:40px;background:url(images/pic.png);background-size:cover;"></i>
 									<span style="font-size:15px;margin-left:-15px;color:rgb(225,230,246);">图片</span></a>
 								</td>
 							</tr>

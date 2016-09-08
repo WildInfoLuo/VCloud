@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yc.vcloud.mapper.VCUploadFileMapper">
+	<select id="getFiles" parameterType="int" resultType="VCUploadFile">
+		select ufid,userid,filepath,filesize,to_char(uploaddate,'yyyy-mm-dd HH:MI:ss') uploaddate,filestatus,stoppoingpath,status,isdir
+		 from uploadfile where userid=#{userid}
+	</select>
+	
+	<insert id="insertFile" parameterType="VCUploadFile">
+		insert into uploadfile values(seq_ufid.nextval,#{userid},#{filepath},0,to_date(#{uploaddate},'yyyy-mm-dd HH24:MI:ss'),1,null,1,1,null,null)
+	</insert>
+	
+</mapper>

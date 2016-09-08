@@ -91,8 +91,8 @@ public class VCUserHandler {
 			map.put(SessionAttribute.USERLOGIN, users.get(0));
 			LogManager.getLogger().debug("user==>" + userLogin);
 			return "index";
-		} else {
-			map.put("logErrorMsg", "用户名或密码输入不正确");
+		}else{
+			map.put(SessionAttribute.LOGERRORMSG, "用户名或密码输入不正确");
 			return "login";
 		}
 	}
