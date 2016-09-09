@@ -7,7 +7,6 @@ $(function() {
 	$(".content-view").hide();
 	var str = "";
 	$.post("uploadFile/getUserFiles",function(data){
-		
 		for(var i=0;i<data.length;i++){
 			var path = parseFilePath(data[i].filepath,1);
 			str += '<dd class="open-enable">'+
@@ -37,8 +36,21 @@ function editSure() {
 	var name = $(".box").val();
 	alert(name);
 	var date = getDate();
+	var str = "";
 	$.post("uploadFile/addDir/"+name+"/"+date,function(data){
-		
+		if(data){
+			str += '<dd class="open-enable">'+
+			'<li class="file-name" style="width: 60%;"><span '+
+			'class="check-icon1" onclick="filenameIcon(1)"'+
+			'style="background: rgba(0, 0, 0, 0) url(images/list-view_4e60b0c.png) no-repeat scroll -9px -12px; height: 14px; left: 11px; width: 14px; top: 20px; margin: 15px 10px; float: left;"></span>'+
+			'<div class="fileicon"></div>'+
+			'<div class="text"><div class="filenameicon"></div>'+
+			'<a class="filename" style="padding-left: 6px;"'+
+			'href="javascript:getNextPath('+'\''+name+'\''+','+'\''+name+'\''+')" title='+name+'>'+name+'</a></div></li>'+
+			'<li class="file-size" style="width: 16%;">-</li>'+
+			'<li>'+date+'</li></dd>';
+			$(".list-view").prepend($(str));    //显示在第一条
+		}
 	});
 	$(".module-edit-name").css("display","none");
 }
@@ -228,7 +240,14 @@ function parseFilePath(filePath,num){
 //获取下一级路径
 function getNextPath(filePath,path){
 	var num = filePath.indexOf(path);
-	alert(num);
+	var paths = new Array();
+	paths = filePath.split("/");
+	if((num+1)<paths.length && paths.length>1){
+		return paths[num+1];
+	}else{
+		return "";
+	}
+	
 }
 
 
