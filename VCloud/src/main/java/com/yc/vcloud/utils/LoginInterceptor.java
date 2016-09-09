@@ -21,15 +21,16 @@ public class LoginInterceptor extends OncePerRequestFilter {
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
 			throws ServletException, IOException {
 		// 不过滤的uri
-		String[] notFilter = new String[] { "login.jsp", "index.html","back/backlogin.jsp"};
+		String[] notFilter = new String[] { "login.jsp", "back/backlogin.jsp", "index.html", "register.jsp" };
 		// 请求的uri
 		String uri = request.getRequestURI();
-		// uri中包含background时才进行过滤
-		if (uri.indexOf("page") != -1) {
+		System.out.println(uri);
+		// uri中包含page时才进行过滤
+		if (uri.contains("page")) {
 			// 是否过滤
 			boolean doFilter = true;
 			for (String s : notFilter) {
-				if (uri.indexOf(s) != -1) {
+				if (!uri.contains(s)) {
 					// 如果uri中包含不过滤的uri，则不进行过滤
 					doFilter = false;
 					break;
@@ -38,8 +39,9 @@ public class LoginInterceptor extends OncePerRequestFilter {
 			if (doFilter) {
 				// 执行过滤
 				// 从session中获取登录者实体
-				Object obj = request.getSession().getAttribute(SessionAttribute.USERLOGIN);
-				if (null == obj) {
+				Object objUser = request.getSession().getAttribute(SessionAttribute.USERLOGIN);
+				Object objAdmin = request.getSession().getAttribute(SessionAttribute.ADMINLOGIN);
+				if (null == objUser) {
 					// 如果session中不存在登录者实体，则弹出框提示重新登录
 					// 设置request和response的字符集，防止乱码
 					request.setCharacterEncoding("UTF-8");
@@ -48,7 +50,24 @@ public class LoginInterceptor extends OncePerRequestFilter {
 					PrintWriter out = response.getWriter();
 					StringBuilder builder = new StringBuilder();
 					builder.append("<script type=\"text/javascript\">");
-					builder.append("alert('您好,请登录!');");
+					builder.append("alert('您好,请先登录bbb!');");
+					builder.append("location.href='login.jsp';");
+					builder.append("</script>");
+					out.print(builder.toString());
+				} else {
+					// 如果session中存在登录者实体，则继续
+					filterChain.doFilter(request, response);
+				}
+				if (null == objAdmin) {
+					// 如果session中不存在登录者实体，则弹出框提示重新登录
+					// 设置request和response的字符集，防止乱码
+					request.setCharacterEncoding("UTF-8");
+					response.setCharacterEncoding("UTF-8");
+					response.setContentType("text/html;charset=utf-8");
+					PrintWriter out = response.getWriter();
+					StringBuilder builder = new StringBuilder();
+					builder.append("<script type=\"text/javascript\">");
+					builder.append("alert('您好,请先登录aaa!');");
 					builder.append("location.href='login.jsp';");
 					builder.append("</script>");
 					out.print(builder.toString());

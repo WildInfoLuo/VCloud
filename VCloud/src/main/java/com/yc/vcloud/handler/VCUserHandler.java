@@ -45,9 +45,8 @@ public class VCUserHandler {
 			map.put("regErrorMsg", "验证码已失效");
 			return "register";
 		}
-		if (user.getCode().equals(session.getAttribute(SessionAttribute.TELRLOGIN))) {
+		if (user.getCode().equalsIgnoreCase((String) session.getAttribute(SessionAttribute.TELRLOGIN))) {
 			if (service.register(user) > 0) {
-				// 成功注册，发送邮件，激活帐号
 				return "login";
 			}
 		} else {
