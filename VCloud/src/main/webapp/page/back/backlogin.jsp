@@ -7,6 +7,9 @@
 <base href="/VCloud/">
 <title>VCloud后台管理系统</title>
 <link rel="stylesheet" type="text/css" href="page/back/css/style2.0.css">
+<script type="text/javascript" src="page/back/js/jquery-1.8.0.min.js"></script>
+<script type="text/javascript" src="page/back/js/com.js"></script>
+<script type="text/javascript" src="page/back/js/backlogin.js"></script>
 <style type="text/css">
 	ul li{font-size: 30px;color:#2ec0f6;}
 	.tyg-div{z-index:-1000;float:left;position:absolute;left:5%;top:20%;}
@@ -118,11 +121,6 @@
 		</form>
 	</div>
 </div>
-
-
-<script type="text/javascript" src="page/back/js/jquery-1.8.0.min.js"></script>
-<script type="text/javascript" src="page/back/js/com.js"></script>
-<script type="text/javascript" src="page/back/js/backlogin.js"></script>
 <!--[if IE 6]>
 <script language="javascript" type="text/javascript" src="./script/ie6_png.js"></script>
 <script language="javascript" type="text/javascript">
