@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.yc.vcloud.entity.VCUploadCount;
 import com.yc.vcloud.entity.VCUploadFile;
 import com.yc.vcloud.entity.VCadmin;
 import com.yc.vcloud.mapper.VCUploadFileMapper;
@@ -27,5 +28,19 @@ public class VCUploadFileServiceImpl implements VCUploadFileService {
 		return vCUploadFileMapper.insertFile(vCUploadFile);
 	}
 
-	
+	@Override
+	public List<VCUploadFile> getAllPhoto(VCUploadFile file) {
+		return vCUploadFileMapper.getAllPhoto(file);
+	}
+
+	@Override
+	public boolean uploadFile(VCUploadFile file) {
+		return vCUploadFileMapper.uploadFile(file);
+	}
+
+	@Override
+	public List<VCUploadCount> getPhotoCount() {
+		return vCUploadFileMapper.getPhotoCount();
+	}
+
 }

@@ -57,3 +57,10 @@
 .upload-list{
 	display:none;
 }
+
+.upload-list .img{
+	margin-left: 40px;
+	margin-top: 10px;
+	width: 130px;
+	height:128px;
+}
