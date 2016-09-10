@@ -6,7 +6,7 @@ import com.yc.vcloud.entity.VCUploadFile;
 
 public interface VCUploadFileService {
 	
-	List<VCUploadFile> getUserFiles(int userid);
+	List<VCUploadFile> getUserFiles(VCUploadFile file);
 	
 	boolean insertDir(VCUploadFile vCUploadFile);
 	

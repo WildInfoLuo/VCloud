@@ -4,7 +4,10 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Iterator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -30,16 +33,33 @@ public class VCUloadFileHandler {
 	@Autowired
 	private VCUploadFileService vCUploadFileService;
 
-	@RequestMapping(value="/getUserFiles",method=RequestMethod.POST)
-	public String getUserFiles(HttpSession session,PrintWriter out){
+	@RequestMapping(value="/getUserFiles/{filepath}",method=RequestMethod.POST)
+	public String getUserFiles(@PathVariable String filepath ,HttpSession session,PrintWriter out){
 		VCUser user = (VCUser)session.getAttribute(SessionAttribute.USERLOGIN);
-		List<VCUploadFile> files = vCUploadFileService.getUserFiles(user.getUserid());
+		VCUploadFile file = new VCUploadFile(user.getUserid(),filepath.equals("null")?null:filepath);
+		List<VCUploadFile> files = vCUploadFileService.getUserFiles(file);
+		System.out.println(files);
+		/*Map<String,String []> map = new HashMap<String,String []>();
+		Map<String,String> dates = new HashMap<String,String >(); 
+		Set<String> keys = null;
+		for(VCUploadFile f:files){
+			String [] fstr = f.getFilepath().split("/");
+			keys = map.keySet();
+			if(keys.contains(fstr[1])){
+				String [] s = map.get(fstr[1]);
+			}
+			map.put(fstr[1], fstr);
+		}
+		System.out.println("map==>"+map.get("我的资源")[2]);
+		
+		System.out.println("key==>"+keys);
+		
+		*/
 		Gson gs = new Gson();
-		String file = gs.toJson(files);
-		out.println(file);
+		String fileStr = gs.toJson(files);
+		out.println(fileStr);
 		out.flush();
 		out.close();
-		System.out.println("===>"+file);
 		return "Person_VCloud";
 	}
 	

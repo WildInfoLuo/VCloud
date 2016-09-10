@@ -18,8 +18,8 @@ public class VCUploadFileServiceImpl implements VCUploadFileService {
 	private VCUploadFileMapper vCUploadFileMapper;
 
 	@Override
-	public List<VCUploadFile> getUserFiles(int userid) {
-		return vCUploadFileMapper.getFiles(userid);
+	public List<VCUploadFile> getUserFiles(VCUploadFile file) {
+		return vCUploadFileMapper.getFiles(file);
 	}
 
 	@Override

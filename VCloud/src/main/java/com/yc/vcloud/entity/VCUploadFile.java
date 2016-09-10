@@ -13,6 +13,12 @@ public class VCUploadFile {
 	public VCUploadFile() {
 	}
 
+	public VCUploadFile(int userid, String filepath) {
+		super();
+		this.userid = userid;
+		this.filepath = filepath;
+	}
+
 	public VCUploadFile(int userid, String filepath, String uploaddate) {
 		super();
 		this.userid = userid;
