@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html  class="no-js">
 <head>
@@ -203,7 +204,7 @@
             <div class="empty-timeline">
             	<div class="empty-bg"></div>
                 <p class="empty-des"></p>
-                <div class="time-upfileimg"><form id="uploadfile" action="file/uploadFile" method="post"  enctype="multipart/form-data"><input  type="file" style="width:154px;height:39px;position:absolute;opacity:0;cursor:pointer;" name="file"   title="点击选择文件" onchange="uploadphoto(${userLogin.userid })"></form></div>
+                <div class="time-upfileimg"><form id="uploadfile" action="uploadFile/uploadFile" method="post"  enctype="multipart/form-data" ><input  type="file" style="width:154px;height:39px;position:absolute;opacity:0;cursor:pointer;" name="file" accept=".png,.jpg,.jpeg,.gif"  title="点击选择文件" onchange="uploadphoto(${userLogin.userid })"></form></div>
             </div>
             
              <div class="module-timeline">
