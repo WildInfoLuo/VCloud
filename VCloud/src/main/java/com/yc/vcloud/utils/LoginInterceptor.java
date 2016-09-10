@@ -29,7 +29,7 @@ public class LoginInterceptor extends OncePerRequestFilter {
 			// 是否过滤
 			boolean doFilter = true;
 			for (String s : notFilter) {
-				if (!uri.contains(s)) {
+				if (uri.contains(s)) {
 					// 如果uri中包含不过滤的uri，则不进行过滤
 					doFilter = false;
 					break;

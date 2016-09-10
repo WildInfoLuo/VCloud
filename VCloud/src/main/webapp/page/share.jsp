@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -61,8 +62,15 @@
 		</div>
 		<div id="navbar_right">
 			<ul>
-				<li style="width: 120px;"><a>用户名</a></li>
-				<li><a href="#">注销</a></li>
+				<li style="width:120px;">
+					<c:if test="${userLogin != null }">
+						<a>${userLogin.uname }，您好</a>
+					</c:if>
+					<c:if test="${userLogin == null }">
+						<a href="page/login.jsp">未登录</a>
+					</c:if>
+				</li>
+				<li><a href="user/logout">注销</a></li>
 				<li><a href="#">通知</a></li>
 				<li><a href="#">更多>></a></li>
 			</ul>
