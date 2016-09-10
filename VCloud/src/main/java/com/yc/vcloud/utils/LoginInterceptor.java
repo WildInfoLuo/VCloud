@@ -1,5 +1,6 @@
 package com.yc.vcloud.utils;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -20,6 +21,14 @@ public class LoginInterceptor extends OncePerRequestFilter {
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
 			throws ServletException, IOException {
+		
+		String uploadpath="../sources";
+		String path=request.getServletContext().getRealPath("/")+uploadpath;
+		System.out.println("拦截器的目录"+path);
+		File file=new File(path);
+		if(!file.exists()){
+			 file.mkdirs();
+		}
 		// 不过滤的uri
 		String[] notFilter = new String[] { "login.jsp", "back/backlogin.jsp", "index.html", "register.jsp" };
 		// 请求的uri
