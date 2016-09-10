@@ -3,9 +3,12 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.yc.vcloud.mapper.VCUploadFileMapper">
-	<select id="getFiles" parameterType="int" resultType="VCUploadFile">
+	<select id="getFiles" parameterType="VCUploadFile" resultType="VCUploadFile">
 		select ufid,userid,filepath,filesize,to_char(uploaddate,'yyyy-mm-dd HH:MI:ss') uploaddate,filestatus,stoppoingpath,status,isdir
 		 from uploadfile where userid=#{userid}
+		 <if test="filepath != null">
+		 	 and regexp_like(filepath,'^'||#{filepath}||'+')
+		 </if>
 	</select>
 	
 	<insert id="insertFile" parameterType="VCUploadFile">

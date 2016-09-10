@@ -7,7 +7,7 @@ import com.yc.vcloud.entity.VCUser;
 
 public interface VCUploadFileMapper {
 	
-	List<VCUploadFile> getFiles(int userid);
+	List<VCUploadFile> getFiles(VCUploadFile file);
 	
 	boolean insertFile(VCUploadFile file);
 }

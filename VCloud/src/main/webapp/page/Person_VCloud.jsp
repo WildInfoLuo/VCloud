@@ -286,7 +286,7 @@
 				<div class="content-view">
 					<div class="grid-view" style="margin-top: 0px;">
 						<dd class="g-clearfix">
-							<div class="grid-view-item1"
+							<!-- <div class="grid-view-item1"
 								style="display: block; height: 122px; margin: 4px 4px 0 0; text-align: center; width: 142px; float: left;"
 								onclick="filenameIcon(1)">
 								<div class="dir-large" title="">
@@ -335,7 +335,7 @@
 								<div class="file-name">
 									<a class="filename" title="doc文件" href="javascript:void(0);">VCloud.doc</a>
 								</div>
-							</div>
+							</div> -->
 						</dd>
 					</div>
 				</div>

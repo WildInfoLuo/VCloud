@@ -22,7 +22,8 @@ public class VCUploadFileServiceImplTest {
 
 	@Test
 	public void testGetUserFiles() {
-		List<VCUploadFile> files = vCUploadFileService.getUserFiles(10041);
+		VCUploadFile file = new VCUploadFile(10041,"null");
+		List<VCUploadFile> files = vCUploadFileService.getUserFiles(file);
 		System.out.println("===>"+files);
 		assertNotNull(files);
 	}
