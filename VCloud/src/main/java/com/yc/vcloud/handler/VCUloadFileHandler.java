@@ -34,27 +34,10 @@ public class VCUloadFileHandler {
 	private VCUploadFileService vCUploadFileService;
 
 	@RequestMapping(value="/getUserFiles/{filepath}",method=RequestMethod.POST)
-	public String getUserFiles(@PathVariable String filepath ,HttpSession session,PrintWriter out){
+	public String getUserFiles(@PathVariable("filepath") String filepath ,HttpSession session,PrintWriter out){
 		VCUser user = (VCUser)session.getAttribute(SessionAttribute.USERLOGIN);
 		VCUploadFile file = new VCUploadFile(user.getUserid(),filepath.equals("null")?null:filepath);
 		List<VCUploadFile> files = vCUploadFileService.getUserFiles(file);
-		System.out.println(files);
-		/*Map<String,String []> map = new HashMap<String,String []>();
-		Map<String,String> dates = new HashMap<String,String >(); 
-		Set<String> keys = null;
-		for(VCUploadFile f:files){
-			String [] fstr = f.getFilepath().split("/");
-			keys = map.keySet();
-			if(keys.contains(fstr[1])){
-				String [] s = map.get(fstr[1]);
-			}
-			map.put(fstr[1], fstr);
-		}
-		System.out.println("map==>"+map.get("我的资源")[2]);
-		
-		System.out.println("key==>"+keys);
-		
-		*/
 		Gson gs = new Gson();
 		String fileStr = gs.toJson(files);
 		out.println(fileStr);
@@ -68,7 +51,6 @@ public class VCUloadFileHandler {
 		VCUser user = (VCUser) session.getAttribute(SessionAttribute.USERLOGIN);
 		VCUploadFile file = new VCUploadFile(user.getUserid(), name, date);
 		boolean flag = vCUploadFileService.insertDir(file);
-		System.out.println("name==>"+name);
 		out.print(flag);
 		out.flush();
 		out.close();

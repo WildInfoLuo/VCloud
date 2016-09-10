@@ -1,5 +1,6 @@
 
 var pathData = null;
+var nextpath = "";
 $(function() {
 	/* 设置在初始化的时候将块隐藏 */
 	$(".list-header-operatearea").hide();
@@ -7,27 +8,9 @@ $(function() {
 	$(".module-edit-name").hide();
 	/*详细内容列表界面隐藏*/
 	$(".content-view").hide();
-	var str = "";
-	var pass = new Array();
 	$.post("uploadFile/getUserFiles/"+null,function(data){
 		pathData = data;
-		for(var i=0;i<data.length;i++){
-			var path = parseFilePath(data[i].filepath,1);
-			if($.inArray(path,pass) == -1){
-				str += '<dd class="open-enable">'+
-				'<li class="file-name" style="width: 60%;"><span '+
-				'class="check-icon1" onclick="filenameIcon(1)"'+
-				'style="background: rgba(0, 0, 0, 0) url(images/list-view_4e60b0c.png) no-repeat scroll -9px -12px; height: 14px; left: 11px; width: 14px; top: 20px; margin: 15px 10px; float: left;"></span>'+
-				'<div class="fileicon"></div>'+
-				'<div class="text"><div class="filenameicon"></div>'+
-				'<a class="filename" style="padding-left: 6px;"'+
-				'href="javascript:getNextPath('+'\'/'+path+'/\','+1+')" title='+path+'>'+path+'</a></div></li>'+
-				'<li class="file-size" style="width: 16%;">-</li>'+
-				'<li>'+data[i].uploaddate+'</li></dd>';
-			}
-			pass[i] = path;
-		}
-		$(".list-view").append($(str));
+		init();
 	},"json");
 });
 
@@ -35,6 +18,7 @@ var isdir=0;
 
 /* 新建文件夹 */
 function upfileSpanjia() {
+	$("#newDir").select();
 	$(".module-edit-name").show();
 }
 
@@ -43,6 +27,18 @@ function editSure() {
 	var name = $(".box").val();
 	var date = getDate();
 	var str = "";
+	var flag = false;
+	var a = getFileNames();
+	var i = 1;
+	if($.inArray(name,a) != -1){
+		while(true){
+			if($.inArray(name+"("+i+")",a) == -1){
+				break;
+			}
+			i++;
+		}
+		name = name+"("+(i)+")";
+	}
 	$.post("uploadFile/addDir/"+name+"/"+date,function(data){
 		if(data){
 			str += '<dd class="open-enable">'+
@@ -84,45 +80,8 @@ function lswitch() {
 	$(".grid-switch").css(divcss2);
 	/* 开始变幻界面 */
 
-	var str = ""; 
-	var pas = new Array();
-	for(var i=0;i<pathData.length;i++){
-		var path = parseFilePath(pathData[i].filepath,1);
-		if($.inArray(path,pas) == -1){
-			str += '<div class="grid-view-item1"'+
-			'style="display: block; height: 122px; margin: 4px 4px 0 0; text-align: center; width: 142px; float: left;"'+
-			'onclick="filenameIcon(1)">';
-			if(path.lastIndexOf(".")!=-1){
-				switch(path.substr(path.lastIndexOf(".")+1)){
-				case "doc":
-					str+='<div class="dir-large fileicon-large-doc" title="">'+
-							'<img class="thumb"> <span class="checkbox"></span>'+
-						 '</div>';
-					break;
-				case "xls":
-					str+='<div class="dir-large fileicon-large-xls" title="">'+
-						'<img class="thumb"> <span class="checkbox"></span>'+
-						'</div>';
-					break;
-				default:
-					str += '<div class="dir-large" title="">'+
-								'<img class="thumb"> <span class="checkbox"></span>'+
-							'</div>';
-					break;
-				}
-			}else{
-				str += '<div class="dir-large" title="">'+
-							'<img class="thumb"> <span class="checkbox"></span>'+
-						'</div>';
-			}
-			str+='<div class="file-name">'+
-				'<a class="filename" title='+path+' href="javascript:getNextPath('+'\'/'+path+'/\','+2+')"">'+path+'</a>'+
-			'</div>'+
-			'</div>';
-		}
-		pas[i] = path;
-	}
-	$(".g-clearfix").html("").append($(str));
+	initView();
+	
 	$(".list-view").hide();
 	$(".content-view").show();
 }
@@ -146,7 +105,6 @@ function gswitch() {
 	$(".grid-switch").css(divcss2);
 
 	// <!--开始变幻界面-->
-	
 	$(".list-view").show();
 	$(".content-view").hide();
 }
@@ -286,6 +244,7 @@ function parseFilePath(filePath,num){
 
 //获取下一级路径
 function getNextPath(path,view){
+	nextpath = path;
 	var nums = new Array();
 	nums = path.split("/");
 	var num = 0;
@@ -315,7 +274,10 @@ function getNextPath(path,view){
 						'<li>'+pathData[i].uploaddate+'</li></dd>';
 						ps[i] = paths[num+1];
 					}
+					var up = '<a style="color:blue;" href="javascript:retrunPre('+'\'/'+paths[num-1]+'/\','+1+')">返回上一级</a>';
+					up +="<span>"+path.replace(/\//gm,">")+"</span>";
 					$(".list-view").html("").append($(str));
+					$(".history-list-dir").html("").html($(up));
 				}else if(view == 2){
 					if($.inArray(paths[num+1],ps) == -1){
 						str += '<div class="grid-view-item1"'+
@@ -350,14 +312,103 @@ function getNextPath(path,view){
 								'</div>';
 					}
 					ps[i] = paths[num+1];
+					var up = '<a style="color:blue;" href="javascript:retrunPre('+'\'/'+paths[num-1]+'/\','+2+')">返回上一级</a>';
+					up +="<span>"+path.replace(/\//gm,">")+"</span>";
 					$(".g-clearfix").html("").append($(str));
+					$(".history-list-dir").html("").html($(up));
 				}
 			}else{
-				return "";
+				str="";
+				$(".list-view").html("");
 			}
 		}
 	}
-	
 }
 
+//获取当前显示的文件的名字
+function getFileNames(){
+	var aArr = new Array();
+	$(".list-view-container a").each(function(index,item){
+		aArr[index] = $(item).html();
+	})
+	return aArr;
+}
 
+//返回上一级
+function retrunPre(path,view){
+	if(path=='//' && view ==1){
+		init();
+		$(".history-list-dir").html("").html("<span>全部文件</span>");
+	}else if(view==2 && path=='//'){
+		initView();
+		$(".history-list-dir").html("").html("<span>全部文件</span>");
+	}else{
+		getNextPath(path,view);
+	}
+}
+
+//初始化，列表    页面加载时显示
+function init(){
+	var str = "";
+	var pass = new Array();
+	for(var i=0;i<pathData.length;i++){
+		var path = parseFilePath(pathData[i].filepath,1);
+		if($.inArray(path,pass) == -1){
+			str += '<dd class="open-enable">'+
+			'<li class="file-name" style="width: 60%;"><span '+
+			'class="check-icon1" onclick="filenameIcon(1)"'+
+			'style="background: rgba(0, 0, 0, 0) url(images/list-view_4e60b0c.png) no-repeat scroll -9px -12px; height: 14px; left: 11px; width: 14px; top: 20px; margin: 15px 10px; float: left;"></span>'+
+			'<div class="fileicon"></div>'+
+			'<div class="text"><div class="filenameicon"></div>'+
+			'<a class="filename" style="padding-left: 6px;"'+
+			'href="javascript:getNextPath('+'\'/'+path+'/\','+1+')" title='+path+'>'+path+'</a></div></li>'+
+			'<li class="file-size" style="width: 16%;">-</li>'+
+			'<li>'+pathData[i].uploaddate+'</li></dd>';
+		}
+		pass[i] = path;
+	}
+	$(".list-view").html("").append($(str));
+}
+
+//视图初始化界面
+function initView(){
+	var str = ""; 
+	var pas = new Array();
+	for(var i=0;i<pathData.length;i++){
+		var path = parseFilePath(pathData[i].filepath,1);
+		if($.inArray(path,pas) == -1){
+			str += '<div class="grid-view-item1"'+
+			'style="display: block; height: 122px; margin: 4px 4px 0 0; text-align: center; width: 142px; float: left;"'+
+			'onclick="filenameIcon(1)">';
+			if(path.lastIndexOf(".")!=-1){
+				switch(path.substr(path.lastIndexOf(".")+1)){
+				case "doc":
+					str+='<div class="dir-large fileicon-large-doc" title="">'+
+							'<img class="thumb"> <span class="checkbox"></span>'+
+						 '</div>';
+					break;
+				case "xls":
+					str+='<div class="dir-large fileicon-large-xls" title="">'+
+						'<img class="thumb"> <span class="checkbox"></span>'+
+						'</div>';
+					break;
+				default:
+					str += '<div class="dir-large" title="">'+
+								'<img class="thumb"> <span class="checkbox"></span>'+
+							'</div>';
+					break;
+				}
+			}else{
+				str += '<div class="dir-large" title="">'+
+							'<img class="thumb"> <span class="checkbox"></span>'+
+						'</div>';
+			}
+			str+='<div class="file-name">'+
+				'<a class="filename" title='+path+' href="javascript:getNextPath('+'\'/'+path+'/\','+2+')"">'+path+'</a>'+
+			'</div>'+
+			'</div>';
+		}
+		pas[i] = path;
+	}
+	$(".g-clearfix").html("").append($(str));
+}

@@ -276,7 +276,7 @@
 								style="background: rgba(0, 0, 0, 0) url('images/list-view_4e60b0c.png') no-repeat scroll -9px -12px; height: 14px; left: 11px; width: 14px; top: 20px; margin: 15px 10px; float: left;"></span>
 								<div class="fileicon"></div>
 								<div class="new-dir-item">
-									<input class="box" type="text" value="新建文件夹"> <span
+									<input class="box" type="text" id="newDir" value="新建文件夹"> <span
 										class="sure" onclick="editSure()"></span> <span class="cancel"
 										onclick="editCancel()"></span>
 								</div>
