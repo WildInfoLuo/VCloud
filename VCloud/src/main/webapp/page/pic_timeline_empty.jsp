@@ -54,8 +54,15 @@
 		</div>
 		<div id="navbar_right">
 			<ul>
-				<li style="width:120px;"><a>用户名</a></li>
-				<li><a href="#">注销</a></li>
+				<li style="width:120px;">
+					<c:if test="${userLogin != null }">
+						<a>${userLogin.uname }，您好</a>
+					</c:if>
+					<c:if test="${userLogin == null }">
+						<a href="page/login.jsp">未登录</a>
+					</c:if>
+				</li>
+				<li><a href="user/logout">注销</a></li>
 				<li><a href="#">通知</a></li>
 				<li><a href="#">更多>></a></li>
 			</ul>
@@ -197,22 +204,38 @@
         <div class="module-list">
         	<div class="module-timeline-list">
             	<ul class="clearfix">
-                	<li class="selected"><a href="#" data-val="0" hidefocus="true">时光轴</a></li>
-                    <li><a data-val="1" href="pic_currentupload_empty.jsp" hidefocus="true">最近上传</a></li>
+                	<li class="selected"><a href="page/pic_timeline_empty.jsp" data-val="0" hidefocus="true">时光轴</a></li>
+                    <li><a data-val="1" href="page/pic_currentupload_empty.jsp" hidefocus="true">最近上传</a></li>
                 </ul>
             </div>
-            <div class="empty-timeline">
-            	<div class="empty-bg"></div>
-                <p class="empty-des"></p>
-                <div class="time-upfileimg"><form id="uploadfile" action="uploadFile/uploadFile" method="post"  enctype="multipart/form-data" ><input  type="file" style="width:154px;height:39px;position:absolute;opacity:0;cursor:pointer;" name="file" accept=".png,.jpg,.jpeg,.gif"  title="点击选择文件" onchange="uploadphoto(${userLogin.userid })"></form></div>
-            </div>
+            <c:choose>
+            	<c:when test="${empty photo}">
+		            <div class="empty-timeline" style="display: block;">
+		            	<div class="empty-bg"></div>
+		                <p class="empty-des"></p>
+		                <div class="time-upfileimg"><form id="uploadfile" action="uploadFile/uploadFile" method="post"  enctype="multipart/form-data" ><input  type="file" style="width:154px;height:39px;position:absolute;opacity:0;cursor:pointer;" name="file" accept=".png,.jpg,.jpeg,.gif"  title="点击选择文件" onchange="uploadphoto(${userLogin.userid })"></form></div>
+		            </div>
+            	</c:when>
+            	<c:otherwise>
+            		<div class="module-timeline" style="display: block;">
+            			<c:forEach items="${photoCount }" var="item1">
+            					<div class="timeline">
+	            					<div class="datediv">
+						 					<span class="datetime">${item1.uploaddate }<label>共${item1.count }张</label></span>
+					                </div>
+            				<c:forEach items="${photo}" var="item">
+            					<c:if test="${item1.uploaddate==item.uploaddate }">
+            						 <img class="img" src="../sources/${item.temp2 }">
+            					</c:if>
+	            			</c:forEach>
+				                </div>
+            			</c:forEach>
+		            </div>
+            	</c:otherwise>
+            </c:choose>
+           
             
-             <div class="module-timeline">
-            	<div>
- 					
-                </div>
-            </div>
+             
         </div>
-    </div>
 </body>
 </html>

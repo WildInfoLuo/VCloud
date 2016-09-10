@@ -4,11 +4,13 @@ public class VCUploadFile {
 	private int ufid;
 	private int userid;
 	private String filepath;
-	private String filesize;
+	private int filesize;
 	private String uploaddate;
 	private String stoppoingpath;
 	private String status;
 	private int isdir;
+	private String temp1;  //存文件类型
+	private String temp2;  //存文件名称
 	
 	public VCUploadFile() {
 	}
@@ -24,6 +26,15 @@ public class VCUploadFile {
 		this.userid = userid;
 		this.filepath = filepath;
 		this.uploaddate = uploaddate;
+	}
+
+	public VCUploadFile(int userid, String filepath, int filesize, String uploaddate,String temp1,String temp2) {
+		this.userid = userid;
+		this.filepath = filepath;
+		this.filesize = filesize;
+		this.uploaddate = uploaddate;
+		this.temp1=temp1;
+		this.temp2=temp2;
 	}
 
 	public int getUfid() {
@@ -50,19 +61,19 @@ public class VCUploadFile {
 		this.filepath = filepath;
 	}
 
-	public String getFilesize() {
+	public int getFilesize() {
 		return filesize;
 	}
 
-	public void setFilesize(String filesize) {
+	public void setFilesize(int filesize) {
 		this.filesize = filesize;
 	}
 
-	public String getDate() {
+	public String getUploaddate() {
 		return uploaddate;
 	}
 
-	public void setDate(String date) {
+	public void setUploaddate(String date) {
 		this.uploaddate = date;
 	}
 
@@ -89,12 +100,32 @@ public class VCUploadFile {
 	public void setIsdir(int isdir) {
 		this.isdir = isdir;
 	}
+	
+
+	public String getTemp1() {
+		return temp1;
+	}
+
+	public void setTemp1(String temp1) {
+		this.temp1 = temp1;
+	}
+	
+
+	public String getTemp2() {
+		return temp2;
+	}
+
+	public void setTemp2(String temp2) {
+		this.temp2 = temp2;
+	}
 
 	@Override
 	public String toString() {
 		return "\nVCUploadFile [ufid=" + ufid + ", userid=" + userid + ", filepath=" + filepath + ", filesize=" + filesize
-				+ ", uploaddate=" + uploaddate + ", stoppoingpath=" + stoppoingpath + ", status=" + status + ", isdir=" + isdir
-				+ "]";
+				+ ", uploaddate=" + uploaddate + ", stoppoingpath=" + stoppoingpath + ", status=" + status + ", isdir="
+				+ isdir + ", temp1=" + temp1 + ", temp2=" + temp2 + "]";
 	}
+
+	
 
 }

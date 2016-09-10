@@ -55,3 +55,28 @@
 	width:154px;
 	background:url(../images/uploadfile.png);
 }
+.datediv{
+	background-color: rgb(243,243,243);
+	margin-left: 15px;
+	margin-top:15px;
+	padding-left: 20px;
+	height:50px;
+	line-height: 50px;
+	border-top: 1px solid rgb(226,226,226);
+}
+.datetime{
+	font-size: 20px;
+	color:blue;
+}
+
+.datetime label{
+	font-size: 16px;
+	margin-left: 50px;
+	color: black;
+}
+.timeline img{
+	margin-left:24px;
+	width: 135px;
+	height: 132px;
+	margin-top: 10px;
+}

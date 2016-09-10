@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html  class="no-js">
 <head>
@@ -52,8 +54,15 @@
 		</div>
 		<div id="navbar_right">
 			<ul>
-				<li style="width:120px;"><a>用户名</a></li>
-				<li><a href="#">注销</a></li>
+				<li style="width:120px;">
+					<c:if test="${userLogin != null }">
+						<a>${userLogin.uname }，您好</a>
+					</c:if>
+					<c:if test="${userLogin == null }">
+						<a href="page/login.jsp">未登录</a>
+					</c:if>
+				</li>
+				<li><a href="user/logout">注销</a></li>
 				<li><a href="#">通知</a></li>
 				<li><a href="#">更多>></a></li>
 			</ul>
@@ -170,22 +179,80 @@
         <div class="module-list">
         	<div class="module-timeline-list">
             	<ul class="clearfix">
-                	<li><a href="pic_timeline_empty.jsp" data-val="0" hidefocus="true">时光轴</a></li>
-                    <li  class="selected"><a data-val="1" href="pic_currentupload_empty.jsp" hidefocus="true">最近上传</a></li>
+                	<li><a href="page/pic_timeline_empty.jsp" data-val="0" hidefocus="true">时光轴</a></li>
+                    <li  class="selected"><a data-val="1" href="page/pic_currentupload_empty.jsp" hidefocus="true">最近上传</a></li>
                 </ul>
             </div>
             
-            <div class="empty-upload">
-            	<div class="history-list">
-                    <span class="history-list-dir">全部文件</span>
-                    <span class="history-list-tips">已全部加载，共0个</span>
-                </div>
-				<div class="no_file_upload"></div>
-            </div>
+            <c:choose>
+            	<c:when test="${empty photo}">
+		             <div class="empty-upload" style="display: block;">
+		            	<div class="history-list">
+		                    <span class="history-list-dir">全部文件</span>
+		                    <span class="history-list-tips">已全部加载，共0个</span>
+		                </div>
+						<div class="no_file_upload"></div>
+		            </div>
+            	</c:when>
+            	<c:otherwise>
+            		<c:set var="allcount" value="0"></c:set>
+            		<c:forEach items="${photo}" var="item">
+            			<c:set var="allcount" value="${allcount+1 }"></c:set>
+            		</c:forEach>
+            		<div class="module-timeline" style="display: block;">
+            			<div class="history-list">
+		                    <span class="history-list-dir">全部文件</span>
+		                    <span class="history-list-tips">已全部加载，共${allcount }个</span>
+		                </div>
+		                	<div class="list-view-header">
+				<div  class="list-header">
+					<!-- 中间的导航栏 -->
+					<ul class="list-cols">
+						<li class="first-col" style="width: 60%;">
+							<div class="check">
+								<span class="check-icon0" onclick="filenameIcon(0)"
+									style="background: rgba(0, 0, 0, 0) url('images/list-view_4e60b0c.png') no-repeat scroll -9px -12px; height: 14px; left: 11px; width: 14px; top: 20px; margin: 15px 10px; float: left;"></span>
+								 <span
+									class="list-header-operatearea"> <span
+									class="count-tips" style="line-height: 43px;">已选中6个文件/文件夹</span>
+									<a class="lg-button" href="javascript:void(0);"> <span
+										class="lg-button-right"> <em class="icon-share-gray"
+											title="分享"></em> <span class="text" style="width: auto;">分享</span>
+									</span>
+								</a> <a class="lg-button" href="javascript:void(0);"> <span
+										class="lg-button-right"> <em class="icon-download-gray"
+											title="下载"></em> <span class="text" style="width: auto;">下载</span>
+									</span>
+								</a> <a class="lg-button" href="javascript:void(0);"> <span
+										class="lg-button-right"> <em class="icon-del-gray"
+											title="删除"></em> <span class="text" style="width: auto;">删除</span>
+									</span>
+								</a> <a class="lg-button" href="javascript:void(0);"> <span
+										class="lg-button-right"> <span class="text"
+											style="width: auto;">复制</span>
+									</span>
+								</a> <a class="lg-button" href="javascript:void(0);"> <span
+										class="lg-button-right"> <span class="text"
+											style="width: auto;">移动</span>
+									</span>
+								</a>
+								</span>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+		                 <div class="upload-list" style="display: block;">
+            				<c:forEach items="${photo}" var="item">
+					            <img class="img" src="../sources/${item.temp2 }">
+            				</c:forEach>
+            			  </div>
+		            </div>
+            	</c:otherwise>
+            </c:choose>
+           
             
-            <div class="upload-list">
-            
-            </div>
+          
         </div>
     </div>
 </body>
