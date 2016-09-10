@@ -21,10 +21,9 @@ public class LoginInterceptor extends OncePerRequestFilter {
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
 			throws ServletException, IOException {
 		// 不过滤的uri
-		String[] notFilter = new String[] { "login.jsp", "back/backlogin.jsp", "index.html", "register.jsp" };
+		String[] notFilter = new String[] {"login.jsp", "back/backlogin.jsp", "index.html", "register.jsp" };
 		// 请求的uri
 		String uri = request.getRequestURI();
-		System.out.println(uri);
 		// uri中包含page时才进行过滤
 		if (uri.contains("page")) {
 			// 是否过滤
@@ -58,7 +57,7 @@ public class LoginInterceptor extends OncePerRequestFilter {
 					// 如果session中存在登录者实体，则继续
 					filterChain.doFilter(request, response);
 				}
-				if (null == objAdmin) {
+				/*if (null == objAdmin) {
 					// 如果session中不存在登录者实体，则弹出框提示重新登录
 					// 设置request和response的字符集，防止乱码
 					request.setCharacterEncoding("UTF-8");
@@ -74,7 +73,7 @@ public class LoginInterceptor extends OncePerRequestFilter {
 				} else {
 					// 如果session中存在登录者实体，则继续
 					filterChain.doFilter(request, response);
-				}
+				}*/
 			} else {
 				// 如果不执行过滤，则继续
 				filterChain.doFilter(request, response);
