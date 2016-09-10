@@ -21,7 +21,7 @@ public class LoginInterceptor extends OncePerRequestFilter {
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
 			throws ServletException, IOException {
 		// 不过滤的uri
-		String[] notFilter = new String[] {"login.jsp", "back/backlogin.jsp", "index.html", "register.jsp" };
+		String[] notFilter = new String[] { "login.jsp", "back/backlogin.jsp", "index.html", "register.jsp" };
 		// 请求的uri
 		String uri = request.getRequestURI();
 		// uri中包含page时才进行过滤
