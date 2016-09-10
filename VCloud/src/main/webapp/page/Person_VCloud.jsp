@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <base href="/VCloud/">
 <meta charset="UTF-8">
 <title>VCloud__网盘</title>
-
 <!--右键菜单样式-->
 <link rel="stylesheet" href="css/base.css" />
 <link rel="stylesheet" href="css/gizmoMenu.css" />
@@ -16,7 +16,6 @@
 
 <link href="images/yun.gif" rel="shortcut icon">
 <script src="js/jquery-1.11.3.min.js">
-	
 </script>
 <script src="js/vclound.js"></script>
 <script type="text/javascript" src="js/index.js"></script>
@@ -78,8 +77,15 @@
 		</div>
 		<div id="navbar_right">
 			<ul>
-				<li style="width: 120px;"><a>用户名</a></li>
-				<li><a href="#">注销</a></li>
+				<li style="width:120px;">
+					<c:if test="${userLogin != null }">
+						<a>${userLogin.uname }，您好</a>
+					</c:if>
+					<c:if test="${userLogin == null }">
+						<a href="page/login.jsp">未登录</a>
+					</c:if>
+				</li>
+				<li><a href="user/logout">注销</a></li>
 				<li><a href="#">通知</a></li>
 				<li><a href="#">更多>></a></li>
 			</ul>

@@ -28,7 +28,7 @@
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 		
-	
+	<!-- 登录拦截 -->
 	<filter>
 		<filter-name>LoginInterceptor</filter-name>
 		<filter-class>com.yc.vcloud.utils.LoginInterceptor</filter-class>
@@ -79,4 +79,8 @@
 		<welcome-file>index.html</welcome-file>
 		<welcome-file>index.jsp</welcome-file>
 	</welcome-file-list>
+	<error-page>
+		<error-code>404</error-code>
+		<location>/page/oth/404.jsp</location>
+	</error-page>
 </web-app>

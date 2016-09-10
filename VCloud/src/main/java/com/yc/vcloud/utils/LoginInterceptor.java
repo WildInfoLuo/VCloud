@@ -38,7 +38,7 @@ public class LoginInterceptor extends OncePerRequestFilter {
 			// 是否过滤
 			boolean doFilter = true;
 			for (String s : notFilter) {
-				if (!uri.contains(s)) {
+				if (uri.contains(s)) {
 					// 如果uri中包含不过滤的uri，则不进行过滤
 					doFilter = false;
 					break;
@@ -48,7 +48,6 @@ public class LoginInterceptor extends OncePerRequestFilter {
 				// 执行过滤
 				// 从session中获取登录者实体
 				Object objUser = request.getSession().getAttribute(SessionAttribute.USERLOGIN);
-				Object objAdmin = request.getSession().getAttribute(SessionAttribute.ADMINLOGIN);
 				if (null == objUser) {
 					// 如果session中不存在登录者实体，则弹出框提示重新登录
 					// 设置request和response的字符集，防止乱码
@@ -58,38 +57,26 @@ public class LoginInterceptor extends OncePerRequestFilter {
 					PrintWriter out = response.getWriter();
 					StringBuilder builder = new StringBuilder();
 					builder.append("<script type=\"text/javascript\">");
-					builder.append("alert('您好,请先登录bbb!');");
-					builder.append("location.href='login.jsp';");
+					builder.append("alert('您好,请先登录!');");
+					if (null == objUser) {
+						builder.append("location.href='login.jsp';");
+					}
 					builder.append("</script>");
 					out.print(builder.toString());
 				} else {
 					// 如果session中存在登录者实体，则继续
 					filterChain.doFilter(request, response);
 				}
-				if (null == objAdmin) {
-					// 如果session中不存在登录者实体，则弹出框提示重新登录
-					// 设置request和response的字符集，防止乱码
-					request.setCharacterEncoding("UTF-8");
-					response.setCharacterEncoding("UTF-8");
-					response.setContentType("text/html;charset=utf-8");
-					PrintWriter out = response.getWriter();
-					StringBuilder builder = new StringBuilder();
-					builder.append("<script type=\"text/javascript\">");
-					builder.append("alert('您好,请先登录aaa!');");
-					builder.append("location.href='login.jsp';");
-					builder.append("</script>");
-					out.print(builder.toString());
-				} else {
-					// 如果session中存在登录者实体，则继续
-					filterChain.doFilter(request, response);
-				}
-			} else {
+			} 
+			else {
 				// 如果不执行过滤，则继续
 				filterChain.doFilter(request, response);
+				return;
 			}
 		} else {
-			// 如果uri中不包含background，则继续
+			// 如果uri中不包含page，则继续
 			filterChain.doFilter(request, response);
+		
 		}
 	}
 }

@@ -74,6 +74,7 @@ public class VCUloadFileHandler {
 		VCUser user = (VCUser) session.getAttribute(SessionAttribute.USERLOGIN);
 		VCUploadFile file = new VCUploadFile(user.getUserid(), name, date);
 		boolean flag = vCUploadFileService.insertDir(file);
+		System.out.println("name==>"+name);
 		out.print(flag);
 		out.flush();
 		out.close();
