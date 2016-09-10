@@ -121,11 +121,5 @@
 		</form>
 	</div>
 </div>
-<!--[if IE 6]>
-<script language="javascript" type="text/javascript" src="./script/ie6_png.js"></script>
-<script language="javascript" type="text/javascript">
-DD_belatedPNG.fix(".png");
-</script>
-<![endif]-->
 </body>
 </html>

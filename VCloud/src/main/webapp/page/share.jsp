@@ -19,7 +19,6 @@
 <script type="text/javascript" src="../js/share.js"></script>
 </head>
 <body>
-
 	<div id="navbar">
 		<div id="navbar_left">
 			<img alt="千度云盘" src="../images/logo2.png">

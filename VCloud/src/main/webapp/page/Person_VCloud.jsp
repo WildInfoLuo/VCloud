@@ -7,7 +7,6 @@
 <base href="/VCloud/">
 <meta charset="UTF-8">
 <title>VCloud__网盘</title>
-
 <!--右键菜单样式-->
 <link rel="stylesheet" href="css/base.css" />
 <link rel="stylesheet" href="css/gizmoMenu.css" />
@@ -17,7 +16,6 @@
 
 <link href="images/yun.gif" rel="shortcut icon">
 <script src="js/jquery-1.11.3.min.js">
-	
 </script>
 <script src="js/vclound.js"></script>
 <script type="text/javascript" src="js/index.js"></script>

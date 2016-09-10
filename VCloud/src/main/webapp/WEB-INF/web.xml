@@ -37,7 +37,6 @@
 		<filter-name>LoginInterceptor</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
-	
 	<filter>
 		<filter-name>HiddenHttpMethodFilter</filter-name>
 		<filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>
