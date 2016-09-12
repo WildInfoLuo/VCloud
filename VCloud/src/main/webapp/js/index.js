@@ -29,5 +29,4 @@ function chageBg(part,type){
 	
 	$(".menu-list li").css({"background-image":"url(images/bg2.jpg)","border":"0"});
 	$("."+type).css({"background-image":"url(images/changebg.jpg)","border":"1px solid rgb(52,116,188)"});
-	
 }
