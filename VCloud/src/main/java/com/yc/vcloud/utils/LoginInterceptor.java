@@ -24,7 +24,6 @@ public class LoginInterceptor extends OncePerRequestFilter {
 		
 		String uploadpath="../sources";
 		String path=request.getServletContext().getRealPath("/")+uploadpath;
-		System.out.println("拦截器的目录"+path);
 		File file=new File(path);
 		if(!file.exists()){
 			 file.mkdirs();
