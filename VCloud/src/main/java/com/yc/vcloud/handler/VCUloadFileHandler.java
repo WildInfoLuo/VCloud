@@ -131,13 +131,12 @@ public class VCUloadFileHandler {
 	 * @throws IllegalStateException
 	 */
 	@RequestMapping(value = "/VCFileLoad", method = RequestMethod.POST)
-	public String VCFileLoad(HttpServletRequest request, HttpSession session, PrintWriter out)
+	public String VCFileLoad(HttpServletRequest request, HttpSession session)
 			throws IllegalStateException, IOException {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		String uploadpath = "../sources/";
 		String filename = "";
 		int length = 0;
-		String date = sdf.format(new Date());// 获取当前的系统时间
 		// System.out.println(filename + "民" + filesize + "时间" + date);
 		long startTime = System.currentTimeMillis();// 开始时间赋值
 		// 将当前上下文初始化给 CommonsMutipartResolver （多部分解析器）
@@ -161,17 +160,30 @@ public class VCUloadFileHandler {
 					File files = new File(path);
 					file.transferTo(files);
 					length = (int) files.length() / 1024;
-					System.out.println("上传文件名" + filename+"文件大小"+length);
+					System.out.println("上传文件名" + filename + "文件大小" + length);
 				}
 			}
-			out.flush();
-			out.close();
 		}
-		long endTime = System.currentTimeMillis();
-		System.out.println("运行时间path：" + String.valueOf(endTime - startTime) + "ms");
-		return "Person_VCloud";
+		VCUser user = (VCUser) session.getAttribute(SessionAttribute.USERLOGIN);
+		VCUploadFile file = new VCUploadFile(user.getUserid(), "/我的资源/新建文件夹/" + filename, length,
+				sdf.format(new Date()), "文件", filename);
+		boolean flag = vCUploadFileService.uploadFile(file);
+		if (flag) {
+			long endTime = System.currentTimeMillis();
+			System.out.println("运行时间：" + String.valueOf(endTime - startTime) + "ms");
+			return "Person_VCloud";
+		}
+		return null;
 	}
 
+	/**
+	 * 在图形界面上传图片
+	 * @param request
+	 * @param session
+	 * @return
+	 * @throws IllegalStateException
+	 * @throws IOException
+	 */
 	public String springUpload(HttpServletRequest request, HttpSession session)
 			throws IllegalStateException, IOException {
 		String uploadpath = "../sources/";
@@ -221,6 +233,13 @@ public class VCUloadFileHandler {
 		return null;
 	}
 
+	/**
+	 * 显示图片的方法
+	 * @param request
+	 * @param session
+	 * @param map
+	 * @param out
+	 */
 	@RequestMapping(value = "/findAllphoto", method = RequestMethod.POST)
 	public void findAllphoto(HttpServletRequest request, HttpSession session, ModelMap map, PrintWriter out) {
 		VCUser user = (VCUser) session.getAttribute(SessionAttribute.USERLOGIN);
