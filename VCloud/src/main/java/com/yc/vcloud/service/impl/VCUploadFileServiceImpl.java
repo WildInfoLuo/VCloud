@@ -43,4 +43,14 @@ public class VCUploadFileServiceImpl implements VCUploadFileService {
 		return vCUploadFileMapper.getPhotoCount();
 	}
 
+	@Override
+	public List<VCUploadFile> getAllDoc(VCUploadFile file) {
+		return vCUploadFileMapper.getAllDoc(file);
+	}
+
+	@Override
+	public VCUploadCount getDocCount() {
+		return vCUploadFileMapper.getDocCount();
+	}
+
 }

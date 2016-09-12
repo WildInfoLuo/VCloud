@@ -16,7 +16,11 @@ function chageBg(part,type){
 			}
 		},"json");
 	}else if(type="list-item-doc"){
-		location.href="";
+		$.post("uploadFile/findAllDoc",function(data){
+			if(data>0){
+				location.href="page/docupload.jsp";
+			}
+		},"json");
 	}else if(type="list-item-video"){
 		location.href="";
 	}else if(type="list-item-bt"){

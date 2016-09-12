@@ -30,7 +30,7 @@ import com.yc.vcloud.utils.SessionAttribute;
 
 @Controller
 @RequestMapping("/uploadFile")
-@SessionAttributes(SessionAttribute.PHOTO)
+@SessionAttributes(value={SessionAttribute.PHOTO,SessionAttribute.DOC})
 public class VCUloadFileHandler {
 	@Autowired
 	private VCUploadFileService vCUploadFileService;
@@ -83,45 +83,6 @@ public class VCUloadFileHandler {
 		return "Person_VCloud";
 	}
 
-	/**
-	 * 上传图片
-	 * 
-	 * @param request
-	 * @return
-	 * @throws IllegalStateException
-	 * @throws IOException
-	 */
-	@RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
-
-	public String springUpload(HttpServletRequest request) throws IllegalStateException, IOException {
-		String uploadpath = "../sources/";
-		long startTime = System.currentTimeMillis();
-		// 将当前上下文初始化给 CommonsMutipartResolver （多部分解析器）
-		CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver(
-				request.getSession().getServletContext());
-		// 检查form中是否有enctype="multipart/form-data"
-		if (multipartResolver.isMultipart(request)) {
-			// 将request变成多部分request
-			MultipartHttpServletRequest multiRequest = (MultipartHttpServletRequest) request;
-			// 获取multiRequest 中所有的文件名
-			@SuppressWarnings("rawtypes")
-			Iterator iter = multiRequest.getFileNames();
-
-			while (iter.hasNext()) {
-				// 一次遍历所有文件
-				MultipartFile file = multiRequest.getFile(iter.next().toString());
-				if (file != null) {
-					String path = request.getServletContext().getRealPath("/") + uploadpath
-							+ file.getOriginalFilename();
-					// 上传
-					file.transferTo(new File(path));
-				}
-			}
-		}
-		long endTime = System.currentTimeMillis();
-		System.out.println("运行时间：" + String.valueOf(endTime - startTime) + "ms");
-		return "pic_timeline_empty";
-	}
 
 	/**
 	 * 在网盘页面上传文件
@@ -185,6 +146,7 @@ public class VCUloadFileHandler {
 	 * @throws IllegalStateException
 	 * @throws IOException
 	 */
+	@RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
 	public String springUpload(HttpServletRequest request, HttpSession session)
 			throws IllegalStateException, IOException {
 		String uploadpath = "../sources/";
@@ -233,6 +195,64 @@ public class VCUloadFileHandler {
 		}
 		return null;
 	}
+	
+	/**
+	 * 在图形界面上传文档
+	 * @param request
+	 * @param session
+	 * @return
+	 * @throws IllegalStateException
+	 * @throws IOException
+	 */
+	@RequestMapping(value = "/uploadDoc", method = RequestMethod.POST)
+	public String docUpload(HttpServletRequest request, HttpSession session)
+			throws IllegalStateException, IOException {
+		String uploadpath = "../sources/";
+		long startTime = System.currentTimeMillis();
+		int length = 0;
+		String filename = "";
+		SimpleDateFormat sbf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		// 将当前上下文初始化给 CommonsMutipartResolver （多部分解析器）
+		CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver(
+				request.getSession().getServletContext());
+		// 检查form中是否有enctype="multipart/form-data"
+		if (multipartResolver.isMultipart(request)) {
+			// 将request变成多部分request
+			MultipartHttpServletRequest multiRequest = (MultipartHttpServletRequest) request;
+			// 获取multiRequest 中所有的文件名
+			Iterator iter = multiRequest.getFileNames();
+
+			while (iter.hasNext()) {
+				// 一次遍历所有文件
+				MultipartFile file = multiRequest.getFile(iter.next().toString());
+				if (file != null) {
+					filename = file.getOriginalFilename();
+					String path = request.getServletContext().getRealPath("/") + uploadpath
+							+ file.getOriginalFilename();
+					System.out.println("path12" + path);
+					// 上传
+					File f = new File(path);
+					file.transferTo(f);
+					length = (int) (f.length() / 1024);
+				}
+
+			}
+
+		}
+		VCUser user = (VCUser) session.getAttribute(SessionAttribute.USERLOGIN);
+		VCUploadFile file = new VCUploadFile(user.getUserid(), "/我的资源/新建文件夹/" + filename, length,
+				sbf.format(new Date()), "文档", filename);
+		boolean flag = vCUploadFileService.uploadFile(file);
+		VCUploadFile file1 = new VCUploadFile(user.getUserid(), null);
+		List<VCUploadFile> files = vCUploadFileService.getAllPhoto(file1);
+		session.setAttribute(SessionAttribute.DOC, files);
+		if (flag) {
+			long endTime = System.currentTimeMillis();
+			System.out.println("运行时间：" + String.valueOf(endTime - startTime) + "ms");
+			return "docupload.jsp";
+		}
+		return null;
+	}
 
 	/**
 	 * 显示图片的方法
@@ -250,6 +270,22 @@ public class VCUloadFileHandler {
 		session.setAttribute(SessionAttribute.PHOTOCOUNT, count);
 		if (files != null) {
 			map.put(SessionAttribute.PHOTO, files);
+		}
+		out.println(1);
+		out.flush();
+		out.close();
+
+	}
+	
+	@RequestMapping(value = "/findAllDoc", method = RequestMethod.POST)
+	public void findAllDoc(HttpServletRequest request, HttpSession session, ModelMap map, PrintWriter out) {
+		VCUser user = (VCUser) session.getAttribute(SessionAttribute.USERLOGIN);
+		VCUploadFile file = new VCUploadFile(user.getUserid(), null);
+		List<VCUploadFile> files = vCUploadFileService.getAllDoc(file);
+		VCUploadCount count = vCUploadFileService.getDocCount();
+		session.setAttribute(SessionAttribute.DOCCOUNT, count);
+		if (files != null) {
+			map.put(SessionAttribute.DOC, files);
 		}
 		out.println(1);
 		out.flush();

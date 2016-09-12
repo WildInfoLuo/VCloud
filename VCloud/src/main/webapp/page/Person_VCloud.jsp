@@ -278,7 +278,7 @@
 				<div class="module-list-view  container">
 					<!-- 先设置隐藏的样式 -->
 					<div class="list-view">
-						<dd class="module-edit-name">
+						<dd class="module-edit-name" >
 							<li class="file-names" style="width: 60%; left: 0px; top: 73px;"><span
 								class="check-icon6" onclick="filenameIcon(6)"
 								style="background: rgba(0, 0, 0, 0) url('images/list-view_4e60b0c.png') no-repeat scroll -9px -12px; height: 14px; left: 11px; width: 14px; top: 20px; margin: 15px 10px; float: left;"></span>
@@ -288,23 +288,11 @@
 										class="sure" onclick="editSure()"></span> <span class="cancel"
 										onclick="editCancel()"></span>
 								</div>
+							</li>
 							<li class="file-size" style="width: 16%;">-</li>
 							<li class="ctime" style="width: 21%;">-</li>
 						</dd>
-						<dd class="open-enable">
-							<li class="file-name" style="width: 60%;">
-								<span class="check-icon1" onclick="filenameIcon(1)"
-								style="background: rgba(0, 0, 0, 0) url('images/list-view_4e60b0c.png') no-repeat scroll -9px -12px; height: 14px; left: 11px; width: 14px; top: 20px; margin: 15px 10px; float: left;"></span>
-								<div class="fileicon"></div>
-								<div class="text">
-									<div class="filenameicon"></div>
-									<a class="filename" style="padding-left: 6px;"
-										href="javascript:void(0);" title="文件接收柜">文件接收柜</a>
-								</div>
-							</li>
-							<li class="file-size" style="width: 16%;">-</li>
-							<li class="ctime" style="width: 21%;">2015-11-15 11:31</li>
-						</dd>
+						
 						<div class="list-empty-tips" style="display: none;">
 							<div class="tip-text">正在加载，请稍候…</div>
 						</div>
