@@ -34,12 +34,13 @@ import com.yc.vcloud.utils.SessionAttribute;
 public class VCUloadFileHandler {
 	@Autowired
 	private VCUploadFileService vCUploadFileService;
+	@RequestMapping(value="/getUserFiles/{filepath}",method=RequestMethod.POST)
+	public String getUserFiles(@PathVariable("filepath") String filepath ,HttpSession session,PrintWriter out){
+		VCUser user = (VCUser)session.getAttribute(SessionAttribute.USERLOGIN);
+		VCUploadFile file = new VCUploadFile(user.getUserid(),filepath.equals("null")?null:filepath);
 
-	@RequestMapping(value = "/getUserFiles/{filepath}", method = RequestMethod.POST)
-	public String getUserFiles(@PathVariable String filepath, HttpSession session, PrintWriter out) {
-		VCUser user = (VCUser) session.getAttribute(SessionAttribute.USERLOGIN);
-		VCUploadFile file = new VCUploadFile(user.getUserid(), filepath.equals("null") ? null : filepath);
 		List<VCUploadFile> files = vCUploadFileService.getUserFiles(file);
+
 		/*
 		 * Map<String,String []> map = new HashMap<String,String []>();
 		 * Map<String,String> dates = new HashMap<String,String >(); Set<String>
@@ -52,6 +53,7 @@ public class VCUloadFileHandler {
 		 * System.out.println("key==>"+keys);
 		 * 
 		 */
+
 		Gson gs = new Gson();
 		String fileStr = gs.toJson(files);
 		out.println(fileStr);
@@ -75,7 +77,6 @@ public class VCUloadFileHandler {
 		VCUser user = (VCUser) session.getAttribute(SessionAttribute.USERLOGIN);
 		VCUploadFile file = new VCUploadFile(user.getUserid(), name, date);
 		boolean flag = vCUploadFileService.insertDir(file);
-		System.out.println("name==>" + name);
 		out.print(flag);
 		out.flush();
 		out.close();
