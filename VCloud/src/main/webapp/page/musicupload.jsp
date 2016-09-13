@@ -208,8 +208,8 @@
 								<form id="uploadfile" action="uploadFile/uploadMusic" method="post" enctype="multipart/form-data">
 									<input id="h5Input0" type="file"
 										style="width: 100px; height: 39px; position: absolute; opacity: 0; cursor: pointer;"
-										name="file" accept="*/*" title="点击选择文件" 
-										onchange="uploadFile()"/>
+										name="files" accept=".mp3 , .wav" title="点击选择文件" 
+										onchange="uploadFile()" multiple="multiple"/>
 								</form>
 							</div>
 						</li>

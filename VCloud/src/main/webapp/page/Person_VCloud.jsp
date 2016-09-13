@@ -206,7 +206,8 @@
 									<input id="h5Input0" type="file"
 										style="width: 100px; height: 39px; position: absolute; opacity: 0; cursor: pointer;"
 										name="file" accept="*/*" title="点击选择文件" 
-										onchange="upFileLoad(this.value)"/>
+										onchange="upFileLoad()"/>
+									<input id="dispath" name="filepath" type="text" style="display: none;">
 								</form>
 							</div>
 						</li>

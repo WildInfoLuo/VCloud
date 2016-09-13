@@ -556,6 +556,39 @@ a {
 	float: left;
 	margin-top: 14px;
 }
+/*显示列表形式*/
+.dir-tables{
+	background: rgba(0, 0, 0, 0) url("../images/listIcon_cb54a24.png") no-repeat
+		scroll;
+	width: 20px;
+	height: 16px;
+	float: left;
+	margin-top: 14px;
+}
+.fileicon-tables-png{
+	background-position: 0px 0px;
+}
+.fileicon-tables-doc{
+	background-position: -58px 0px;
+}
+.fileicon-tables-xls{
+	background-position: -88px 0px;
+}
+.fileicon-tables-txt{
+	background-position: -119px 0px;
+}
+.fileicon-tables-mp4{
+	background-position: -210px 0px;
+}
+.fileicon-tables-zip{
+	background-position: -240px 0px;
+}
+.fileicon-tables-music{
+	background-position: -180px 0px;
+}
+.fileicon-tables-oth{
+	background-position: -391px 0px;
+}
 /*详细内容视图*/
 .grid-view-item{
 	display: block;

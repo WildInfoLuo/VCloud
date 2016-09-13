@@ -7,8 +7,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.swing.plaf.synth.SynthSpinnerUI;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -86,8 +88,9 @@ public class VCUloadFileHandler {
 	 * @throws IllegalStateException
 	 */
 	@RequestMapping(value = "/VCFileLoad", method = RequestMethod.POST)
-	public String VCFileLoad(HttpServletRequest request, HttpSession session)
+	public String VCFileLoad(VCUploadFile uploadFile,HttpServletRequest request, HttpSession session,ModelMap map)
 			throws IllegalStateException, IOException {
+		System.out.println("金利来。。。"+uploadFile.getFilepath());
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		String uploadpath = "../sources/";
 		String filename = "";
@@ -115,16 +118,16 @@ public class VCUloadFileHandler {
 					File files = new File(path);
 					file.transferTo(files);
 					length = (int) files.length() / 1024;
-					System.out.println("上传文件名" + filename + "文件大小" + length);
 				}
 			}
 		}
 		VCUser user = (VCUser) session.getAttribute(SessionAttribute.USERLOGIN);
-		VCUploadFile file = new VCUploadFile(user.getUserid(), "/我的资源/新建文件夹/" + filename, length,
+		VCUploadFile file = new VCUploadFile(user.getUserid(), uploadFile.getFilepath() + filename, length,
 				sdf.format(new Date()), "文件", filename);
 		boolean flag = vCUploadFileService.uploadFile(file);
 		if (flag) {
 			long endTime = System.currentTimeMillis();
+			
 			System.out.println("运行时间：" + String.valueOf(endTime - startTime) + "ms");
 			return "Person_VCloud";
 		}
@@ -146,6 +149,7 @@ public class VCUloadFileHandler {
 		long startTime = System.currentTimeMillis();
 		int length = 0;
 		String filename = "";
+		VCUser user = (VCUser) session.getAttribute(SessionAttribute.USERLOGIN);
 		SimpleDateFormat sbf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		// 将当前上下文初始化给 CommonsMutipartResolver （多部分解析器）
 		CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver(
@@ -155,38 +159,31 @@ public class VCUloadFileHandler {
 			// 将request变成多部分request
 			MultipartHttpServletRequest multiRequest = (MultipartHttpServletRequest) request;
 			// 获取multiRequest 中所有的文件名
-			Iterator iter = multiRequest.getFileNames();
-
-			while (iter.hasNext()) {
-				// 一次遍历所有文件
-				MultipartFile file = multiRequest.getFile(iter.next().toString());
-				if (file != null) {
-					filename = file.getOriginalFilename();
+			 List<MultipartFile> files = multiRequest.getFiles("files");
+			 for (MultipartFile multipartFile : files) {  
+				if (multipartFile != null) {
+					filename = multipartFile.getOriginalFilename();
 					String path = request.getServletContext().getRealPath("/") + uploadpath
-							+ file.getOriginalFilename();
+							+ multipartFile.getOriginalFilename();
 					System.out.println("path12" + path);
 					// 上传
 					File f = new File(path);
-					file.transferTo(f);
+					multipartFile.transferTo(f);
 					length = (int) (f.length() / 1024);
 				}
-
+				VCUploadFile file = new VCUploadFile(user.getUserid(), "/我的资源/新建文件夹/" + filename, length,
+						sbf.format(new Date()), "图片", filename);
+				 vCUploadFileService.uploadFile(file);
 			}
 
 		}
-		VCUser user = (VCUser) session.getAttribute(SessionAttribute.USERLOGIN);
-		VCUploadFile file = new VCUploadFile(user.getUserid(), "/我的资源/新建文件夹/" + filename, length,
-				sbf.format(new Date()), "图片", filename);
-		boolean flag = vCUploadFileService.uploadFile(file);
-		VCUploadFile file1 = new VCUploadFile(user.getUserid(), null);
-		List<VCUploadFile> files = vCUploadFileService.getAllPhoto(file1);
+		
+		VCUploadFile file = new VCUploadFile(user.getUserid(), null);
+		List<VCUploadFile> files = vCUploadFileService.getAllPhoto(file);
 		session.setAttribute(SessionAttribute.PHOTO, files);
-		if (flag) {
-			long endTime = System.currentTimeMillis();
-			System.out.println("运行时间：" + String.valueOf(endTime - startTime) + "ms");
-			return "pic_timeline_empty";
-		}
-		return null;
+		long endTime = System.currentTimeMillis();
+		System.out.println("运行时间：" + String.valueOf(endTime - startTime) + "ms");
+		return "pic_timeline_empty";
 	}
 	
 	/**
@@ -204,6 +201,7 @@ public class VCUloadFileHandler {
 		long startTime = System.currentTimeMillis();
 		int length = 0;
 		String filename = "";
+		VCUser user = (VCUser) session.getAttribute(SessionAttribute.USERLOGIN);
 		SimpleDateFormat sbf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		// 将当前上下文初始化给 CommonsMutipartResolver （多部分解析器）
 		CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver(
@@ -213,38 +211,30 @@ public class VCUloadFileHandler {
 			// 将request变成多部分request
 			MultipartHttpServletRequest multiRequest = (MultipartHttpServletRequest) request;
 			// 获取multiRequest 中所有的文件名
-			Iterator iter = multiRequest.getFileNames();
-
-			while (iter.hasNext()) {
-				// 一次遍历所有文件
-				MultipartFile file = multiRequest.getFile(iter.next().toString());
-				if (file != null) {
-					filename = file.getOriginalFilename();
+			 List<MultipartFile> files = multiRequest.getFiles("files");
+			 for (MultipartFile multipartFile : files) {  
+				if (multipartFile != null) {
+					filename = multipartFile.getOriginalFilename();
 					String path = request.getServletContext().getRealPath("/") + uploadpath
-							+ file.getOriginalFilename();
+							+ multipartFile.getOriginalFilename();
 					System.out.println("path12" + path);
 					// 上传
 					File f = new File(path);
-					file.transferTo(f);
+					multipartFile.transferTo(f);
 					length = (int) (f.length() / 1024);
 				}
-
+				VCUploadFile file = new VCUploadFile(user.getUserid(), "/我的资源/新建文件夹/" + filename, length,
+						sbf.format(new Date()), "文档", filename);
+				 vCUploadFileService.uploadFile(file);
 			}
 
 		}
-		VCUser user = (VCUser) session.getAttribute(SessionAttribute.USERLOGIN);
-		VCUploadFile file = new VCUploadFile(user.getUserid(), "/我的资源/新建文件夹/" + filename, length,
-				sbf.format(new Date()), "文档", filename);
-		boolean flag = vCUploadFileService.uploadFile(file);
-		VCUploadFile file1 = new VCUploadFile(user.getUserid(), null);
-		List<VCUploadFile> files = vCUploadFileService.getAllPhoto(file1);
+		VCUploadFile file = new VCUploadFile(user.getUserid(), null);
+		List<VCUploadFile> files = vCUploadFileService.getAllPhoto(file);
 		session.setAttribute(SessionAttribute.DOC, files);
-		if (flag) {
-			long endTime = System.currentTimeMillis();
-			System.out.println("运行时间：" + String.valueOf(endTime - startTime) + "ms");
-			return "docupload";
-		}
-		return null;
+		long endTime = System.currentTimeMillis();
+		System.out.println("运行时间：" + String.valueOf(endTime - startTime) + "ms");
+		return "docupload";
 	}
 	
 	/**
@@ -262,6 +252,7 @@ public class VCUloadFileHandler {
 		long startTime = System.currentTimeMillis();
 		int length = 0;
 		String filename = "";
+		VCUser user = (VCUser) session.getAttribute(SessionAttribute.USERLOGIN);
 		SimpleDateFormat sbf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		// 将当前上下文初始化给 CommonsMutipartResolver （多部分解析器）
 		CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver(
@@ -271,37 +262,31 @@ public class VCUloadFileHandler {
 			// 将request变成多部分request
 			MultipartHttpServletRequest multiRequest = (MultipartHttpServletRequest) request;
 			// 获取multiRequest 中所有的文件名
-			Iterator iter = multiRequest.getFileNames();
-
-			while (iter.hasNext()) {
-				// 一次遍历所有文件
-				MultipartFile file = multiRequest.getFile(iter.next().toString());
-				if (file != null) {
-					filename = file.getOriginalFilename();
+			 List<MultipartFile> files = multiRequest.getFiles("files");
+			 for (MultipartFile multipartFile : files) {  
+				if (multipartFile != null) {
+					filename = multipartFile.getOriginalFilename();
 					String path = request.getServletContext().getRealPath("/") + uploadpath
-							+ file.getOriginalFilename();
+							+ multipartFile.getOriginalFilename();
 					// 上传
 					File f = new File(path);
-					file.transferTo(f);
+					multipartFile.transferTo(f);
 					length = (int) (f.length() / 1024);
 				}
-
+				System.out.println(multipartFile.getOriginalFilename());
+				VCUploadFile file = new VCUploadFile(user.getUserid(), "/我的资源/新建文件夹/" + filename, length,
+						sbf.format(new Date()), "音乐", filename);
+				 vCUploadFileService.uploadFile(file);
 			}
 
 		}
-		VCUser user = (VCUser) session.getAttribute(SessionAttribute.USERLOGIN);
-		VCUploadFile file = new VCUploadFile(user.getUserid(), "/我的资源/新建文件夹/" + filename, length,
-				sbf.format(new Date()), "音乐", filename);
-		boolean flag = vCUploadFileService.uploadFile(file);
-		VCUploadFile file1 = new VCUploadFile(user.getUserid(), null);
-		List<VCUploadFile> files = vCUploadFileService.getAllMusic(file1);
+	
+		VCUploadFile file = new VCUploadFile(user.getUserid(), null);
+		List<VCUploadFile> files = vCUploadFileService.getAllMusic(file);
 		session.setAttribute(SessionAttribute.MUSIC, files);
-		if (flag) {
-			long endTime = System.currentTimeMillis();
-			System.out.println("运行时间：" + String.valueOf(endTime - startTime) + "ms");
-			return "musicupload";
-		}
-		return null;
+		long endTime = System.currentTimeMillis();
+		System.out.println("运行时间：" + String.valueOf(endTime - startTime) + "ms");
+		return "musicupload";
 	}
 
 	/**
