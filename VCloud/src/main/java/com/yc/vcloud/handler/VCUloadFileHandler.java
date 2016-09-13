@@ -7,6 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -132,8 +133,9 @@ public class VCUloadFileHandler {
 	 * @throws IllegalStateException
 	 */
 	@RequestMapping(value = "/VCFileLoad", method = RequestMethod.POST)
-	public String VCFileLoad(HttpServletRequest request, HttpSession session)
+	public String VCFileLoad(VCUploadFile uploadFile,HttpServletRequest request, HttpSession session,ModelMap map)
 			throws IllegalStateException, IOException {
+		System.out.println("金利来。。。"+uploadFile.getFilepath());
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		String uploadpath = "../sources/";
 		String filename = "";
@@ -161,16 +163,16 @@ public class VCUloadFileHandler {
 					File files = new File(path);
 					file.transferTo(files);
 					length = (int) files.length() / 1024;
-					System.out.println("上传文件名" + filename + "文件大小" + length);
 				}
 			}
 		}
 		VCUser user = (VCUser) session.getAttribute(SessionAttribute.USERLOGIN);
-		VCUploadFile file = new VCUploadFile(user.getUserid(), "/我的资源/新建文件夹/" + filename, length,
+		VCUploadFile file = new VCUploadFile(user.getUserid(), uploadFile.getFilepath() + filename, length,
 				sdf.format(new Date()), "文件", filename);
 		boolean flag = vCUploadFileService.uploadFile(file);
 		if (flag) {
 			long endTime = System.currentTimeMillis();
+			
 			System.out.println("运行时间：" + String.valueOf(endTime - startTime) + "ms");
 			return "Person_VCloud";
 		}
