@@ -21,4 +21,8 @@ public interface VCUploadFileService {
 
 	VCUploadCount getDocCount();
 
+	List<VCUploadFile> getAllMusic(VCUploadFile file);
+
+	VCUploadCount getMusicCount();
+
 }

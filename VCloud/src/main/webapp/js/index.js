@@ -15,19 +15,23 @@ function chageBg(part,type){
 				location.href="page/pic_timeline_empty.jsp";
 			}
 		},"json");
-	}else if(type="list-item-doc"){
+	}else if(type=="list-item-doc"){
 		$.post("uploadFile/findAllDoc",function(data){
 			if(data>0){
 				location.href="page/docupload.jsp";
 			}
 		},"json");
-	}else if(type="list-item-video"){
+	}else if(type=="list-item-video"){
 		location.href="";
-	}else if(type="list-item-bt"){
+	}else if(type=="list-item-bt"){
 		location.href="";
-	}else if(type="list-item-music"){
-		location.href="";
-	}else if(type="list-item-oth"){
+	}else if(type=="list-item-music"){
+		$.post("uploadFile/findAllMusic",function(data){
+			if(data>0){
+				location.href="page/musicupload.jsp";
+			}
+		},"json");
+	}else if(type=="list-item-oth"){
 		location.href="";
 	}
 	

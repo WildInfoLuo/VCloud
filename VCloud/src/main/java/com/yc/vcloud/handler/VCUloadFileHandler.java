@@ -30,7 +30,7 @@ import com.yc.vcloud.utils.SessionAttribute;
 
 @Controller
 @RequestMapping("/uploadFile")
-@SessionAttributes(value={SessionAttribute.PHOTO,SessionAttribute.DOC})
+@SessionAttributes(value={SessionAttribute.PHOTO,SessionAttribute.DOC,SessionAttribute.MUSIC})
 public class VCUloadFileHandler {
 	@Autowired
 	private VCUploadFileService vCUploadFileService;
@@ -249,7 +249,64 @@ public class VCUloadFileHandler {
 		if (flag) {
 			long endTime = System.currentTimeMillis();
 			System.out.println("运行时间：" + String.valueOf(endTime - startTime) + "ms");
-			return "docupload.jsp";
+			return "docupload";
+		}
+		return null;
+	}
+	
+	/**
+	 * 在图形界面上传音乐
+	 * @param request
+	 * @param session
+	 * @return
+	 * @throws IllegalStateException
+	 * @throws IOException
+	 */
+	@RequestMapping(value = "/uploadMusic", method = RequestMethod.POST)
+	public String musicUpload(HttpServletRequest request, HttpSession session)
+			throws IllegalStateException, IOException {
+		String uploadpath = "../sources/";
+		long startTime = System.currentTimeMillis();
+		int length = 0;
+		String filename = "";
+		SimpleDateFormat sbf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		// 将当前上下文初始化给 CommonsMutipartResolver （多部分解析器）
+		CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver(
+				request.getSession().getServletContext());
+		// 检查form中是否有enctype="multipart/form-data"
+		if (multipartResolver.isMultipart(request)) {
+			// 将request变成多部分request
+			MultipartHttpServletRequest multiRequest = (MultipartHttpServletRequest) request;
+			// 获取multiRequest 中所有的文件名
+			Iterator iter = multiRequest.getFileNames();
+
+			while (iter.hasNext()) {
+				// 一次遍历所有文件
+				MultipartFile file = multiRequest.getFile(iter.next().toString());
+				if (file != null) {
+					filename = file.getOriginalFilename();
+					String path = request.getServletContext().getRealPath("/") + uploadpath
+							+ file.getOriginalFilename();
+					// 上传
+					File f = new File(path);
+					file.transferTo(f);
+					length = (int) (f.length() / 1024);
+				}
+
+			}
+
+		}
+		VCUser user = (VCUser) session.getAttribute(SessionAttribute.USERLOGIN);
+		VCUploadFile file = new VCUploadFile(user.getUserid(), "/我的资源/新建文件夹/" + filename, length,
+				sbf.format(new Date()), "音乐", filename);
+		boolean flag = vCUploadFileService.uploadFile(file);
+		VCUploadFile file1 = new VCUploadFile(user.getUserid(), null);
+		List<VCUploadFile> files = vCUploadFileService.getAllMusic(file1);
+		session.setAttribute(SessionAttribute.MUSIC, files);
+		if (flag) {
+			long endTime = System.currentTimeMillis();
+			System.out.println("运行时间：" + String.valueOf(endTime - startTime) + "ms");
+			return "musicupload";
 		}
 		return null;
 	}
@@ -286,6 +343,22 @@ public class VCUloadFileHandler {
 		session.setAttribute(SessionAttribute.DOCCOUNT, count);
 		if (files != null) {
 			map.put(SessionAttribute.DOC, files);
+		}
+		out.println(1);
+		out.flush();
+		out.close();
+
+	}
+	
+	@RequestMapping(value = "/findAllMusic", method = RequestMethod.POST)
+	public void findAllMusic(HttpServletRequest request, HttpSession session, ModelMap map, PrintWriter out) {
+		VCUser user = (VCUser) session.getAttribute(SessionAttribute.USERLOGIN);
+		VCUploadFile file = new VCUploadFile(user.getUserid(), null);
+		List<VCUploadFile> files = vCUploadFileService.getAllMusic(file);
+		VCUploadCount count = vCUploadFileService.getMusicCount();
+		session.setAttribute(SessionAttribute.MUSICCOUNT, count);
+		if (files != null) {
+			map.put(SessionAttribute.MUSIC, files);
 		}
 		out.println(1);
 		out.flush();

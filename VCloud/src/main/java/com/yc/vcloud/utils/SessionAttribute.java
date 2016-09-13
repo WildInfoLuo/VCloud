@@ -9,4 +9,6 @@ public class SessionAttribute {
 	public static final String PHOTOCOUNT = "photoCount";
 	public static  final String DOC="doc";  //文档
 	public static final String DOCCOUNT = "doccount";
+	public static  final String MUSIC="music";  //音乐
+	public static final String MUSICCOUNT = "musiccount";
 }

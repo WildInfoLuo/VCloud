@@ -53,4 +53,14 @@ public class VCUploadFileServiceImpl implements VCUploadFileService {
 		return vCUploadFileMapper.getDocCount();
 	}
 
+	@Override
+	public List<VCUploadFile> getAllMusic(VCUploadFile file) {
+		return vCUploadFileMapper.getAllMusic(file);
+	}
+
+	@Override
+	public VCUploadCount getMusicCount() {
+		return vCUploadFileMapper.getMusicCount();
+	}
+
 }
