@@ -7,6 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.swing.plaf.synth.SynthSpinnerUI;
@@ -17,6 +18,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -62,21 +64,13 @@ public class VCUloadFileHandler {
 		out.close();
 		return "Person_VCloud";
 	}
-
-	/**
-	 * 新建文件夹
-	 * 
-	 * @param name
-	 * @param date
-	 * @param session
-	 * @param out
-	 * @return
-	 */
-	@RequestMapping(value = "/addDir/{name}/{date}", method = RequestMethod.POST)
-	public String addDir(@PathVariable("name") String name, @PathVariable String date, HttpSession session,
-			PrintWriter out) {
+	
+	@RequestMapping(value="/addDir/{date}",method=RequestMethod.POST)
+	public String addDir(@RequestParam String name,@PathVariable String date,HttpSession session,PrintWriter out){
 		VCUser user = (VCUser) session.getAttribute(SessionAttribute.USERLOGIN);
-		VCUploadFile file = new VCUploadFile(user.getUserid(), name, date);
+		String n = "/"+name+"/";
+		System.out.println("===>"+n);
+		VCUploadFile file = new VCUploadFile(user.getUserid(), n, date);
 		boolean flag = vCUploadFileService.insertDir(file);
 		out.print(flag);
 		out.flush();
@@ -94,8 +88,9 @@ public class VCUloadFileHandler {
 	 * @throws IllegalStateException
 	 */
 	@RequestMapping(value = "/VCFileLoad", method = RequestMethod.POST)
-	public String VCFileLoad(HttpServletRequest request, HttpSession session)
+	public String VCFileLoad(VCUploadFile uploadFile,HttpServletRequest request, HttpSession session,ModelMap map)
 			throws IllegalStateException, IOException {
+		System.out.println("金利来。。。"+uploadFile.getFilepath());
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		String uploadpath = "../sources/";
 		String filename = "";
@@ -123,16 +118,16 @@ public class VCUloadFileHandler {
 					File files = new File(path);
 					file.transferTo(files);
 					length = (int) files.length() / 1024;
-					System.out.println("上传文件名" + filename + "文件大小" + length);
 				}
 			}
 		}
 		VCUser user = (VCUser) session.getAttribute(SessionAttribute.USERLOGIN);
-		VCUploadFile file = new VCUploadFile(user.getUserid(), "/我的资源/新建文件夹/" + filename, length,
+		VCUploadFile file = new VCUploadFile(user.getUserid(), uploadFile.getFilepath() + filename, length,
 				sdf.format(new Date()), "文件", filename);
 		boolean flag = vCUploadFileService.uploadFile(file);
 		if (flag) {
 			long endTime = System.currentTimeMillis();
+			
 			System.out.println("运行时间：" + String.valueOf(endTime - startTime) + "ms");
 			return "Person_VCloud";
 		}
@@ -348,4 +343,12 @@ public class VCUloadFileHandler {
 		out.close();
 
 	}
+	
+	@RequestMapping(value="/delFile",method=RequestMethod.POST)
+	public String delFiles(@RequestParam List<String> delpaths){
+		System.out.println("===>"+delpaths);
+		return "Person_VCloud";
+	}
+	
+	
 }
