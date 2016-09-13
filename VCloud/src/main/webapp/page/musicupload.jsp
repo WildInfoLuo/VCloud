@@ -1,15 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <!DOCTYPE html>
 <html>
 <head>
 <base href="/VCloud/">
 <meta charset="UTF-8">
-<title>VCloud__网盘</title>
+<title>音乐上传</title>
 <!--右键菜单样式-->
 <link rel="stylesheet" href="css/base.css" />
 <link rel="stylesheet" href="css/gizmoMenu.css" />
+<link type="text/css" rel="stylesheet" href="css/piv_currentupload_empty.css"/>
 
 <link type="text/css" rel="stylesheet" href="css/vclound.css" />
 <link type="text/css" rel="stylesheet" href="css/index.css">
@@ -18,7 +21,7 @@
 <script src="js/jquery-1.11.3.min.js">
 	
 </script>
-<script src="js/vclound.js"></script>
+<script src="js/docupload.js"></script>
 <script type="text/javascript" src="js/index.js"></script>
 
 <script type="text/javascript" src="js/gizmoMenu.js"></script>
@@ -202,20 +205,12 @@
 					<ul class="upfileds">
 						<li>
 							<div class="time-upfileimg">
-								<form id="upload" action="uploadFile/VCFileLoad" method="post" enctype="multipart/form-data">
+								<form id="uploadfile" action="uploadFile/uploadMusic" method="post" enctype="multipart/form-data">
 									<input id="h5Input0" type="file"
 										style="width: 100px; height: 39px; position: absolute; opacity: 0; cursor: pointer;"
-										name="file" accept="*/*" title="点击选择文件" 
-										onchange="upFileLoad()"/>
-									<input id="dispath" name="filepath" type="text" style="display: none;">
+										name="files" accept=".mp3 , .wav" title="点击选择文件" 
+										onchange="uploadFile()" multiple="multiple"/>
 								</form>
-							</div>
-						</li>
-						<li class="upfileInputjia">
-							<div>
-								<div class="upfileimgjia"></div>
-								<a href="javascript:upfileSpanjia()" style="width: 80px;"><span
-									class="upfileSpanjia">新建文件夹</span></a>
 							</div>
 						</li>
 					</ul>
@@ -229,8 +224,13 @@
 	</div>
 	<div class="content">
 		<div class="module-list">
+		<c:if test="${empty music}">
 			<span class="history-list-dir">全部文件</span> <span
-				class="history-list-tips">已全部加载，共6个</span>
+				class="history-list-tips">已全部加载，共0个</span>
+				</c:if>
+				<c:if test="${! empty music}">
+				<span class="history-list-dir">全部文件</span> <span
+				class="history-list-tips">已全部加载，共${musiccount.count }个</span>
 			<div class="list-view-header">
 				<div class="list-header">
 					<!-- 中间的导航栏 -->
@@ -273,27 +273,42 @@
 							onClick="lastColicon()"><span class="text">修改日期</span> <span
 							class="order-icon"></span></li>
 					</ul>
+						
+					
 				</div>
 			</div>
+			</c:if>
 			<div class="list-view-container">
 				<div class="module-list-view  container">
 					<!-- 先设置隐藏的样式 -->
 					<div class="list-view">
-						<dd class="module-edit-name" >
-							<li class="file-names" style="width: 60%; left: 0px; top: 73px;"><span
-								class="check-icon6" onclick="filenameIcon(6)"
+						 <c:choose>
+            	<c:when test="${empty music}">
+		             <div class="empty-upload" style="display: block;">
+						<div class="no_file_upload"></div>
+		            </div>
+            	</c:when>
+            	<c:otherwise>
+            		<c:forEach items="${music }" var="item">
+            			<dd class="open-enable">
+							<li class="file-name" style="width: 60%;">
+								<span class="check-icon${item.rownum }" onclick="filenameIcon(${item.rownum })"
 								style="background: rgba(0, 0, 0, 0) url('images/list-view_4e60b0c.png') no-repeat scroll -9px -12px; height: 14px; left: 11px; width: 14px; top: 20px; margin: 15px 10px; float: left;"></span>
 								<div class="fileicon"></div>
-								<div class="new-dir-item">
-									<input class="box" type="text" id="newDir" value="新建文件夹"> <span
-										class="sure" onclick="editSure()"></span> <span class="cancel"
-										onclick="editCancel()"></span>
+								<div class="text">
+									<c:if test="${fn:endsWith(item.temp2,'mp3') || fn:endsWith(item.temp2,'wav') }">
+										<div class="fileicon-small-music"></div>
+									</c:if>
+									<a class="filename" style="padding-left: 6px;"
+										href="javascript:void(0);" title="${item.temp2 }">${item.temp2 }</a>
 								</div>
 							</li>
-							<li class="file-size" style="width: 16%;">-</li>
-							<li class="ctime" style="width: 21%;">-</li>
+							<li class="file-size" style="width: 16%; margin-left: 20px;">${item.filesize }KB</li>
+							<li class="ctime" style="width: 21%; margin-left: 10px;">${item.uploaddate }</li>
 						</dd>
-						
+            		</c:forEach>
+            	</c:otherwise>
+            </c:choose>
 						<div class="list-empty-tips" style="display: none;">
 							<div class="tip-text">正在加载，请稍候…</div>
 						</div>

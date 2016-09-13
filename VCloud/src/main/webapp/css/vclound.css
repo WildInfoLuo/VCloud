@@ -653,3 +653,40 @@ a {
 	height: 30px;
 	padding-left: -2px;
 }
+
+
+.fileicon-small-doc, .fileicon-small-pdf, .fileicon-small-ppt, .fileicon-small-txt, .fileicon-small-xls, .fileicon-small-music {
+    background-image: url(../images/listIcon_cb54a24.png);
+}
+
+.fileicon-small-doc{
+	background-position: -60px 0;
+	width: 20px;
+	height: 16px;
+	float: left;
+	margin-top: 14px;
+}
+
+.fileicon-small-xls{
+	background-position: -90px 0;
+	width: 20px;
+	height: 16px;
+	float: left;
+	margin-top: 14px;
+}
+
+.fileicon-small-txt {
+    background-position: -120px 0;
+    width: 20px;
+	height: 16px;
+	float: left;
+	margin-top: 14px;
+}
+
+.fileicon-small-music {
+    background-position: -180px 0;
+    width: 20px;
+	height: 16px;
+	float: left;
+	margin-top: 14px;
+}

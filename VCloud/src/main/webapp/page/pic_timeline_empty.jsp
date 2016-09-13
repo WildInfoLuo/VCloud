@@ -213,7 +213,7 @@
 		            <div class="empty-timeline" style="display: block;">
 		            	<div class="empty-bg"></div>
 		                <p class="empty-des"></p>
-		                <div class="time-upfileimg"><form id="uploadfile" action="uploadFile/uploadFile" method="post"  enctype="multipart/form-data" ><input  type="file" style="width:154px;height:39px;position:absolute;opacity:0;cursor:pointer;" name="file" accept=".png,.jpg,.jpeg,.gif"  title="点击选择文件" onchange="uploadphoto(${userLogin.userid })"></form></div>
+		                <div class="time-upfileimg"><form id="uploadfile" action="uploadFile/uploadFile" method="post"  enctype="multipart/form-data" ><input  type="file" multiple="multiple" style="width:154px;height:39px;position:absolute;opacity:0;cursor:pointer;" name="files" accept=".png,.jpg,.jpeg,.gif"  title="点击选择文件" onchange="uploadphoto(${userLogin.userid })"></form></div>
 		            </div>
             	</c:when>
             	<c:otherwise>
