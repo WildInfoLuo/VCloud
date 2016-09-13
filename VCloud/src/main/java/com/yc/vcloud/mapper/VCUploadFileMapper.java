@@ -20,4 +20,11 @@ public interface VCUploadFileMapper {
 	
 	boolean delFiles(List<String> paths);
 	
+	List<VCUploadFile> getAllDoc(VCUploadFile file);
+
+	VCUploadCount getDocCount();
+
+	List<VCUploadFile> getAllMusic(VCUploadFile file);
+
+	VCUploadCount getMusicCount();
 }

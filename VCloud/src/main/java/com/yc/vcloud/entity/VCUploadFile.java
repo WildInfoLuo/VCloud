@@ -11,6 +11,7 @@ public class VCUploadFile {
 	private int isdir;
 	private String temp1;  //存文件类型
 	private String temp2;  //存文件名称
+	private int rownum;//标记勾选框
 	
 	public VCUploadFile() {
 	}
@@ -117,6 +118,15 @@ public class VCUploadFile {
 
 	public void setTemp2(String temp2) {
 		this.temp2 = temp2;
+	}
+
+	
+	public int getRownum() {
+		return rownum;
+	}
+
+	public void setRownum(int rownum) {
+		this.rownum = rownum;
 	}
 
 	@Override

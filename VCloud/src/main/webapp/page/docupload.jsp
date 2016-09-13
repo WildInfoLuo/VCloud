@@ -1,15 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <!DOCTYPE html>
 <html>
 <head>
 <base href="/VCloud/">
 <meta charset="UTF-8">
-<title>VCloud__网盘</title>
+<title>文档上传</title>
 <!--右键菜单样式-->
 <link rel="stylesheet" href="css/base.css" />
 <link rel="stylesheet" href="css/gizmoMenu.css" />
+<link type="text/css" rel="stylesheet" href="css/piv_currentupload_empty.css"/>
 
 <link type="text/css" rel="stylesheet" href="css/vclound.css" />
 <link type="text/css" rel="stylesheet" href="css/index.css">
@@ -18,7 +21,7 @@
 <script src="js/jquery-1.11.3.min.js">
 	
 </script>
-<script src="js/vclound.js"></script>
+<script src="js/docupload.js"></script>
 <script type="text/javascript" src="js/index.js"></script>
 
 <script type="text/javascript" src="js/gizmoMenu.js"></script>
@@ -202,19 +205,12 @@
 					<ul class="upfileds">
 						<li>
 							<div class="time-upfileimg">
-								<form id="upload" action="uploadFile/VCFileLoad" method="post" enctype="multipart/form-data">
+								<form id="uploadfile" action="uploadFile/uploadDoc" method="post" enctype="multipart/form-data">
 									<input id="h5Input0" type="file"
 										style="width: 100px; height: 39px; position: absolute; opacity: 0; cursor: pointer;"
 										name="file" accept="*/*" title="点击选择文件" 
-										onchange="upFileLoad(this.value)"/>
+										onchange="uploadFile()"/>
 								</form>
-							</div>
-						</li>
-						<li class="upfileInputjia">
-							<div>
-								<div class="upfileimgjia"></div>
-								<a href="javascript:upfileSpanjia()" style="width: 80px;"><span
-									class="upfileSpanjia">新建文件夹</span></a>
 							</div>
 						</li>
 					</ul>
@@ -228,8 +224,13 @@
 	</div>
 	<div class="content">
 		<div class="module-list">
+		<c:if test="${empty doc}">
 			<span class="history-list-dir">全部文件</span> <span
-				class="history-list-tips">已全部加载，共6个</span>
+				class="history-list-tips">已全部加载，共0个</span>
+				</c:if>
+				<c:if test="${! empty doc}">
+				<span class="history-list-dir">全部文件</span> <span
+				class="history-list-tips">已全部加载，共${doccount.count }个</span>
 			<div class="list-view-header">
 				<div class="list-header">
 					<!-- 中间的导航栏 -->
@@ -249,7 +250,7 @@
 										class="lg-button-right"> <em class="icon-download-gray"
 											title="下载"></em> <span class="text" style="width: auto;">下载</span>
 									</span>
-								</a> <a class="lg-button" href="javascript:deleteFile();"> <span
+								</a> <a class="lg-button" href="javascript:void(0);"> <span
 										class="lg-button-right"> <em class="icon-del-gray"
 											title="删除"></em> <span class="text" style="width: auto;">删除</span>
 									</span>
@@ -272,12 +273,49 @@
 							onClick="lastColicon()"><span class="text">修改日期</span> <span
 							class="order-icon"></span></li>
 					</ul>
+						
+					
 				</div>
 			</div>
+			</c:if>
 			<div class="list-view-container">
 				<div class="module-list-view  container">
 					<!-- 先设置隐藏的样式 -->
 					<div class="list-view">
+						 <c:choose>
+            	<c:when test="${empty doc}">
+		             <div class="empty-upload" style="display: block;">
+						<div class="no_file_upload"></div>
+		            </div>
+            	</c:when>
+            	<c:otherwise>
+            		<c:forEach items="${doc }" var="item">
+            			<dd class="open-enable">
+							<li class="file-name" style="width: 60%;">
+								<span class="check-icon${item.rownum }" onclick="filenameIcon(${item.rownum })"
+								style="background: rgba(0, 0, 0, 0) url('images/list-view_4e60b0c.png') no-repeat scroll -9px -12px; height: 14px; left: 11px; width: 14px; top: 20px; margin: 15px 10px; float: left;"></span>
+								<div class="fileicon"></div>
+								<div class="text">
+									<c:if test="${fn:endsWith(item.temp2,'doc') || fn:endsWith(item.temp2,'docx') }">
+										<div class="fileicon-small-doc"></div>
+									</c:if>
+									<c:if test="${fn:endsWith(item.temp2,'xls') || fn:endsWith(item.temp2,'xlsx') }">
+										<div class="fileicon-small-xls"></div>
+									</c:if>
+									<c:if test="${fn:endsWith(item.temp2,'txt') }">
+										<div class="fileicon-small-txt"></div>
+									</c:if>
+									
+									<a class="filename" style="padding-left: 6px;"
+										href="javascript:void(0);" title="${item.temp2 }">${item.temp2 }</a>
+								</div>
+							</li>
+							<li class="file-size" style="width: 16%; margin-left: 20px;">${item.filesize }KB</li>
+							<li class="ctime" style="width: 21%; margin-left: 10px;">${item.uploaddate }</li>
+						</dd>
+            		</c:forEach>
+            	</c:otherwise>
+            </c:choose>
 						<div class="list-empty-tips" style="display: none;">
 							<div class="tip-text">正在加载，请稍候…</div>
 						</div>
@@ -286,6 +324,56 @@
 				<div class="content-view">
 					<div class="grid-view" style="margin-top: 0px;">
 						<dd class="g-clearfix">
+							<!-- <div class="grid-view-item1"
+								style="display: block; height: 122px; margin: 4px 4px 0 0; text-align: center; width: 142px; float: left;"
+								onclick="filenameIcon(1)">
+								<div class="dir-large" title="">
+									<img class="thumb"> <span class="checkbox"></span>
+								</div>
+								<div class="file-name">
+									<a class="filename" title="文件接收柜" href="javascript:void(0);">文件接收柜</a>
+								</div>
+							</div>
+							<div class="grid-view-item2"
+								style="display: block; height: 122px; margin: 4px 4px 0 0; text-align: center; width: 142px; float: left;"
+								onclick="filenameIcon(2)">
+								<div class="dir-large" title="">
+									<img class="thumb"> <span class="checkbox"></span>
+								</div>
+								<div class="file-name">
+									<a class="filename" title="我的数据" href="javascript:void(0);">我的数据</a>
+								</div>
+							</div>
+							<div class="grid-view-item3"
+								style="display: block; height: 122px; margin: 4px 4px 0 0; text-align: center; width: 142px; float: left;"
+								onclick="filenameIcon(3)">
+								<div class="dir-large" title="">
+									<img class="thumb"> <span class="checkbox"></span>
+								</div>
+								<div class="file-name">
+									<a class="filename" title="我的资源" href="javascript:void(0);">我的资源</a>
+								</div>
+							</div>
+							<div class="grid-view-item4"
+								style="display: block; height: 122px; margin: 4px 4px 0 0; text-align: center; width: 142px; float: left;"
+								onclick="filenameIcon(4)">
+								<div class="dir-large fileicon-large-xls" title="">
+									<img class="thumb"> <span class="checkbox"></span>
+								</div>
+								<div class="file-name">
+									<a class="filename" title="xls文件" href="javascript:void(0);">VCloud.xls</a>
+								</div>
+							</div>
+							<div class="grid-view-item5"
+								style="display: block; height: 122px; margin: 4px 4px 0 0; text-align: center; width: 142px; float: left;"
+								onclick="filenameIcon(5)">
+								<div class="dir-large fileicon-large-doc" title="">
+									<img class="thumb"> <span class="checkbox"></span>
+								</div>
+								<div class="file-name">
+									<a class="filename" title="doc文件" href="javascript:void(0);">VCloud.doc</a>
+								</div>
+							</div> -->
 						</dd>
 					</div>
 				</div>

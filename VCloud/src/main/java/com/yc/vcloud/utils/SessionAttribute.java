@@ -7,4 +7,8 @@ public class SessionAttribute {
 	public final static String LOGERRORMSG = "logErrorMsg";   //前台登录错误验证
 	public static final String PHOTO = "photo";  //查看是否有图片
 	public static final String PHOTOCOUNT = "photoCount";
+	public static  final String DOC="doc";  //文档
+	public static final String DOCCOUNT = "doccount";
+	public static  final String MUSIC="music";  //音乐
+	public static final String MUSICCOUNT = "musiccount";
 }

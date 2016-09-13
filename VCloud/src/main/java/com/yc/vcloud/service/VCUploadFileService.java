@@ -20,4 +20,12 @@ public interface VCUploadFileService {
 	//删除文件夹的方法
 	boolean delFiles(List<String> paths);
 
+	List<VCUploadFile> getAllDoc(VCUploadFile file);
+
+	VCUploadCount getDocCount();
+
+	List<VCUploadFile> getAllMusic(VCUploadFile file);
+
+	VCUploadCount getMusicCount();
+
 }

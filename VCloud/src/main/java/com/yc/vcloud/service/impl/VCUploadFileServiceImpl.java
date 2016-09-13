@@ -47,5 +47,23 @@ public class VCUploadFileServiceImpl implements VCUploadFileService {
 	public boolean delFiles(List<String> paths) {
 		return vCUploadFileMapper.delFiles(paths);
 	}
+	public List<VCUploadFile> getAllDoc(VCUploadFile file) {
+		return vCUploadFileMapper.getAllDoc(file);
+	}
+
+	@Override
+	public VCUploadCount getDocCount() {
+		return vCUploadFileMapper.getDocCount();
+	}
+
+	@Override
+	public List<VCUploadFile> getAllMusic(VCUploadFile file) {
+		return vCUploadFileMapper.getAllMusic(file);
+	}
+
+	@Override
+	public VCUploadCount getMusicCount() {
+		return vCUploadFileMapper.getMusicCount();
+	}
 
 }

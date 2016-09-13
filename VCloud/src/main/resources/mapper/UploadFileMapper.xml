@@ -25,7 +25,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	
 	<select id="getPhotoCount" resultType="VCUploadCount">
-		select to_char(uploaddate,'yyyy"年"mm"月"dd"日"') uploaddate,count(*) count from uploadfile  
+		select to_char(uploaddate,'yyyy"年"mm"月"dd"日"') uploaddate,count(*) count from uploadfile  where isdir=0 and temp1='图片'
 		group by uploaddate  order by uploaddate desc
 	</select>
 	
@@ -36,5 +36,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</foreach>
 	</delete>
 	
+	<select id="getAllDoc" parameterType="VCUploadFile" resultType="VCUploadFile">
+		select ufid,userid,filepath,filesize,to_char(uploaddate,'yyyy-mm-dd HH:MI:ss') uploaddate,filestatus,stoppoingpath,status,isdir,temp1,temp2,rownum
+		 from uploadfile where userid=#{userid} and isdir=0 and temp1='文档' order by uploaddate desc
+	</select>
 	
+	<select id="getDocCount" resultType="VCUploadCount">
+		select count(*) count from uploadfile  where isdir=0 and temp1='文档'
+	</select>
+	
+	<select id="getAllMusic" parameterType="VCUploadFile" resultType="VCUploadFile">
+		select ufid,userid,filepath,filesize,to_char(uploaddate,'yyyy-mm-dd HH:MI:ss') uploaddate,filestatus,stoppoingpath,status,isdir,temp1,temp2,rownum
+		 from uploadfile where userid=#{userid} and isdir=0 and temp1='音乐' order by uploaddate desc
+	</select>
+	
+	<select id="getMusicCount" resultType="VCUploadCount">
+		select count(*) count from uploadfile  where isdir=0 and temp1='音乐'
+	</select>
 </mapper>
