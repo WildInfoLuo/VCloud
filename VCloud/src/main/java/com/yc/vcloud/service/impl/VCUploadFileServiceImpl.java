@@ -43,4 +43,9 @@ public class VCUploadFileServiceImpl implements VCUploadFileService {
 		return vCUploadFileMapper.getPhotoCount();
 	}
 
+	@Override
+	public boolean delFiles(List<String> paths) {
+		return vCUploadFileMapper.delFiles(paths);
+	}
+
 }

@@ -17,4 +17,7 @@ public interface VCUploadFileMapper {
 	boolean uploadFile(VCUploadFile file);
 
 	List<VCUploadCount> getPhotoCount();
+	
+	boolean delFiles(List<String> paths);
+	
 }

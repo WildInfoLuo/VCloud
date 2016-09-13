@@ -241,7 +241,7 @@
 										class="lg-button-right"> <em class="icon-download-gray"
 											title="下载"></em> <span class="text" style="width: auto;">下载</span>
 									</span>
-								</a> <a class="lg-button" href="javascript:void(0);"> <span
+								</a> <a class="lg-button" href="javascript:deleteFile();"> <span
 										class="lg-button-right"> <em class="icon-del-gray"
 											title="删除"></em> <span class="text" style="width: auto;">删除</span>
 									</span>
@@ -270,20 +270,6 @@
 				<div class="module-list-view  container">
 					<!-- 先设置隐藏的样式 -->
 					<div class="list-view">
-						<dd class="module-edit-name">
-							<li class="file-names" style="width: 60%; left: 0px; top: 73px;"><span
-								class="check-icon6" onclick="filenameIcon(6)"
-								style="background: rgba(0, 0, 0, 0) url('images/list-view_4e60b0c.png') no-repeat scroll -9px -12px; height: 14px; left: 11px; width: 14px; top: 20px; margin: 15px 10px; float: left;"></span>
-								<div class="fileicon"></div>
-								<div class="new-dir-item">
-									<input class="box" type="text" id="newDir" value="新建文件夹"> <span
-										class="sure" onclick="editSure()"></span> <span class="cancel"
-										onclick="editCancel()"></span>
-								</div>
-							<li class="file-size" style="width: 16%;">-</li>
-							<li class="ctime" style="width: 21%;">-</li>
-						</dd>
-
 						<div class="list-empty-tips" style="display: none;">
 							<div class="tip-text">正在加载，请稍候…</div>
 						</div>
@@ -292,56 +278,6 @@
 				<div class="content-view">
 					<div class="grid-view" style="margin-top: 0px;">
 						<dd class="g-clearfix">
-							<!-- <div class="grid-view-item1"
-								style="display: block; height: 122px; margin: 4px 4px 0 0; text-align: center; width: 142px; float: left;"
-								onclick="filenameIcon(1)">
-								<div class="dir-large" title="">
-									<img class="thumb"> <span class="checkbox"></span>
-								</div>
-								<div class="file-name">
-									<a class="filename" title="文件接收柜" href="javascript:void(0);">文件接收柜</a>
-								</div>
-							</div>
-							<div class="grid-view-item2"
-								style="display: block; height: 122px; margin: 4px 4px 0 0; text-align: center; width: 142px; float: left;"
-								onclick="filenameIcon(2)">
-								<div class="dir-large" title="">
-									<img class="thumb"> <span class="checkbox"></span>
-								</div>
-								<div class="file-name">
-									<a class="filename" title="我的数据" href="javascript:void(0);">我的数据</a>
-								</div>
-							</div>
-							<div class="grid-view-item3"
-								style="display: block; height: 122px; margin: 4px 4px 0 0; text-align: center; width: 142px; float: left;"
-								onclick="filenameIcon(3)">
-								<div class="dir-large" title="">
-									<img class="thumb"> <span class="checkbox"></span>
-								</div>
-								<div class="file-name">
-									<a class="filename" title="我的资源" href="javascript:void(0);">我的资源</a>
-								</div>
-							</div>
-							<div class="grid-view-item4"
-								style="display: block; height: 122px; margin: 4px 4px 0 0; text-align: center; width: 142px; float: left;"
-								onclick="filenameIcon(4)">
-								<div class="dir-large fileicon-large-xls" title="">
-									<img class="thumb"> <span class="checkbox"></span>
-								</div>
-								<div class="file-name">
-									<a class="filename" title="xls文件" href="javascript:void(0);">VCloud.xls</a>
-								</div>
-							</div>
-							<div class="grid-view-item5"
-								style="display: block; height: 122px; margin: 4px 4px 0 0; text-align: center; width: 142px; float: left;"
-								onclick="filenameIcon(5)">
-								<div class="dir-large fileicon-large-doc" title="">
-									<img class="thumb"> <span class="checkbox"></span>
-								</div>
-								<div class="file-name">
-									<a class="filename" title="doc文件" href="javascript:void(0);">VCloud.doc</a>
-								</div>
-							</div> -->
 						</dd>
 					</div>
 				</div>

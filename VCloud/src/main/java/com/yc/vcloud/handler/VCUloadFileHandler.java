@@ -20,6 +20,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -52,10 +53,12 @@ public class VCUloadFileHandler {
 		return "Person_VCloud";
 	}
 	
-	@RequestMapping(value="/addDir/{name}/{date}",method=RequestMethod.POST)
-	public String addDir(@PathVariable("name")String name,@PathVariable String date,HttpSession session,PrintWriter out){
+	@RequestMapping(value="/addDir/{date}",method=RequestMethod.POST)
+	public String addDir(@RequestParam String name,@PathVariable String date,HttpSession session,PrintWriter out){
 		VCUser user = (VCUser) session.getAttribute(SessionAttribute.USERLOGIN);
-		VCUploadFile file = new VCUploadFile(user.getUserid(), name, date);
+		String n = "/"+name+"/";
+		System.out.println("===>"+n);
+		VCUploadFile file = new VCUploadFile(user.getUserid(), n, date);
 		boolean flag = vCUploadFileService.insertDir(file);
 		out.print(flag);
 		out.flush();
@@ -130,4 +133,12 @@ public class VCUloadFileHandler {
 		out.flush();
 		out.close();
 	}
+	
+	@RequestMapping(value="/delFile",method=RequestMethod.POST)
+	public String delFiles(@RequestParam List<String> delpaths){
+		System.out.println("===>"+delpaths);
+		return "Person_VCloud";
+	}
+	
+	
 }

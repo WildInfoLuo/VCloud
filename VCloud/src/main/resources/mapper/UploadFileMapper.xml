@@ -28,4 +28,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select to_char(uploaddate,'yyyy"年"mm"月"dd"日"') uploaddate,count(*) count from uploadfile  
 		group by uploaddate  order by uploaddate desc
 	</select>
+	
+	<delete id="delFiles" parameterType="String">
+		delete from uploadfile where filepath in 
+		<foreach collection="list" item="paths" open="(" close=")" separator=",">
+			#{paths}
+		</foreach>
+	</delete>
+	
+	
 </mapper>
