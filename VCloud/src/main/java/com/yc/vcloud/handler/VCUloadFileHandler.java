@@ -148,7 +148,7 @@ public class VCUloadFileHandler {
 	 * @throws IOException
 	 */
 	@RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
-	public String springUpload(HttpServletRequest request, HttpSession session)
+	public String springUpload(HttpServletRequest request, HttpSession session,ModelMap map)
 			throws IllegalStateException, IOException {
 		String uploadpath = "../sources/";
 		long startTime = System.currentTimeMillis();
@@ -185,7 +185,7 @@ public class VCUloadFileHandler {
 		
 		VCUploadFile file = new VCUploadFile(user.getUserid(), null);
 		List<VCUploadFile> files = vCUploadFileService.getAllPhoto(file);
-		session.setAttribute(SessionAttribute.PHOTO, files);
+		map.put(SessionAttribute.PHOTO, files);
 		long endTime = System.currentTimeMillis();
 		System.out.println("运行时间：" + String.valueOf(endTime - startTime) + "ms");
 		return "pic_timeline_empty";
@@ -200,7 +200,7 @@ public class VCUloadFileHandler {
 	 * @throws IOException
 	 */
 	@RequestMapping(value = "/uploadDoc", method = RequestMethod.POST)
-	public String docUpload(HttpServletRequest request, HttpSession session)
+	public String docUpload(HttpServletRequest request, HttpSession session,ModelMap map)
 			throws IllegalStateException, IOException {
 		String uploadpath = "../sources/";
 		long startTime = System.currentTimeMillis();
@@ -236,7 +236,7 @@ public class VCUloadFileHandler {
 		}
 		VCUploadFile file = new VCUploadFile(user.getUserid(), null);
 		List<VCUploadFile> files = vCUploadFileService.getAllPhoto(file);
-		session.setAttribute(SessionAttribute.DOC, files);
+		map.put(SessionAttribute.DOC, files);
 		long endTime = System.currentTimeMillis();
 		System.out.println("运行时间：" + String.valueOf(endTime - startTime) + "ms");
 		return "docupload";
@@ -251,7 +251,7 @@ public class VCUloadFileHandler {
 	 * @throws IOException
 	 */
 	@RequestMapping(value = "/uploadMusic", method = RequestMethod.POST)
-	public String musicUpload(HttpServletRequest request, HttpSession session)
+	public String musicUpload(HttpServletRequest request, HttpSession session,ModelMap map)
 			throws IllegalStateException, IOException {
 		String uploadpath = "../sources/";
 		long startTime = System.currentTimeMillis();
@@ -288,7 +288,7 @@ public class VCUloadFileHandler {
 	
 		VCUploadFile file = new VCUploadFile(user.getUserid(), null);
 		List<VCUploadFile> files = vCUploadFileService.getAllMusic(file);
-		session.setAttribute(SessionAttribute.MUSIC, files);
+		map.put(SessionAttribute.MUSIC, files);
 		long endTime = System.currentTimeMillis();
 		System.out.println("运行时间：" + String.valueOf(endTime - startTime) + "ms");
 		return "musicupload";
