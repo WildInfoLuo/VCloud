@@ -24,8 +24,6 @@
 	<div class="gif">
 		<img class="top_gif" src="images/tab_3_slog.gif"
 			style="width: 84.3125px; height: 91.3385px; left: 550.169px; top: 236.778px;">
-		<img class="left_gif" src="images/tab_1_slog.gif"
-			style="width: 263.477px; height: 49.1823px; left: 124.012px; top: 113.119px;">
 	</div>
 	<div class="logo">
 		<div class="logo_2">

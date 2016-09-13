@@ -19,6 +19,7 @@
 	
 </script>
 <script src="js/vclound.js"></script>
+<script src="js/ajaxfileupload.js"></script>
 <script type="text/javascript" src="js/index.js"></script>
 
 <script type="text/javascript" src="js/gizmoMenu.js"></script>
@@ -205,7 +206,7 @@
 								<form id="upload" action="uploadFile/VCFileLoad" method="post" enctype="multipart/form-data">
 									<input id="h5Input0" type="file"
 										style="width: 100px; height: 39px; position: absolute; opacity: 0; cursor: pointer;"
-										name="file" accept="*/*" title="点击选择文件" 
+										name="uploadFile" accept="*/*" title="点击选择文件" multiple="multiple"
 										onchange="upFileLoad()"/>
 									<input id="dispath" name="filepath" type="text" style="display: none;">
 								</form>

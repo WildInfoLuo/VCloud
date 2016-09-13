@@ -87,10 +87,10 @@ public class VCUloadFileHandler {
 	 * @throws IOException
 	 * @throws IllegalStateException
 	 */
-	@RequestMapping(value = "/VCFileLoad", method = RequestMethod.POST)
-	public String VCFileLoad(VCUploadFile uploadFile,HttpServletRequest request, HttpSession session,ModelMap map)
+	@RequestMapping(value = "/VCFileLoad/{nextpath}", method = RequestMethod.POST)
+	public String VCFileLoad(@PathVariable String nextpath, VCUploadFile uploadFile,HttpServletRequest request, HttpSession session,ModelMap map)
 			throws IllegalStateException, IOException {
-		System.out.println("金利来。。。"+uploadFile.getFilepath());
+		System.out.println("金利来。。。"+nextpath);
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		String uploadpath = "../sources/";
 		String filename = "";

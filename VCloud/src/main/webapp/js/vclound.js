@@ -131,9 +131,7 @@ function editSure() {
 					});
 	$(".module-edit-name").css("display", "none");
 
-	$
-			.post(
-					"uploadFile/addDir/" + name + "/" + date,
+	$.post("uploadFile/addDir/" + name + "/" + date,
 					function(data) {
 						if (data) {
 							str += '<dd class="open-enable">'
@@ -376,15 +374,23 @@ function filenameIcon(id) {
 	checked2 = checked;
 }
 // 上传文件
-function upFileLoad(filename) {
-	$("#dispath").val(nextpath);
-	$("#upload").submit();
-	// alert(nextpath);
-	// $.post("uploadFile/VCFileLoad",
-	// function(data) {
-	//			
-	// });
-
+function upFileLoad() {
+	/*$("#dispath").val(nextpath);
+	$("#upload").submit();*/
+	alert(nextpath);
+	$.ajaxFileUpload({
+		url : "uploadFile/VCFileLoad/"+nextpath,
+		secureuri : false,
+		fileElementId : "h5Input0",
+		dataType : "json",
+		success : function(data, status) {
+			if (data > 0) {
+			}
+		},
+		error : function(data, status, e) {
+			alert('错误信息', '新闻信息添加失败...\n' + e, 'error');
+		}
+	});
 }
 // 获取当前时间
 function getDate() {
