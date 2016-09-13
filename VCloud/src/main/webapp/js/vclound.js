@@ -579,12 +579,12 @@ function init() {
 	for (var i = 0; i < pathData.length; i++) {
 		var path = parseFilePath(pathData[i].filepath, 1);
 		if ($.inArray(path, pass) == -1) {
-			if (pathData[i].filepath.indexOf(".") > -1) {
-				str += '<dd class="open-enable">'
-						+ '<li class="file-name" style="width: 60%;"><span '
-						+ 'class="check-icon1" onclick="filenameIcon(1)"'
-						+ 'style="background: rgba(0, 0, 0, 0) url(images/list-view_4e60b0c.png) no-repeat scroll -9px -12px;height: 14px; left: 11px; width: 14px; top: 20px; margin: 15px 10px; float: left;"></span>'
-						+ '<div class="fileicon"></div>';
+			str += '<dd class="open-enable">'
+				+ '<li class="file-name" style="width: 60%;"><span '
+				+ 'class="check-icon'+(i+1)+'" onclick="filenameIcon('+(i+1)+')"'
+				+ 'style="background: rgba(0, 0, 0, 0) url(images/list-view_4e60b0c.png) no-repeat scroll -9px -12px;height: 14px; left: 11px; width: 14px; top: 20px; margin: 15px 10px; float: left;"></span>'
+				;
+			if (pathData[i].filepath.indexOf(".") != -1) {
 				switch (path.substr(path.lastIndexOf(".") + 1)) {
 				case "doc":
 					str += '<div class="text"><div class="dir-tables fileicon-tables-doc"></div>';
@@ -617,18 +617,20 @@ function init() {
 					str += '<div class="text"><div class="dir-tables fileicon-tables-zip"></div>';
 					break;
 				default:
-					str += '<div class="fileicon"></div>'
-							+ '<div class="text"><div class="filenameicon"></div>';
+					
 					break;
 				}
-				str += '<a class="filename" style="padding-left: 6px;"'
-						+ 'href="javascript:getNextPath(' + '\'/' + path
-						+ '/\',' + 1 + ')" title=' + path + '>' + path
-						+ '</a></div></li>'
-						+ '<li class="file-size" style="width: 16%;">'
-						+ pathData[i].filesize + 'KB</li>' + '<li>'
-						+ pathData[i].uploaddate + '</li></dd>';
+			}else{
+				str += '<div class="fileicon"></div>'
+					+ '<div class="text"><div class="filenameicon"></div>';
 			}
+			str += '<a class="filename" style="padding-left: 6px;"'
+				+ 'href="javascript:getNextPath(' + '\'/' + path
+				+ '/\',' + 1 + ')" title=' + path + '>' + path
+				+ '</a></div></li>'
+				+ '<li class="file-size" style="width: 16%;">'
+				+ pathData[i].filesize + 'KB</li>' + '<li>'
+				+ pathData[i].uploaddate + '</li></dd>';
 		}
 		pass[i] = path;
 	}
