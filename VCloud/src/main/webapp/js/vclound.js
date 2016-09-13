@@ -331,7 +331,7 @@ function filenameIcon(id) {
 		ids = idstr.substr(idstr.lastIndexOf("n") + 1);
 		a[i] = ids;
 	}
-
+	
 	if (id == 0) {
 		if (checked2 == a.length) { // 说明已经全部选中
 			for (var i = 0; i < a.length; i++) {
@@ -413,6 +413,11 @@ function parseFilePath(filePath, num) {
 }
 // 获取下一级路径
 function getNextPath(path, view) {
+	checked2 = 0;
+	for (var i = 0; i < length; i++) {
+		tcheckIcon[i] = false;
+	}
+	filenameIcon(-1);
 	nextpath = path;
 	var nums = new Array();
 	nums = path.split("/");
@@ -585,11 +590,10 @@ function init() {
 		if ($.inArray(path, pass) == -1) {
 			str += '<dd class="open-enable">'
 				+ '<li class="file-name" style="width: 60%;"><span '
-				+ 'class="check-icon1" onclick="filenameIcon(1)"'
+				+ 'class="check-icon'+(i+1)+'" onclick="filenameIcon('+(i+1)+')"'
 				+ 'style="background: rgba(0, 0, 0, 0) url(images/list-view_4e60b0c.png) no-repeat scroll -9px -12px;height: 14px; left: 11px; width: 14px; top: 20px; margin: 15px 10px; float: left;"></span>'
 				;
-			if (pathData[i].filepath.indexOf(".") > -1) {
-				
+			if (pathData[i].filepath.indexOf(".") != -1) {
 				switch (path.substr(path.lastIndexOf(".") + 1)) {
 				case "doc":
 					str += '<div class="text"><div class="dir-tables fileicon-tables-doc"></div>';
@@ -622,15 +626,13 @@ function init() {
 					str += '<div class="text"><div class="dir-tables fileicon-tables-zip"></div>';
 					break;
 				default:
-					str+='<div class="fileicon"></div>'
-						+ '<div class="text"><div class="filenameicon"></div>';
 					break;
 				}
 			}else{
 				str += '<div class="fileicon"></div>'
 					+ '<div class="text"><div class="filenameicon"></div>';
 			}
-			str += '<a class="filename" style="padding-left: 6px;"'
+			str += '<a class="filename" id="a'+(i+1)+'"  style="padding-left: 6px;"'
 				+ 'href="javascript:getNextPath(' + '\'/' + path
 				+ '/\',' + 1 + ')" title=' + path + '>' + path
 				+ '</a></div></li>'
@@ -640,7 +642,7 @@ function init() {
 		}
 		pass[i] = path;
 	}
-	$(".list-view").append($(str));
+	$(".list-view").html("").append($(str));
 	// 右上角显示
 	var a = getFileNames();
 	$(".history-list-tips").html("").append("已全部加载，共" + (a.length) + "个文件");
@@ -696,6 +698,7 @@ function initView() {
 
 // 删除文件
 function deleteFile() {
+	alert(delpaths);
 	$.post("uploadFile/delFile", {
 		delpaths : delpaths
 	}, function(data) {
