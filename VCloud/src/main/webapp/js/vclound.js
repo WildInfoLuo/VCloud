@@ -9,105 +9,10 @@ $(function() {
 	$(".content-view").hide();
 	var str = "";
 	var pass = new Array();
-	$.post("uploadFile/getUserFiles/" + null,
-					function(data) {
-						pathData = data;
-						for (var i = 0; i < data.length; i++) {
-							var path = parseFilePath(data[i].filepath, 1);
-							// 如果是文件的话,再判断是什么类型的文件,根据文件类型在判断显示图标类型
-							if (data[i].filepath.indexOf(".") > -1) {
-								var index1 = data[i].filepath.lastIndexOf(".");// 获取文件以点结尾的长度
-								var index2 = data[i].filepath.length;// 获取文件的总长度
-								var filePost = data[i].filepath.substring(
-										index1 + 1, index2);
-								// alert(filePost);//判断文件类型
-								// 先写好各种文件类型的背景图标
-								var picbg = "";// 定义全局的背景图片
-								var docbg = "background: rgba(0, 0, 0, 0) url('images/gridIcon_2a39f1a.png') no-repeat scroll -350px 0px;";
-								var xslsbg = "";
-								var textbg = "";
-								var musicbg = "";
-								var zipbg = "";
-								var pptbg = "";
-								var othbg = "";
-								// 如果是doc
-								if (filePost.indexOf("doc") > -1) {
-									picbg = docbg;
-								}
-								// 如果是doc
-								if (filePost.indexOf("xslsbg") > -1) {
-									picbg = xslsbg;
-								}
-								// 如果是doc
-								if (filePost.indexOf("textbg") > -1) {
-									picbg = textbg;
-								}
-								// 如果是doc
-								if (filePost.indexOf("doc") > -1) {
-									picbg = docbg;
-								}
-								// 如果是doc
-								if (filePost.indexOf("doc") > -1) {
-									picbg = docbg;
-								}
-
-								if ($.inArray(path, pass) == -1) {
-									str += '<dd class="open-enable">'
-											+ '<li class="file-name" style="width: 60%;"><span '
-											+ 'class="check-icon1" onclick="filenameIcon(1)"'
-											+ 'style="background: rgba(0, 0, 0, 0) url(images/list-view_4e60b0c.png) no-repeat scroll -9px -12px;height: 14px; left: 11px; width: 14px; top: 20px; margin: 15px 10px; float: left;"></span>'
-											+ '<div class="fileicon"></div>'
-											+ '<div class="text"><div class="filenameicon" style="'
-											+ picbg
-											+ ' width: 20px; height: 16px; float: left; margin-top: 14px;"></div>'
-											+ '<a class="filename" style="padding-left: 6px;"'
-											+ 'href="javascript:getNextPath('
-											+ '\'/'
-											+ path
-											+ '/\','
-											+ 1
-											+ ')" title='
-											+ path
-											+ '>'
-											+ path
-											+ '</a></div></li>'
-											+ '<li class="file-size" style="width: 16%;">-</li>'
-											+ '<li>' + data[i].uploaddate
-											+ '</li></dd>';
-								}
-								// 如果是文件夹
-							} else if ($.inArray(path, pass) == -1) {
-								str += '<dd class="open-enable">'
-										+ '<li class="file-name" style="width: 60%;"><span '
-										+ 'class="check-icon1" onclick="filenameIcon(1)"'
-										+ 'style="background: rgba(0, 0, 0, 0) url(images/list-view_4e60b0c.png) no-repeat scroll -9px -12px; height: 14px; left: 11px; width: 14px; top: 20px; margin: 15px 10px; float: left;"></span>'
-										+ '<div class="fileicon"></div>'
-										+ '<div class="text"><div class="filenameicon"></div>'
-										+ '<a class="filename" style="padding-left: 6px;"'
-										+ 'href="javascript:getNextPath('
-										+ '\'/'
-										+ path
-										+ '/\','
-										+ 1
-										+ ')" title='
-										+ path
-										+ '>'
-										+ path
-										+ '</a></div></li>'
-										+ '<li class="file-size" style="width: 16%;">-</li>'
-										+ '<li>' + data[i].uploaddate
-										+ '</li></dd>';
-							}
-							pass[i] = path;
-						}
-						$(".list-view").append($(str));
-					}, "json");
-
-	/*$.post("uploadFile/getUserFiles/" + null, function(data) {
->>>>>>> branch 'master' of ssh://git@github.com/WildInfoLuo/VCloud.git
+	$.post("uploadFile/getUserFiles/" + null, function(data) {
 		pathData = data;
 		init();
-	}, "json");*/
+	}, "json");
 });
 
 var isdir = 0;
