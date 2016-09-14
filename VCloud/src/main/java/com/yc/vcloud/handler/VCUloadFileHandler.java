@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -348,9 +350,20 @@ public class VCUloadFileHandler {
 	}
 	
 	//删除文件的方法
+	@ResponseBody
 	@RequestMapping(value="/delFile",method=RequestMethod.POST)
-	public String delFiles(@RequestParam List<String> delpaths){
-		System.out.println("===>"+delpaths);
+	public String delFiles(@RequestParam(value="delpaths[]") String[] delpaths){
+		System.out.println("===>"+delpaths.length);
+		List<String> list = new ArrayList<String>();
+		for(String str:delpaths){
+			if(""!=str && str!=null){
+				list.add(str);
+			}
+		}
+		System.out.println(list);
+		System.out.println(list.size());
+		boolean flag = vCUploadFileService.delFiles(delpaths);
+		System.out.println("==>"+flag);
 		return "Person_VCloud";
 	}
 	

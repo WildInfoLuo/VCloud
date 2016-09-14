@@ -42,36 +42,6 @@ function editSure() {
 	var name = $(".box").val();
 	var date = getDate();
 	var str = "";
-	$.post("uploadFile/addDir/" + name + "/" + date,
-					function(data) {
-						if (data) {
-							str += '<dd class="open-enable">'
-									+ '<li class="file-name" style="width: 60%;"><span '
-									+ 'class="check-icon1" onclick="filenameIcon(1)"'
-									+ 'style="background: rgba(0, 0, 0, 0) url(images/list-view_4e60b0c.png) no-repeat scroll -9px -12px; height: 14px; left: 11px; width: 14px; top: 20px; margin: 15px 10px; float: left;"></span>'
-									+ '<div class="fileicon"></div>'
-									+ '<div class="text"><div class="filenameicon"></div>'
-									+ '<a class="filename" style="padding-left: 6px;"'
-									+ 'href="javascript:getNextPath('
-									+ '\''
-									+ name
-									+ '\''
-									+ ','
-									+ '\''
-									+ name
-									+ '\''
-									+ ')" title='
-									+ name
-									+ '>'
-									+ name
-									+ '</a></div></li>'
-									+ '<li class="file-size" style="width: 16%;">0</li>'
-									+ '<li>' + date + '</li></dd>';
-							$(".list-view").prepend($(str)); // 显示在第一条
-						}
-					});
-	$(".module-edit-name").css("display", "none");
-
 	var flag = false;
 	var a = getFileNames();
 	var i = 1;
@@ -89,10 +59,7 @@ function editSure() {
 		n = nextpath.substr(1) + name;
 	}
 
-	$.post("uploadFile/addDir/" + date,
-					{
-						name : n
-					},
+	$.post("uploadFile/addDir/" + date,{name : n},
 					function(data) {
 						if (data) {
 							str += '<dd class="open-enable">'
@@ -393,11 +360,13 @@ function parseFilePath(filePath, num) {
 }
 // 获取下一级路径
 function getNextPath(path, view) {
+	alert(pathData);
 	checked2 = 0;
 	for (var i = 0; i < length; i++) {
 		tcheckIcon[i] = false;
 	}
 	filenameIcon(-1);
+	delpaths.length = 0;
 	nextpath = path;
 	alert(nextpath);
 	var nums = new Array();
@@ -417,7 +386,8 @@ function getNextPath(path, view) {
 			if ((num + 1) < paths.length && paths.length > 1) {
 				if (view == 1) {
 					if($.inArray(paths[num+1],ps) == -1){
-						if (pathData[i].filepath.indexOf(".") > -1) {
+						if (paths[num+1].lastIndexOf(".") != -1) {
+							alert("in");
 							str +='<dd class="open-enable">'
 								+ '<li class="file-name" style="width: 60%;"><span '
 								+ 'class="check-icon'+(i+1)+'" onclick="filenameIcon('+(i+1)+')"'
@@ -550,7 +520,6 @@ function retrunPre(path, view) {
 		initView();
 		$(".history-list-dir").html("").html("<span>全部文件</span>");
 	} else {
-		alert("in");
 		getNextPath(path, view);
 	}
 	var a = getFileNames();
@@ -559,6 +528,7 @@ function retrunPre(path, view) {
 		tcheckIcon[i] = false;
 	}
 	filenameIcon(-1);
+	delpaths.length = 0;
 	// getNextPath(path,view)
 }
 
@@ -574,7 +544,7 @@ function init() {
 				+ 'class="check-icon'+(i+1)+'" onclick="filenameIcon('+(i+1)+')"'
 				+ 'style="background: rgba(0, 0, 0, 0) url(images/list-view_4e60b0c.png) no-repeat scroll -9px -12px;height: 14px; left: 11px; width: 14px; top: 20px; margin: 15px 10px; float: left;"></span>'
 				;
-			if (pathData[i].filepath.indexOf(".") != -1) {
+			if (pathData[i].filepath.indexOf(".") != -1 && pathData[i].isdir==0) {
 				switch (path.substr(path.lastIndexOf(".") + 1)) {
 				case "doc":
 					str += '<div class="text"><div class="dir-tables fileicon-tables-doc"></div>';
@@ -706,9 +676,7 @@ function upFileLoad() {
 // 删除文件
 function deleteFile() {
 	alert(delpaths);
-	$.post("uploadFile/delFile", {
-		delpaths : delpaths
-	}, function(data) {
+	$.post("uploadFile/delFile", {delpaths:delpaths}, function(data) {
 		alert(data);
 	})
 }
