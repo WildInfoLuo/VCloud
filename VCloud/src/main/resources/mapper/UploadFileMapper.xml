@@ -30,9 +30,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<delete id="delFiles" parameterType="String">
-		delete from uploadfile where filepath in 
-		<foreach collection="list" item="paths" open="(" close=")" separator=",">
-			#{paths}
+		delete from uploadfile where 
+		<foreach collection="array" item="paths" open="(" close=")" separator=",">
+			regexp_like(filepath,'^'||#{paths}||'+')
 		</foreach>
 	</delete>
 	

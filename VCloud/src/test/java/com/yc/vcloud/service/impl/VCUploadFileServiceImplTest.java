@@ -37,14 +37,12 @@ public class VCUploadFileServiceImplTest {
 		assertEquals(flag, true);
 	}
 	
-	@Test
+	/*@Test
 	public void testDelUserFiles() {
-		List<String> list = new ArrayList<String>();
-		list.add("/我的资源/");
-		list.add("/新建文件夹/");
-		boolean flag = vCUploadFileService.delFiles(list);
+		String [] str = {"","/资源/"};
+		boolean flag = vCUploadFileService.delFiles(str);
 		System.out.println("===>"+flag);
 		assertEquals(flag, true);
-	}
+	}*/
 
 }
