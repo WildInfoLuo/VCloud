@@ -229,9 +229,7 @@ function lswitch() {
 		pas[i] = path;
 	}
 	$(".g-clearfix").html("").append($(str));
-
 	initView();
-
 	$(".list-view").hide();
 	$(".content-view").show();
 }
@@ -373,25 +371,7 @@ function filenameIcon(id) {
 	$(".count-tips").text("已选中" + checked + "个文件/共" + a.length + "文件");
 	checked2 = checked;
 }
-// 上传文件
-function upFileLoad() {
-	/*$("#dispath").val(nextpath);
-	$("#upload").submit();*/
-	alert(nextpath);
-	$.ajaxFileUpload({
-		url : "uploadFile/VCFileLoad/"+nextpath,
-		secureuri : false,
-		fileElementId : "h5Input0",
-		dataType : "json",
-		success : function(data, status) {
-			if (data > 0) {
-			}
-		},
-		error : function(data, status, e) {
-			alert('错误信息', '新闻信息添加失败...\n' + e, 'error');
-		}
-	});
-}
+
 // 获取当前时间
 function getDate() {
 	var date = new Date();
@@ -419,6 +399,7 @@ function getNextPath(path, view) {
 	}
 	filenameIcon(-1);
 	nextpath = path;
+	alert(nextpath);
 	var nums = new Array();
 	nums = path.split("/");
 	var num = 0;
@@ -626,6 +607,8 @@ function init() {
 					str += '<div class="text"><div class="dir-tables fileicon-tables-zip"></div>';
 					break;
 				default:
+					str += '<div class="fileicon"></div>'
+						+ '<div class="text"><div class="filenameicon"></div>';
 					break;
 				}
 			}else{
@@ -694,6 +677,30 @@ function initView() {
 		pas[i] = path;
 	}
 	$(".g-clearfix").html("").append($(str));
+}
+//上传文件
+function upFileLoad() {
+	if(nextpath.length==0){
+		nextpath="/";
+	}
+	/*$("#dispath").val(nextpath);
+	$("#upload").submit();*/
+	$.ajaxFileUpload({
+		type:'post',
+		url : "uploadFile/VCFileLoad",
+		data:{nextpath:nextpath},
+		secureuri : false,
+		fileElementId : "h5Input0",
+		dataType : "json",
+		success : function(data, status) {
+			if (data > 0) {
+				alert()
+			}
+		},
+		error : function(data, status, e) {
+			alert("上传失败");
+		}
+	});
 }
 
 // 删除文件

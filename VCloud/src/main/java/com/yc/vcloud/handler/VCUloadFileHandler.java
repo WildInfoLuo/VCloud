@@ -10,7 +10,6 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.swing.plaf.synth.SynthSpinnerUI;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -87,8 +86,9 @@ public class VCUloadFileHandler {
 	 * @throws IOException
 	 * @throws IllegalStateException
 	 */
-	@RequestMapping(value = "/VCFileLoad/{nextpath}", method = RequestMethod.POST)
-	public String VCFileLoad(@PathVariable String nextpath, VCUploadFile uploadFile,HttpServletRequest request, HttpSession session,ModelMap map)
+	//"uploadFile/VCFileLoad/"+nextpath
+	@RequestMapping(value = "/VCFileLoad", method = RequestMethod.POST)
+	public String VCFileLoad(@RequestParam String nextpath, VCUploadFile uploadFile,HttpServletRequest request, HttpSession session,PrintWriter out)
 			throws IllegalStateException, IOException {
 		System.out.println("金利来。。。"+nextpath);
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -122,9 +122,12 @@ public class VCUloadFileHandler {
 			}
 		}
 		VCUser user = (VCUser) session.getAttribute(SessionAttribute.USERLOGIN);
-		VCUploadFile file = new VCUploadFile(user.getUserid(), uploadFile.getFilepath() + filename, length,
+		VCUploadFile file = new VCUploadFile(user.getUserid(), nextpath + filename, length,
 				sdf.format(new Date()), "文件", filename);
 		boolean flag = vCUploadFileService.uploadFile(file);
+		out.print(file);
+		out.flush();
+		out.close();
 		if (flag) {
 			long endTime = System.currentTimeMillis();
 			
