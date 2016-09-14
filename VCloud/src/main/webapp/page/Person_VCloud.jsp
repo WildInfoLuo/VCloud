@@ -208,8 +208,7 @@
 										style="width: 100px; height: 39px; position: absolute; opacity: 0; cursor: pointer;"
 										name="uploadFile" accept="*/*" title="点击选择文件" multiple="multiple"
 										onchange="upFileLoad()"/>
-<!-- 									<input id="dispath" name="filepath" type="text" style="display: none;">
- -->								</form>
+								</form>
 							</div>
 						</li>
 						<li class="upfileInputjia">

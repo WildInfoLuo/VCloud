@@ -360,7 +360,6 @@ function parseFilePath(filePath, num) {
 }
 // 获取下一级路径
 function getNextPath(path, view) {
-	alert(pathData);
 	checked2 = 0;
 	for (var i = 0; i < length; i++) {
 		tcheckIcon[i] = false;
@@ -368,7 +367,6 @@ function getNextPath(path, view) {
 	filenameIcon(-1);
 	delpaths.length = 0;
 	nextpath = path;
-	alert(nextpath);
 	var nums = new Array();
 	nums = path.split("/");
 	var num = 0;
@@ -387,7 +385,6 @@ function getNextPath(path, view) {
 				if (view == 1) {
 					if($.inArray(paths[num+1],ps) == -1){
 						if (paths[num+1].lastIndexOf(".") != -1) {
-							alert("in");
 							str +='<dd class="open-enable">'
 								+ '<li class="file-name" style="width: 60%;"><span '
 								+ 'class="check-icon'+(i+1)+'" onclick="filenameIcon('+(i+1)+')"'
@@ -408,6 +405,9 @@ function getNextPath(path, view) {
 								break;
 							case "png":
 								str+='<div class="text"><div class="dir-tables fileicon-tables-png"></div>';
+								break;
+							case "gif":
+								str += '<div class="text"><div class="dir-tables fileicon-tables-png"></div>';
 								break;
 							case "jpg":
 								str+='<div class="text"><div class="dir-tables fileicon-tables-png"></div>';
@@ -561,6 +561,9 @@ function init() {
 				case "png":
 					str += '<div class="text"><div class="dir-tables fileicon-tables-png"></div>';
 					break;
+				case "gif":
+					str += '<div class="text"><div class="dir-tables fileicon-tables-png"></div>';
+					break;
 				case "jpg":
 					str += '<div class="text"><div class="dir-tables fileicon-tables-png"></div>';
 					break;
@@ -656,19 +659,18 @@ function upFileLoad() {
 	/*$("#dispath").val(nextpath);
 	$("#upload").submit();*/
 	$.ajaxFileUpload({
-		type:'post',
 		url : "uploadFile/VCFileLoad",
 		data:{nextpath:nextpath},
 		secureuri : false,
 		fileElementId : "h5Input0",
-		dataType : "json",
+		dataType : 'json',
 		success : function(data, status) {
 			if (data > 0) {
-				alert()
+				alert(data+"进来了")
 			}
 		},
 		error : function(data, status, e) {
-			alert("上传失败");
+			alert(e);
 		}
 	});
 }
