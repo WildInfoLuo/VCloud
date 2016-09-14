@@ -384,6 +384,11 @@ function getNextPath(path, view) {
 			if ((num + 1) < paths.length && paths.length > 1) {
 				if (view == 1) {
 					if($.inArray(paths[num+1],ps) == -1){
+						str +='<dd class="open-enable">'
+							+ '<li class="file-name" style="width: 60%;"><span '
+							+ 'class="check-icon'+(i+1)+'" onclick="filenameIcon('+(i+1)+')"'
+							+ 'style="background: rgba(0, 0, 0, 0) url(images/list-view_4e60b0c.png) no-repeat scroll -9px -12px;height: 14px; left: 11px; width: 14px; top: 20px; margin: 15px 10px; float: left;"></span>'
+							+ '<div class="fileicon"></div>';
 						if (paths[num+1].lastIndexOf(".") != -1) {
 							str +='<dd class="open-enable">'
 								+ '<li class="file-name" style="width: 60%;"><span '
@@ -429,15 +434,15 @@ function getNextPath(path, view) {
 									+ '<div class="text"><div class="filenameicon"></div>';
 								break;
 							}
-							str+='<a class="filename" id="a'+(i+1)+'" style="padding-left: 6px;"'+
-								'href="javascript:getNextPath('+'\''+path+paths[num+1]+'/\','+1+')" title='+paths[num+1]+'>'+paths[num+1]+'</a></div></li>'
-								+ '<li class="file-size" style="width: 16%;">'+pathData[i].filesize+'KB</li>'
-								+ '<li>' + pathData[i].uploaddate
-								+ '</li></dd>';
 							}else{
 								str+='<div class="fileicon"></div>'
 									+ '<div class="text"><div class="filenameicon"></div>';
 							}
+							str+='<a class="filename" id="a'+(i+1)+'" style="padding-left: 6px;"'+
+							'href="javascript:getNextPath('+'\''+path+paths[num+1]+'/\','+1+')" title='+paths[num+1]+'>'+paths[num+1]+'</a></div></li>'
+							+ '<li class="file-size" style="width: 16%;">'+pathData[i].filesize+'KB</li>'
+							+ '<li>' + pathData[i].uploaddate
+							+ '</li></dd>';
 						ps[i] = paths[num+1];
 					}
 					var up = '<a style="color:blue;" href="javascript:retrunPre('+'\'/'+paths[num-1]+'/\','+1+')">返回上一级</a>';

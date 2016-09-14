@@ -39,7 +39,7 @@ public class VCUploadFileServiceImplTest {
 	
 	/*@Test
 	public void testDelUserFiles() {
-		String [] str = {"","/资源/"};
+		String [] str = {"/资源/"};
 		boolean flag = vCUploadFileService.delFiles(str);
 		System.out.println("===>"+flag);
 		assertEquals(flag, true);

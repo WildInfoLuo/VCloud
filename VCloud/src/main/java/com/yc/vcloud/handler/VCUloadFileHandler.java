@@ -362,7 +362,7 @@ public class VCUloadFileHandler {
 		}
 		System.out.println(list);
 		System.out.println(list.size());
-		boolean flag = vCUploadFileService.delFiles(delpaths);
+		boolean flag = vCUploadFileService.delFiles(list);
 		System.out.println("==>"+flag);
 		return "Person_VCloud";
 	}
