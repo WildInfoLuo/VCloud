@@ -9,9 +9,12 @@
 <title>VCloud主页</title>
 	<link type="text/css" rel="stylesheet" href="css/index.css">
 	<link type="text/css" rel="stylesheet" href="css/vclound.css">
+	<link type="text/css" rel="stylesheet" href="css/progressbar.css">
 	<link rel="stylesheet" href="css/nheader.css">
 	<link rel="stylesheet" href="css/nstyle.css">
+	<script src="js/jquery-1.11.3.min.js"></script>
 	<script type="text/javascript" src="js/index.js"></script>
+
 </head>
 <body>
 	<div id="navbar">
@@ -189,6 +192,11 @@
         <div style="width: 100%; height: 97px; background: transparent none repeat scroll 0% 0%;">
             <div class="aside-absolute-container" style="visibility: visible; position: absolute; width: 100%; height: 155px; top: 460px; bottom: auto;">
         </div>
+        <!-- 容量进度条 -->
+         <div class="progressbar" data-perc="${countSize/1024/10 }">
+            <div class="contain">容量:${countSize }MB/10G</div>
+			<div class="bar"><span></span></div>
+		</div>
 	</div>
 </div>
     

@@ -52,4 +52,11 @@ public interface VCUserMapper {
 	 * @return
 	 */
 	public int updateUserMsg(VCUser user);
+
+	/**
+	 * 查询用户内存使用大小
+	 * @param userLogin
+	 * @return
+	 */
+	public int countSize(VCUser user);
 }

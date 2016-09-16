@@ -10,6 +10,7 @@
 <link type="text/css" rel="stylesheet" href="css/piv_timeline_empty.css"/>
 <link type="text/css" rel="stylesheet" href="css/index.css">
 <link type="text/css" rel="stylesheet" href="css/vclound.css">
+<link type="text/css" rel="stylesheet" href="css/progressbar.css">
 <link href="images/云准备.gif" rel="shortcut icon">
 <script src="js/jquery-1.11.3.min.js">
 </script><script src="js/vclound.js"></script>
@@ -174,6 +175,11 @@
      	 <div style="width: 100%; height: 220px; background: transparent none repeat scroll 0% 0%;">
             <div class="aside-absolute-container" style="visibility: visible; position: absolute; width: 100%; height: 155px; top: 460px; bottom: auto;">
         </div>
+        <!-- 容量进度条 -->
+         <div class="progressbar" data-perc="${countSize/1024/10 }">
+            <div class="contain">容量:${countSize }MB/10G</div>
+			<div class="bar"><span></span></div>
+		</div>
 	</div>
 </div>
 

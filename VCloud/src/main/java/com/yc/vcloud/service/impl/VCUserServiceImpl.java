@@ -56,4 +56,9 @@ public class VCUserServiceImpl implements VCUserService {
 		return vcmapper.updateUserMsg(user);
 	}
 
+	@Override
+	public int countSize(VCUser user) {
+		System.out.println(user.getUserid());
+		return vcmapper.countSize(user);
+	}
 }
