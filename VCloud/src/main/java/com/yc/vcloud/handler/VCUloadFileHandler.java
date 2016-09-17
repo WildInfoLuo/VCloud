@@ -32,6 +32,8 @@ import com.yc.vcloud.entity.VCUser;
 import com.yc.vcloud.service.VCUploadFileService;
 import com.yc.vcloud.utils.SessionAttribute;
 
+import net.sf.json.JSONObject;
+
 @Controller
 @RequestMapping("/uploadFile")
 @SessionAttributes(value={SessionAttribute.PHOTO,SessionAttribute.DOC,SessionAttribute.MUSIC})
@@ -91,7 +93,6 @@ public class VCUloadFileHandler {
 	@RequestMapping(value = "/VCFileLoad", method = RequestMethod.POST)
 	public String VCFileLoad(@RequestParam String nextpath,VCUploadFile uploadFile,HttpServletRequest request, HttpSession session,PrintWriter out)
 			throws IllegalStateException, IOException {
-		System.out.println("金利来。。。"+nextpath);
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		String uploadpath = "../sources/";
 		String filename = "";
@@ -127,13 +128,16 @@ public class VCUloadFileHandler {
 				sdf.format(new Date()), "文件", filename);
 		boolean flag = vCUploadFileService.uploadFile(file);
 		System.out.println("文件上传后"+user.getUserid()+file.getFilepath());
+		//JSONObject jsonObject = new JSONObject();
 		List<VCUploadFile> wangFile=vCUploadFileService.getAllFileWang(user.getUserid(),file.getFilepath());
-		out.print(wangFile);
+		session.setAttribute(SessionAttribute.FILESESSION, wangFile);
+		Gson gson=new Gson();
+		//jsonObject.put("data", wangFile);
+		out.print(gson.toJson(wangFile));
 		out.flush();
 		out.close();
 		if (flag) {
 			long endTime = System.currentTimeMillis();
-			
 			System.out.println("运行时间：" + String.valueOf(endTime - startTime) + "ms");
 			return "Person_VCloud";
 		}
