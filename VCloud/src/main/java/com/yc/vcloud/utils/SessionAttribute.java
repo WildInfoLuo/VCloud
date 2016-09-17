@@ -11,4 +11,5 @@ public class SessionAttribute {
 	public static final String DOCCOUNT = "doccount";
 	public static  final String MUSIC="music";  //音乐
 	public static final String MUSICCOUNT = "musiccount";
+	public static final String USERCOUNTSIZE = "countSize";
 }

@@ -13,6 +13,7 @@
 
 <link type="text/css" rel="stylesheet" href="css/vclound.css" />
 <link type="text/css" rel="stylesheet" href="css/index.css">
+<link type="text/css" rel="stylesheet" href="css/progressbar.css">
 
 <link href="images/yun.gif" rel="shortcut icon">
 <script src="js/jquery-1.11.3.min.js">
@@ -194,6 +195,11 @@
 			<div class="aside-absolute-container"
 				style="visibility: visible; position: absolute; width: 100%; height: 155px; top: 460px; bottom: auto;">
 			</div>
+			<!-- 容量进度条 -->
+	         <div class="progressbar" data-perc="${countSize/1024/10 }">
+	            <div class="contain">容量:${countSize }MB/10G</div>
+				<div class="bar"><span></span></div>
+			</div>
 		</div>
 	</div>
 	<!--上传文件、新建文件夹-->
@@ -208,8 +214,7 @@
 										style="width: 100px; height: 39px; position: absolute; opacity: 0; cursor: pointer;"
 										name="uploadFile" accept="*/*" title="点击选择文件" multiple="multiple"
 										onchange="upFileLoad()"/>
-<!-- 									<input id="dispath" name="filepath" type="text" style="display: none;">
- -->								</form>
+								</form>
 							</div>
 						</li>
 						<li class="upfileInputjia">

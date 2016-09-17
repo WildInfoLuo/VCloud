@@ -359,6 +359,11 @@ function getNextPath(path, view) {
 							+ 'style="background: rgba(0, 0, 0, 0) url(images/list-view_4e60b0c.png) no-repeat scroll -9px -12px;height: 14px; left: 11px; width: 14px; top: 20px; margin: 15px 10px; float: left;"></span>'
 							+ '<div class="fileicon"></div>';
 						if (paths[num+1].lastIndexOf(".") != -1) {
+							str +='<dd class="open-enable">'
+								+ '<li class="file-name" style="width: 60%;"><span '
+								+ 'class="check-icon'+(i+1)+'" onclick="filenameIcon('+(i+1)+')"'
+								+ 'style="background: rgba(0, 0, 0, 0) url(images/list-view_4e60b0c.png) no-repeat scroll -9px -12px;height: 14px; left: 11px; width: 14px; top: 20px; margin: 15px 10px; float: left;"></span>'
+								+ '<div class="fileicon"></div>';
 							switch (paths[num+1].substr(paths[num+1].lastIndexOf(".") + 1)) {
 							case "doc":
 								str+='<div class="text"><div class="dir-tables fileicon-tables-doc"></div>';
@@ -374,6 +379,9 @@ function getNextPath(path, view) {
 								break;
 							case "png":
 								str+='<div class="text"><div class="dir-tables fileicon-tables-png"></div>';
+								break;
+							case "gif":
+								str += '<div class="text"><div class="dir-tables fileicon-tables-png"></div>';
 								break;
 							case "jpg":
 								str+='<div class="text"><div class="dir-tables fileicon-tables-png"></div>';
@@ -527,6 +535,9 @@ function init() {
 				case "png":
 					str += '<div class="text"><div class="dir-tables fileicon-tables-png"></div>';
 					break;
+				case "gif":
+					str += '<div class="text"><div class="dir-tables fileicon-tables-png"></div>';
+					break;
 				case "jpg":
 					str += '<div class="text"><div class="dir-tables fileicon-tables-png"></div>';
 					break;
@@ -622,19 +633,18 @@ function upFileLoad() {
 	/*$("#dispath").val(nextpath);
 	$("#upload").submit();*/
 	$.ajaxFileUpload({
-		type:'post',
 		url : "uploadFile/VCFileLoad",
 		data:{nextpath:nextpath},
 		secureuri : false,
 		fileElementId : "h5Input0",
-		dataType : "json",
+		dataType : 'json',
 		success : function(data, status) {
 			if (data > 0) {
-				alert()
+				alert(data+"进来了")
 			}
 		},
 		error : function(data, status, e) {
-			alert("上传失败");
+			alert(e);
 		}
 	});
 }

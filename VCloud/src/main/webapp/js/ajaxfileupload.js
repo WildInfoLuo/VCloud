@@ -152,8 +152,10 @@ jQuery.extend({
             jQuery.globalEval(data);  
         // Get the JavaScript object, if JSON is used.  
         if (type == "json")  
-            eval("data = " + data);  
-        // evaluate scripts within html  
+            //eval("data = " + data);  
+        // evaluate scripts within html
+        	alert("json数据");
+        	data = jQuery.parseJSON(jQuery(data).text());
         if (type == "html")  
             jQuery("<div>").html(data).find('script').remove();  
         return data;  

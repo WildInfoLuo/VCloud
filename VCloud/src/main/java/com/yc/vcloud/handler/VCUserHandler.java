@@ -83,11 +83,13 @@ public class VCUserHandler {
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String Login(VCUser userLogin, BindingResult result, HttpServletRequest request, PrintWriter out,
-			ModelMap map) {
+			ModelMap map,HttpSession session) {
 		// 如果有错误的话，那么将返回注册页面
 		List<VCUser> users = service.login(userLogin);
 		if (users.size() > 0) {
 			map.put(SessionAttribute.USERLOGIN, users.get(0));
+			int count=service.countSize(users.get(0));
+			session.setAttribute(SessionAttribute.USERCOUNTSIZE, count/1024);
 			LogManager.getLogger().debug("user==>" + userLogin);
 			return "index";
 		}else{
