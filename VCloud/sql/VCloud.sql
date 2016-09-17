@@ -55,18 +55,19 @@ create table uploadfile(
 	status varchar2(10),  --文件审核字段     1.通过，0.不通过
 	isdir int, --判断是否为文件夹   1.文件夹  0.文件
 	temp1 varchar2(200),		--备用字段
-    temp2 varchar2(200)		
+    temp2 varchar2(200),
+    isdel varchar2(10)
 );
 create sequence seq_ufid start with 40001;
+alter table uploadfile add isdel varchar2(10)    --1.删除    0.未删除
 
-insert into uploadfile values(seq_ufid.nextval,10041,'/我的资/新建文件夹',0,sysdate,1,null,1,1,null,null);
-insert into uploadfile values(seq_ufid.nextval,10041,'/来自百度手机浏览器/hello/hello.doc',0,sysdate,1,null,1,0,null,null);
-insert into uploadfile values(seq_ufid.nextval,10041,'/我的资源/新建文件夹/我的资源',0,sysdate,1,null,1,1,null,null);
-insert into uploadfile values(seq_ufid.nextval,10041,'/资源/新建文件夹/我的资源',0,sysdate,1,null,1,1,null,null);
-insert into uploadfile values(seq_ufid.nextval,10041,'/我的资源/新建文件夹2/我的资源3',0,sysdate,1,null,1,1,null,null);
-
-insert into uploadfile values(seq_ufid.nextval,10041,'/我的资源.xls',0,sysdate,1,null,1,0,null,null);
-insert into uploadfile values(seq_ufid.nextval,10041,'/我的资源/新建文件夹2/我的资源3.xls',0,sysdate,1,null,1,1,null,null);
+insert into uploadfile values(seq_ufid.nextval,10041,'/我的资/新建文件夹',0,sysdate,1,null,1,1,null,null,0);
+insert into uploadfile values(seq_ufid.nextval,10041,'/来自百度手机浏览器/hello/hello.doc',0,sysdate,1,null,1,0,null,null,0);
+insert into uploadfile values(seq_ufid.nextval,10041,'/我的资源/新建文件夹/我的资源',0,sysdate,1,null,1,1,null,null,0);
+insert into uploadfile values(seq_ufid.nextval,10041,'/资源/新建文件夹/我的资源',0,sysdate,1,null,1,1,null,null,0);
+insert into uploadfile values(seq_ufid.nextval,10041,'/我的资源/新建文件夹2/我的资源3',0,sysdate,1,null,1,1,null,null,0);
+insert into uploadfile values(seq_ufid.nextval,10041,'/我的资源.xls',0,sysdate,1,null,1,0,null,null,0);
+insert into uploadfile values(seq_ufid.nextval,10041,'/我的资源/新建文件夹2/我的资源3.xls',0,sysdate,1,null,1,1,null,null,0);
 
 delete from uploadfile;
 
@@ -84,9 +85,12 @@ create table VCRecyle(
 		constraint FK_VCUploadFile_id references VCUploadFile(ufid),
 	deletedate date, --删除时间
 	lefttime int,  --可存放天数
-	temp1 varchar2(200),		--备用字段
+	deletepath varchar2(200),		--备用字段
     temp2 varchar2(200)			--备用字段 
 );
+
+alter table VCRecyle rename column temp1 to deletepath
+
 create sequence seq_rid start with 50001;
 
 --分享表
