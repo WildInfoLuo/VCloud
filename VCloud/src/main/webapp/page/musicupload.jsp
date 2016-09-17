@@ -13,6 +13,7 @@
 <link rel="stylesheet" href="css/base.css" />
 <link rel="stylesheet" href="css/gizmoMenu.css" />
 <link type="text/css" rel="stylesheet" href="css/piv_currentupload_empty.css"/>
+<link type="text/css" rel="stylesheet" href="css/progressbar.css">
 
 <link type="text/css" rel="stylesheet" href="css/vclound.css" />
 <link type="text/css" rel="stylesheet" href="css/index.css">
@@ -195,6 +196,11 @@
 			style="width: 100%; height: 236px; background: transparent none repeat scroll 0% 0%;">
 			<div class="aside-absolute-container"
 				style="visibility: visible; position: absolute; width: 100%; height: 155px; top: 460px; bottom: auto;">
+			</div>
+			<!-- 容量进度条 -->
+	         <div class="progressbar" data-perc="${countSize/1024/10 }">
+	            <div class="contain">容量:${countSize }MB/10G</div>
+				<div class="bar"><span></span></div>
 			</div>
 		</div>
 	</div>

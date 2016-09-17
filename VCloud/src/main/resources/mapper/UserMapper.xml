@@ -31,4 +31,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="updateUserMsg" parameterType="VCUser">
 		update VCUser set status=#{status}  where userid=#{userid} 
 	</update>
+	
+	<select id="countSize" parameterType="VCUser" resultType="Integer">
+		select sum(filesize)  from uploadfile where  userid=#{userid} and isdir=0  
+	</select>
 </mapper>
