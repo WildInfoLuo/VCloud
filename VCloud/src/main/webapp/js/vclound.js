@@ -97,37 +97,6 @@ function editSure() {
 						}
 					});
 	$(".module-edit-name").css("display", "none");
-
-	$.post("uploadFile/addDir/" + name + "/" + date,
-					function(data) {
-						if (data) {
-							str += '<dd class="open-enable">'
-									+ '<li class="file-name" style="width: 60%;"><span '
-									+ 'class="check-icon1" onclick="filenameIcon(1)"'
-									+ 'style="background: rgba(0, 0, 0, 0) url(images/list-view_4e60b0c.png) no-repeat scroll -9px -12px; height: 14px; left: 11px; width: 14px; top: 20px; margin: 15px 10px; float: left;"></span>'
-									+ '<div class="fileicon"></div>'
-									+ '<div class="text"><div class="filenameicon"></div>'
-									+ '<a class="filename" style="padding-left: 6px;"'
-									+ 'href="javascript:getNextPath('
-									+ '\''
-									+ name
-									+ '\''
-									+ ','
-									+ '\''
-									+ name
-									+ '\''
-									+ ')" title='
-									+ name
-									+ '>'
-									+ name
-									+ '</a></div></li>'
-									+ '<li class="file-size" style="width: 16%;">-</li>'
-									+ '<li>' + date + '</li></dd>';
-							$(".list-view").prepend($(str)); // 显示在第一条
-						}
-					});
-	$(".module-edit-name").css("display", "none");
-
 }
 
 function editCancel() {
@@ -390,11 +359,6 @@ function getNextPath(path, view) {
 							+ 'style="background: rgba(0, 0, 0, 0) url(images/list-view_4e60b0c.png) no-repeat scroll -9px -12px;height: 14px; left: 11px; width: 14px; top: 20px; margin: 15px 10px; float: left;"></span>'
 							+ '<div class="fileicon"></div>';
 						if (paths[num+1].lastIndexOf(".") != -1) {
-							str +='<dd class="open-enable">'
-								+ '<li class="file-name" style="width: 60%;"><span '
-								+ 'class="check-icon'+(i+1)+'" onclick="filenameIcon('+(i+1)+')"'
-								+ 'style="background: rgba(0, 0, 0, 0) url(images/list-view_4e60b0c.png) no-repeat scroll -9px -12px;height: 14px; left: 11px; width: 14px; top: 20px; margin: 15px 10px; float: left;"></span>'
-								+ '<div class="fileicon"></div>';
 							switch (paths[num+1].substr(paths[num+1].lastIndexOf(".") + 1)) {
 							case "doc":
 								str+='<div class="text"><div class="dir-tables fileicon-tables-doc"></div>';
@@ -675,7 +639,78 @@ function upFileLoad() {
 			}
 		},
 		error : function(data, status, e) {
-			alert(e);
+			alert(data);
+			var str = "";
+			var pass = new Array();
+			for (var i = 0; i < data.length; i++) {
+				var path = parseFilePath(nextpath, 1);
+				alert(nextpath+"===="+path);
+				if ($.inArray(path, pass) == -1) {
+					alert("进来了显示的方法");
+					str += '<dd class="open-enable">'
+						+ '<li class="file-name" style="width: 60%;"><span '
+						+ 'class="check-icon'+(i+1)+'" onclick="filenameIcon('+(i+1)+')"'
+						+ 'style="background: rgba(0, 0, 0, 0) url(images/list-view_4e60b0c.png) no-repeat scroll -9px -12px;height: 14px; left: 11px; width: 14px; top: 20px; margin: 15px 10px; float: left;"></span>'
+						;
+					if (data[i].filepath.indexOf(".") != -1 && data[i].isdir==0) {
+						switch (path.substr(path.lastIndexOf(".") + 1)) {
+						case "doc":
+							str += '<div class="text"><div class="dir-tables fileicon-tables-doc"></div>';
+							break;
+						case "docx":
+							str += '<div class="text"><div class="dir-tables fileicon-tables-doc"></div>';
+							break;
+						case "xls":
+							str += '<div class="text"><div class="dir-tables fileicon-tables-xls"></div>';
+							break;
+						case "xlsx":
+							str += '<div class="text"><div class="dir-tables fileicon-tables-xls"></div>';
+							break;
+						case "png":
+							str += '<div class="text"><div class="dir-tables fileicon-tables-png"></div>';
+							break;
+						case "gif":
+							str += '<div class="text"><div class="dir-tables fileicon-tables-png"></div>';
+							break;
+						case "jpg":
+							str += '<div class="text"><div class="dir-tables fileicon-tables-png"></div>';
+							break;
+						case "txt":
+							str += '<div class="text"><div class="dir-tables fileicon-tables-txt"></div>';
+							break;
+						case "mp4":
+							str += '<div class="text"><div class="dir-tables fileicon-tables-mp4"></div>';
+							break;
+						case "mpg":
+							str += '<div class="text"><div class="dir-tables fileicon-tables-mp4"></div>';
+							break;
+						case "zip":
+							str += '<div class="text"><div class="dir-tables fileicon-tables-zip"></div>';
+							break;
+						default:
+							str += '<div class="fileicon"></div>'
+								+ '<div class="text"><div class="filenameicon"></div>';
+							break;
+						}
+					}else{
+						str += '<div class="fileicon"></div>'
+							+ '<div class="text"><div class="filenameicon"></div>';
+					}
+					str += '<a class="filename" id="a'+(i+1)+'"  style="padding-left: 6px;"'
+						+ 'href="javascript:getNextPath(' + '\'/' + path
+						+ '/\',' + 1 + ')" title=' + path + '>' + path
+						+ '</a></div></li>'
+						+ '<li class="file-size" style="width: 16%;">'
+						+ data[i].filesize + 'KB</li>' + '<li>'
+						+ data[i].uploaddate + '</li></dd>';
+				}
+				pass[i] = path;
+			}
+			$(".list-view").html("").append($(str));
+			// 右上角显示
+			var a = getFileNames();
+			$(".history-list-tips").html("").append("已全部加载，共" + (a.length) + "个文件");
+
 		}
 	});
 }

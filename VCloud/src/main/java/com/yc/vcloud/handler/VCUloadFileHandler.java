@@ -88,9 +88,8 @@ public class VCUloadFileHandler {
 	 * @throws IOException
 	 * @throws IllegalStateException
 	 */
-	//"uploadFile/VCFileLoad/"+nextpath
 	@RequestMapping(value = "/VCFileLoad", method = RequestMethod.POST)
-	public String VCFileLoad(@RequestParam String nextpath, VCUploadFile uploadFile,HttpServletRequest request, HttpSession session,PrintWriter out)
+	public String VCFileLoad(@RequestParam String nextpath,VCUploadFile uploadFile,HttpServletRequest request, HttpSession session,PrintWriter out)
 			throws IllegalStateException, IOException {
 		System.out.println("金利来。。。"+nextpath);
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -127,7 +126,9 @@ public class VCUloadFileHandler {
 		VCUploadFile file = new VCUploadFile(user.getUserid(), nextpath + filename, length,
 				sdf.format(new Date()), "文件", filename);
 		boolean flag = vCUploadFileService.uploadFile(file);
-		out.print(file);
+		System.out.println("文件上传后"+user.getUserid()+file.getFilepath());
+		List<VCUploadFile> wangFile=vCUploadFileService.getAllFileWang(user.getUserid(),file.getFilepath());
+		out.print(wangFile);
 		out.flush();
 		out.close();
 		if (flag) {
