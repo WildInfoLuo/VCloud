@@ -2,6 +2,8 @@ package com.yc.vcloud.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.yc.vcloud.entity.VCUploadCount;
 import com.yc.vcloud.entity.VCUploadFile;
 import com.yc.vcloud.entity.VCUser;
@@ -27,4 +29,7 @@ public interface VCUploadFileMapper {
 	List<VCUploadFile> getAllMusic(VCUploadFile file);
 
 	VCUploadCount getMusicCount();
+	
+	List<VCUploadFile> getAllFileWang(@Param("userid")int userid,@Param("filepath")String filepath);
+
 }

@@ -66,4 +66,9 @@ public class VCUploadFileServiceImpl implements VCUploadFileService {
 		return vCUploadFileMapper.getMusicCount();
 	}
 
+	@Override
+	public List<VCUploadFile> getAllFileWang(int userid,String filePath) {
+		return vCUploadFileMapper.getAllFileWang(userid,filePath);
+	}
+
 }
