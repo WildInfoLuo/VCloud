@@ -19,7 +19,7 @@ public interface VCUploadFileService {
 	List<VCUploadCount> getPhotoCount();
 	
 	//删除文件夹的方法
-	boolean delFiles(List<String> paths);
+	boolean delFiles(String paths);
 
 	List<VCUploadFile> getAllDoc(VCUploadFile file);
 
@@ -32,5 +32,7 @@ public interface VCUploadFileService {
 	boolean shareFile(VCShareFile list);
 
 	List<VCUploadFile> findShareFile(VCShareFile file);
+	//上传文件异步刷新
+	List<VCUploadFile> getAllFileWang(int userid,String filePath);
 
 }

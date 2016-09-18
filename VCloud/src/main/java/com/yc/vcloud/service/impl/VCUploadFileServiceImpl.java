@@ -45,7 +45,7 @@ public class VCUploadFileServiceImpl implements VCUploadFileService {
 	}
 
 	@Override
-	public boolean delFiles(List<String> paths) {
+	public boolean delFiles(String paths) {
 		return vCUploadFileMapper.delFiles(paths);
 	}
 	public List<VCUploadFile> getAllDoc(VCUploadFile file) {
@@ -75,6 +75,10 @@ public class VCUploadFileServiceImpl implements VCUploadFileService {
 	@Override
 	public List<VCUploadFile> findShareFile(VCShareFile file) {
 		return vCUploadFileMapper.findShareFile(file);
+	}
+	
+	public List<VCUploadFile> getAllFileWang(int userid,String filePath) {
+		return vCUploadFileMapper.getAllFileWang(userid,filePath);
 	}
 
 }

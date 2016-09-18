@@ -33,13 +33,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		group by uploaddate  order by uploaddate desc
 	</select>
 	
-	<delete id="delFiles" parameterType="String">
-		delete from uploadfile where filepath like
-		<foreach collection="list" item="paths" separator=",">
+	<update id="delFiles" parameterType="String">
+		update uploadfile set isdel = 1 
+		<where>
 			<!-- regexp_like(filepath,'^'||#{paths}||'+') -->
-			'%'||#{paths}
-		</foreach>
-	</delete>
+			filepath like #{paths}||'%'
+		</where>
+	</update>
 	
 	<insert id="shareFile" parameterType="VCShareFile">
 		insert into VCShare values(seq_shareid.nextval,#{userid},#{filepath},#{password},#{temp1},#{temp2})
@@ -61,5 +61,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id="getMusicCount" resultType="VCUploadCount">
 		select count(*) count from uploadfile  where isdir=0 and temp1='音乐' and isdel=0
+	</select>
+	
+	<select id="getAllFileWang" parameterType="VCUploadFile" resultType="VCUploadFile">
+		select ufid,userid,filepath,filesize,to_char(uploaddate,'yyyy-mm-dd HH:MI:ss') uploaddate,filestatus,stoppoingpath,status,isdir,temp1,temp2,rownum
+		 from uploadfile where userid=#{userid} and filepath=#{filepath} and isdir=0  order by uploaddate desc
 	</select>
 </mapper>

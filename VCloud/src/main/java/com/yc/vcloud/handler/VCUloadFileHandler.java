@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -89,11 +88,9 @@ public class VCUloadFileHandler {
 	 * @throws IOException
 	 * @throws IllegalStateException
 	 */
-	//"uploadFile/VCFileLoad/"+nextpath
 	@RequestMapping(value = "/VCFileLoad", method = RequestMethod.POST)
-	public String VCFileLoad(@RequestParam String nextpath, VCUploadFile uploadFile,HttpServletRequest request, HttpSession session,PrintWriter out)
+	public String VCFileLoad(@RequestParam String nextpath,VCUploadFile uploadFile,HttpServletRequest request, HttpSession session,PrintWriter out)
 			throws IllegalStateException, IOException {
-		System.out.println("金利来。。。"+nextpath);
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		String uploadpath = "../sources/";
 		String filename = "";
@@ -128,12 +125,17 @@ public class VCUloadFileHandler {
 		VCUploadFile file = new VCUploadFile(user.getUserid(), nextpath + filename+"/", length,
 				sdf.format(new Date()), "文件", filename);
 		boolean flag = vCUploadFileService.uploadFile(file);
-		out.print(file);
+		System.out.println("文件上传后"+user.getUserid()+file.getFilepath());
+		//JSONObject jsonObject = new JSONObject();
+		List<VCUploadFile> wangFile=vCUploadFileService.getAllFileWang(user.getUserid(),file.getFilepath());
+		session.setAttribute(SessionAttribute.FILESESSION, wangFile);
+		Gson gson=new Gson();
+		//jsonObject.put("data", wangFile);
+		out.print(gson.toJson(wangFile));
 		out.flush();
 		out.close();
 		if (flag) {
 			long endTime = System.currentTimeMillis();
-			
 			System.out.println("运行时间：" + String.valueOf(endTime - startTime) + "ms");
 			return "Person_VCloud";
 		}
@@ -387,20 +389,20 @@ public class VCUloadFileHandler {
 		return "Person_VCloud";
 	}
 	//删除文件的方法
-	@ResponseBody
 	@RequestMapping(value="/delFile",method=RequestMethod.POST)
-	public String delFiles(@RequestParam(value="delpaths[]") String[] delpaths){
-		System.out.println("===>"+delpaths.length);
-		List<String> list = new ArrayList<String>();
+	public String delFiles(@RequestParam(value="delpaths[]") String[] delpaths,@RequestParam(value="date")String date,PrintWriter out){
+		System.out.println("===>");
+		System.out.println("delpaths===>"+delpaths.length);
+		
+		boolean flag= false;
 		for(String str:delpaths){
 			if(""!=str && str!=null){
-				list.add(str);
+				flag = vCUploadFileService.delFiles(str);
 			}
 		}
-		System.out.println(list);
-		System.out.println(list.size());
-		boolean flag = vCUploadFileService.delFiles(list);
-		System.out.println("==>"+flag);
+		out.println(flag);
+		out.flush();
+		out.close();
 		return "Person_VCloud";
 	}
 	
