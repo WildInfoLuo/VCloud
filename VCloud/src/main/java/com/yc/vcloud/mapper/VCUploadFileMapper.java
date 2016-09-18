@@ -2,6 +2,7 @@ package com.yc.vcloud.mapper;
 
 import java.util.List;
 
+import com.yc.vcloud.entity.VCShareFile;
 import com.yc.vcloud.entity.VCUploadCount;
 import com.yc.vcloud.entity.VCUploadFile;
 import com.yc.vcloud.entity.VCUser;
@@ -27,4 +28,8 @@ public interface VCUploadFileMapper {
 	List<VCUploadFile> getAllMusic(VCUploadFile file);
 
 	VCUploadCount getMusicCount();
+
+	boolean shareFile(VCShareFile list);
+
+	List<VCUploadFile> findShareFile(VCShareFile file);
 }

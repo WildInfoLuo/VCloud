@@ -2,6 +2,7 @@ package com.yc.vcloud.service;
 
 import java.util.List;
 
+import com.yc.vcloud.entity.VCShareFile;
 import com.yc.vcloud.entity.VCUploadCount;
 import com.yc.vcloud.entity.VCUploadFile;
 
@@ -27,5 +28,9 @@ public interface VCUploadFileService {
 	List<VCUploadFile> getAllMusic(VCUploadFile file);
 
 	VCUploadCount getMusicCount();
+
+	boolean shareFile(VCShareFile list);
+
+	List<VCUploadFile> findShareFile(VCShareFile file);
 
 }

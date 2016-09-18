@@ -649,6 +649,12 @@ function upFileLoad() {
 	});
 }
 
+//分享文件
+function shareFile(){
+	$(".bg").css("display","block");
+	showpath();
+}
+
 // 删除文件
 function deleteFile() {
 	alert(delpaths[0]);

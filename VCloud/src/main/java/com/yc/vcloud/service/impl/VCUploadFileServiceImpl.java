@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.yc.vcloud.entity.VCShareFile;
 import com.yc.vcloud.entity.VCUploadCount;
 import com.yc.vcloud.entity.VCUploadFile;
 import com.yc.vcloud.entity.VCadmin;
@@ -64,6 +65,16 @@ public class VCUploadFileServiceImpl implements VCUploadFileService {
 	@Override
 	public VCUploadCount getMusicCount() {
 		return vCUploadFileMapper.getMusicCount();
+	}
+
+	@Override
+	public boolean shareFile(VCShareFile list) {
+		return vCUploadFileMapper.shareFile(list);
+	}
+
+	@Override
+	public List<VCUploadFile> findShareFile(VCShareFile file) {
+		return vCUploadFileMapper.findShareFile(file);
 	}
 
 }
