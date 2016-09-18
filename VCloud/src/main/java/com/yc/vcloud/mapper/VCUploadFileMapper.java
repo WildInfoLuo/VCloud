@@ -37,4 +37,6 @@ public interface VCUploadFileMapper {
 	
 	List<VCUploadFile> getAllFileWang(@Param("userid")int userid,@Param("filepath")String filepath);
 
+	String surePwd(VCShareFile file);
+
 }

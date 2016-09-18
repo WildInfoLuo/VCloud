@@ -159,7 +159,20 @@
 			</div>
 		</div>
 	</div>
-
+	<div id="pwdinput">
+		<span style="color: rgb(49,173,238);font-size:18px;font-family:monospace;margin-left:10px;margin-top:20px;display: inline-block;">请输入提取密码</span>
+		<div>
+			<span id="pwdError" style="margin-left:190px;font-size:12px;display: inline-block;font-family: monospace;color: red;">
+			</span>
+			<br>
+			<span style="margin-left:150px;font-size:12px;margin-top:10px;display: inline-block;font-family: monospace;">
+				提取密码
+			</span>
+			<input id="pwd" type="text"  style="width:83px;height:28px;margin-top:30px;margin-left:50px;"/>
+			<br><a id="surepwd" onclick="surepwd()"></a>
+		</div>
+	</div>
+	
 	<div class="gizmoMenu gizmoDropDown">
 		<ul>
 			<li><i class="fa fa-camera-retro"></i><a href="#">查看</a><img

@@ -238,7 +238,7 @@ public class VCUloadFileHandler {
 
 		}
 		VCUploadFile file = new VCUploadFile(user.getUserid(), null);
-		List<VCUploadFile> files = vCUploadFileService.getAllPhoto(file);
+		List<VCUploadFile> files = vCUploadFileService.getAllDoc(file);
 		map.put(SessionAttribute.DOC, files);
 		long endTime = System.currentTimeMillis();
 		System.out.println("运行时间：" + String.valueOf(endTime - startTime) + "ms");
@@ -376,17 +376,45 @@ public class VCUloadFileHandler {
 	}
 	
 	@RequestMapping(value="/findShareFile",method=RequestMethod.POST)
-	public String findShareFile(HttpSession session,HttpServletRequest request,PrintWriter out){
+	public void findShareFile(HttpSession session,HttpServletRequest request,PrintWriter out){
 		String time =(String) session.getAttribute("shareFile");
 		VCShareFile file = new VCShareFile(0, 0, "", "", "", time);
+		String pwd=vCUploadFileService.surePwd(file);
+		if(pwd!=null){
+			out.println(1);
+			out.flush();
+			out.close();
+//			return "downloadshare";
+		}else{
+			List<VCUploadFile> files = vCUploadFileService.findShareFile(file);
+			Gson gs = new Gson();
+			String fileStr = gs.toJson(files);
+			out.println(fileStr);
+			out.flush();
+			out.close();
+//			return "downloadshare";
+		}
 		
-		List<VCUploadFile> files = vCUploadFileService.findShareFile(file);
-		Gson gs = new Gson();
-		String fileStr = gs.toJson(files);
-		out.println(fileStr);
-		out.flush();
-		out.close();
-		return "Person_VCloud";
+	}
+	
+	@RequestMapping(value="/surepwd",method=RequestMethod.POST)
+	public void surepwd(HttpSession session,HttpServletRequest request,PrintWriter out,String pwd,ModelMap map){
+		String time =(String) session.getAttribute("shareFile");
+		VCShareFile file = new VCShareFile(0, 0, "", "", "", time);
+		String truepwd=vCUploadFileService.surePwd(file);
+		if(pwd.equals(truepwd)){
+			List<VCUploadFile> files = vCUploadFileService.findShareFile(file);
+			Gson gs = new Gson();
+			String fileStr = gs.toJson(files);
+			out.println(fileStr);
+			out.flush();
+			out.close();
+		}else{
+			out.println(1);
+			out.flush();
+			out.close();
+		}
+		
 	}
 	//删除文件的方法
 	@RequestMapping(value="/delFile",method=RequestMethod.POST)

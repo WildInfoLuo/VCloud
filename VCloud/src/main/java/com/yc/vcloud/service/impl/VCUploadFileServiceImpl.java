@@ -81,4 +81,9 @@ public class VCUploadFileServiceImpl implements VCUploadFileService {
 		return vCUploadFileMapper.getAllFileWang(userid,filePath);
 	}
 
+	@Override
+	public String surePwd(VCShareFile file) {
+		return vCUploadFileMapper.surePwd(file);
+	}
+
 }

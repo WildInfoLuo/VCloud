@@ -15,6 +15,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		 from uploadfile where filepath in (select filepath from VCShare where temp2=#{temp2}  ) and isdel=0
 	</select>
 	
+	<select id="surePwd" parameterType="VCShareFile" resultType="String">
+		select password from VCShare where temp2=#{temp2}
+	</select>
+	
 	<insert id="insertFile" parameterType="VCUploadFile">
 		insert into uploadfile values(seq_ufid.nextval,#{userid},#{filepath},0,to_date(#{uploaddate},'yyyy-mm-dd HH24:MI:ss'),1,null,1,1,null,null,0)
 	</insert>

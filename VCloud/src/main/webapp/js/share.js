@@ -48,9 +48,12 @@ function showperson(){
 		num = Math.ceil(Math.random()*10)+10;
 		nums += ens[num];
 	}
-	$("#personpwd").val(nums);
-	$("#sharepath").css({"display":"none"});
-	$("#personsuc").css({"display":"block"});
+	$.post("uploadFile/shareFile", {delpaths:delpaths,password:nums}, function(data) {
+		$("#sharepath").css({"display":"none"});
+		$("#personpath-text").val(data);
+		$("#personpwd").val(nums);
+		$("#personsuc").css({"display":"block"});
+	})
 }
 
 //复制链接到粘贴板中
@@ -162,8 +165,15 @@ $(function() {
 	var pass = new Array();
 
 	$.post("uploadFile/findShareFile/", function(data) {
-		pathData = data;
-		init();
+		if(typeof(data)=="number"){
+			$("#navbar").css({"display":"none"});
+			$(".content").css({"display":"none"});
+			$("#bg").css({"display":"block"});
+			$("#pwdinput").css({"display":"block"});
+		}else{
+			pathData = data;
+			init();
+		}
 	}, "json");
 });
 
@@ -841,6 +851,28 @@ function pathDataDel(path){//上一级路径+当前路径
 }
 
 
+function surepwd(){
+	var pwd=$("#pwd").val();
+	$.post("uploadFile/surepwd/",{pwd:pwd}, function(data) {
+		if(data!=1){
+			$("#navbar").css({"display":"block"});
+			$(".content").css({"display":"block"});
+			$("#bg").css({"display":"none"});
+			$("#pwdinput").css({"display":"none"});
+			pathData = data;
+			init();
+		}else{
+			alert();
+			$("#pwdError").html("提取密码不正确");
+			$("#pwd").val("");
+		}
+	}, "json");
+}
 
-
-
+$(function(){
+	 $('body').keypress(function(event){
+		 if(event.which==13){
+			 surepwd();
+		 }
+	 });
+});

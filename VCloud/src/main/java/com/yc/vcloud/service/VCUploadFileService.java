@@ -35,4 +35,6 @@ public interface VCUploadFileService {
 	//上传文件异步刷新
 	List<VCUploadFile> getAllFileWang(int userid,String filePath);
 
+	String surePwd(VCShareFile file);
+
 }
