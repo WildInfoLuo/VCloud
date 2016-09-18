@@ -58,7 +58,6 @@ function editSure() {
 	} else {
 		n = nextpath.substr(1) + name;
 	}
-	pathDataAdd(n,date)
 	$.post("uploadFile/addDir/" + date,{name : n},
 					function(data) {
 						if (data) {
@@ -89,11 +88,7 @@ function editSure() {
 									+ '<li class="file-size" style="width: 16%;">-</li>'
 									+ '<li>' + date + '</li></dd>';
 							$(".list-view").prepend($(str)); // 显示在第一条
-							/*
-							 * pathData[pathData.length-1] =
-							 * [{"filepath":"/"+n,"uploaddate":date}];
-							 * alert(pathData[pathData.length-1].filepath);
-							 */
+							pathDataAdd(n,date,0)
 						}
 					});
 	$(".module-edit-name").css("display", "none");
@@ -253,6 +248,8 @@ function filenameIcon(id) {
 	var idstr = "";
 	var a = new Array();
 	var icons = $(".open-enable li span");
+	
+	//取得length
 	length = icons.length;
 	var path = $("#path").html(); // 上一级路径
 	if (path != undefined) {
@@ -288,7 +285,7 @@ function filenameIcon(id) {
 	for (var i = 0; i <= a[a.length - 1]; i++) {
 		if (tcheckIcon[a[i]] == true) {
 			checked++;
-			delpaths[i] = path + $("#a" + a[i] + "").html() + "/";
+			delpaths[i] = path + $("#a" + a[i] + "").html()+"/";
 			$(".textCla").hide();
 			$(".list-header-operatearea").show();
 			$(".check-icon" + a[i]).css(divcss2);
@@ -639,7 +636,7 @@ function upFileLoad() {
 		fileElementId : "h5Input0",
 		dataType : 'json',
 		success : function(data, status) {
-			if (data > 0) {
+			if (data != null) {
 				alert(data+"进来了")
 			}
 		},
@@ -651,11 +648,16 @@ function upFileLoad() {
 
 // 删除文件
 function deleteFile() {
-	alert(delpaths[0]);
-	
 	$.post("uploadFile/delFile", {delpaths:delpaths}, function(data) {
 		pathDataDel(delpaths);
 		init();
+		var a = getFileNames();
+		checked2 = 0;
+		for (var i = 0; i < a.length; i++) {
+			tcheckIcon[i] = false;
+		}
+		filenameIcon(-1);
+		delpaths.length = 0;
 	})
 }
 
@@ -666,22 +668,24 @@ function pathDataAdd(path,date,filesize){
 	arr.uploaddate = date
 	arr.filesize = filesize;
 	pathData.push(arr);
-	alert(pathData[pathData.length-1].filepath);
 }
 
 //从pathData中删除元素的方法
 function pathDataDel(path){//上一级路径+当前路径
-	alert(pathData.length);
-	console.info(pathData);
-	for(var i = 0;i<pathData.length;i++){
-		console.info(pathData[i].filepath);
-		if(pathData[i].filepath.indexOf(path[i])!=0){
-			alert(pathData[i].filepath);
+	var i = 0;
+	var num = 0;
+	while(i<pathData.length){
+		if(pathData[i].filepath.indexOf(path[num])==0){
 			pathData.splice(i, 1);
+			num++;
+			i=0;
+		}else{
+			i++;
+		}
+		if(num == path.length){
+			return;
 		}
 	}
-	alert(pathData.length);
-	console.info(pathData);
 }
 
 

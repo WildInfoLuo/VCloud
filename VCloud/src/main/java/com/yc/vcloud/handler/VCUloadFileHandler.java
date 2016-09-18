@@ -354,16 +354,14 @@ public class VCUloadFileHandler {
 	@RequestMapping(value="/delFile",method=RequestMethod.POST)
 	public String delFiles(@RequestParam(value="delpaths[]") String[] delpaths){
 		System.out.println("===>"+delpaths.length);
-		List<String> list = new ArrayList<String>();
+		boolean flag= false;
 		for(String str:delpaths){
 			if(""!=str && str!=null){
-				list.add(str);
+				flag = vCUploadFileService.delFiles(str);
+				System.out.println("str==>"+str);
+				System.out.println("==>"+flag);
 			}
 		}
-		System.out.println(list);
-		System.out.println(list.size());
-		boolean flag = vCUploadFileService.delFiles(list);
-		System.out.println("==>"+flag);
 		return "Person_VCloud";
 	}
 	

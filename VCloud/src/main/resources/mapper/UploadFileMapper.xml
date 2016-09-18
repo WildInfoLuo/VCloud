@@ -5,7 +5,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.yc.vcloud.mapper.VCUploadFileMapper">
 	<select id="getFiles" parameterType="VCUploadFile" resultType="VCUploadFile">
 		select ufid,userid,filepath,filesize,to_char(uploaddate,'yyyy-mm-dd HH:MI:ss') uploaddate,filestatus,stoppoingpath,status,isdir,isdel 
-		 from uploadfile where userid=#{userid}
+		 from uploadfile where userid=#{userid} and isdel = 0 
 		 <if test="filepath != null">
 		 	 and regexp_like(filepath,'^'||#{filepath}||'+')
 		 </if>
@@ -21,7 +21,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<insert id="uploadFile" parameterType="VCUploadFile">
-		insert into uploadfile values(seq_ufid.nextval,#{userid},#{filepath},#{filesize},to_date(#{uploaddate},'yyyy-mm-dd HH24:MI:ss'),1,null,1,0,#{temp1},#{temp2})
+		insert into uploadfile values(seq_ufid.nextval,#{userid},#{filepath},#{filesize},to_date(#{uploaddate},'yyyy-mm-dd HH24:MI:ss'),1,null,1,0,#{temp1},#{temp2},0)
 	</insert>
 	
 	<select id="getPhotoCount" resultType="VCUploadCount">
@@ -29,13 +29,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		group by uploaddate  order by uploaddate desc
 	</select>
 	
-	<delete id="delFiles" parameterType="String">
-		delete from uploadfile where filepath like
-		<foreach collection="list" item="paths" separator=",">
+	<update id="delFiles" parameterType="String">
+		update uploadfile set isdel = 1 
+		<where>
 			<!-- regexp_like(filepath,'^'||#{paths}||'+') -->
-			'%'||#{paths}
-		</foreach>
-	</delete>
+			filepath like #{paths}||'%'
+		</where>
+	</update>
 	
 	<select id="getAllDoc" parameterType="VCUploadFile" resultType="VCUploadFile">
 		select ufid,userid,filepath,filesize,to_char(uploaddate,'yyyy-mm-dd HH:MI:ss') uploaddate,filestatus,stoppoingpath,status,isdir,temp1,temp2,rownum

@@ -18,7 +18,7 @@ public interface VCUploadFileService {
 	List<VCUploadCount> getPhotoCount();
 	
 	//删除文件夹的方法
-	boolean delFiles(List<String> paths);
+	boolean delFiles(String paths);
 
 	List<VCUploadFile> getAllDoc(VCUploadFile file);
 
