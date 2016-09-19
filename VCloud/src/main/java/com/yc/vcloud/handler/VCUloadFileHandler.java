@@ -122,8 +122,8 @@ public class VCUloadFileHandler {
 			}
 		}
 		VCUser user = (VCUser) session.getAttribute(SessionAttribute.USERLOGIN);
-		VCUploadFile file = new VCUploadFile(user.getUserid(), nextpath + filename, length,
-				sdf.format(new Date()), "文件", filename,"1");
+		VCUploadFile file = new VCUploadFile(user.getUserid(), nextpath + filename+"/", length,
+				sdf.format(new Date()), "文件", filename,"0");
 		boolean flag = vCUploadFileService.uploadFile(file);
 		System.out.println("文件上传后"+user.getUserid()+nextpath);
 		List<VCUploadFile> wangFile=vCUploadFileService.getAllFileWang(user.getUserid(),nextpath);
@@ -177,8 +177,8 @@ public class VCUloadFileHandler {
 					multipartFile.transferTo(f);
 					length = (int) (f.length() / 1024);
 				}
-				VCUploadFile file = new VCUploadFile(user.getUserid(), "/我的资源/新建文件夹/" + filename, length,
-						sbf.format(new Date()), "图片", filename,"1");
+				VCUploadFile file = new VCUploadFile(user.getUserid(), "/我的资源/新建文件夹/" + filename+"/", length,
+						sbf.format(new Date()), "图片", filename,"0");
 				 vCUploadFileService.uploadFile(file);
 			}
 		}
@@ -228,7 +228,7 @@ public class VCUloadFileHandler {
 					multipartFile.transferTo(f);
 					length = (int) (f.length() / 1024);
 				}
-				VCUploadFile file = new VCUploadFile(user.getUserid(), "/我的资源/新建文件夹/" + filename, length,
+				VCUploadFile file = new VCUploadFile(user.getUserid(), "/我的资源/新建文件夹/" + filename+"/", length,
 						sbf.format(new Date()), "文档", filename,"0");
 				 vCUploadFileService.uploadFile(file);
 			}
@@ -279,7 +279,7 @@ public class VCUloadFileHandler {
 					length = (int) (f.length() / 1024);
 				}
 				System.out.println(multipartFile.getOriginalFilename());
-				VCUploadFile file = new VCUploadFile(user.getUserid(), "/我的资源/新建文件夹/" + filename, length,
+				VCUploadFile file = new VCUploadFile(user.getUserid(), "/我的资源/新建文件夹/" + filename+"/", length,
 						sbf.format(new Date()), "音乐", filename,"0");
 				 vCUploadFileService.uploadFile(file);
 			}
