@@ -59,7 +59,6 @@ function editSure() {
 		n = nextpath.substr(1) + name;
 	}
 	var num = getMaxNum();
-	alert(num);
 	$.post("uploadFile/addDir/" + date,{name : n},
 					function(data) {
 						if (data) {
@@ -90,7 +89,7 @@ function editSure() {
 									+ '<li class="file-size" style="width: 16%;">-</li>'
 									+ '<li>' + date + '</li></dd>';
 							$(".list-view").prepend($(str)); // 显示在第一条
-							pathDataAdd(n,date,0)
+							pathDataAdd("/"+n+"/",date,0);
 						}
 					});
 	$(".module-edit-name").css("display", "none");
@@ -651,22 +650,88 @@ function upFileLoad() {
 		},
 		secureuri : false,
 		fileElementId : "h5Input0",
-		dataType:'json',
+		dataType : 'json',
 		success : function(data, status) {
-			alert("文件属性1" + JSON.stringify(data));
-			if (data > 0) {
-				var str = "";
-				var pass = new Array();
-				str += '';
-				$(".list-view").html("").append($(str));
-				// 右上角显示
-				var a = getFileNames();
-				$(".history-list-tips").html("").append("已全部加载，共" + (a.length) + "个文件");
+			alert(JSON.stringify(data));
+			var str = "";
+			var pass = new Array();
+			for (var i = 0; i < data.length; i++) {
+				var path = parseFilePath(data[i].filepath, 1);
+				alert("目前的路径"+path);
+				if ($.inArray(path, pass) == -1) {
+					str += '<dd class="open-enable">'
+							+ '<li class="file-name" style="width: 60%;"><span '
+							+ 'class="check-icon'
+							+ (i + 1)
+							+ '" onclick="filenameIcon('
+							+ (i + 1)
+							+ ')"'
+							+ 'style="background: rgba(0, 0, 0, 0) url(images/list-view_4e60b0c.png) no-repeat scroll -9px -12px;height: 14px; left: 11px; width: 14px; top: 20px; margin: 15px 10px; float: left;"></span>';
+					if (data[i].filepath.indexOf(".") != -1
+							&& data[i].isdir == 0) {
+						switch (path.substr(path.lastIndexOf(".") + 1)) {
+						case "doc":
+							str += '<div class="text"><div class="dir-tables fileicon-tables-doc"></div>';
+							break;
+						case "docx":
+							str += '<div class="text"><div class="dir-tables fileicon-tables-doc"></div>';
+							break;
+						case "xls":
+							str += '<div class="text"><div class="dir-tables fileicon-tables-xls"></div>';
+							break;
+						case "xlsx":
+							str += '<div class="text"><div class="dir-tables fileicon-tables-xls"></div>';
+							break;
+						case "png":
+							str += '<div class="text"><div class="dir-tables fileicon-tables-png"></div>';
+							break;
+						case "gif":
+							str += '<div class="text"><div class="dir-tables fileicon-tables-png"></div>';
+							break;
+						case "jpg":
+							str += '<div class="text"><div class="dir-tables fileicon-tables-png"></div>';
+							break;
+						case "txt":
+							str += '<div class="text"><div class="dir-tables fileicon-tables-txt"></div>';
+							break;
+						case "mp4":
+							str += '<div class="text"><div class="dir-tables fileicon-tables-mp4"></div>';
+							break;
+						case "mpg":
+							str += '<div class="text"><div class="dir-tables fileicon-tables-mp4"></div>';
+							break;
+						case "zip":
+							str += '<div class="text"><div class="dir-tables fileicon-tables-zip"></div>';
+							break;
+						case "mp3":
+							str += '<div class="text"><div class="dir-tables fileicon-tables-music"></div>';
+							break;
+						default:
+							str += '<div class="fileicon"></div>'
+									+ '<div class="text"><div class="filenameicon"></div>';
+							break;
+						}
+					} else {
+						str += '<div class="fileicon"></div>'
+								+ '<div class="text"><div class="filenameicon"></div>';
+					}
+					str += '<a class="filename" id="a' + (i + 1)
+							+ '"  style="padding-left: 6px;"'
+							+ 'href="javascript:getNextPath(' + '\'/' + nextpath + '/\','
+							+ 1 + ')" title=' + data[i].temp2 + '>' + data[i].temp2  + '</a></div></li>'
+							+ '<li class="file-size" style="width: 16%;">'
+							+ data[i].filesize + 'KB</li>' + '<li>'
+							+ data[i].uploaddate + '</li></dd>';
+				}
+				pass[i] = path;
 			}
-		},
+			$(".list-view").html("").append($(str));
+			// 右上角显示
+			var a = getFileNames();
+			$(".history-list-tips").html("").append("已全部加载，共" + (a.length) + "个文件");
+},
 		error : function(data, status, e) {
-			// data=JSON.stringify(data).substring(0,JSON.stringify(data).indexOf("\",\"responseXML\""));
-			alert("文件属性00" + JSON.stringify(data));
+			alert("文件上传失败...");
 		}
 	});
 }
@@ -691,8 +756,9 @@ function deleteFile() {
 			}
 			filenameIcon(-1);
 			delpaths.length = 0;
+			
 		}
-	})
+	});
 }
 
 //从pathData中添加元素的方法
@@ -706,21 +772,26 @@ function pathDataAdd(path,date,filesize){
 
 //从pathData中删除元素的方法
 function pathDataDel(path){//上一级路径+当前路径
-	var i = 0;
+	var n = 0;
 	var num = 0;
-	console.info(pathData);
-	while(i<pathData.length){
-		if(pathData[i].filepath.indexOf(path[num])==0){
-			pathData.splice(i, 1);
+	for(var i = 0;i<path.length;i++){
+		if(path[i] == null || ""==path[i]){
+			path.splice(i, 1);
+		}
+	}
+	while(n<pathData.length){
+		if(pathData[n].filepath.indexOf(path[num])==0){
+			pathData.splice(n, 1);
 			num++;
-			i=0;
+			n=0;
 		}else{
-			i++;
+			n++;
 		}
 		if(num == path.length){
 			return;
 		}
 	}
+	console.info(pathData);
 }
 
 //获取最大的标识数
@@ -747,6 +818,93 @@ function getMaxNum(){
 	return a[a.length-1];
 }
 
+function showShare(){
+	$("#shareshow").css({"display":"block"});
+}
+
+function closeShare(){
+	$("#shareshow").css({"display":"none"});
+}
+function closeSharePath(){
+	$("#sharepath").css({"display":"none"});
+	$(".bg").css("display","none");
+}
+
+function closepublicsuc(){
+	$("#publicsuc").css({"display":"none"});
+	$(".bg").css("display","none");
+}
+
+function closepersonsuc(){
+	$("#personsuc").css({"display":"none"});
+	$(".bg").css("display","none");
+}
+
+function showpath(){
+	$("#shareshow").css({"display":"none"});
+	$("#sharepath").css({"display":"block"});
+}
+
+function showpublic(){
+	$.post("uploadFile/shareFile", {delpaths:delpaths}, function(data) {
+		$("#sharepath").css({"display":"none"});
+		$("#publicsuc input").val(data);
+		$("#publicsuc").css({"display":"block"});
+		
+	})
+}
+
+function showperson(){
+	var nums = "";
+	var num;
+	var ens = ['1','2','3','4','5','6','7','8','9','a','b','c','d','e','f','h','i','j','k','l','m','n'
+	           ,'o','p','q','r','s','t','u','v','w','x','y','z'];
+	for(var i=0;i<2;i++){
+		num = Math.ceil(Math.random()*10)-2;
+		if(num==-1){
+			num=0;
+		}
+		nums += ens[num];
+		num = Math.ceil(Math.random()*10)+10;
+		nums += ens[num];
+	}
+	$.post("uploadFile/shareFile", {delpaths:delpaths,password:nums}, function(data) {
+		$("#sharepath").css({"display":"none"});
+		$("#personpath-text").val(data);
+		$("#personpwd").val(nums);
+		$("#personsuc").css({"display":"block"});
+	})
+}
+
+//复制链接到粘贴板中
+function copypublicpath(){
+	/*alert(window.clipboardData.getData("text"));*/
+	$("#copypath").zclip({
+		path: "ZeroClipboard.swf", 
+		copy: function(){
+			return $("#publicpath-text").val();
+		},
+		afterCopy: function(){ //复制成功
+	       alert('复制成功');
+	    }
+	});
+}
+
+//生成提取码及复制
+function copypersonpath(){
+	var pwd=$("#personpwd").val();
+	var text = $("#personpath-text").val();
+	var str=text+","+pwd;
+	$("#copypath2").zclip({
+		path: "ZeroClipboard.swf", 
+		copy: function(){
+			return str;
+		},
+		afterCopy: function(){ //复制成功
+	       alert('复制成功');
+	    }
+	});
+} 
 
 
 

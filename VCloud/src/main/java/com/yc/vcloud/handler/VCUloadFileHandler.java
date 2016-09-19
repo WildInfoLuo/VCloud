@@ -122,15 +122,13 @@ public class VCUloadFileHandler {
 			}
 		}
 		VCUser user = (VCUser) session.getAttribute(SessionAttribute.USERLOGIN);
-		VCUploadFile file = new VCUploadFile(user.getUserid(), nextpath + filename+"/", length,
-				sdf.format(new Date()), "文件", filename);
+		VCUploadFile file = new VCUploadFile(user.getUserid(), nextpath + filename, length,
+				sdf.format(new Date()), "文件", filename,"1");
 		boolean flag = vCUploadFileService.uploadFile(file);
-		System.out.println("文件上传后"+user.getUserid()+file.getFilepath());
-		//JSONObject jsonObject = new JSONObject();
-		List<VCUploadFile> wangFile=vCUploadFileService.getAllFileWang(user.getUserid(),file.getFilepath());
+		System.out.println("文件上传后"+user.getUserid()+nextpath);
+		List<VCUploadFile> wangFile=vCUploadFileService.getAllFileWang(user.getUserid(),nextpath);
 		session.setAttribute(SessionAttribute.FILESESSION, wangFile);
 		Gson gson=new Gson();
-		//jsonObject.put("data", wangFile);
 		out.print(gson.toJson(wangFile));
 		out.flush();
 		out.close();
@@ -179,11 +177,10 @@ public class VCUloadFileHandler {
 					multipartFile.transferTo(f);
 					length = (int) (f.length() / 1024);
 				}
-				VCUploadFile file = new VCUploadFile(user.getUserid(), "/我的资源/新建文件夹/" + filename+"/", length,
-						sbf.format(new Date()), "图片", filename);
+				VCUploadFile file = new VCUploadFile(user.getUserid(), "/我的资源/新建文件夹/" + filename, length,
+						sbf.format(new Date()), "图片", filename,"1");
 				 vCUploadFileService.uploadFile(file);
 			}
-
 		}
 		
 		VCUploadFile file = new VCUploadFile(user.getUserid(), null);
@@ -231,8 +228,8 @@ public class VCUloadFileHandler {
 					multipartFile.transferTo(f);
 					length = (int) (f.length() / 1024);
 				}
-				VCUploadFile file = new VCUploadFile(user.getUserid(), "/我的资源/新建文件夹/" + filename+"/", length,
-						sbf.format(new Date()), "文档", filename);
+				VCUploadFile file = new VCUploadFile(user.getUserid(), "/我的资源/新建文件夹/" + filename, length,
+						sbf.format(new Date()), "文档", filename,"0");
 				 vCUploadFileService.uploadFile(file);
 			}
 
@@ -282,8 +279,8 @@ public class VCUloadFileHandler {
 					length = (int) (f.length() / 1024);
 				}
 				System.out.println(multipartFile.getOriginalFilename());
-				VCUploadFile file = new VCUploadFile(user.getUserid(), "/我的资源/新建文件夹/" + filename+"/", length,
-						sbf.format(new Date()), "音乐", filename);
+				VCUploadFile file = new VCUploadFile(user.getUserid(), "/我的资源/新建文件夹/" + filename, length,
+						sbf.format(new Date()), "音乐", filename,"0");
 				 vCUploadFileService.uploadFile(file);
 			}
 
@@ -418,14 +415,16 @@ public class VCUloadFileHandler {
 	}
 	//删除文件的方法
 	@RequestMapping(value="/delFile",method=RequestMethod.POST)
-	public String delFiles(@RequestParam(value="delpaths[]") String[] delpaths,@RequestParam(value="date")String date,PrintWriter out){
-		System.out.println("===>");
+	public String delFiles(@RequestParam(value="delpaths[]") String[] delpaths,@RequestParam(value="date")String date,
+							PrintWriter out, HttpSession session){
+		VCUser user = (VCUser) session.getAttribute(SessionAttribute.USERLOGIN);
+		System.out.println("date===>"+date);
 		System.out.println("delpaths===>"+delpaths.length);
-		
 		boolean flag= false;
 		for(String str:delpaths){
 			if(""!=str && str!=null){
 				flag = vCUploadFileService.delFiles(str);
+				vCUploadFileService.insertRecyle(str, date, user.getUserid());
 			}
 		}
 		out.println(flag);

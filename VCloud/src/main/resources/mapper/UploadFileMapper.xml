@@ -4,12 +4,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.yc.vcloud.mapper.VCUploadFileMapper">
 	<select id="getFiles" parameterType="VCUploadFile" resultType="VCUploadFile">
-		select ufid,userid,filepath,filesize,to_char(uploaddate,'yyyy-mm-dd HH:MI:ss') uploaddate,filestatus,stoppoingpath,status,isdir,isdel 
-		 from uploadfile where userid=#{userid} and isdel=0
+		select ufid,userid,filepath,filesize,to_char(uploaddate,'yyyy-mm-dd HH24:MI:ss') uploaddate,filestatus,stoppoingpath,status,isdir,isdel 
+		 from uploadfile where userid=#{userid} and isdel = 0 
 		 <if test="filepath != null">
 		 	 and regexp_like(filepath,'^'||#{filepath}||'+')
 		 </if>
+		 order by ufid desc
 	</select>
+	
 	<select id="findShareFile" parameterType="VCShareFile" resultType="VCUploadFile">
 		select ufid,userid,filepath,filesize,to_char(uploaddate,'yyyy-mm-dd HH:MI:ss') uploaddate,filestatus,stoppoingpath,status,isdir,isdel 
 		 from uploadfile where filepath in (select filepath from VCShare where temp2=#{temp2}  ) and isdel=0
@@ -29,7 +31,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<insert id="uploadFile" parameterType="VCUploadFile">
-		insert into uploadfile values(seq_ufid.nextval,#{userid},#{filepath},#{filesize},to_date(#{uploaddate},'yyyy-mm-dd HH24:MI:ss'),1,null,1,0,#{temp1},#{temp2},0)
+		insert into uploadfile values(seq_ufid.nextval,#{userid},#{filepath},#{filesize},to_date(#{uploaddate},'yyyy-mm-dd HH24:MI:ss'),1,null,1,0,#{temp1},#{temp2},#{isdel})
 	</insert>
 	
 	<select id="getPhotoCount" resultType="VCUploadCount">
@@ -45,6 +47,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</where>
 	</update>
 	
+	<insert id="insertRecyle" parameterType="VCRecyle">
+		insert into VCRecyle values(seq_rid.nextval,#{userid},to_date(#{deletedate},'yyyy-mm-dd HH24:MI:ss'),7,#{deletepath},null)
+	</insert>
+	
+	<select id="getUserRecyle" parameterType="int" resultType="VCRecyle">
+		select rid,userid,to_char(deletedate,'yyyy-mm-dd HH24:MI:ss') deletedate,lefttime,deletepath from VCRecyle where userid=#{userid}
+	</select>
 	<insert id="shareFile" parameterType="VCShareFile">
 		insert into VCShare values(seq_shareid.nextval,#{userid},#{filepath},#{password},#{temp1},#{temp2})
 	</insert>
@@ -69,6 +78,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id="getAllFileWang" parameterType="VCUploadFile" resultType="VCUploadFile">
 		select ufid,userid,filepath,filesize,to_char(uploaddate,'yyyy-mm-dd HH:MI:ss') uploaddate,filestatus,stoppoingpath,status,isdir,temp1,temp2,rownum
-		 from uploadfile where userid=#{userid} and filepath=#{filepath} and isdir=0  order by uploaddate desc
+		 from uploadfile where userid=#{userid} and filepath like '${filepath}%' and isdir=0  order by uploaddate desc
 	</select>
 </mapper>

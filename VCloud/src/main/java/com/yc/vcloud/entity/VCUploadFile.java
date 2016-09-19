@@ -12,6 +12,7 @@ public class VCUploadFile {
 	private String temp1;  //存文件类型
 	private String temp2;  //存文件名称
 	private int rownum;//标记勾选框
+	private String isdel;//是否删除
 	
 	public VCUploadFile() {
 	}
@@ -29,13 +30,22 @@ public class VCUploadFile {
 		this.uploaddate = uploaddate;
 	}
 
-	public VCUploadFile(int userid, String filepath, int filesize, String uploaddate,String temp1,String temp2) {
+	public VCUploadFile(int userid, String filepath, int filesize, String uploaddate,String temp1,String temp2,String isdel) {
 		this.userid = userid;
 		this.filepath = filepath;
 		this.filesize = filesize;
 		this.uploaddate = uploaddate;
 		this.temp1=temp1;
 		this.temp2=temp2;
+		this.isdel=isdel;
+	}
+
+	public String getIsdel() {
+		return isdel;
+	}
+
+	public void setIsdel(String isdel) {
+		this.isdel = isdel;
 	}
 
 	public int getUfid() {
@@ -131,9 +141,9 @@ public class VCUploadFile {
 
 	@Override
 	public String toString() {
-		return "\nVCUploadFile [ufid=" + ufid + ", userid=" + userid + ", filepath=" + filepath + ", filesize=" + filesize
+		return "VCUploadFile [ufid=" + ufid + ", userid=" + userid + ", filepath=" + filepath + ", filesize=" + filesize
 				+ ", uploaddate=" + uploaddate + ", stoppoingpath=" + stoppoingpath + ", status=" + status + ", isdir="
-				+ isdir + ", temp1=" + temp1 + ", temp2=" + temp2 + "]";
+				+ isdir + ", temp1=" + temp1 + ", temp2=" + temp2 + ", rownum=" + rownum + ", isdel=" + isdel + "]";
 	}
 
 	
