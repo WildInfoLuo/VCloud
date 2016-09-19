@@ -32,8 +32,6 @@ import com.yc.vcloud.entity.VCUser;
 import com.yc.vcloud.service.VCUploadFileService;
 import com.yc.vcloud.utils.SessionAttribute;
 
-import net.sf.json.JSONObject;
-
 @Controller
 @RequestMapping("/uploadFile")
 @SessionAttributes(value={SessionAttribute.PHOTO,SessionAttribute.DOC,SessionAttribute.MUSIC})
@@ -125,14 +123,12 @@ public class VCUloadFileHandler {
 		}
 		VCUser user = (VCUser) session.getAttribute(SessionAttribute.USERLOGIN);
 		VCUploadFile file = new VCUploadFile(user.getUserid(), nextpath + filename, length,
-				sdf.format(new Date()), "文件", filename);
+				sdf.format(new Date()), "文件", filename,"1");
 		boolean flag = vCUploadFileService.uploadFile(file);
-		System.out.println("文件上传后"+user.getUserid()+file.getFilepath());
-		//JSONObject jsonObject = new JSONObject();
-		List<VCUploadFile> wangFile=vCUploadFileService.getAllFileWang(user.getUserid(),file.getFilepath());
+		System.out.println("文件上传后"+user.getUserid()+nextpath);
+		List<VCUploadFile> wangFile=vCUploadFileService.getAllFileWang(user.getUserid(),nextpath);
 		session.setAttribute(SessionAttribute.FILESESSION, wangFile);
 		Gson gson=new Gson();
-		//jsonObject.put("data", wangFile);
 		out.print(gson.toJson(wangFile));
 		out.flush();
 		out.close();
@@ -182,7 +178,7 @@ public class VCUloadFileHandler {
 					length = (int) (f.length() / 1024);
 				}
 				VCUploadFile file = new VCUploadFile(user.getUserid(), "/我的资源/新建文件夹/" + filename, length,
-						sbf.format(new Date()), "图片", filename);
+						sbf.format(new Date()), "图片", filename,"1");
 				 vCUploadFileService.uploadFile(file);
 			}
 
@@ -234,7 +230,7 @@ public class VCUloadFileHandler {
 					length = (int) (f.length() / 1024);
 				}
 				VCUploadFile file = new VCUploadFile(user.getUserid(), "/我的资源/新建文件夹/" + filename, length,
-						sbf.format(new Date()), "文档", filename);
+						sbf.format(new Date()), "文档", filename,"0");
 				 vCUploadFileService.uploadFile(file);
 			}
 
@@ -285,7 +281,7 @@ public class VCUloadFileHandler {
 				}
 				System.out.println(multipartFile.getOriginalFilename());
 				VCUploadFile file = new VCUploadFile(user.getUserid(), "/我的资源/新建文件夹/" + filename, length,
-						sbf.format(new Date()), "音乐", filename);
+						sbf.format(new Date()), "音乐", filename,"0");
 				 vCUploadFileService.uploadFile(file);
 			}
 
