@@ -18,6 +18,7 @@
 <script src="js/vclound.js"></script>
 <script type="text/javascript" src="js/index.js"></script>
 <script type="text/javascript" src="js/share.js"></script>
+<script type="text/javascript" src="js/ZeroClipboard.js"></script>
 </head>
 <body>
 	<div id="navbar">
@@ -184,8 +185,11 @@
 		</div>
 		<div id="name">
 			<div style="width:60%;height:40px;float:left;"  id="file">
-				<span class="check-icon0" onclick="filenameIcon(0)"></span> 
-				<span>文件名</span>
+				<span class="check-icon0" onclick="filenameIcon(0)"
+									style="background: rgba(0, 0, 0, 0) url('images/list-view_4e60b0c.png') no-repeat scroll -9px -12px; height: 14px; left: 11px; width: 14px; top: 20px; margin: 15px 10px; float: left;"></span>
+								<span class="textCla" style="line-height: 43px;">文件名</span> <span
+									class="list-header-operatearea"> <span
+									class="count-tips" style="line-height: 43px;"></span>
 			</div>
 			<div style="width:20%;float:left;"  id="file">
 				<span class="text">大小</span>
@@ -196,7 +200,7 @@
 		</div>
 		
 		<div id="sharefile">
-			<div id="file2">
+			<div  id="file2">
 				<div style="width: 60%; height: 40px; float: left;" id="file1">
 					<span class="check-icon1" onclick="filenameIcon(1)" ></span>
 					<div class="filenameicon"></div>
@@ -211,7 +215,7 @@
 			</div>
 		</div>
 		<div id="sharefoot">
-			<div id="localup"></div>
+			<!-- <div id="localup"></div> -->
 			<div id="certain" onclick="showpath()"></div>
 		</div>
 	</div>
@@ -229,11 +233,13 @@
 		<span style="color: rgb(49,173,238);font-size:18px;font-family:monospace;margin-left:10px;margin-top:20px;display: inline-block;">成功创建公开链接</span>
 		<div>
 			<br><input id="publicpath-text" type="text" readonly="readonly" value="sd" style="width:380px;height:30px;margin-top:10px;margin-left:10px;"/>
-			<a id="copypath" onclick="copypublicpath()"></a>  <br>
+			<a id="copypath"  onclick="copypublicpath()"></a>  <br>
 			<span style="margin-left:10px;font-size:14px;font-family: cursive;margin-top:10px;display: inline-block;">
-			 1.生成文件下载链接</span> <br>
+			 可以发送给好友:</span> <br>
 			 <span style="margin-left:10px;font-size:14px;font-family: cursive;margin-top:8px;display: inline-block;">
-			 2.把链接通过QQ、微博、人人网、QQ空间等方式分享给好友
+			   <a target="blank" href="tencent://message/?uin=635809507&Site=potisoft&Menu=yes"  class="menuclass">罗大伟</a>
+			   <a target="blank" href="tencent://message/?uin=396411601&Site=potisoft&Menu=yes"  class="menuclass">小辉辉</a>
+			   <a target="blank" href="tencent://message/?uin=517302276&Site=potisoft&Menu=yes"  class="menuclass">张老黑</a>
 			</span>
 		</div>
 		
@@ -250,10 +256,15 @@
 			<br><input id="personpwd" type="text" readonly="readonly" style="width:83px;height:28px;margin-top:10px;margin-left:10px;"/>
 			<a id="copypath2" onclick="copypersonpath()"></a>  <br>
 			<span style="margin-left:10px;font-size:14px;font-family: cursive;margin-top:10px;display: inline-block;">
-				可以将链接发送给你的QQ好友等
+			 可以发送给好友:</span> <br>
+			 <span style="margin-left:10px;font-size:14px;font-family: cursive;margin-top:8px;display: inline-block;">
+			   <a target="blank" href="tencent://message/?uin=635809507&Site=potisoft&Menu=yes"  class="menuclass">罗大伟</a>
+			   <a target="blank" href="tencent://message/?uin=396411601&Site=potisoft&Menu=yes"  class="menuclass">小辉辉</a>
+			   <a target="blank" href="tencent://message/?uin=517302276&Site=potisoft&Menu=yes"  class="menuclass">张老黑</a>
 			</span>
 		</div>
 	</div>
+	
 </body>
 
 <script type="text/javascript" src="js/jquery.zclip.min.js"></script>

@@ -394,6 +394,33 @@ public class VCUloadFileHandler {
 		
 	}
 	
+	@RequestMapping(value="/findAllShareFile",method=RequestMethod.POST)
+	public void findAllShareFile(HttpSession session,HttpServletRequest request,PrintWriter out){
+		VCUser user = (VCUser) session.getAttribute(SessionAttribute.USERLOGIN);
+		List<VCUploadFile> files = vCUploadFileService.findAllShareFile(user);
+		Gson gs = new Gson();
+		String fileStr = gs.toJson(files);
+		out.println(fileStr);
+		out.flush();
+		out.close();
+	}
+	
+	@RequestMapping(value="/cancelshareFile",method=RequestMethod.POST)
+	public void cancelshareFile(@RequestParam(value="delpaths[]")  String[] delpaths,HttpSession session,HttpServletRequest request,PrintWriter out){
+		VCUser user = (VCUser) session.getAttribute(SessionAttribute.USERLOGIN);
+		VCShareFile sf;
+		for(String str:delpaths){
+				sf=new VCShareFile(0, user.getUserid(), str, "", "", "");
+				vCUploadFileService.cancelshareFile(sf);
+		}
+		List<VCUploadFile> files = vCUploadFileService.findAllShareFile(user);
+		Gson gs = new Gson();
+		String fileStr = gs.toJson(files);
+		out.println(fileStr);
+		out.flush();
+		out.close();
+	}
+	
 	@RequestMapping(value="/surepwd",method=RequestMethod.POST)
 	public void surepwd(HttpSession session,HttpServletRequest request,PrintWriter out,String pwd,ModelMap map){
 		String time =(String) session.getAttribute("shareFile");

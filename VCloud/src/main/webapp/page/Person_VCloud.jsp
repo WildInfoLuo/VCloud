@@ -46,7 +46,7 @@
 		<div id="navbar_left">
 			<img alt="千度云盘" src="images/logo2.png">
 			<ul>
-				<li id="left_li"><a href="index.jsp">主页</a></li>
+				<li id="left_li"><a href="page/index.jsp">主页</a></li>
 				<li class="cjh" id="left_li" onmouseover="showH()"
 					onmouseout="hiddenH()">
 					<!--" --> <a href="page/Person_VCloud.jsp">网盘</a> <a><img
@@ -66,12 +66,12 @@
 										<span
 										style="font-size: 15px; margin-left: -20px; color: rgb(225, 230, 246);">视频</span></a>
 								</td>
-								<td><a href="#"> <i
+								<td><a href="page/docupload.jsp"> <i
 										style="display: block; width: 40px; height: 40px; background: url(images/word.png); background-size: cover;"></i>
 										<span
 										style="font-size: 15px; margin-left: -20px; color: rgb(225, 230, 246);">文档</span></a>
 								</td>
-								<td><a href="pic_currentupload_empty.jsp"> <i
+								<td><a href="page/pic_currentupload_empty.jsp"> <i
 										style="display: block; width: 40px; height: 40px; background: url(images/pic.png); background-size: cover;"></i>
 										<span
 										style="font-size: 15px; margin-left: -15px; color: rgb(225, 230, 246);">图片</span></a>
@@ -80,7 +80,7 @@
 						</table>
 					</div>
 				</li>
-				<li id="left_li"><a href="share.jsp">分享</a></li>
+				<li id="left_li"><a href="page/share.jsp">分享</a></li>
 				<li id="left_li"><a href="#">应用</a></li>
 			</ul>
 		</div>
@@ -155,7 +155,7 @@
 		</ul>
 		<div class="item-separator" style="display: block;"></div>
 		<ul class="middle-button-container">
-			<a class="g-button" href="/share/manage" data-button-index="8"
+			<a class="g-button" href="page/myshare.jsp" data-button-index="8"
 				data-button-id="b1" style=""> <span class="g-button-right">
 					<em class="icon-aside-share" title="我的分享"></em> <span class="text"
 					style="width: auto;">我的分享</span>
@@ -247,7 +247,7 @@
 									style="background: rgba(0, 0, 0, 0) url('images/list-view_4e60b0c.png') no-repeat scroll -9px -12px; height: 14px; left: 11px; width: 14px; top: 20px; margin: 15px 10px; float: left;"></span>
 								<span class="textCla" style="line-height: 43px;">文件名</span> <span
 									class="list-header-operatearea"> <span
-									class="count-tips" style="line-height: 43px;">已选中6个文件/文件夹</span>
+									class="count-tips" style="line-height: 43px;"></span>
 									<a class="lg-button" href="javascript:shareFile();"> <span
 										class="lg-button-right"> <em class="icon-share-gray"
 											title="分享"></em> <span class="text" style="width: auto;">分享</span>

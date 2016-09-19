@@ -1,28 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-
 <!DOCTYPE html>
 <html>
 <head>
 <base href="/VCloud/">
 <meta charset="UTF-8">
-<title>我的分享</title>
+<title>VCloud__网盘</title>
 <!--右键菜单样式-->
 <link rel="stylesheet" href="css/base.css" />
 <link rel="stylesheet" href="css/gizmoMenu.css" />
-<link type="text/css" rel="stylesheet" href="css/piv_currentupload_empty.css"/>
-<link type="text/css" rel="stylesheet" href="css/progressbar.css">
 
 <link type="text/css" rel="stylesheet" href="css/vclound.css" />
 <link type="text/css" rel="stylesheet" href="css/index.css">
-
+<link type="text/css" rel="stylesheet" href="css/progressbar.css">
+<link type="text/css" rel="stylesheet" href="css/share.css">
 <link href="images/yun.gif" rel="shortcut icon">
 <script src="js/jquery-1.11.3.min.js">
 	
 </script>
-<script src="js/docupload.js"></script>
+<script src="js/myshare.js"></script>
+<script src="js/ajaxfileupload.js"></script>
 <script type="text/javascript" src="js/index.js"></script>
 
 <script type="text/javascript" src="js/gizmoMenu.js"></script>
@@ -43,12 +41,12 @@
 </script>
 </head>
 <body>
-
+	<div id="bg" class="bg" style="display:none;"></div>
 	<div id="navbar">
 		<div id="navbar_left">
 			<img alt="千度云盘" src="images/logo2.png">
 			<ul>
-				<li id="left_li"><a href="index.jsp">主页</a></li>
+				<li id="left_li"><a href="page/index.jsp">主页</a></li>
 				<li class="cjh" id="left_li" onmouseover="showH()"
 					onmouseout="hiddenH()">
 					<!--" --> <a href="page/Person_VCloud.jsp">网盘</a> <a><img
@@ -68,12 +66,12 @@
 										<span
 										style="font-size: 15px; margin-left: -20px; color: rgb(225, 230, 246);">视频</span></a>
 								</td>
-								<td><a href="#"> <i
+								<td><a href="page/docupload.jsp"> <i
 										style="display: block; width: 40px; height: 40px; background: url(images/word.png); background-size: cover;"></i>
 										<span
 										style="font-size: 15px; margin-left: -20px; color: rgb(225, 230, 246);">文档</span></a>
 								</td>
-								<td><a href="pic_currentupload_empty.jsp"> <i
+								<td><a href="page/pic_currentupload_empty.jsp"> <i
 										style="display: block; width: 40px; height: 40px; background: url(images/pic.png); background-size: cover;"></i>
 										<span
 										style="font-size: 15px; margin-left: -15px; color: rgb(225, 230, 246);">图片</span></a>
@@ -82,7 +80,7 @@
 						</table>
 					</div>
 				</li>
-				<li id="left_li"><a href="share.jsp">分享</a></li>
+				<li id="left_li"><a href="page/share.jsp">分享</a></li>
 				<li id="left_li"><a href="#">应用</a></li>
 			</ul>
 		</div>
@@ -93,7 +91,7 @@
 						<a>${userLogin.uname }，您好</a>
 					</c:if>
 					<c:if test="${userLogin == null }">
-						<a href="page/login.jsp">未登录</a>
+	 					<a href="page/login.jsp">未登录</a>
 					</c:if>
 				</li>
 				<li><a href="user/logout">注销</a></li>
@@ -157,7 +155,7 @@
 		</ul>
 		<div class="item-separator" style="display: block;"></div>
 		<ul class="middle-button-container">
-			<a class="g-button" href="/share/manage" data-button-index="8"
+			<a class="g-button" href="page/myshare.jsp" data-button-index="8"
 				data-button-id="b1" style=""> <span class="g-button-right">
 					<em class="icon-aside-share" title="我的分享"></em> <span class="text"
 					style="width: auto;">我的分享</span>
@@ -204,22 +202,15 @@
 			</div>
 		</div>
 	</div>
-	
-		<!--控制lay块的隐藏与显示  -->
-		<div class="list-grid-switch">
-			<a class="list-switch" href="javascript:void(0)" onClick="lswitch()"></a>
-			<a class="grid-switch" href="javascript:void(0)" onClick="gswitch()"></a>
-		</div>
-	</div>
 	<div class="content">
 		<div class="module-list">
-		<c:if test="${empty doc}">
-			<span class="history-list-dir">全部文件</span> <span
-				class="history-list-tips">已全部加载，共0个</span>
-				</c:if>
-				<c:if test="${! empty doc}">
-				<span class="history-list-dir">全部文件</span> <span
-				class="history-list-tips">已全部加载，共${doccount.count }个</span>
+			<div class="module-timeline-list">
+            	<ul class="clearfix">
+                    <li style="border-bottom: 5px solid blue; width: 90px; margin-left: 15px;"><span style="color: blue; font-size:16px;  margin-left: 15px;" >链接分享</span></li>
+                </ul>
+            </div>
+			<span class="history-list-dir" style="margin-left: 10px; font-size: 12px; font-weight: 300;">我分享的文件</span> <span
+				class="history-list-tips">已全部加载，共6个</span>
 			<div class="list-view-header">
 				<div class="list-header">
 					<!-- 中间的导航栏 -->
@@ -230,64 +221,26 @@
 									style="background: rgba(0, 0, 0, 0) url('images/list-view_4e60b0c.png') no-repeat scroll -9px -12px; height: 14px; left: 11px; width: 14px; top: 20px; margin: 15px 10px; float: left;"></span>
 								<span class="textCla" style="line-height: 43px;">文件名</span> <span
 									class="list-header-operatearea"> <span
-									class="count-tips" style="line-height: 43px;">已选中6个文件/文件夹</span>
-									<a class="lg-button" href="javascript:void(0);"> <span
-										class="lg-button-right"> <em class="icon-share-gray"
-											title="取消分享"></em> <span class="text" style="width: auto;">取消分享</span>
+									class="count-tips" style="line-height: 43px;"></span>
+									<a class="lg-button" href="javascript:cancelshareFile();" > <span
+										class="lg-button-right" > <em  class="icon-share-gray"
+											title="分享"></em> <span class="text" style="width: auto;">取消</span>
 									</span>
 								</a> 
 								</span>
 							</div>
 						</li>
-						
 						<li class="last-col"
 							style="width: 21%; cursor: pointer; line-height: 43px;"
 							onClick="lastColicon()"><span class="text">分享日期</span> <span
 							class="order-icon"></span></li>
 					</ul>
-						
-					
 				</div>
 			</div>
-			</c:if>
 			<div class="list-view-container">
 				<div class="module-list-view  container">
 					<!-- 先设置隐藏的样式 -->
 					<div class="list-view">
-						 <c:choose>
-            	<c:when test="${empty doc}">
-		             <div class="empty-upload" style="display: block;">
-						<div class="no_file_upload"></div>
-		            </div>
-            	</c:when>
-            	<c:otherwise>
-            		<c:forEach items="${doc }" var="item">
-            			<dd class="open-enable">
-							<li class="file-name" style="width: 60%;">
-								<span class="check-icon${item.rownum }" onclick="filenameIcon(${item.rownum })"
-								style="background: rgba(0, 0, 0, 0) url('images/list-view_4e60b0c.png') no-repeat scroll -9px -12px; height: 14px; left: 11px; width: 14px; top: 20px; margin: 15px 10px; float: left;"></span>
-								<div class="fileicon"></div>
-								<div class="text">
-									<c:if test="${fn:endsWith(item.temp2,'doc') || fn:endsWith(item.temp2,'docx') }">
-										<div class="fileicon-small-doc"></div>
-									</c:if>
-									<c:if test="${fn:endsWith(item.temp2,'xls') || fn:endsWith(item.temp2,'xlsx') }">
-										<div class="fileicon-small-xls"></div>
-									</c:if>
-									<c:if test="${fn:endsWith(item.temp2,'txt') }">
-										<div class="fileicon-small-txt"></div>
-									</c:if>
-									
-									<a class="filename" style="padding-left: 6px;"
-										href="javascript:void(0);" title="${item.temp2 }">${item.temp2 }</a>
-								</div>
-							</li>
-							<li class="file-size" style="width: 16%; margin-left: 20px;">${item.filesize }KB</li>
-							<li class="ctime" style="width: 21%; margin-left: 10px;">${item.uploaddate }</li>
-						</dd>
-            		</c:forEach>
-            	</c:otherwise>
-            </c:choose>
 						<div class="list-empty-tips" style="display: none;">
 							<div class="tip-text">正在加载，请稍候…</div>
 						</div>
@@ -296,56 +249,6 @@
 				<div class="content-view">
 					<div class="grid-view" style="margin-top: 0px;">
 						<dd class="g-clearfix">
-							<!-- <div class="grid-view-item1"
-								style="display: block; height: 122px; margin: 4px 4px 0 0; text-align: center; width: 142px; float: left;"
-								onclick="filenameIcon(1)">
-								<div class="dir-large" title="">
-									<img class="thumb"> <span class="checkbox"></span>
-								</div>
-								<div class="file-name">
-									<a class="filename" title="文件接收柜" href="javascript:void(0);">文件接收柜</a>
-								</div>
-							</div>
-							<div class="grid-view-item2"
-								style="display: block; height: 122px; margin: 4px 4px 0 0; text-align: center; width: 142px; float: left;"
-								onclick="filenameIcon(2)">
-								<div class="dir-large" title="">
-									<img class="thumb"> <span class="checkbox"></span>
-								</div>
-								<div class="file-name">
-									<a class="filename" title="我的数据" href="javascript:void(0);">我的数据</a>
-								</div>
-							</div>
-							<div class="grid-view-item3"
-								style="display: block; height: 122px; margin: 4px 4px 0 0; text-align: center; width: 142px; float: left;"
-								onclick="filenameIcon(3)">
-								<div class="dir-large" title="">
-									<img class="thumb"> <span class="checkbox"></span>
-								</div>
-								<div class="file-name">
-									<a class="filename" title="我的资源" href="javascript:void(0);">我的资源</a>
-								</div>
-							</div>
-							<div class="grid-view-item4"
-								style="display: block; height: 122px; margin: 4px 4px 0 0; text-align: center; width: 142px; float: left;"
-								onclick="filenameIcon(4)">
-								<div class="dir-large fileicon-large-xls" title="">
-									<img class="thumb"> <span class="checkbox"></span>
-								</div>
-								<div class="file-name">
-									<a class="filename" title="xls文件" href="javascript:void(0);">VCloud.xls</a>
-								</div>
-							</div>
-							<div class="grid-view-item5"
-								style="display: block; height: 122px; margin: 4px 4px 0 0; text-align: center; width: 142px; float: left;"
-								onclick="filenameIcon(5)">
-								<div class="dir-large fileicon-large-doc" title="">
-									<img class="thumb"> <span class="checkbox"></span>
-								</div>
-								<div class="file-name">
-									<a class="filename" title="doc文件" href="javascript:void(0);">VCloud.doc</a>
-								</div>
-							</div> -->
 						</dd>
 					</div>
 				</div>
@@ -375,5 +278,6 @@
 				class="fa fa-arrow-right"></i><a href="#">新建文件夹</a></li>
 		</ul>
 	</div>
+	
 </body>
 </html>
