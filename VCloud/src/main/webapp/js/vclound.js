@@ -329,9 +329,21 @@ function parseFilePath(filePath, num) {
 }
 // 获取下一级路径
 function getNextPath(path, view) {
-	alert(path.length+"------"+path.substring(0,path.length-1)+"****0"+path);
-	$("#shareshow").css({"display":"block"});//.substring(0,str.length-1)../sources/${item.temp2 }
-	$("#imgshow").html("").append('<img src="../sources'+path.substring(0,path.length-1)+'">');
+	var pathName;//文件名
+	var paths = new Array();
+	paths = path.split("/");
+	//多级目录下显示详细信息
+	if(path.indexOf("jpg")!=-1||path.indexOf("gif")!=-1||path.indexOf("png")!=-1||path.indexOf("JPG")!=-1){//说明包含
+		pathName=parseFilePath(path,paths.length-2);
+		$("#shareshow").css({"display":"block"});
+		$("#imgshow").html("").append('<img src=".../sources/'+pathName+'">');
+	}else if(path.indexOf("mpg")!=-1||path.indexOf("mp4")!=-1||path.indexOf("avi")!=-1){
+		pathName=parseFilePath(path,paths.length);
+		$("#shareshow").css({"display":"block"});
+		$("#imgshow").html("").append('<video src=".../sources/'+pathName+'" width="auto" height="auto" controls autoplay loop><source type=video/mp4 /> Your browser does not support the video tag. </video>');
+		}else if(path.indexOf(".")!=-1){
+		alert("此类文件需安装VCloud管家!!!");
+	}
 	checked2 = 0;
 	for (var i = 0; i < length; i++) {
 		tcheckIcon[i] = false;

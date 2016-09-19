@@ -468,8 +468,6 @@ public class VCUloadFileHandler {
 	public String delFiles(@RequestParam(value = "delpaths[]") String[] delpaths,
 			@RequestParam(value = "date") String date, PrintWriter out, HttpSession session) {
 		VCUser user = (VCUser) session.getAttribute(SessionAttribute.USERLOGIN);
-		System.out.println("date===>" + date);
-		System.out.println("delpaths===>" + delpaths.length);
 		boolean flag = false;
 		for (String str : delpaths) {
 			if ("" != str && str != null) {
@@ -477,7 +475,7 @@ public class VCUloadFileHandler {
 				vCUploadFileService.insertRecyle(str, date, user.getUserid());
 			}
 		}
-		out.println(flag);
+		out.print(flag);
 		out.flush();
 		out.close();
 		return "Person_VCloud";
