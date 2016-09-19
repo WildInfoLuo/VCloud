@@ -30,6 +30,7 @@ import com.yc.vcloud.entity.VCUploadCount;
 import com.yc.vcloud.entity.VCUploadFile;
 import com.yc.vcloud.entity.VCUser;
 import com.yc.vcloud.service.VCUploadFileService;
+import com.yc.vcloud.utils.DownloadDemo2;
 import com.yc.vcloud.utils.SessionAttribute;
 
 @Controller
@@ -137,8 +138,12 @@ public class VCUloadFileHandler {
 				|| filename.contains("gif")) {
 			file = new VCUploadFile(user.getUserid(), nextpath + filename+"/", length, sdf.format(new Date()), "图片",
 					filename, "0");
-		} else {
-			file = new VCUploadFile(user.getUserid(), nextpath + filename+"/", length, sdf.format(new Date()), "文件",
+		} else if(filename.contains("doc") || filename.contains("docx") || filename.contains("txt")
+				|| filename.contains("xls")){
+			file = new VCUploadFile(user.getUserid(), nextpath + filename+"/", length, sdf.format(new Date()), "文档",
+					filename, "0");
+		}else if(filename.contains("mp3")  ){
+			file = new VCUploadFile(user.getUserid(), nextpath + filename+"/", length, sdf.format(new Date()), "音乐",
 					filename, "0");
 		}
 		boolean flag = vCUploadFileService.uploadFile(file);
@@ -479,6 +484,27 @@ public class VCUloadFileHandler {
 		out.flush();
 		out.close();
 		return "Person_VCloud";
+	}
+	
+	@RequestMapping(value="/downloadFile",method=RequestMethod.POST)
+	public void downloadFile(@RequestParam(value="delpaths[]")  String[] delpaths,HttpSession session,HttpServletRequest request,PrintWriter out){
+		String basePath=request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+request.getContextPath()+"/../sources/";
+		
+		for(String str:delpaths){
+			if(str!=""){
+				DownloadDemo2 download=new DownloadDemo2();
+				download.downloadFile(basePath+str.split("/")[str.split("/").length-1], "D:/VCloudDownload/", 5);
+				while(true){
+					if(download.i==5){
+						break;
+					}
+				}
+			}
+		}
+		
+		out.println(1);
+		out.flush();
+		out.close();
 	}
 
 }

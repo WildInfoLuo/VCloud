@@ -21,7 +21,7 @@
 		<div id="navbar_left">
 			<img alt="千度云盘" src="images/logo2.png">
 			<ul>
-				<li id="left_li"><a href="index.jsp">主页</a></li>
+				<li id="left_li"><a href="page/index.jsp">主页</a></li>
 				<li class="cjh"  id="left_li" onmouseover="showH()" onmouseout="hiddenH()" > <!--" -->
 					
 					<a href="page/Person_VCloud.jsp">网盘</a>
@@ -37,11 +37,11 @@
 									<i style="display:block;width:40px;height:40px;background:url(images/tv.png);background-size:cover;"></i>
 									<span style="font-size:15px;margin-left:-20px;color:rgb(225,230,246);">视频</span></a>
 								</td>
-								<td><a href="#">
+								<td><a href="page/docupload.jsp">
 									<i style="display:block;width:40px;height:40px;background:url(images/word.png);background-size:cover;"></i>
 									<span style="font-size:15px;margin-left:-20px;color:rgb(225,230,246);">文档</span></a>
 								</td>
-								<td><a href="pic_currentupload_empty.jsp">
+								<td><a href="page/pic_currentupload_empty.jsp">
 									<i style="display:block;width:40px;height:40px;background:url(images/pic.png);background-size:cover;"></i>
 									<span style="font-size:15px;margin-left:-15px;color:rgb(225,230,246);">图片</span></a>
 								</td>
@@ -49,7 +49,7 @@
 						</table>
 					</div>
 				</li>
-				<li  id="left_li"><a href="share.jsp">分享</a></li>
+				<li  id="left_li"><a href="page/share.jsp">分享</a></li>
 				<li  id="left_li"><a href="#">应用</a></li>
 			</ul>
 		</div>
@@ -74,16 +74,16 @@
 		<table id="navbar_table" style="width: 300px; height: 70px;"
 			cellspacing="0" cellpadding="8">
 			<tr>
-				<td><a href="share.jsp"> <i
+				<td><a href="page/share.jsp"> <i
 						style="display: block; width: 40px; height: 40px; background: url(images/picred.png); background-size: cover;"></i>
 						<span style="font-size: 14px; margin-left: -8px;color:rgb(225,230,246);">分享图片</span></a></td>
-				<td><a href="#"> <i
+				<td><a href="page/share.jsp"> <i
 						style="display: block; width: 40px; height: 40px; background: url(images/vedio.png); background-size: cover;"></i>
 						<span style="font-size: 14px; margin-left: -8px;color:rgb(225,230,246);">分享视频</span></a></td>
-				<td><a href="#"> <i
+				<td><a href="page/share.jsp"> <i
 						style="display: block; width: 40px; height: 40px; background: url(images/wordblue.png); background-size: cover;"></i>
 						<span style="font-size: 14px; margin-left: -8px;color:rgb(225,230,246);">分享文档</span></a></td>
-				<td><a href="#"> <i
+				<td><a href="page/share.jsp"> <i
 						style="display: block; width: 41px; height: 40px; background: url(images/music.png); background-size: cover;"></i>
 						<span style="font-size: 14px; margin-left: -8px;color:rgb(225,230,246);">分享音乐</span></a></td>
 			</tr>
@@ -152,7 +152,7 @@
 
     <div class="item-separator" style="display: block;"></div>
         <ul class="middle-button-container">
-        	<a class="g-button" href="/share/manage" data-button-index="8" data-button-id="b1" style="">
+        	<a class="g-button" href="page/myshare.jsp" data-button-index="8" data-button-id="b1" style="">
                 <span class="g-button-right">
                     <em class="icon-aside-share" title="我的分享"></em>
                     <span class="text" style="width: auto;">我的分享</span>
@@ -275,9 +275,9 @@
       <div class="content">
         <div class="btns_area">
           <div class="btns_box" id="control_box">
-            <a href="http://sc.chinaz.com/jiaoben/" target="_blank" class="btn_ipr btn_shoulei cur" title="回收站" ><span class="ic_shoulei hide_txt png">回收站</span></a>
-            <a href="http://sc.chinaz.com/jiaoben/" target="_blank" class="btn_xnet" title="分享"><span class="ic_xnet hide_txt png">分享</span></a>
-            <a href="http://sc.chinaz.com/jiaoben/" target="_blank" class="btn_member" title="网盘"><span class="ic_member hide_txt png">网盘</span></a>
+            <a href="page/backstore.jsp" target="_blank" class="btn_ipr btn_shoulei cur" title="回收站" ><span class="ic_shoulei hide_txt png">回收站</span></a>
+            <a href="page/share.jsp" target="_blank" class="btn_xnet" title="分享"><span class="ic_xnet hide_txt png">分享</span></a>
+            <a href="page/Person_VCloud.jsp" target="_blank" class="btn_member" title="网盘"><span class="ic_member hide_txt png">网盘</span></a>
             <span class="ic_line" id="ic_line"></span>
           </div>
         </div>

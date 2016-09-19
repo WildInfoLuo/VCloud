@@ -250,7 +250,7 @@
 										class="lg-button-right"> <em class="icon-share-gray"
 											title="分享"></em> <span class="text" style="width: auto;">分享</span>
 									</span>
-								</a> <a class="lg-button" href="javascript:void(0);"> <span
+								</a> <a class="lg-button" href="javascript:downloadFile();"> <span
 										class="lg-button-right"> <em class="icon-download-gray"
 											title="下载"></em> <span class="text" style="width: auto;">下载</span>
 									</span>
@@ -358,6 +358,12 @@
 			<span style="margin-left:10px;font-size:14px;font-family: cursive;margin-top:10px;display: inline-block;">
 				可以将链接发送给你的QQ好友等
 			</span>
+		</div>
+	</div>
+	<div id="download" >
+		<span style="color: rgb(49,173,238);font-size:18px;font-family:monospace;margin-left:150px;margin-top:20px;display: inline-block; ">文件正在下载中,请等待..</span>
+		<div>
+			<img src="images/wait.gif" style="width: 400px; height: 150px; margin-left: 50px;" >
 		</div>
 	</div>
 	<!-- 显示图片 -->
