@@ -79,16 +79,21 @@ select ufid,userid,filepath,filesize,to_char(uploaddate,'yyyy-mm-dd HH:MI:ss'),f
 		 from uploadfile where userid=10041 and regexp_like(filepath,'^//我的资源+');
 
 --回收站表
+
+drop table VCRecyle
+		 
 create table VCRecyle(
 	rid int primary key,
-	ufid int   --文件id
-		constraint FK_VCUploadFile_id references VCUploadFile(ufid),
+	userid int
+		constraint FK_VCRecyle_id_share references VCUser(userid),
 	deletedate date, --删除时间
 	lefttime int,  --可存放天数
 	deletepath varchar2(200),		--备用字段
     temp2 varchar2(200)			--备用字段 
 );
 
+select * from VCRecyle
+delete from VCRecyle
 alter table VCRecyle rename column temp1 to deletepath
 
 create sequence seq_rid start with 50001;

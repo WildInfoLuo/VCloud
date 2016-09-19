@@ -415,14 +415,16 @@ public class VCUloadFileHandler {
 	}
 	//删除文件的方法
 	@RequestMapping(value="/delFile",method=RequestMethod.POST)
-	public String delFiles(@RequestParam(value="delpaths[]") String[] delpaths,@RequestParam(value="date")String date,PrintWriter out){
-		System.out.println("===>");
+	public String delFiles(@RequestParam(value="delpaths[]") String[] delpaths,@RequestParam(value="date")String date,
+							PrintWriter out, HttpSession session){
+		VCUser user = (VCUser) session.getAttribute(SessionAttribute.USERLOGIN);
+		System.out.println("date===>"+date);
 		System.out.println("delpaths===>"+delpaths.length);
-		
 		boolean flag= false;
 		for(String str:delpaths){
 			if(""!=str && str!=null){
 				flag = vCUploadFileService.delFiles(str);
+				vCUploadFileService.insertRecyle(str, date, user.getUserid());
 			}
 		}
 		out.println(flag);

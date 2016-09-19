@@ -59,7 +59,6 @@ function editSure() {
 		n = nextpath.substr(1) + name;
 	}
 	var num = getMaxNum();
-	alert(num);
 	$.post("uploadFile/addDir/" + date,{name : n},
 					function(data) {
 						if (data) {
@@ -90,7 +89,7 @@ function editSure() {
 									+ '<li class="file-size" style="width: 16%;">-</li>'
 									+ '<li>' + date + '</li></dd>';
 							$(".list-view").prepend($(str)); // 显示在第一条
-							pathDataAdd(n,date,0)
+							pathDataAdd("/"+n+"/",date,0);
 						}
 					});
 	$(".module-edit-name").css("display", "none");
@@ -757,8 +756,9 @@ function deleteFile() {
 			}
 			filenameIcon(-1);
 			delpaths.length = 0;
+			
 		}
-	})
+	});
 }
 
 //从pathData中添加元素的方法
@@ -772,21 +772,26 @@ function pathDataAdd(path,date,filesize){
 
 //从pathData中删除元素的方法
 function pathDataDel(path){//上一级路径+当前路径
-	var i = 0;
+	var n = 0;
 	var num = 0;
-	console.info(pathData);
-	while(i<pathData.length){
-		if(pathData[i].filepath.indexOf(path[num])==0){
-			pathData.splice(i, 1);
+	for(var i = 0;i<path.length;i++){
+		if(path[i] == null || ""==path[i]){
+			path.splice(i, 1);
+		}
+	}
+	while(n<pathData.length){
+		if(pathData[n].filepath.indexOf(path[num])==0){
+			pathData.splice(n, 1);
 			num++;
-			i=0;
+			n=0;
 		}else{
-			i++;
+			n++;
 		}
 		if(num == path.length){
 			return;
 		}
 	}
+	console.info(pathData);
 }
 
 //获取最大的标识数
@@ -813,6 +818,93 @@ function getMaxNum(){
 	return a[a.length-1];
 }
 
+function showShare(){
+	$("#shareshow").css({"display":"block"});
+}
+
+function closeShare(){
+	$("#shareshow").css({"display":"none"});
+}
+function closeSharePath(){
+	$("#sharepath").css({"display":"none"});
+	$(".bg").css("display","none");
+}
+
+function closepublicsuc(){
+	$("#publicsuc").css({"display":"none"});
+	$(".bg").css("display","none");
+}
+
+function closepersonsuc(){
+	$("#personsuc").css({"display":"none"});
+	$(".bg").css("display","none");
+}
+
+function showpath(){
+	$("#shareshow").css({"display":"none"});
+	$("#sharepath").css({"display":"block"});
+}
+
+function showpublic(){
+	$.post("uploadFile/shareFile", {delpaths:delpaths}, function(data) {
+		$("#sharepath").css({"display":"none"});
+		$("#publicsuc input").val(data);
+		$("#publicsuc").css({"display":"block"});
+		
+	})
+}
+
+function showperson(){
+	var nums = "";
+	var num;
+	var ens = ['1','2','3','4','5','6','7','8','9','a','b','c','d','e','f','h','i','j','k','l','m','n'
+	           ,'o','p','q','r','s','t','u','v','w','x','y','z'];
+	for(var i=0;i<2;i++){
+		num = Math.ceil(Math.random()*10)-2;
+		if(num==-1){
+			num=0;
+		}
+		nums += ens[num];
+		num = Math.ceil(Math.random()*10)+10;
+		nums += ens[num];
+	}
+	$.post("uploadFile/shareFile", {delpaths:delpaths,password:nums}, function(data) {
+		$("#sharepath").css({"display":"none"});
+		$("#personpath-text").val(data);
+		$("#personpwd").val(nums);
+		$("#personsuc").css({"display":"block"});
+	})
+}
+
+//复制链接到粘贴板中
+function copypublicpath(){
+	/*alert(window.clipboardData.getData("text"));*/
+	$("#copypath").zclip({
+		path: "ZeroClipboard.swf", 
+		copy: function(){
+			return $("#publicpath-text").val();
+		},
+		afterCopy: function(){ //复制成功
+	       alert('复制成功');
+	    }
+	});
+}
+
+//生成提取码及复制
+function copypersonpath(){
+	var pwd=$("#personpwd").val();
+	var text = $("#personpath-text").val();
+	var str=text+","+pwd;
+	$("#copypath2").zclip({
+		path: "ZeroClipboard.swf", 
+		copy: function(){
+			return str;
+		},
+		afterCopy: function(){ //复制成功
+	       alert('复制成功');
+	    }
+	});
+} 
 
 
 

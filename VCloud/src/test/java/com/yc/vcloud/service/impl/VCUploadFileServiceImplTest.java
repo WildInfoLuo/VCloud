@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.yc.vcloud.entity.VCRecyle;
 import com.yc.vcloud.entity.VCUploadFile;
 import com.yc.vcloud.service.VCUploadFileService;
 
@@ -44,5 +45,14 @@ public class VCUploadFileServiceImplTest {
 		System.out.println("===>"+flag);
 		assertEquals(flag, true);
 	}*/
+	
+	@Test
+	public void testInsertinsertRecyle() {
+		//VCRecyle vr = new VCRecyle(10041, "2015-06-06 2:3:6","/新建文件夹/");
+		boolean flag = vCUploadFileService.insertRecyle("/新建文件夹/", "2015-06-06 2:3:6",10041);
+		System.out.println("===>"+flag);
+		assertEquals(flag, true);
+	}
+	
 
 }
