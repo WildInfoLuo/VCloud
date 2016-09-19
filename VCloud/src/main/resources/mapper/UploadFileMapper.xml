@@ -17,6 +17,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		 from uploadfile where filepath in (select filepath from VCShare where temp2=#{temp2}  ) and isdel=0
 	</select>
 	
+	<select id="findAllShareFile" parameterType="VCUser" resultType="VCUploadFile">
+		select u.filepath filepath, a.temp1 temp1
+		 from uploadfile u , (select temp1, filepath from VCShare where userid=#{userid}) a where u.filepath=a.filepath  and isdel=0
+	</select>
+	
+	<delete id="cancelshareFile" parameterType="VCShareFile">
+		delete from VCShare where userid=#{userid} and filepath=#{filepath}
+	</delete>
+	
 	<select id="surePwd" parameterType="VCShareFile" resultType="String">
 		select password from VCShare where temp2=#{temp2}
 	</select>

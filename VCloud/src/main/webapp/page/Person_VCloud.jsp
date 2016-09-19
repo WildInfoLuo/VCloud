@@ -16,9 +16,7 @@
 <link type="text/css" rel="stylesheet" href="css/progressbar.css">
 <link type="text/css" rel="stylesheet" href="css/share.css">
 <link href="images/yun.gif" rel="shortcut icon">
-<script src="js/jquery-1.11.3.min.js">
-	
-</script>
+<script src="js/jquery-1.11.3.min.js"></script>
 <script src="js/vclound.js"></script>
 <script src="js/ajaxfileupload.js"></script>
 <script type="text/javascript" src="js/index.js"></script>
@@ -46,7 +44,7 @@
 		<div id="navbar_left">
 			<img alt="千度云盘" src="images/logo2.png">
 			<ul>
-				<li id="left_li"><a href="index.jsp">主页</a></li>
+				<li id="left_li"><a href="page/index.jsp">主页</a></li>
 				<li class="cjh" id="left_li" onmouseover="showH()"
 					onmouseout="hiddenH()">
 					<!--" --> <a href="page/Person_VCloud.jsp">网盘</a> <a><img
@@ -66,12 +64,12 @@
 										<span
 										style="font-size: 15px; margin-left: -20px; color: rgb(225, 230, 246);">视频</span></a>
 								</td>
-								<td><a href="#"> <i
+								<td><a href="page/docupload.jsp"> <i
 										style="display: block; width: 40px; height: 40px; background: url(images/word.png); background-size: cover;"></i>
 										<span
 										style="font-size: 15px; margin-left: -20px; color: rgb(225, 230, 246);">文档</span></a>
 								</td>
-								<td><a href="pic_currentupload_empty.jsp"> <i
+								<td><a href="page/pic_currentupload_empty.jsp"> <i
 										style="display: block; width: 40px; height: 40px; background: url(images/pic.png); background-size: cover;"></i>
 										<span
 										style="font-size: 15px; margin-left: -15px; color: rgb(225, 230, 246);">图片</span></a>
@@ -80,7 +78,7 @@
 						</table>
 					</div>
 				</li>
-				<li id="left_li"><a href="share.jsp">分享</a></li>
+				<li id="left_li"><a href="page/share.jsp">分享</a></li>
 				<li id="left_li"><a href="#">应用</a></li>
 			</ul>
 		</div>
@@ -155,7 +153,7 @@
 		</ul>
 		<div class="item-separator" style="display: block;"></div>
 		<ul class="middle-button-container">
-			<a class="g-button" href="/share/manage" data-button-index="8"
+			<a class="g-button" href="page/myshare.jsp" data-button-index="8"
 				data-button-id="b1" style=""> <span class="g-button-right">
 					<em class="icon-aside-share" title="我的分享"></em> <span class="text"
 					style="width: auto;">我的分享</span>
@@ -247,12 +245,12 @@
 									style="background: rgba(0, 0, 0, 0) url('images/list-view_4e60b0c.png') no-repeat scroll -9px -12px; height: 14px; left: 11px; width: 14px; top: 20px; margin: 15px 10px; float: left;"></span>
 								<span class="textCla" style="line-height: 43px;">文件名</span> <span
 									class="list-header-operatearea"> <span
-									class="count-tips" style="line-height: 43px;">已选中6个文件/文件夹</span>
+									class="count-tips" style="line-height: 43px;"></span>
 									<a class="lg-button" href="javascript:shareFile();"> <span
 										class="lg-button-right"> <em class="icon-share-gray"
 											title="分享"></em> <span class="text" style="width: auto;">分享</span>
 									</span>
-								</a> <a class="lg-button" href="javascript:void(0);"> <span
+								</a> <a class="lg-button" href="javascript:downloadFile();"> <span
 										class="lg-button-right"> <em class="icon-download-gray"
 											title="下载"></em> <span class="text" style="width: auto;">下载</span>
 									</span>
@@ -361,6 +359,18 @@
 				可以将链接发送给你的QQ好友等
 			</span>
 		</div>
+	</div>
+	<div id="download" >
+		<span style="color: rgb(49,173,238);font-size:18px;font-family:monospace;margin-left:150px;margin-top:20px;display: inline-block; ">文件正在下载中,请等待..</span>
+		<div>
+			<img src="images/wait.gif" style="width: 400px; height: 150px; margin-left: 50px;" >
+		</div>
+	</div>
+	<!-- 显示图片 -->
+	<div id="sharebut" onclick="javascript:showShare()"></div>
+	<div id="shareshow">
+		<img id="close" src="images/close.png" onclick="closeShare()">
+		<div id="imgshow" style="width: 720px;height: 600px;float: left;overflow: hidden;"></div>
 	</div>
 </body>
 </html>

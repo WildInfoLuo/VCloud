@@ -6,20 +6,42 @@
 <head>
 <base href="/VCloud/">
 <meta charset="UTF-8">
-<title>VCloud__分享</title>
+<title>VCloud__网盘</title>
+<!--右键菜单样式-->
+<link rel="stylesheet" href="css/base.css" />
+<link rel="stylesheet" href="css/gizmoMenu.css" />
+
 <link type="text/css" rel="stylesheet" href="css/vclound.css" />
 <link type="text/css" rel="stylesheet" href="css/index.css">
+<link type="text/css" rel="stylesheet" href="css/progressbar.css">
 <link type="text/css" rel="stylesheet" href="css/share.css">
-<link href="images/云准备.gif" rel="shortcut icon">
+<link href="images/yun.gif" rel="shortcut icon">
 <script src="js/jquery-1.11.3.min.js">
 	
 </script>
-<script src="js/vclound.js"></script>
+<script src="js/myshare.js"></script>
+<script src="js/ajaxfileupload.js"></script>
 <script type="text/javascript" src="js/index.js"></script>
-<script type="text/javascript" src="js/share.js"></script>
-<script type="text/javascript" src="js/ZeroClipboard.js"></script>
+
+<script type="text/javascript" src="js/gizmoMenu.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('.container').gizmoMenu({
+			'menu' : 'gizmoDropDown'
+		});
+
+		$('#hamburger_example').gizmoMenu({
+			'menu' : 'gizmoBurger'
+		});
+
+		$('#horizontal_example').gizmoMenu({
+			'menu' : 'gizmoHorizontal'
+		});
+	});
+</script>
 </head>
 <body>
+	<div id="bg" class="bg" style="display:none;"></div>
 	<div id="navbar">
 		<div id="navbar_left">
 			<img alt="千度云盘" src="images/logo2.png">
@@ -133,7 +155,7 @@
 		</ul>
 		<div class="item-separator" style="display: block;"></div>
 		<ul class="middle-button-container">
-			<a class="g-button" href="/share/manage" data-button-index="8"
+			<a class="g-button" href="page/myshare.jsp" data-button-index="8"
 				data-button-id="b1" style=""> <span class="g-button-right">
 					<em class="icon-aside-share" title="我的分享"></em> <span class="text"
 					style="width: auto;">我的分享</span>
@@ -148,7 +170,7 @@
 		</ul>
 		<div class="item-separator" style="display: block;"></div>
 		<ul class="bottom-button-container">
-			<a class="g-button" href="/disk/recyclebin" data-button-index="9"
+			<a class="g-button" href="backstore.jsp" data-button-index="9"
 				data-button-id="b5" style=""> <span class="g-button-right">
 					<em class="icon-aside-recyclebin" title="回收站"></em> <span
 					class="text" style="width: auto;">回收站</span>
@@ -170,111 +192,92 @@
 		<div class="item-separator" style="display: block;"></div>
 		<div
 			style="width: 100%; height: 236px; background: transparent none repeat scroll 0% 0%;">
+			<div class="aside-absolute-container"
+				style="visibility: visible; position: absolute; width: 100%; height: 155px; top: 460px; bottom: auto;">
+			</div>
+			<!-- 容量进度条 -->
+	         <div class="progressbar" data-perc="${countSize/1024/10 }">
+	            <div class="contain">容量:${countSize }MB/10G</div>
+				<div class="bar"><span></span></div>
+			</div>
 		</div>
 	</div>
-	
-	<!-- 分享 -->
-	<div id="shareCon"></div>
-	<div id="sharebut" onclick="javascript:showShare()"></div>
-	<div id="shareshow">
-		<h3 id="shareh3">文件列表<img id="close" src="images/close.png" onclick="closeShare()"></h3>
-		<div id="showall">
-			<span style="width:40%;float:left;">全部文件</span>
-			<div id="search" style="float:left;margin-left:163px;">
-				<img id="search-icon" src="images/search.png">
-				<input type="text" id="search-key" placeholder="搜索我的网盘文件">
-				<img id="search-enter" src="images/enter.png">
-			</div>
-			<!--控制lay块的隐藏与显示  -->
-			<div class="share-grid-switch">
-				<a class="list-switch" href="javascript:void(0)" onClick="lswitch()"></a>
-				<a class="grid-switch" href="javascript:void(0)" onClick="gswitch()"></a>
-			</div>
-		</div>
-		<div id="name">
-			<div style="width:60%;height:40px;float:left;"  id="file">
-				<span class="check-icon0" onclick="filenameIcon(0)"
+	<div class="content">
+		<div class="module-list">
+			<div class="module-timeline-list">
+            	<ul class="clearfix">
+                    <li style="border-bottom: 5px solid blue; width: 90px; margin-left: 15px;"><span style="color: blue; font-size:16px;  margin-left: 15px;" >链接分享</span></li>
+                </ul>
+            </div>
+			<span class="history-list-dir" style="margin-left: 10px; font-size: 12px; font-weight: 300;">我分享的文件</span> <span
+				class="history-list-tips">已全部加载，共6个</span>
+			<div class="list-view-header">
+				<div class="list-header">
+					<!-- 中间的导航栏 -->
+					<ul class="list-cols">
+						<li class="first-col" style="width: 60%;">
+							<div class="check">
+								<span class="check-icon0" onclick="filenameIcon(0)"
 									style="background: rgba(0, 0, 0, 0) url('images/list-view_4e60b0c.png') no-repeat scroll -9px -12px; height: 14px; left: 11px; width: 14px; top: 20px; margin: 15px 10px; float: left;"></span>
 								<span class="textCla" style="line-height: 43px;">文件名</span> <span
 									class="list-header-operatearea"> <span
 									class="count-tips" style="line-height: 43px;"></span>
-			</div>
-			<div style="width:20%;float:left;"  id="file">
-				<span class="text">大小</span>
-			</div>
-			<div  style="width:20%;float:left;"  id="file">
-				<span class="text" onClick="lastColicon()" style="margin-left:7px;">修改日期</span> <span class="order-icon"></span>
-			</div>
-		</div>
-		
-		<div id="sharefile">
-			<div  id="file2">
-				<div style="width: 60%; height: 40px; float: left;" id="file1">
-					<span class="check-icon1" onclick="filenameIcon(1)" ></span>
-					<div class="filenameicon"></div>
-					<a href="#" style="margin-left: 8px;">我的资源</a>
-				</div>
-				<div style="width: 20%; float: left;"  id="file1">
-					<span class="text">-</span>
-				</div>
-				<div style="width: 20%; float: left;" id="file1">
-					<span class="text" onClick="lastColicon()">2016-06-06</span>
+									<a class="lg-button" href="javascript:cancelshareFile();" > <span
+										class="lg-button-right" > <em  class="icon-share-gray"
+											title="分享"></em> <span class="text" style="width: auto;">取消</span>
+									</span>
+								</a> 
+								</span>
+							</div>
+						</li>
+						<li class="last-col"
+							style="width: 21%; cursor: pointer; line-height: 43px;"
+							onClick="lastColicon()"><span class="text">分享日期</span> <span
+							class="order-icon"></span></li>
+					</ul>
 				</div>
 			</div>
-		</div>
-		<div id="sharefoot">
-			<!-- <div id="localup"></div> -->
-			<div id="certain" onclick="showpath()"></div>
+			<div class="list-view-container">
+				<div class="module-list-view  container">
+					<!-- 先设置隐藏的样式 -->
+					<div class="list-view">
+						<div class="list-empty-tips" style="display: none;">
+							<div class="tip-text">正在加载，请稍候…</div>
+						</div>
+					</div>
+				</div>
+				<div class="content-view">
+					<div class="grid-view" style="margin-top: 0px;">
+						<dd class="g-clearfix">
+						</dd>
+					</div>
+				</div>
+
+			</div>
 		</div>
 	</div>
-	<div id="sharepath">
-		<img id="close" src="images/close.png" onclick="closeSharePath()">
-		<a id="publicpath" onclick="showpublic()"></a>
-		<span>(任何复制使用此链接的人均可查看下载该文件...)</span>
-		<a id="personpath"  onclick="showperson()"></a>
-		<span>(只有拥有密钥的人复制使用此链接才可查看下载该文件...)</span>
-	</div>
-	
-	<div id="publicsuc">
-		<img id="close" src="images/close.png" onclick="closepublicsuc()">
-		<img src="images/success.png" style="width:30px;height:30px;float:left;margin-left:10px;margin-top:20px;">
-		<span style="color: rgb(49,173,238);font-size:18px;font-family:monospace;margin-left:10px;margin-top:20px;display: inline-block;">成功创建公开链接</span>
-		<div>
-			<br><input id="publicpath-text" type="text" readonly="readonly" value="sd" style="width:380px;height:30px;margin-top:10px;margin-left:10px;"/>
-			<a id="copypath"  onclick="copypublicpath()"></a>  <br>
-			<span style="margin-left:10px;font-size:14px;font-family: cursive;margin-top:10px;display: inline-block;">
-			 可以发送给好友:</span> <br>
-			 <span style="margin-left:10px;font-size:14px;font-family: cursive;margin-top:8px;display: inline-block;">
-			   <a target="blank" href="tencent://message/?uin=635809507&Site=potisoft&Menu=yes"  class="menuclass">罗大伟</a>
-			   <a target="blank" href="tencent://message/?uin=396411601&Site=potisoft&Menu=yes"  class="menuclass">小辉辉</a>
-			   <a target="blank" href="tencent://message/?uin=517302276&Site=potisoft&Menu=yes"  class="menuclass">张老黑</a>
-			</span>
-		</div>
-		
-	</div>
-	<div id="personsuc">
-		<img id="close" src="images/close.png" onclick="closepersonsuc()">
-		<img src="images/success.png" style="width:30px;height:30px;float:left;margin-left:10px;margin-top:20px;">
-		<span style="color: rgb(49,173,238);font-size:18px;font-family:monospace;margin-left:10px;margin-top:20px;display: inline-block;">成功创建私密链接</span>
-		<div>
-			<br><input id="personpath-text" type="text" value="sdfsd" readonly="readonly" style="width:483px;height:30px;margin-top:10px;margin-left:10px;"/>
-			<span style="margin-left:10px;font-size:12px;margin-top:10px;display: inline-block;font-family: monospace;">
-				提取密码
-			</span>
-			<br><input id="personpwd" type="text" readonly="readonly" style="width:83px;height:28px;margin-top:10px;margin-left:10px;"/>
-			<a id="copypath2" onclick="copypersonpath()"></a>  <br>
-			<span style="margin-left:10px;font-size:14px;font-family: cursive;margin-top:10px;display: inline-block;">
-			 可以发送给好友:</span> <br>
-			 <span style="margin-left:10px;font-size:14px;font-family: cursive;margin-top:8px;display: inline-block;">
-			   <a target="blank" href="tencent://message/?uin=635809507&Site=potisoft&Menu=yes"  class="menuclass">罗大伟</a>
-			   <a target="blank" href="tencent://message/?uin=396411601&Site=potisoft&Menu=yes"  class="menuclass">小辉辉</a>
-			   <a target="blank" href="tencent://message/?uin=517302276&Site=potisoft&Menu=yes"  class="menuclass">张老黑</a>
-			</span>
-		</div>
+
+	<div class="gizmoMenu gizmoDropDown">
+		<ul>
+			<li><i class="fa fa-camera-retro"></i><a href="#">查看</a><img
+				style="margin-top: 5px; margin-left: 70px;" src="images/jian.png" />
+				<ul>
+					<li><i class="fa fa-bullseye"></i><a href="#">列表</a></li>
+					<li><i class="fa fa-cubes"></i><a href="#">缩略图</a></li>
+				</ul></li>
+			<li><i class="fa fa-camera-retro"></i><a href="#">排序方式</a><img
+				style="margin-top: 5px; margin-left: 38px;" src="images/jian.png" />
+				<ul>
+					<li><i class="fa fa-bullseye"></i><a href="#">名称</a></li>
+					<li><i class="fa fa-cubes"></i><a href="#">大小</a></li>
+					<li><i class="fa fa-bullseye"></i><a href="#">修改日期</a></li>
+				</ul></li>
+			<li><i class="fa fa-arrow-right"></i><a href="#">刷新</a></li>
+			<li><i class="fa fa-arrow-right"></i><a href="#">重新加载页面</a></li>
+			<li id="file"><img src="images/yfile.png" /><i
+				class="fa fa-arrow-right"></i><a href="#">新建文件夹</a></li>
+		</ul>
 	</div>
 	
 </body>
-
-<script type="text/javascript" src="js/jquery.zclip.min.js"></script>
-
 </html>

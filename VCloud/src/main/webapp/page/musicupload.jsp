@@ -14,7 +14,7 @@
 <link rel="stylesheet" href="css/gizmoMenu.css" />
 <link type="text/css" rel="stylesheet" href="css/piv_currentupload_empty.css"/>
 <link type="text/css" rel="stylesheet" href="css/progressbar.css">
-
+<link type="text/css" rel="stylesheet" href="css/share.css">
 <link type="text/css" rel="stylesheet" href="css/vclound.css" />
 <link type="text/css" rel="stylesheet" href="css/index.css">
 
@@ -22,6 +22,7 @@
 <script src="js/jquery-1.11.3.min.js">
 	
 </script>
+<script src="js/public.js"></script>
 <script src="js/docupload.js"></script>
 <script type="text/javascript" src="js/index.js"></script>
 
@@ -43,12 +44,12 @@
 </script>
 </head>
 <body>
-
+	<div id="bg" class="bg" style="display:none;"></div>
 	<div id="navbar">
 		<div id="navbar_left">
 			<img alt="千度云盘" src="images/logo2.png">
 			<ul>
-				<li id="left_li"><a href="index.jsp">主页</a></li>
+				<li id="left_li"><a href="page/index.jsp">主页</a></li>
 				<li class="cjh" id="left_li" onmouseover="showH()"
 					onmouseout="hiddenH()">
 					<!--" --> <a href="page/Person_VCloud.jsp">网盘</a> <a><img
@@ -68,12 +69,12 @@
 										<span
 										style="font-size: 15px; margin-left: -20px; color: rgb(225, 230, 246);">视频</span></a>
 								</td>
-								<td><a href="#"> <i
+								<td><a href="page/docupload.jsp"> <i
 										style="display: block; width: 40px; height: 40px; background: url(images/word.png); background-size: cover;"></i>
 										<span
 										style="font-size: 15px; margin-left: -20px; color: rgb(225, 230, 246);">文档</span></a>
 								</td>
-								<td><a href="pic_currentupload_empty.jsp"> <i
+								<td><a href="page/pic_currentupload_empty.jsp"> <i
 										style="display: block; width: 40px; height: 40px; background: url(images/pic.png); background-size: cover;"></i>
 										<span
 										style="font-size: 15px; margin-left: -15px; color: rgb(225, 230, 246);">图片</span></a>
@@ -82,7 +83,7 @@
 						</table>
 					</div>
 				</li>
-				<li id="left_li"><a href="share.jsp">分享</a></li>
+				<li id="left_li"><a href="page/share.jsp">分享</a></li>
 				<li id="left_li"><a href="#">应用</a></li>
 			</ul>
 		</div>
@@ -93,7 +94,7 @@
 						<a>${userLogin.uname }，您好</a>
 					</c:if>
 					<c:if test="${userLogin == null }">
-						<a href="page/login.jsp">未登录</a>
+	 					<a href="page/login.jsp">未登录</a>
 					</c:if>
 				</li>
 				<li><a href="user/logout">注销</a></li>
@@ -248,11 +249,11 @@
 								<span class="textCla" style="line-height: 43px;">文件名</span> <span
 									class="list-header-operatearea"> <span
 									class="count-tips" style="line-height: 43px;">已选中6个文件/文件夹</span>
-									<a class="lg-button" href="javascript:void(0);"> <span
+									<a class="lg-button" href="javascript:shareFile();"> <span
 										class="lg-button-right"> <em class="icon-share-gray"
 											title="分享"></em> <span class="text" style="width: auto;">分享</span>
 									</span>
-								</a> <a class="lg-button" href="javascript:void(0);"> <span
+								</a> <a class="lg-button" href="javascript:downloadFile();"> <span
 										class="lg-button-right"> <em class="icon-download-gray"
 											title="下载"></em> <span class="text" style="width: auto;">下载</span>
 									</span>
@@ -323,56 +324,7 @@
 				<div class="content-view">
 					<div class="grid-view" style="margin-top: 0px;">
 						<dd class="g-clearfix">
-							<!-- <div class="grid-view-item1"
-								style="display: block; height: 122px; margin: 4px 4px 0 0; text-align: center; width: 142px; float: left;"
-								onclick="filenameIcon(1)">
-								<div class="dir-large" title="">
-									<img class="thumb"> <span class="checkbox"></span>
-								</div>
-								<div class="file-name">
-									<a class="filename" title="文件接收柜" href="javascript:void(0);">文件接收柜</a>
-								</div>
-							</div>
-							<div class="grid-view-item2"
-								style="display: block; height: 122px; margin: 4px 4px 0 0; text-align: center; width: 142px; float: left;"
-								onclick="filenameIcon(2)">
-								<div class="dir-large" title="">
-									<img class="thumb"> <span class="checkbox"></span>
-								</div>
-								<div class="file-name">
-									<a class="filename" title="我的数据" href="javascript:void(0);">我的数据</a>
-								</div>
-							</div>
-							<div class="grid-view-item3"
-								style="display: block; height: 122px; margin: 4px 4px 0 0; text-align: center; width: 142px; float: left;"
-								onclick="filenameIcon(3)">
-								<div class="dir-large" title="">
-									<img class="thumb"> <span class="checkbox"></span>
-								</div>
-								<div class="file-name">
-									<a class="filename" title="我的资源" href="javascript:void(0);">我的资源</a>
-								</div>
-							</div>
-							<div class="grid-view-item4"
-								style="display: block; height: 122px; margin: 4px 4px 0 0; text-align: center; width: 142px; float: left;"
-								onclick="filenameIcon(4)">
-								<div class="dir-large fileicon-large-xls" title="">
-									<img class="thumb"> <span class="checkbox"></span>
-								</div>
-								<div class="file-name">
-									<a class="filename" title="xls文件" href="javascript:void(0);">VCloud.xls</a>
-								</div>
-							</div>
-							<div class="grid-view-item5"
-								style="display: block; height: 122px; margin: 4px 4px 0 0; text-align: center; width: 142px; float: left;"
-								onclick="filenameIcon(5)">
-								<div class="dir-large fileicon-large-doc" title="">
-									<img class="thumb"> <span class="checkbox"></span>
-								</div>
-								<div class="file-name">
-									<a class="filename" title="doc文件" href="javascript:void(0);">VCloud.doc</a>
-								</div>
-							</div> -->
+							
 						</dd>
 					</div>
 				</div>
@@ -380,7 +332,51 @@
 			</div>
 		</div>
 	</div>
-
+	<div id="sharepath">
+		<img id="close" src="images/close.png" onclick="closeSharePath()">
+		<a id="publicpath" onclick="showpublic()"></a>
+		<span>(任何复制使用此链接的人均可查看下载该文件...)</span>
+		<a id="personpath"  onclick="showperson()"></a>
+		<span>(只有拥有密钥的人复制使用此链接才可查看下载该文件...)</span>
+	</div>
+	
+	<div id="publicsuc">
+		<img id="close" src="images/close.png" onclick="closepublicsuc()">
+		<img src="images/success.png" style="width:30px;height:30px;float:left;margin-left:10px;margin-top:20px;">
+		<span style="color: rgb(49,173,238);font-size:18px;font-family:monospace;margin-left:10px;margin-top:20px;display: inline-block;">成功创建公开链接</span>
+		<div>
+			<br><input id="publicpath-text" type="text" value="" readonly="readonly" style="width:380px;height:30px;margin-top:10px;margin-left:10px;"/>
+			<a id="copypath" onclick="copypublicpath()"></a>  <br>
+			<span style="margin-left:10px;font-size:14px;font-family: cursive;margin-top:10px;display: inline-block;">
+			 1.生成文件下载链接</span> <br>
+			 <span style="margin-left:10px;font-size:14px;font-family: cursive;margin-top:8px;display: inline-block;">
+			 2.把链接通过QQ、微博、人人网、QQ空间等方式分享给好友
+			</span>
+		</div>
+		
+	</div>
+	<div id="personsuc">
+		<img id="close" src="images/close.png" onclick="closepersonsuc()">
+		<img src="images/success.png" style="width:30px;height:30px;float:left;margin-left:10px;margin-top:20px;">
+		<span style="color: rgb(49,173,238);font-size:18px;font-family:monospace;margin-left:10px;margin-top:20px;display: inline-block;">成功创建私密链接</span>
+		<div>
+			<br><input id="personpath-text" type="text"  readonly="readonly" style="width:483px;height:30px;margin-top:10px;margin-left:10px;"/>
+			<span style="margin-left:10px;font-size:12px;margin-top:10px;display: inline-block;font-family: monospace;">
+				提取密码
+			</span>
+			<br><input id="personpwd" type="text" readonly="readonly" style="width:83px;height:28px;margin-top:10px;margin-left:10px;"/>
+			<a id="copypath2" onclick="copypersonpath()"></a>  <br>
+			<span style="margin-left:10px;font-size:14px;font-family: cursive;margin-top:10px;display: inline-block;">
+				可以将链接发送给你的QQ好友等
+			</span>
+		</div>
+	</div>
+	<div id="download" >
+		<span style="color: rgb(49,173,238);font-size:18px;font-family:monospace;margin-left:150px;margin-top:20px;display: inline-block; ">文件正在下载中,请等待..</span>
+		<div>
+			<img src="images/wait.gif" style="width: 400px; height: 150px; margin-left: 50px;" >
+		</div>
+	</div>
 	<div class="gizmoMenu gizmoDropDown">
 		<ul>
 			<li><i class="fa fa-camera-retro"></i><a href="#">查看</a><img

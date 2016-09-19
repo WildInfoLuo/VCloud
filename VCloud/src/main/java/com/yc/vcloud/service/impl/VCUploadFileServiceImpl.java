@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.yc.vcloud.entity.VCShareFile;
 import com.yc.vcloud.entity.VCUploadCount;
 import com.yc.vcloud.entity.VCUploadFile;
+import com.yc.vcloud.entity.VCUser;
 import com.yc.vcloud.mapper.VCUploadFileMapper;
 import com.yc.vcloud.service.VCUploadFileService;
 
@@ -96,6 +97,15 @@ public class VCUploadFileServiceImpl implements VCUploadFileService {
 	@Override
 	public boolean reFile(String filepath) {
 		return vCUploadFileMapper.reFile(filepath);
+	}
+	
+	public List<VCUploadFile> findAllShareFile(VCUser user) {
+		return vCUploadFileMapper.findAllShareFile(user);
+	}
+
+	@Override
+	public void cancelshareFile(VCShareFile sf) {
+		vCUploadFileMapper.cancelshareFile(sf);
 	}
 
 }

@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Param;
 import com.yc.vcloud.entity.VCRecyle;
 import com.yc.vcloud.entity.VCUploadCount;
 import com.yc.vcloud.entity.VCUploadFile;
+import com.yc.vcloud.entity.VCUser;
 
 public interface VCUploadFileMapper {
 	
@@ -46,4 +47,8 @@ public interface VCUploadFileMapper {
 	int getFileSize(@Param("userid")int userid,@Param("filepath")String filepath);
 	
 	boolean reFile(String filepath);
+
+	List<VCUploadFile> findAllShareFile(VCUser user);
+
+	void cancelshareFile(VCShareFile sf);
 }
