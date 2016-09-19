@@ -29,7 +29,7 @@ public class LoginInterceptor extends OncePerRequestFilter {
 			 file.mkdirs();
 		}
 		// 不过滤的uri
-		String[] notFilter = new String[] { "login.jsp", "back/backlogin.jsp", "index.html", "register.jsp" };
+		String[] notFilter = new String[] { "login.jsp", "back/backlogin.jsp", "index.html", "register.jsp","page/share","downloadshare.jsp" };
 		// 请求的uri
 		String uri = request.getRequestURI();
 		// uri中包含page时才进行过滤

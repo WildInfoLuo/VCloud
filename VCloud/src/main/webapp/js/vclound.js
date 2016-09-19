@@ -670,6 +670,12 @@ function upFileLoad() {
 	});
 }
 
+//分享文件
+function shareFile(){
+	$(".bg").css("display","block");
+	showpath();
+}
+
 // 删除文件
 function deleteFile() {
 	var date = getDate();
@@ -746,6 +752,93 @@ function getMaxNum(){
 	return a[a.length-1];
 }
 
+function showShare(){
+	$("#shareshow").css({"display":"block"});
+}
+
+function closeShare(){
+	$("#shareshow").css({"display":"none"});
+}
+function closeSharePath(){
+	$("#sharepath").css({"display":"none"});
+	$(".bg").css("display","none");
+}
+
+function closepublicsuc(){
+	$("#publicsuc").css({"display":"none"});
+	$(".bg").css("display","none");
+}
+
+function closepersonsuc(){
+	$("#personsuc").css({"display":"none"});
+	$(".bg").css("display","none");
+}
+
+function showpath(){
+	$("#shareshow").css({"display":"none"});
+	$("#sharepath").css({"display":"block"});
+}
+
+function showpublic(){
+	$.post("uploadFile/shareFile", {delpaths:delpaths}, function(data) {
+		$("#sharepath").css({"display":"none"});
+		$("#publicsuc input").val(data);
+		$("#publicsuc").css({"display":"block"});
+		
+	})
+}
+
+function showperson(){
+	var nums = "";
+	var num;
+	var ens = ['1','2','3','4','5','6','7','8','9','a','b','c','d','e','f','h','i','j','k','l','m','n'
+	           ,'o','p','q','r','s','t','u','v','w','x','y','z'];
+	for(var i=0;i<2;i++){
+		num = Math.ceil(Math.random()*10)-2;
+		if(num==-1){
+			num=0;
+		}
+		nums += ens[num];
+		num = Math.ceil(Math.random()*10)+10;
+		nums += ens[num];
+	}
+	$.post("uploadFile/shareFile", {delpaths:delpaths,password:nums}, function(data) {
+		$("#sharepath").css({"display":"none"});
+		$("#personpath-text").val(data);
+		$("#personpwd").val(nums);
+		$("#personsuc").css({"display":"block"});
+	})
+}
+
+//复制链接到粘贴板中
+function copypublicpath(){
+	/*alert(window.clipboardData.getData("text"));*/
+	$("#copypath").zclip({
+		path: "ZeroClipboard.swf", 
+		copy: function(){
+			return $("#publicpath-text").val();
+		},
+		afterCopy: function(){ //复制成功
+	       alert('复制成功');
+	    }
+	});
+}
+
+//生成提取码及复制
+function copypersonpath(){
+	var pwd=$("#personpwd").val();
+	var text = $("#personpath-text").val();
+	var str=text+","+pwd;
+	$("#copypath2").zclip({
+		path: "ZeroClipboard.swf", 
+		copy: function(){
+			return str;
+		},
+		afterCopy: function(){ //复制成功
+	       alert('复制成功');
+	    }
+	});
+} 
 
 
 

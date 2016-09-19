@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.yc.vcloud.entity.VCShareFile;
 import com.yc.vcloud.entity.VCUploadCount;
 import com.yc.vcloud.entity.VCUploadFile;
 import com.yc.vcloud.entity.VCadmin;
@@ -67,6 +68,15 @@ public class VCUploadFileServiceImpl implements VCUploadFileService {
 	}
 
 	@Override
+	public boolean shareFile(VCShareFile list) {
+		return vCUploadFileMapper.shareFile(list);
+	}
+
+	@Override
+	public List<VCUploadFile> findShareFile(VCShareFile file) {
+		return vCUploadFileMapper.findShareFile(file);
+	}
+	
 	public List<VCUploadFile> getAllFileWang(int userid,String filePath) {
 		return vCUploadFileMapper.getAllFileWang(userid,filePath);
 	}
@@ -74,6 +84,10 @@ public class VCUploadFileServiceImpl implements VCUploadFileService {
 	@Override
 	public boolean insertRecyle(String filepath, String date,int userid) {
 		return vCUploadFileMapper.insertRecyle(filepath, date,userid);
+	}
+	
+	public String surePwd(VCShareFile file) {
+		return vCUploadFileMapper.surePwd(file);
 	}
 
 }

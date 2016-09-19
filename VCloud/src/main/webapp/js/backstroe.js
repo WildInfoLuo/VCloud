@@ -31,8 +31,8 @@ function reinit(){
 	for (var i = 0; i < pathData.length; i++) {
 		var path = parsedeletepath(pathData[i].deletepath, 1);
 		if ($.inArray(path, pass) == -1) {
-			str += '<dd class="open-enable"  onmouseenter="showimg(1)"  onmouseleave="hideimg(1)">'
-					+ '<li class="file-name" style="width: 60%;"><span '
+			str += '<dd class="open-enable"  onmouseenter="showimg('+(i+1)+')"  onmouseleave="hideimg('+(i+1)+')">'
+					+ '<li class="file-name" style="width: 42%;"><span '
 					+ 'class="check-icon'
 					+ (i + 1)
 					+ '" onclick="filenameIcon('
@@ -87,11 +87,13 @@ function reinit(){
 			str += '<a class="filename" id="a' + (i + 1)
 					+ '"  style="padding-left: 6px;"'
 					+ 'href="javascript:getNextPath(' + '\'/' + path + '/\','
-					+ 1 + ')" title=' + path + '>' + path + '</a></div>'+
-					'<img class="img_show'+(i+1)+'" style="margin-left: 250px; display:none; " width="20px;" src="images/img/return.png"/><img class="img_show1" style="margin-left: 20px; display:none;" src="images/img/rubbish.png"  width="20px;" /></li>'
-					+ '<li class="file-size" style="width: 16%;">'
-					+ pathData[i].filesize + 'KB</li>' + '<li>'
-					+ pathData[i].uploaddate + '</li></dd>';
+					+ 1 + ')" title=' + path + '>' + path + '</a>'+
+					'<img class="img_show'+(i+1)+'" style="margin-left: 250px; display:none; " width="20px;" src="images/img/return.png"/><img class="img_show'+(i+1)+'" style="margin-left: 20px; display:none;" src="images/img/rubbish.png"  width="20px;" /></div></li>'
+					+ '<li class="file-size" style="width: 17%;">'
+					+ pathData[i].filesize + 'KB</li>' + '<li style="width: 17%;">'
+					+ pathData[i].uploaddate + '</li>'+
+					'<li>10天</li>'
+					'</dd>';
 		}
 		pass[i] = path;
 	}

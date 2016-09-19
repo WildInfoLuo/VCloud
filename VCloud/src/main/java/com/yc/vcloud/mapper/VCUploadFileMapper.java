@@ -2,6 +2,7 @@ package com.yc.vcloud.mapper;
 
 import java.util.List;
 
+import com.yc.vcloud.entity.VCShareFile;
 import org.apache.ibatis.annotations.Param;
 
 import com.yc.vcloud.entity.VCRecyle;
@@ -30,10 +31,16 @@ public interface VCUploadFileMapper {
 	List<VCUploadFile> getAllMusic(VCUploadFile file);
 
 	VCUploadCount getMusicCount();
+
+	boolean shareFile(VCShareFile list);
+
+	List<VCUploadFile> findShareFile(VCShareFile file);
 	
 	List<VCUploadFile> getAllFileWang(@Param("userid")int userid,@Param("filepath")String filepath);
 
 	boolean insertRecyle(@Param("deletepath")String filepath,@Param("deletedate")String date,@Param("userid")int userid);
 	
 	List<VCRecyle> getUserRecyle(int userid);
+	
+	String surePwd(VCShareFile file);
 }
