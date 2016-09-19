@@ -259,7 +259,7 @@
 			</div>
 		                 <div class="upload-list" style="display: block;">
             				<c:forEach items="${photo}" var="item">
-					            <img class="img" src="../sources/${item.temp2 }">
+					            <img class="img" src="webapps/sources/${item.temp2 }">
             				</c:forEach>
             			  </div>
 		            </div>

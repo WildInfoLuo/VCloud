@@ -16,9 +16,7 @@
 <link type="text/css" rel="stylesheet" href="css/progressbar.css">
 <link type="text/css" rel="stylesheet" href="css/share.css">
 <link href="images/yun.gif" rel="shortcut icon">
-<script src="js/jquery-1.11.3.min.js">
-	
-</script>
+<script src="js/jquery-1.11.3.min.js"></script>
 <script src="js/vclound.js"></script>
 <script src="js/ajaxfileupload.js"></script>
 <script type="text/javascript" src="js/index.js"></script>
@@ -367,6 +365,13 @@
 		<div>
 			<img src="images/wait.gif" style="width: 400px; height: 150px; margin-left: 50px;" >
 		</div>
+	</div>
+	<!-- 显示图片 -->
+	<div id="sharebut" onclick="javascript:showShare()"></div>
+	<div id="shareshow">
+		<img id="" src="../sources/021.jpg" >
+		<img id="close" src="images/close.png" onclick="closeShare()">
+		<div id="imgshow" style="width: 720px;height: 600px;float: left;overflow: hidden;"></div>
 	</div>
 </body>
 </html>
