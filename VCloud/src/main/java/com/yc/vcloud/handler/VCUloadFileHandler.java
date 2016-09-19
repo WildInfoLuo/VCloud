@@ -30,6 +30,7 @@ import com.yc.vcloud.entity.VCUploadCount;
 import com.yc.vcloud.entity.VCUploadFile;
 import com.yc.vcloud.entity.VCUser;
 import com.yc.vcloud.service.VCUploadFileService;
+import com.yc.vcloud.utils.DownloadDemo2;
 import com.yc.vcloud.utils.SessionAttribute;
 
 @Controller
@@ -460,5 +461,24 @@ public class VCUloadFileHandler {
 		return "Person_VCloud";
 	}
 	
-	
+	@RequestMapping(value="/downloadFile",method=RequestMethod.POST)
+	public void downloadFile(@RequestParam(value="delpaths[]")  String[] delpaths,HttpSession session,HttpServletRequest request,PrintWriter out){
+		String basePath=request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+request.getContextPath()+"/../sources/";
+		
+		for(String str:delpaths){
+			if(str!=""){
+				DownloadDemo2 download=new DownloadDemo2();
+				download.downloadFile(basePath+str.split("/")[str.split("/").length-1], "D:/VCloudDownload/", 5);
+				while(true){
+					if(download.i==5){
+						break;
+					}
+				}
+			}
+		}
+		
+		out.println(1);
+		out.flush();
+		out.close();
+	}
 }

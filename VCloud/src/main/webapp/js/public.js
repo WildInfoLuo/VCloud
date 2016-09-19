@@ -1,6 +1,3 @@
-function uploadphoto(id){
-	$("#uploadfile").submit();
-} 
 var pathData = null;
 var nextpath = "";
 var newDirArr = new Array();
@@ -13,8 +10,8 @@ $(function() {
 	$(".content-view").hide();
 	var str = "";
 	var pass = new Array();
-
 });
+
 
 var isdir = 0;
 
@@ -735,11 +732,6 @@ function upFileLoad() {
 	});
 }
 
-//分享文件
-function shareFile(){
-	$(".bg").css("display","block");
-	showpath();
-}
 
 // 删除文件
 function deleteFile() {
@@ -817,6 +809,12 @@ function getMaxNum(){
 	return a[a.length-1];
 }
 
+//分享文件
+function shareFile(){
+	$(".bg").css("display","block");
+	showpath();
+}
+
 function showShare(){
 	$("#shareshow").css({"display":"block"});
 }
@@ -846,6 +844,12 @@ function showpath(){
 
 function showpublic(){
 	$.post("uploadFile/shareFile", {delpaths:delpaths}, function(data) {
+		checked2 = 0;
+		for (var i = 0; i < length; i++) {
+			tcheckIcon[i] = false;
+		}
+		filenameIcon(-1);
+		delpaths.length = 0;
 		$("#sharepath").css({"display":"none"});
 		$("#publicsuc input").val(data);
 		$("#publicsuc").css({"display":"block"});
@@ -868,6 +872,12 @@ function showperson(){
 		nums += ens[num];
 	}
 	$.post("uploadFile/shareFile", {delpaths:delpaths,password:nums}, function(data) {
+		checked2 = 0;
+		for (var i = 0; i < length; i++) {
+			tcheckIcon[i] = false;
+		}
+		filenameIcon(-1);
+		delpaths.length = 0;
 		$("#sharepath").css({"display":"none"});
 		$("#personpath-text").val(data);
 		$("#personpwd").val(nums);
@@ -905,6 +915,7 @@ function copypersonpath(){
 	});
 } 
 
+//下载文件
 function downloadFile(){
 	$("#download").css({"display":"block"});
 	$.post("uploadFile/downloadFile",{delpaths:delpaths},function(data) {

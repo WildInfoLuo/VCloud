@@ -25,15 +25,17 @@
 		<div id="navbar_left">
 			<img alt="千度云盘" src="images/logo2.png">
 			<ul>
-				<li id="left_li"><a href="index.jsp">主页</a></li>
+				<li id="left_li"><a href="page/index.jsp">主页</a></li>
 				<li class="cjh" id="left_li" onmouseover="showH()"
 					onmouseout="hiddenH()">
-					<!--" --> <a href="Person_VCloud.jsp">网盘</a>
+					<!--" --> <a href="page/Person_VCloud.jsp">网盘</a> <a><img
+						id="f-icon" src="images/down.png"
+						style="width: 11px; height: 11px; margin-top: 20px; margin-left: 3px; position: absolute;"></a>
 					<div id="navbar_hidden" onmouseout="hiddenH()">
 						<table id="navbar_table" style="width: 300px; height: 70px;"
 							cellspacing="0" cellpadding="8">
 							<tr>
-								<td><a href="#"> <i
+								<td><a href="page/Person_VCloud.jsp"> <i
 										style="display: block; width: 40px; height: 40px; background: url(images/cloud.png); background-size: cover; margin-left: 15px;"></i>
 										<span
 										style="font-size: 15px; margin-left: -15px; color: rgb(225, 230, 246);">网盘</span></a>
@@ -43,12 +45,12 @@
 										<span
 										style="font-size: 15px; margin-left: -20px; color: rgb(225, 230, 246);">视频</span></a>
 								</td>
-								<td><a href="#"> <i
+								<td><a href="page/docupload.jsp"> <i
 										style="display: block; width: 40px; height: 40px; background: url(images/word.png); background-size: cover;"></i>
 										<span
 										style="font-size: 15px; margin-left: -20px; color: rgb(225, 230, 246);">文档</span></a>
 								</td>
-								<td><a href="#"> <i
+								<td><a href="page/pic_currentupload_empty.jsp"> <i
 										style="display: block; width: 40px; height: 40px; background: url(images/pic.png); background-size: cover;"></i>
 										<span
 										style="font-size: 15px; margin-left: -15px; color: rgb(225, 230, 246);">图片</span></a>
@@ -57,7 +59,7 @@
 						</table>
 					</div>
 				</li>
-				<li id="left_li"><a href="share.jsp">分享</a></li>
+				<li id="left_li"><a href="page/share.jsp">分享</a></li>
 				<li id="left_li"><a href="#">应用</a></li>
 			</ul>
 		</div>
@@ -68,12 +70,19 @@
 						<a>${userLogin.uname }，您好</a>
 					</c:if>
 					<c:if test="${userLogin == null }">
-						<a href="page/login.jsp">未登录</a>
+	 					<a href="page/login.jsp">未登录</a>
 					</c:if>
 				</li>
 				<li><a href="user/logout">注销</a></li>
 				<li><a href="#">通知</a></li>
 				<li><a href="#">更多>></a></li>
+			</ul>
+		</div>
+		<div id="search">
+			<ul>
+				<li><input type="text" name="searchkey" id="searchkey"
+					placeholder="请输入您要搜索的关键字" /><input type="button" name="searchbu"
+					id="searchbu" value="搜索" /></li>
 			</ul>
 		</div>
 	</div>

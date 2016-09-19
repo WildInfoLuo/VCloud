@@ -736,11 +736,6 @@ function upFileLoad() {
 	});
 }
 
-//分享文件
-function shareFile(){
-	$(".bg").css("display","block");
-	showpath();
-}
 
 // 删除文件
 function deleteFile() {
@@ -816,6 +811,12 @@ function getMaxNum(){
 		}
 	}
 	return a[a.length-1];
+}
+
+//分享文件
+function shareFile(){
+	$(".bg").css("display","block");
+	showpath();
 }
 
 function showShare(){
@@ -906,5 +907,18 @@ function copypersonpath(){
 	});
 } 
 
-
+//下载文件
+function downloadFile(){
+	$("#download").css({"display":"block"});
+	$.post("uploadFile/downloadFile",{delpaths:delpaths},function(data) {
+		checked2 = 0;
+		for (var i = 0; i < length; i++) {
+			tcheckIcon[i] = false;
+		}
+		filenameIcon(-1);
+		delpaths.length = 0;
+		$("#download").css({"display":"none"});
+		alert("下载完成!");
+	}, "json");
+}
 
