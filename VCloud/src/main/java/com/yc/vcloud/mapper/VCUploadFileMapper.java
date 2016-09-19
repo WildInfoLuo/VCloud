@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.yc.vcloud.entity.VCRecyle;
 import com.yc.vcloud.entity.VCUploadCount;
 import com.yc.vcloud.entity.VCUploadFile;
 import com.yc.vcloud.entity.VCUser;
@@ -32,4 +33,7 @@ public interface VCUploadFileMapper {
 	
 	List<VCUploadFile> getAllFileWang(@Param("userid")int userid,@Param("filepath")String filepath);
 
+	boolean insertRecyle(@Param("deletepath")String filepath,@Param("deletedate")String date,@Param("userid")int userid);
+	
+	List<VCRecyle> getUserRecyle(int userid);
 }

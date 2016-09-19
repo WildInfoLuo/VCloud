@@ -71,4 +71,9 @@ public class VCUploadFileServiceImpl implements VCUploadFileService {
 		return vCUploadFileMapper.getAllFileWang(userid,filePath);
 	}
 
+	@Override
+	public boolean insertRecyle(String filepath, String date,int userid) {
+		return vCUploadFileMapper.insertRecyle(filepath, date,userid);
+	}
+
 }

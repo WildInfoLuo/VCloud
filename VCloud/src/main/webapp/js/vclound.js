@@ -59,7 +59,6 @@ function editSure() {
 		n = nextpath.substr(1) + name;
 	}
 	var num = getMaxNum();
-	alert(num);
 	$.post("uploadFile/addDir/" + date,{name : n},
 					function(data) {
 						if (data) {
@@ -90,7 +89,7 @@ function editSure() {
 									+ '<li class="file-size" style="width: 16%;">-</li>'
 									+ '<li>' + date + '</li></dd>';
 							$(".list-view").prepend($(str)); // 显示在第一条
-							pathDataAdd(n,date,0)
+							pathDataAdd("/"+n+"/",date,0);
 						}
 					});
 	$(".module-edit-name").css("display", "none");
@@ -685,8 +684,9 @@ function deleteFile() {
 			}
 			filenameIcon(-1);
 			delpaths.length = 0;
+			
 		}
-	})
+	});
 }
 
 //从pathData中添加元素的方法
@@ -700,21 +700,26 @@ function pathDataAdd(path,date,filesize){
 
 //从pathData中删除元素的方法
 function pathDataDel(path){//上一级路径+当前路径
-	var i = 0;
+	var n = 0;
 	var num = 0;
-	console.info(pathData);
-	while(i<pathData.length){
-		if(pathData[i].filepath.indexOf(path[num])==0){
-			pathData.splice(i, 1);
+	for(var i = 0;i<path.length;i++){
+		if(path[i] == null || ""==path[i]){
+			path.splice(i, 1);
+		}
+	}
+	while(n<pathData.length){
+		if(pathData[n].filepath.indexOf(path[num])==0){
+			pathData.splice(n, 1);
 			num++;
-			i=0;
+			n=0;
 		}else{
-			i++;
+			n++;
 		}
 		if(num == path.length){
 			return;
 		}
 	}
+	console.info(pathData);
 }
 
 //获取最大的标识数
