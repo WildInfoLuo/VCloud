@@ -4,24 +4,25 @@
 <!DOCTYPE html>
 <html>
 <head>
+<base href="/VCloud/">
 <meta charset=UTF-8">
 <title>VCloud__分享</title>
 
-<link type="text/css" rel="stylesheet" href="../css/vclound.css" />
-<link type="text/css" rel="stylesheet" href="../css/index.css">
-<link type="text/css" rel="stylesheet" href="../css/share.css">
-<link href="../images/云准备.gif" rel="shortcut icon">
-<script src="../js/jquery-1.11.3.min.js">
+<link type="text/css" rel="stylesheet" href="css/vclound.css" />
+<link type="text/css" rel="stylesheet" href="css/index.css">
+<link type="text/css" rel="stylesheet" href="css/share.css">
+<link href="images/云准备.gif" rel="shortcut icon">
+<script src="js/jquery-1.11.3.min.js">
 	
 </script>
-<script src="../js/vclound.js"></script>
-<script type="text/javascript" src="../js/index.js"></script>
-<script type="text/javascript" src="../js/share.js"></script>
+<script src="js/vclound.js"></script>
+<script type="text/javascript" src="js/index.js"></script>
+<script type="text/javascript" src="js/share.js"></script>
 </head>
 <body>
 	<div id="navbar">
 		<div id="navbar_left">
-			<img alt="千度云盘" src="../images/logo2.png">
+			<img alt="千度云盘" src="images/logo2.png">
 			<ul>
 				<li id="left_li"><a href="index.jsp">主页</a></li>
 				<li class="cjh" id="left_li" onmouseover="showH()"
@@ -32,22 +33,22 @@
 							cellspacing="0" cellpadding="8">
 							<tr>
 								<td><a href="#"> <i
-										style="display: block; width: 40px; height: 40px; background: url(../images/cloud.png); background-size: cover; margin-left: 15px;"></i>
+										style="display: block; width: 40px; height: 40px; background: url(images/cloud.png); background-size: cover; margin-left: 15px;"></i>
 										<span
 										style="font-size: 15px; margin-left: -15px; color: rgb(225, 230, 246);">网盘</span></a>
 								</td>
 								<td><a href="#"> <i
-										style="display: block; width: 40px; height: 40px; background: url(../images/tv.png); background-size: cover;"></i>
+										style="display: block; width: 40px; height: 40px; background: url(images/tv.png); background-size: cover;"></i>
 										<span
 										style="font-size: 15px; margin-left: -20px; color: rgb(225, 230, 246);">视频</span></a>
 								</td>
 								<td><a href="#"> <i
-										style="display: block; width: 40px; height: 40px; background: url(../images/word.png); background-size: cover;"></i>
+										style="display: block; width: 40px; height: 40px; background: url(images/word.png); background-size: cover;"></i>
 										<span
 										style="font-size: 15px; margin-left: -20px; color: rgb(225, 230, 246);">文档</span></a>
 								</td>
 								<td><a href="#"> <i
-										style="display: block; width: 40px; height: 40px; background: url(../images/pic.png); background-size: cover;"></i>
+										style="display: block; width: 40px; height: 40px; background: url(images/pic.png); background-size: cover;"></i>
 										<span
 										style="font-size: 15px; margin-left: -15px; color: rgb(225, 230, 246);">图片</span></a>
 								</td>
@@ -167,13 +168,13 @@
 	<div id="shareCon"></div>
 	<div id="sharebut" onclick="javascript:showShare()"></div>
 	<div id="shareshow">
-		<h3 id="shareh3">文件列表<img id="close" src="../images/close.png" onclick="closeShare()"></h3>
+		<h3 id="shareh3">文件列表<img id="close" src="images/close.png" onclick="closeShare()"></h3>
 		<div id="showall">
 			<span style="width:40%;float:left;">全部文件</span>
 			<div id="search" style="float:left;margin-left:163px;">
-				<img id="search-icon" src="../images/search.png">
+				<img id="search-icon" src="images/search.png">
 				<input type="text" id="search-key" placeholder="搜索我的网盘文件">
-				<img id="search-enter" src="../images/enter.png">
+				<img id="search-enter" src="images/enter.png">
 			</div>
 			<!--控制lay块的隐藏与显示  -->
 			<div class="share-grid-switch">
@@ -215,7 +216,7 @@
 		</div>
 	</div>
 	<div id="sharepath">
-		<img id="close" src="../images/close.png" onclick="closeSharePath()">
+		<img id="close" src="images/close.png" onclick="closeSharePath()">
 		<a id="publicpath" onclick="showpublic()"></a>
 		<span>(任何复制使用此链接的人均可查看下载该文件...)</span>
 		<a id="personpath"  onclick="showperson()"></a>
@@ -223,8 +224,8 @@
 	</div>
 	
 	<div id="publicsuc">
-		<img id="close" src="../images/close.png" onclick="closepublicsuc()">
-		<img src="../images/success.png" style="width:30px;height:30px;float:left;margin-left:10px;margin-top:20px;">
+		<img id="close" src="images/close.png" onclick="closepublicsuc()">
+		<img src="images/success.png" style="width:30px;height:30px;float:left;margin-left:10px;margin-top:20px;">
 		<span style="color: rgb(49,173,238);font-size:18px;font-family:monospace;margin-left:10px;margin-top:20px;display: inline-block;">成功创建公开链接</span>
 		<div>
 			<br><input id="publicpath-text" type="text" readonly="readonly" value="sd" style="width:380px;height:30px;margin-top:10px;margin-left:10px;"/>
@@ -238,8 +239,8 @@
 		
 	</div>
 	<div id="personsuc">
-		<img id="close" src="../images/close.png" onclick="closepersonsuc()">
-		<img src="../images/success.png" style="width:30px;height:30px;float:left;margin-left:10px;margin-top:20px;">
+		<img id="close" src="images/close.png" onclick="closepersonsuc()">
+		<img src="images/success.png" style="width:30px;height:30px;float:left;margin-left:10px;margin-top:20px;">
 		<span style="color: rgb(49,173,238);font-size:18px;font-family:monospace;margin-left:10px;margin-top:20px;display: inline-block;">成功创建私密链接</span>
 		<div>
 			<br><input id="personpath-text" type="text" value="sdfsd" readonly="readonly" style="width:483px;height:30px;margin-top:10px;margin-left:10px;"/>
@@ -255,6 +256,6 @@
 	</div>
 </body>
 
-<script type="text/javascript" src="../js/jquery.zclip.min.js"></script>
+<script type="text/javascript" src="js/jquery.zclip.min.js"></script>
 
 </html>
