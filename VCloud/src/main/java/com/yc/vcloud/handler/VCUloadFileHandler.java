@@ -122,11 +122,12 @@ public class VCUloadFileHandler {
 			}
 		}
 		VCUser user = (VCUser) session.getAttribute(SessionAttribute.USERLOGIN);
-		VCUploadFile file = new VCUploadFile(user.getUserid(), nextpath + filename, length,
-				sdf.format(new Date()), "文件", filename,"1");
+		VCUploadFile file = new VCUploadFile(user.getUserid(), nextpath + filename+"/", length,
+				sdf.format(new Date()), "文件", filename,"0");
 		boolean flag = vCUploadFileService.uploadFile(file);
 		System.out.println("文件上传后"+user.getUserid()+nextpath);
-		List<VCUploadFile> wangFile=vCUploadFileService.getAllFileWang(user.getUserid(),nextpath);
+		List<VCUploadFile> wangFile=vCUploadFileService.getAllFileWang(user.getUserid(),nextpath+ filename);
+		System.out.println("wangFile"+wangFile);
 		session.setAttribute(SessionAttribute.FILESESSION, wangFile);
 		Gson gson=new Gson();
 		out.print(gson.toJson(wangFile));
@@ -178,7 +179,7 @@ public class VCUloadFileHandler {
 					length = (int) (f.length() / 1024);
 				}
 				VCUploadFile file = new VCUploadFile(user.getUserid(), "/我的资源/新建文件夹/" + filename, length,
-						sbf.format(new Date()), "图片", filename,"1");
+						sbf.format(new Date()), "图片", filename,"0");
 				 vCUploadFileService.uploadFile(file);
 			}
 		}
@@ -427,6 +428,18 @@ public class VCUloadFileHandler {
 				vCUploadFileService.insertRecyle(str, date, user.getUserid());
 			}
 		}
+		out.println(flag);
+		out.flush();
+		out.close();
+		return "Person_VCloud";
+	}
+	
+	//获取文件大小
+	@RequestMapping(value="/getFileSize/{path}",method=RequestMethod.POST)
+	public String getFileSize(@RequestParam(value="path")String path,
+							PrintWriter out, HttpSession session){
+		VCUser user = (VCUser) session.getAttribute(SessionAttribute.USERLOGIN);
+		boolean flag= false;
 		out.println(flag);
 		out.flush();
 		out.close();

@@ -47,6 +47,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</where>
 	</update>
 	
+	<update id="reFile" parameterType="String">
+		update uploadfile set isdel = 0 
+		<where>
+			filepath like #{filepath}||'%'
+		</where>
+	</update>
+	
 	<insert id="insertRecyle" parameterType="VCRecyle">
 		insert into VCRecyle values(seq_rid.nextval,#{userid},to_date(#{deletedate},'yyyy-mm-dd HH24:MI:ss'),7,#{deletepath},null)
 	</insert>
@@ -78,6 +85,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id="getAllFileWang" parameterType="VCUploadFile" resultType="VCUploadFile">
 		select ufid,userid,filepath,filesize,to_char(uploaddate,'yyyy-mm-dd HH:MI:ss') uploaddate,filestatus,stoppoingpath,status,isdir,temp1,temp2,rownum
-		 from uploadfile where userid=#{userid} and filepath like '${filepath}%' and isdir=0  order by uploaddate desc
+		 from uploadfile where userid=#{userid} and filepath =#{filepath} and isdir=0  order by uploaddate desc
 	</select>
+	
+	<!-- 查询文件大小 -->
+	<select id="getFileSize" parameterType="VCUploadFile" resultType="int">
+		select count(filesize) from uploadfile where userid = #{userid} and filepath like #{filepath}||'%' and isdel = 0
+	</select>
+	
 </mapper>

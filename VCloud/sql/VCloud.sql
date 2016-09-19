@@ -61,20 +61,19 @@ create table uploadfile(
 create sequence seq_ufid start with 40001;
 alter table uploadfile add isdel varchar2(10)    --1.删除    0.未删除
 
-insert into uploadfile values(seq_ufid.nextval,10041,'/我的资/新建文件夹',0,sysdate,1,null,1,1,null,null,0);
-insert into uploadfile values(seq_ufid.nextval,10041,'/来自百度手机浏览器/hello/hello.doc',0,sysdate,1,null,1,0,null,null,0);
-insert into uploadfile values(seq_ufid.nextval,10041,'/我的资源/新建文件夹/我的资源',0,sysdate,1,null,1,1,null,null,0);
-insert into uploadfile values(seq_ufid.nextval,10041,'/资源/新建文件夹/我的资源',0,sysdate,1,null,1,1,null,null,0);
-insert into uploadfile values(seq_ufid.nextval,10041,'/我的资源/新建文件夹2/我的资源3',0,sysdate,1,null,1,1,null,null,0);
-insert into uploadfile values(seq_ufid.nextval,10041,'/我的资源.xls',0,sysdate,1,null,1,0,null,null,0);
-insert into uploadfile values(seq_ufid.nextval,10041,'/我的资源/新建文件夹2/我的资源3.xls',0,sysdate,1,null,1,1,null,null,0);
+insert into uploadfile values(seq_ufid.nextval,10041,'/我的资/新建文件夹/',564,sysdate,1,null,1,1,null,null,0);
+insert into uploadfile values(seq_ufid.nextval,10041,'/来自百度手机浏览器/hello/hello.doc/',456,sysdate,1,null,1,0,null,null,0);
+insert into uploadfile values(seq_ufid.nextval,10041,'/我的资源/新建文件夹/我的资源/',2342,sysdate,1,null,1,1,null,null,0);
+insert into uploadfile values(seq_ufid.nextval,10041,'/资源/新建文件夹/我的资源/',123,sysdate,1,null,1,1,null,null,0);
+insert into uploadfile values(seq_ufid.nextval,10041,'/我的资源/新建文件夹2/我的资源3/',76,sysdate,1,null,1,1,null,null,0);
+insert into uploadfile values(seq_ufid.nextval,10041,'/我的资源.xls/',876,sysdate,1,null,1,0,null,null,0);
+insert into uploadfile values(seq_ufid.nextval,10041,'/我的资源/新建文件夹2/我的资源3.xls/',6789,sysdate,1,null,1,1,null,null,0);
 
 delete from uploadfile;
 
 select * from UPLOADFILE;
 
-delete from uploadfile where filepath like( '/资源/'%,'/我的资/'%)
-
+update uploadfile set isdel = 0 where filepath like '/我的资源/'||'%'
 select ufid,userid,filepath,filesize,to_char(uploaddate,'yyyy-mm-dd HH:MI:ss'),filestatus,stoppoingpath,status,isdir
 		 from uploadfile where userid=10041 and regexp_like(filepath,'^//我的资源+');
 
@@ -89,9 +88,9 @@ create table VCRecyle(
 	deletedate date, --删除时间
 	lefttime int,  --可存放天数
 	deletepath varchar2(200),		--备用字段
-    temp2 varchar2(200)			--备用字段 
+    temp2 varchar2(200)			--文件大小
 );
-
+delete from VCRecyle where deletepath = '/新建文件夹(2)/';
 select * from VCRecyle
 delete from VCRecyle
 alter table VCRecyle rename column temp1 to deletepath
@@ -109,7 +108,7 @@ create table VCShare(
   temp2 varchar2(200)				--备用字段
 );
 create sequence seq_shareid start with 70001;
-
+select * from vcshare
 
 --解决文件服务器端至客户端下载 			将本机作为服务器，其他作为客户端直接输入localhost进行访问与下载
 --回收站的删除与还原、清空回收站

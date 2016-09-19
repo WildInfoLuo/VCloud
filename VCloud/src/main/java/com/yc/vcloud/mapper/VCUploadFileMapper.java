@@ -42,4 +42,8 @@ public interface VCUploadFileMapper {
 	List<VCRecyle> getUserRecyle(int userid);
 	
 	String surePwd(VCShareFile file);
+	
+	int getFileSize(@Param("userid")int userid,@Param("filepath")String filepath);
+	
+	boolean reFile(String filepath);
 }

@@ -60,7 +60,7 @@ function showperson(){
 function copypublicpath(){
 	/*alert(window.clipboardData.getData("text"));*/
 	$("#copypath").zclip({
-		path: "ZeroClipboard.swf", 
+		path: "page/ZeroClipboard.swf", 
 		copy: function(){
 			return $("#publicpath-text").val();
 		},
@@ -76,7 +76,7 @@ function copypersonpath(){
 	var text = $("#personpath-text").val();
 	var str=text+","+pwd;
 	$("#copypath2").zclip({
-		path: "ZeroClipboard.swf", 
+		path: "page/ZeroClipboard.swf", 
 		copy: function(){
 			return str;
 		},
