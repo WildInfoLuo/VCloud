@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -26,6 +25,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 import com.google.gson.Gson;
+import com.yc.vcloud.entity.VCShareFile;
 import com.yc.vcloud.entity.VCUploadCount;
 import com.yc.vcloud.entity.VCUploadFile;
 import com.yc.vcloud.entity.VCUser;
@@ -181,7 +181,6 @@ public class VCUloadFileHandler {
 						sbf.format(new Date()), "图片", filename,"1");
 				 vCUploadFileService.uploadFile(file);
 			}
-
 		}
 		
 		VCUploadFile file = new VCUploadFile(user.getUserid(), null);
@@ -236,7 +235,7 @@ public class VCUloadFileHandler {
 
 		}
 		VCUploadFile file = new VCUploadFile(user.getUserid(), null);
-		List<VCUploadFile> files = vCUploadFileService.getAllPhoto(file);
+		List<VCUploadFile> files = vCUploadFileService.getAllDoc(file);
 		map.put(SessionAttribute.DOC, files);
 		long endTime = System.currentTimeMillis();
 		System.out.println("运行时间：" + String.valueOf(endTime - startTime) + "ms");
@@ -349,22 +348,86 @@ public class VCUloadFileHandler {
 		out.close();
 
 	}
-	
-	//删除文件的方法
+	//分享文件的方法
 	@ResponseBody
-	@RequestMapping(value="/delFile",method=RequestMethod.POST)
-	public String delFiles(@RequestParam(value="delpaths[]") String[] delpaths){
-		System.out.println("===>"+delpaths.length);
-		List<String> list = new ArrayList<String>();
+	@RequestMapping(value="/shareFile",method=RequestMethod.POST)
+	public void shareFiles(@RequestParam(value="delpaths[]") String[] delpaths,HttpSession session,String password,HttpServletRequest request,PrintWriter out){
+		VCUser user = (VCUser) session.getAttribute(SessionAttribute.USERLOGIN);
+		SimpleDateFormat sbf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String time=String.valueOf(System.currentTimeMillis());
+		String basePath=request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+request.getContextPath()+"/page/share/"+time;
+		VCShareFile sf;
 		for(String str:delpaths){
 			if(""!=str && str!=null){
-				list.add(str);
+				if(""!=password && password!=null){
+					sf=new VCShareFile(0, user.getUserid(), str, password, sbf.format(new Date()), time);
+				}else{
+				    sf=new VCShareFile(0, user.getUserid(), str, "", sbf.format(new Date()), time);
+				}
+				vCUploadFileService.shareFile(sf);
 			}
 		}
-		System.out.println(list);
-		System.out.println(list.size());
-		boolean flag = vCUploadFileService.delFiles(list);
-		System.out.println("==>"+flag);
+		out.println(basePath);
+		out.flush();
+		out.close();
+	}
+	
+	@RequestMapping(value="/findShareFile",method=RequestMethod.POST)
+	public void findShareFile(HttpSession session,HttpServletRequest request,PrintWriter out){
+		String time =(String) session.getAttribute("shareFile");
+		VCShareFile file = new VCShareFile(0, 0, "", "", "", time);
+		String pwd=vCUploadFileService.surePwd(file);
+		if(pwd!=null){
+			out.println(1);
+			out.flush();
+			out.close();
+//			return "downloadshare";
+		}else{
+			List<VCUploadFile> files = vCUploadFileService.findShareFile(file);
+			Gson gs = new Gson();
+			String fileStr = gs.toJson(files);
+			out.println(fileStr);
+			out.flush();
+			out.close();
+//			return "downloadshare";
+		}
+		
+	}
+	
+	@RequestMapping(value="/surepwd",method=RequestMethod.POST)
+	public void surepwd(HttpSession session,HttpServletRequest request,PrintWriter out,String pwd,ModelMap map){
+		String time =(String) session.getAttribute("shareFile");
+		VCShareFile file = new VCShareFile(0, 0, "", "", "", time);
+		String truepwd=vCUploadFileService.surePwd(file);
+		if(pwd.equals(truepwd)){
+			List<VCUploadFile> files = vCUploadFileService.findShareFile(file);
+			Gson gs = new Gson();
+			String fileStr = gs.toJson(files);
+			out.println(fileStr);
+			out.flush();
+			out.close();
+		}else{
+			out.println(1);
+			out.flush();
+			out.close();
+		}
+		
+	}
+	//删除文件的方法
+	@RequestMapping(value="/delFile",method=RequestMethod.POST)
+	public String delFiles(@RequestParam(value="delpaths[]") String[] delpaths,@RequestParam(value="date")String date,PrintWriter out){
+		System.out.println("===>");
+		System.out.println("delpaths===>"+delpaths.length);
+		
+		boolean flag= false;
+		for(String str:delpaths){
+			if(""!=str && str!=null){
+				flag = vCUploadFileService.delFiles(str);
+			}
+		}
+		out.println(flag);
+		out.flush();
+		out.close();
 		return "Person_VCloud";
 	}
 	

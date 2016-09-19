@@ -47,7 +47,10 @@
 #copypath2{cursor:pointer;width:115px;height:28px;background-image: url(../images/copypathsec.png);position: absolute;margin-top:10px;margin-left:260px;}
 #copypath2:hover{opacity:0.7;}
 
+#surepwd{cursor:pointer;width:54px;height:28px;background-image: url(../images/ScreenLockBut.png);position: absolute;margin-top:10px;margin-left:200px;margin-top: 20px;}
+#surepwd:hover{opacity:0.7;}
 
+#pwdinput{display:none;width:510px;min-height:200px;border:3px solid rgb(209,209,211);z-index:300;position: absolute;margin-top:120px;margin-left:460px;background-color: white;}
 
 
 

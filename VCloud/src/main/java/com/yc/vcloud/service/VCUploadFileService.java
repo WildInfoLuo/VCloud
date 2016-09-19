@@ -2,6 +2,7 @@ package com.yc.vcloud.service;
 
 import java.util.List;
 
+import com.yc.vcloud.entity.VCShareFile;
 import com.yc.vcloud.entity.VCUploadCount;
 import com.yc.vcloud.entity.VCUploadFile;
 
@@ -18,7 +19,7 @@ public interface VCUploadFileService {
 	List<VCUploadCount> getPhotoCount();
 	
 	//删除文件夹的方法
-	boolean delFiles(List<String> paths);
+	boolean delFiles(String paths);
 
 	List<VCUploadFile> getAllDoc(VCUploadFile file);
 
@@ -28,7 +29,12 @@ public interface VCUploadFileService {
 
 	VCUploadCount getMusicCount();
 
+	boolean shareFile(VCShareFile list);
+
+	List<VCUploadFile> findShareFile(VCShareFile file);
 	//上传文件异步刷新
 	List<VCUploadFile> getAllFileWang(int userid,String filePath);
+
+	String surePwd(VCShareFile file);
 
 }

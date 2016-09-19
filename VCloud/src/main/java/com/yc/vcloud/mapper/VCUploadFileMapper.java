@@ -2,6 +2,7 @@ package com.yc.vcloud.mapper;
 
 import java.util.List;
 
+import com.yc.vcloud.entity.VCShareFile;
 import org.apache.ibatis.annotations.Param;
 
 import com.yc.vcloud.entity.VCUploadCount;
@@ -19,7 +20,7 @@ public interface VCUploadFileMapper {
 
 	List<VCUploadCount> getPhotoCount();
 	
-	boolean delFiles(List<String> paths);
+	boolean delFiles(String paths);
 	
 	List<VCUploadFile> getAllDoc(VCUploadFile file);
 
@@ -28,7 +29,13 @@ public interface VCUploadFileMapper {
 	List<VCUploadFile> getAllMusic(VCUploadFile file);
 
 	VCUploadCount getMusicCount();
+
+	boolean shareFile(VCShareFile list);
+
+	List<VCUploadFile> findShareFile(VCShareFile file);
 	
 	List<VCUploadFile> getAllFileWang(@Param("userid")int userid,@Param("filepath")String filepath);
+
+	String surePwd(VCShareFile file);
 
 }

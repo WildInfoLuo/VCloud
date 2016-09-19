@@ -58,26 +58,22 @@ function editSure() {
 	} else {
 		n = nextpath.substr(1) + name;
 	}
-
-	$
-			.post(
-					"uploadFile/addDir/" + date,
-					{
-						name : n
-					},
+	var num = getMaxNum();
+	alert(num);
+	$.post("uploadFile/addDir/" + date,{name : n},
 					function(data) {
 						if (data) {
 							str += '<dd class="open-enable">'
 									+ '<li class="file-name" style="width: 60%;"><span '
 									+ 'class="check-icon'
-									+ (i + 1)
+									+ (parseInt(num) + 1)
 									+ '" onclick="filenameIcon('
-									+ (i + 1)
+									+ (parseInt(num) + 1)
 									+ ')"'
 									+ 'style="background: rgba(0, 0, 0, 0) url(images/list-view_4e60b0c.png) no-repeat scroll -9px -12px; height: 14px; left: 11px; width: 14px; top: 20px; margin: 15px 10px; float: left;"></span>'
 									+ '<div class="fileicon"></div>'
 									+ '<div class="text"><div class="filenameicon"></div>'
-									+ '<a class="filename" style="padding-left: 6px;"'
+									+ '<a class="filename" id="a'+(parseInt(num) + 1)+'"  style="padding-left: 6px;"'
 									+ 'href="javascript:getNextPath('
 									+ '\''
 									+ name
@@ -94,11 +90,7 @@ function editSure() {
 									+ '<li class="file-size" style="width: 16%;">-</li>'
 									+ '<li>' + date + '</li></dd>';
 							$(".list-view").prepend($(str)); // 显示在第一条
-							/*
-							 * pathData[pathData.length-1] =
-							 * [{"filepath":"/"+n,"uploaddate":date}];
-							 * alert(pathData[pathData.length-1].filepath);
-							 */
+							pathDataAdd(n,date,0)
 						}
 					});
 	$(".module-edit-name").css("display", "none");
@@ -126,7 +118,6 @@ function lswitch() {
 	$(".list-switch").css(divcss1);
 	$(".grid-switch").css(divcss2);
 	/* 开始变幻界面 */
-
 	var str = "";
 	var pas = new Array();
 	for (var i = 0; i < pathData.length; i++) {
@@ -258,6 +249,7 @@ function filenameIcon(id) {
 	var idstr = "";
 	var a = new Array();
 	var icons = $(".open-enable li span");
+	//取得length
 	length = icons.length;
 	var path = $("#path").html(); // 上一级路径
 	if (path != undefined) {
@@ -270,7 +262,7 @@ function filenameIcon(id) {
 		ids = idstr.substr(idstr.lastIndexOf("n") + 1);
 		a[i] = ids;
 	}
-
+	
 	if (id == 0) {
 		if (checked2 == a.length) { // 说明已经全部选中
 			for (var i = 0; i < a.length; i++) {
@@ -290,10 +282,13 @@ function filenameIcon(id) {
 		tcheckIcon[id] = true; // 表示选中
 	}
 	// 判断以选中多少个文件夹
-	for (var i = 0; i <= a[a.length - 1]; i++) {
+	var l = getMaxNum();
+	for (var i = 0; i <= l; i++) {
 		if (tcheckIcon[a[i]] == true) {
 			checked++;
-			delpaths[i] = path + $("#a" + a[i] + "").html() + "/";
+			delpaths[i] = path + $("#a" + a[i] + "").html()+"/";
+			console.info(a[i]);
+			console.info(delpaths[i]);
 			$(".textCla").hide();
 			$(".list-header-operatearea").show();
 			$(".check-icon" + a[i]).css(divcss2);
@@ -742,12 +737,82 @@ function upFileLoad() {
 	});
 }
 
+//分享文件
+function shareFile(){
+	$(".bg").css("display","block");
+	showpath();
+}
+
 // 删除文件
 function deleteFile() {
-	alert(delpaths);
-	$.post("uploadFile/delFile", {
-		delpaths : delpaths
-	}, function(data) {
-		alert(data);
+	var date = getDate();
+	$.post("uploadFile/delFile", {delpaths:delpaths,date:date}, function(data) {
+		if(data){
+			pathDataDel(delpaths);
+			init();
+			var a = getFileNames();
+			checked2 = 0;
+			for (var i = 0; i < a.length; i++) {
+				tcheckIcon[i] = false;
+			}
+			filenameIcon(-1);
+			delpaths.length = 0;
+		}
 	})
 }
+
+//从pathData中添加元素的方法
+function pathDataAdd(path,date,filesize){
+	var arr = new Object();
+	arr.filepath = path;
+	arr.uploaddate = date
+	arr.filesize = filesize;
+	pathData.push(arr);
+}
+
+//从pathData中删除元素的方法
+function pathDataDel(path){//上一级路径+当前路径
+	var i = 0;
+	var num = 0;
+	console.info(pathData);
+	while(i<pathData.length){
+		if(pathData[i].filepath.indexOf(path[num])==0){
+			pathData.splice(i, 1);
+			num++;
+			i=0;
+		}else{
+			i++;
+		}
+		if(num == path.length){
+			return;
+		}
+	}
+}
+
+//获取最大的标识数
+function getMaxNum(){
+	var a = new Array();
+	var idstr = "";
+	var ids = 0;
+	var icons = $(".open-enable li span");
+	for (var i = 0; i < icons.length; i++) {
+		idstr = $(icons[i]).attr("class");
+		ids = idstr.substr(idstr.lastIndexOf("n") + 1);
+		a[i] = ids;
+	}
+	var temp = 0;
+	for(var i = 0;i<a.length;i++){
+		for(var j=i;j<a.length;j++){
+			 if (a[i] > a[j]) {
+                 temp = a[i];
+                 a[i] = a[j];
+                 a[j] = temp;
+             }
+		}
+	}
+	return a[a.length-1];
+}
+
+
+
+

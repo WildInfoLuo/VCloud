@@ -34,6 +34,5 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="src" path="ejbModule"/>
-	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/json-lib-2.2.3-jdk15.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

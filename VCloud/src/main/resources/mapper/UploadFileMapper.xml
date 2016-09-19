@@ -5,10 +5,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.yc.vcloud.mapper.VCUploadFileMapper">
 	<select id="getFiles" parameterType="VCUploadFile" resultType="VCUploadFile">
 		select ufid,userid,filepath,filesize,to_char(uploaddate,'yyyy-mm-dd HH:MI:ss') uploaddate,filestatus,stoppoingpath,status,isdir,isdel 
-		 from uploadfile where userid=#{userid} 
+		 from uploadfile where userid=#{userid} and isdel=0
 		 <if test="filepath != null">
 		 	 and regexp_like(filepath,'^'||#{filepath}||'+')
 		 </if>
+	</select>
+	<select id="findShareFile" parameterType="VCShareFile" resultType="VCUploadFile">
+		select ufid,userid,filepath,filesize,to_char(uploaddate,'yyyy-mm-dd HH:MI:ss') uploaddate,filestatus,stoppoingpath,status,isdir,isdel 
+		 from uploadfile where filepath in (select filepath from VCShare where temp2=#{temp2}  ) and isdel=0
+	</select>
+	
+	<select id="surePwd" parameterType="VCShareFile" resultType="String">
+		select password from VCShare where temp2=#{temp2}
 	</select>
 	
 	<insert id="insertFile" parameterType="VCUploadFile">
@@ -17,7 +25,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id="getAllPhoto" parameterType="VCUploadFile" resultType="VCUploadFile">
 		select ufid,userid,filepath,filesize,to_char(uploaddate,'yyyy"年"mm"月"dd"日"') uploaddate,filestatus,stoppoingpath,status,isdir,temp1,temp2,isdel 
-		 from uploadfile where userid=#{userid} and isdir=0 and temp1='图片'
+		 from uploadfile where userid=#{userid} and isdir=0 and temp1='图片' and isdel=0
 	</select>
 	
 	<insert id="uploadFile" parameterType="VCUploadFile">
@@ -25,34 +33,38 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	
 	<select id="getPhotoCount" resultType="VCUploadCount">
-		select to_char(uploaddate,'yyyy"年"mm"月"dd"日"') uploaddate,count(*) count from uploadfile  where isdir=0 and temp1='图片'
+		select to_char(uploaddate,'yyyy"年"mm"月"dd"日"') uploaddate,count(*) count from uploadfile  where isdir=0 and temp1='图片' and isdel=0
 		group by uploaddate  order by uploaddate desc
 	</select>
 	
-	<delete id="delFiles" parameterType="String">
-		delete from uploadfile where filepath like
-		<foreach collection="list" item="paths" separator=",">
+	<update id="delFiles" parameterType="String">
+		update uploadfile set isdel = 1 
+		<where>
 			<!-- regexp_like(filepath,'^'||#{paths}||'+') -->
-			'%'||#{paths}
-		</foreach>
-	</delete>
+			filepath like #{paths}||'%'
+		</where>
+	</update>
+	
+	<insert id="shareFile" parameterType="VCShareFile">
+		insert into VCShare values(seq_shareid.nextval,#{userid},#{filepath},#{password},#{temp1},#{temp2})
+	</insert>
 	
 	<select id="getAllDoc" parameterType="VCUploadFile" resultType="VCUploadFile">
 		select ufid,userid,filepath,filesize,to_char(uploaddate,'yyyy-mm-dd HH:MI:ss') uploaddate,filestatus,stoppoingpath,status,isdir,temp1,temp2,rownum
-		 from uploadfile where userid=#{userid} and isdir=0 and temp1='文档' order by uploaddate desc
+		 from uploadfile where userid=#{userid} and isdir=0 and temp1='文档' and isdel=0 order by uploaddate desc
 	</select>
 	
 	<select id="getDocCount" resultType="VCUploadCount">
-		select count(*) count from uploadfile  where isdir=0 and temp1='文档'
+		select count(*) count from uploadfile  where isdir=0 and temp1='文档' and isdel=0
 	</select>
 	
 	<select id="getAllMusic" parameterType="VCUploadFile" resultType="VCUploadFile">
 		select ufid,userid,filepath,filesize,to_char(uploaddate,'yyyy-mm-dd HH:MI:ss') uploaddate,filestatus,stoppoingpath,status,isdir,temp1,temp2,rownum
-		 from uploadfile where userid=#{userid} and isdir=0 and temp1='音乐' order by uploaddate desc
+		 from uploadfile where userid=#{userid} and isdir=0 and temp1='音乐' and isdel=0 order by uploaddate desc
 	</select>
 	
 	<select id="getMusicCount" resultType="VCUploadCount">
-		select count(*) count from uploadfile  where isdir=0 and temp1='音乐'
+		select count(*) count from uploadfile  where isdir=0 and temp1='音乐' and isdel=0
 	</select>
 	
 	<select id="getAllFileWang" parameterType="VCUploadFile" resultType="VCUploadFile">
