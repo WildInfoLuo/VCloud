@@ -8,9 +8,7 @@ import org.springframework.stereotype.Service;
 import com.yc.vcloud.entity.VCShareFile;
 import com.yc.vcloud.entity.VCUploadCount;
 import com.yc.vcloud.entity.VCUploadFile;
-import com.yc.vcloud.entity.VCadmin;
 import com.yc.vcloud.mapper.VCUploadFileMapper;
-import com.yc.vcloud.service.VCAdminService;
 import com.yc.vcloud.service.VCUploadFileService;
 
 @Service("vCUploadFileService")

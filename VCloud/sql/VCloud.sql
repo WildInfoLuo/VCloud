@@ -117,8 +117,9 @@ create sequence seq_shareid start with 70001;
 --视频--视频在线播放
 --文件处理--文件的上传、下载、断点上传与下载
 
-
-
+insert into uploadfile values(seq_ufid.nextval,?,?,?,to_date(?,'yyyy-mm-dd HH24:MI:ss'),1,null,1,0,?,?)
+select ufid,userid,filepath,filesize,to_char(uploaddate,'yyyy-mm-dd HH:MI:ss') uploaddate,filestatus,stoppoingpath,status,isdir,temp1,temp2,rownum
+		 from uploadfile where userid=10042 and filepath like '/新建文件夹/新建文件夹/%' and isdir=0  order by uploaddate desc
 
 
 

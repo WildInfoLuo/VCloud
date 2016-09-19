@@ -8,7 +8,6 @@ import org.apache.ibatis.annotations.Param;
 import com.yc.vcloud.entity.VCRecyle;
 import com.yc.vcloud.entity.VCUploadCount;
 import com.yc.vcloud.entity.VCUploadFile;
-import com.yc.vcloud.entity.VCUser;
 
 public interface VCUploadFileMapper {
 	
