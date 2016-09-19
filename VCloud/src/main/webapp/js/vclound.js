@@ -8,6 +8,7 @@ $(function() {
 	$(".module-edit-name").hide();
 	/* 详细内容列表界面隐藏 */
 	$(".content-view").hide();
+	$("#shareshow").css({"display":"none"});
 	var str = "";
 	var pass = new Array();
 
@@ -328,6 +329,9 @@ function parseFilePath(filePath, num) {
 }
 // 获取下一级路径
 function getNextPath(path, view) {
+	alert(path.length+"------"+path.substring(0,path.length-1)+"****0"+path);
+	$("#shareshow").css({"display":"block"});//.substring(0,str.length-1)../sources/${item.temp2 }
+	$("#imgshow").html("").append('<img src="../sources'+path.substring(0,path.length-1)+'">');
 	checked2 = 0;
 	for (var i = 0; i < length; i++) {
 		tcheckIcon[i] = false;
@@ -667,8 +671,10 @@ function upFileLoad() {
 							+ (i + 1)
 							+ ')"'
 							+ 'style="background: rgba(0, 0, 0, 0) url(images/list-view_4e60b0c.png) no-repeat scroll -9px -12px;height: 14px; left: 11px; width: 14px; top: 20px; margin: 15px 10px; float: left;"></span>';
+					alert("文件夹////"+data[i].isdir);
 					if (data[i].filepath.indexOf(".") != -1
 							&& data[i].isdir == 0) {
+						alert("进来了判断文件的路径...");
 						switch (path.substr(path.lastIndexOf(".") + 1)) {
 						case "doc":
 							str += '<div class="text"><div class="dir-tables fileicon-tables-doc"></div>';
@@ -717,7 +723,7 @@ function upFileLoad() {
 					}
 					str += '<a class="filename" id="a' + (i + 1)
 							+ '"  style="padding-left: 6px;"'
-							+ 'href="javascript:getNextPath(' + '\'/' + nextpath + '/\','
+							+ 'href="javascript:getNextPath(' + '\'/' + path + '/\','
 							+ 1 + ')" title=' + data[i].temp2 + '>' + data[i].temp2  + '</a></div></li>'
 							+ '<li class="file-size" style="width: 16%;">'
 							+ data[i].filesize + 'KB</li>' + '<li>'
