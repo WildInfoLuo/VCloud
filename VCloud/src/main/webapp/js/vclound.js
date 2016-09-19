@@ -658,7 +658,7 @@ function upFileLoad() {
 			for (var i = 0; i < data.length; i++) {
 				var path = parseFilePath(data[i].filepath, 1);
 				alert("目前的路径"+path);
-				if ($.inArray(path, pass) == -1) {
+				if ($.inArray(path, pass) == -1) {//说明数组中有path
 					str += '<dd class="open-enable">'
 							+ '<li class="file-name" style="width: 60%;"><span '
 							+ 'class="check-icon'
