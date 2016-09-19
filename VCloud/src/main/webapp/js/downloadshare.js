@@ -1,7 +1,157 @@
-function uploadphoto(id){
-	$("#uploadfile").submit();
+function showShare(){
+	$("#shareshow").css({"display":"block"});
+}
+
+function closeShare(){
+	$("#shareshow").css({"display":"none"});
+}
+function closeSharePath(){
+	$("#sharepath").css({"display":"none"});
+	$(".bg").css("display","none");
+}
+
+function closepublicsuc(){
+	$("#publicsuc").css({"display":"none"});
+	$(".bg").css("display","none");
+}
+
+function closepersonsuc(){
+	$("#personsuc").css({"display":"none"});
+	$(".bg").css("display","none");
+}
+
+function showpath(){
+	$("#shareshow").css({"display":"none"});
+	$("#sharepath").css({"display":"block"});
+}
+
+function showpublic(){
+	$.post("uploadFile/shareFile", {delpaths:delpaths}, function(data) {
+		$("#sharepath").css({"display":"none"});
+		$("#publicsuc input").val(data);
+		$("#publicsuc").css({"display":"block"});
+		
+	})
+}
+
+function showperson(){
+	var nums = "";
+	var num;
+	var ens = ['1','2','3','4','5','6','7','8','9','a','b','c','d','e','f','h','i','j','k','l','m','n'
+	           ,'o','p','q','r','s','t','u','v','w','x','y','z'];
+	for(var i=0;i<2;i++){
+		num = Math.ceil(Math.random()*10)-2;
+		if(num==-1){
+			num=0;
+		}
+		nums += ens[num];
+		num = Math.ceil(Math.random()*10)+10;
+		nums += ens[num];
+	}
+	$.post("uploadFile/shareFile", {delpaths:delpaths,password:nums}, function(data) {
+		$("#sharepath").css({"display":"none"});
+		$("#personpath-text").val(data);
+		$("#personpwd").val(nums);
+		$("#personsuc").css({"display":"block"});
+	})
+}
+
+//复制链接到粘贴板中
+function copypublicpath(){
+	/*alert(window.clipboardData.getData("text"));*/
+	$("#copypath").zclip({
+		path: "ZeroClipboard.swf", 
+		copy: function(){
+			return $("#publicpath-text").val();
+		},
+		afterCopy: function(){ //复制成功
+	       alert('复制成功');
+	    }
+	});
+}
+
+//生成提取码及复制
+function copypersonpath(){
+	var pwd=$("#personpwd").val();
+	var text = $("#personpath-text").val();
+	var str=text+","+pwd;
+	$("#copypath2").zclip({
+		path: "ZeroClipboard.swf", 
+		copy: function(){
+			return str;
+		},
+		afterCopy: function(){ //复制成功
+	       alert('复制成功');
+	    }
+	});
 } 
-var pathData = null;
+
+var tcheckIcon = new Array();
+function filenameIcon(id) {
+	// alert(tcheckIcon);
+	if (id == 0) {
+		if (tcheckIcon[id] == true) {
+			/* 已选择check */
+			var divcss1 = {
+				background : "rgba(0, 0, 0, 0) url('../images/list-view_4e60b0c.png') no-repeat  scroll -9px -12px",
+				height : '14px',
+				left : '11px',
+				width : '14px',
+				top : '20px',
+				margin : '15px 10px',
+				float : 'left'
+			};
+			$(".check-icon" + id).css(divcss1);
+			/*$(".file-name span").css(divcss1);*/
+			tcheckIcon[id] = false;
+			return;
+		} else {
+			var divcss2 = {
+				background : "rgba(0, 0, 0, 0) url('../images/list-view_4e60b0c.png') no-repeat  scroll -40px -12px",
+				height : '14px',
+				left : '11px',
+				width : '14px',
+				top : '20px',
+				margin : '15px 10px',
+				float : 'left'
+			};
+			tcheckIcon[id] = true;
+			$(".check-icon" + id).css(divcss2);
+			/*$(".file-name span").css(divcss2);*/
+			return;
+		}
+	}
+	if (tcheckIcon[id] == true && id > 0) {
+		/* 已选择check */
+		var divcss1 = {
+			background : "rgba(0, 0, 0, 0) url('../images/list-view_4e60b0c.png') no-repeat  scroll -9px -12px",
+			height : '14px',
+			left : '11px',
+			width : '14px',
+			top : '20px',
+			margin : '15px 10px',
+			float : 'left'
+		};
+		tcheckIcon[id] = false;
+		$(".check-icon" + id).css(divcss1);
+		return;
+	} else {
+		var divcss2 = {
+			background : "rgba(0, 0, 0, 0) url('../images/list-view_4e60b0c.png') no-repeat  scroll -40px -12px",
+			height : '14px',
+			left : '11px',
+			width : '14px',
+			top : '20px',
+			margin : '15px 10px',
+			float : 'left'
+		};
+		tcheckIcon[id] = true;
+		$(".check-icon" + id).css(divcss2);
+		return;
+	}
+}
+
+var pathData = new Array();
 var nextpath = "";
 var newDirArr = new Array();
 $(function() {
@@ -14,6 +164,17 @@ $(function() {
 	var str = "";
 	var pass = new Array();
 
+	$.post("uploadFile/findShareFile/", function(data) {
+		if(typeof(data)=="number"){
+			$("#navbar").css({"display":"none"});
+			$(".content").css({"display":"none"});
+			$("#bg").css({"display":"block"});
+			$("#pwdinput").css({"display":"block"});
+		}else{
+			pathData = data;
+			init();
+		}
+	}, "json");
 });
 
 var isdir = 0;
@@ -57,21 +218,21 @@ function editSure() {
 	} else {
 		n = nextpath.substr(1) + name;
 	}
-	var num = getMaxNum();
+	pathDataAdd(n,date)
 	$.post("uploadFile/addDir/" + date,{name : n},
 					function(data) {
 						if (data) {
 							str += '<dd class="open-enable">'
 									+ '<li class="file-name" style="width: 60%;"><span '
 									+ 'class="check-icon'
-									+ (parseInt(num) + 1)
+									+ (i + 1)
 									+ '" onclick="filenameIcon('
-									+ (parseInt(num) + 1)
+									+ (i + 1)
 									+ ')"'
 									+ 'style="background: rgba(0, 0, 0, 0) url(images/list-view_4e60b0c.png) no-repeat scroll -9px -12px; height: 14px; left: 11px; width: 14px; top: 20px; margin: 15px 10px; float: left;"></span>'
 									+ '<div class="fileicon"></div>'
 									+ '<div class="text"><div class="filenameicon"></div>'
-									+ '<a class="filename" id="a'+(parseInt(num) + 1)+'"  style="padding-left: 6px;"'
+									+ '<a class="filename" style="padding-left: 6px;"'
 									+ 'href="javascript:getNextPath('
 									+ '\''
 									+ name
@@ -88,7 +249,11 @@ function editSure() {
 									+ '<li class="file-size" style="width: 16%;">-</li>'
 									+ '<li>' + date + '</li></dd>';
 							$(".list-view").prepend($(str)); // 显示在第一条
-							pathDataAdd("/"+n+"/",date,0);
+							/*
+							 * pathData[pathData.length-1] =
+							 * [{"filepath":"/"+n,"uploaddate":date}];
+							 * alert(pathData[pathData.length-1].filepath);
+							 */
 						}
 					});
 	$(".module-edit-name").css("display", "none");
@@ -116,6 +281,7 @@ function lswitch() {
 	$(".list-switch").css(divcss1);
 	$(".grid-switch").css(divcss2);
 	/* 开始变幻界面 */
+
 	var str = "";
 	var pas = new Array();
 	for (var i = 0; i < pathData.length; i++) {
@@ -247,7 +413,6 @@ function filenameIcon(id) {
 	var idstr = "";
 	var a = new Array();
 	var icons = $(".open-enable li span");
-	//取得length
 	length = icons.length;
 	var path = $("#path").html(); // 上一级路径
 	if (path != undefined) {
@@ -280,13 +445,10 @@ function filenameIcon(id) {
 		tcheckIcon[id] = true; // 表示选中
 	}
 	// 判断以选中多少个文件夹
-	var l = getMaxNum();
-	for (var i = 0; i <= l; i++) {
+	for (var i = 0; i <= a[a.length - 1]; i++) {
 		if (tcheckIcon[a[i]] == true) {
 			checked++;
-			delpaths[i] = path + $("#a" + a[i] + "").html()+"/";
-			console.info(a[i]);
-			console.info(delpaths[i]);
+			delpaths[i] = path + $("#a" + a[i] + "").html() + "/";
 			$(".textCla").hide();
 			$(".list-header-operatearea").show();
 			$(".check-icon" + a[i]).css(divcss2);
@@ -350,83 +512,73 @@ function getNextPath(path, view) {
 		if (pathData[i].filepath.indexOf(path) == 0) {
 			if ((num + 1) < paths.length && paths.length > 1) {
 				if (view == 1) {
-					if ($.inArray(paths[num + 1], ps) == -1) {
-						str += '<dd class="open-enable">'
+					if($.inArray(paths[num+1],ps) == -1){
+						str +='<dd class="open-enable">'
+							+ '<li class="file-name" style="width: 60%;"><span '
+							+ 'class="check-icon'+(i+1)+'" onclick="filenameIcon('+(i+1)+')"'
+							+ 'style="background: rgba(0, 0, 0, 0) url(images/list-view_4e60b0c.png) no-repeat scroll -9px -12px;height: 14px; left: 11px; width: 14px; top: 20px; margin: 15px 10px; float: left;"></span>'
+							+ '<div class="fileicon"></div>';
+						if (paths[num+1].lastIndexOf(".") != -1) {
+							str +='<dd class="open-enable">'
 								+ '<li class="file-name" style="width: 60%;"><span '
-								+ 'class="check-icon'
-								+ (i + 1)
-								+ '" onclick="filenameIcon('
-								+ (i + 1)
-								+ ')"'
+								+ 'class="check-icon'+(i+1)+'" onclick="filenameIcon('+(i+1)+')"'
 								+ 'style="background: rgba(0, 0, 0, 0) url(images/list-view_4e60b0c.png) no-repeat scroll -9px -12px;height: 14px; left: 11px; width: 14px; top: 20px; margin: 15px 10px; float: left;"></span>'
 								+ '<div class="fileicon"></div>';
-						if (paths[num + 1].lastIndexOf(".") != -1) {
-							switch (paths[num + 1].substr(paths[num + 1]
-									.lastIndexOf(".") + 1)) {
+							switch (paths[num+1].substr(paths[num+1].lastIndexOf(".") + 1)) {
 							case "doc":
-								str += '<div class="text"><div class="dir-tables fileicon-tables-doc"></div>';
+								str+='<div class="text"><div class="dir-tables fileicon-tables-doc"></div>';
 								break;
 							case "docx":
-								str += '<div class="text"><div class="dir-tables fileicon-tables-doc"></div>';
+								str+='<div class="text"><div class="dir-tables fileicon-tables-doc"></div>';
 								break;
 							case "xls":
-								str += '<div class="text"><div class="dir-tables fileicon-tables-xls"></div>';
+								str+='<div class="text"><div class="dir-tables fileicon-tables-xls"></div>';
 								break;
 							case "xlsx":
-								str += '<div class="text"><div class="dir-tables fileicon-tables-xls"></div>';
+								str+='<div class="text"><div class="dir-tables fileicon-tables-xls"></div>';
 								break;
 							case "png":
-								str += '<div class="text"><div class="dir-tables fileicon-tables-png"></div>';
+								str+='<div class="text"><div class="dir-tables fileicon-tables-png"></div>';
 								break;
 							case "gif":
 								str += '<div class="text"><div class="dir-tables fileicon-tables-png"></div>';
 								break;
 							case "jpg":
-								str += '<div class="text"><div class="dir-tables fileicon-tables-png"></div>';
+								str+='<div class="text"><div class="dir-tables fileicon-tables-png"></div>';
 								break;
 							case "txt":
-								str += '<div class="text"><div class="dir-tables fileicon-tables-txt"></div>';
+								str+='<div class="text"><div class="dir-tables fileicon-tables-txt"></div>';
 								break;
 							case "mp4":
-								str += '<div class="text"><div class="dir-tables fileicon-tables-mp4"></div>';
+								str+='<div class="text"><div class="dir-tables fileicon-tables-mp4"></div>';
 								break;
 							case "mpg":
-								str += '<div class="text"><div class="dir-tables fileicon-tables-mp4"></div>';
+								str+='<div class="text"><div class="dir-tables fileicon-tables-mp4"></div>';
 								break;
 							case "zip":
-								str += '<div class="text"><div class="dir-tables fileicon-tables-zip"></div>';
+								str+='<div class="text"><div class="dir-tables fileicon-tables-zip"></div>';
 								break;
 							default:
-								str += '<div class="fileicon"></div>'
-										+ '<div class="text"><div class="filenameicon"></div>';
+								str+='<div class="fileicon"></div>'
+									+ '<div class="text"><div class="filenameicon"></div>';
 								break;
 							}
-						} else {
-							str += '<div class="fileicon"></div>'
+							}else{
+								str+='<div class="fileicon"></div>'
 									+ '<div class="text"><div class="filenameicon"></div>';
-						}
-						str += '<a class="filename" id="a' + (i + 1)
-								+ '" style="padding-left: 6px;"'
-								+ 'href="javascript:getNextPath(' + '\'' + path
-								+ paths[num + 1] + '/\',' + 1 + ')" title='
-								+ paths[num + 1] + '>' + paths[num + 1]
-								+ '</a></div></li>'
-								+ '<li class="file-size" style="width: 16%;">'
-								+ pathData[i].filesize + 'KB</li>' + '<li>'
-								+ pathData[i].uploaddate + '</li></dd>';
-						ps[i] = paths[num + 1];
+							}
+							str+='<a class="filename" id="a'+(i+1)+'" style="padding-left: 6px;"'+
+							'href="javascript:getNextPath('+'\''+path+paths[num+1]+'/\','+1+')" title='+paths[num+1]+'>'+paths[num+1]+'</a></div></li>'
+							+ '<li class="file-size" style="width: 16%;">'+pathData[i].filesize+'KB</li>'
+							+ '<li>' + pathData[i].uploaddate
+							+ '</li></dd>';
+						ps[i] = paths[num+1];
 					}
-					var up = '<a style="color:blue;" href="javascript:retrunPre('
-							+ '\'/'
-							+ paths[num - 1]
-							+ '/\','
-							+ 1
-							+ ')">返回上一级</a>';
-					up += "<span id='path'>" + path.replace(/\//gm, ">")
-							+ "</span>";
+					var up = '<a style="color:blue;" href="javascript:retrunPre('+'\'/'+paths[num-1]+'/\','+1+')">返回上一级</a>';
+					up +="<span id='path'>"+path.replace(/\//gm,">")+"</span>";
 					$(".list-view").html("").append($(str));
 					$(".history-list-dir").html("").html($(up));
-				} else if (view == 2) {
+				}else if (view == 2) {
 					if ($.inArray(paths[num + 1], ps) == -1) {
 						str += '<div class="grid-view-item1"'
 								+ 'style="display: block; height: 122px; margin: 4px 4px 0 0; text-align: center; width: 142px; float: left;"'
@@ -522,15 +674,11 @@ function init() {
 		var path = parseFilePath(pathData[i].filepath, 1);
 		if ($.inArray(path, pass) == -1) {
 			str += '<dd class="open-enable">'
-					+ '<li class="file-name" style="width: 60%;"><span '
-					+ 'class="check-icon'
-					+ (i + 1)
-					+ '" onclick="filenameIcon('
-					+ (i + 1)
-					+ ')"'
-					+ 'style="background: rgba(0, 0, 0, 0) url(images/list-view_4e60b0c.png) no-repeat scroll -9px -12px;height: 14px; left: 11px; width: 14px; top: 20px; margin: 15px 10px; float: left;"></span>';
-			if (pathData[i].filepath.indexOf(".") != -1
-					&& pathData[i].isdir == 0) {
+				+ '<li class="file-name" style="width: 60%;"><span '
+				+ 'class="check-icon'+(i+1)+'" onclick="filenameIcon('+(i+1)+')"'
+				+ 'style="background: rgba(0, 0, 0, 0) url(images/list-view_4e60b0c.png) no-repeat scroll -9px -12px;height: 14px; left: 11px; width: 14px; top: 20px; margin: 15px 10px; float: left;"></span>'
+				;
+			if (pathData[i].filepath.indexOf(".") != -1 && pathData[i].isdir==0) {
 				switch (path.substr(path.lastIndexOf(".") + 1)) {
 				case "doc":
 					str += '<div class="text"><div class="dir-tables fileicon-tables-doc"></div>';
@@ -567,20 +715,20 @@ function init() {
 					break;
 				default:
 					str += '<div class="fileicon"></div>'
-							+ '<div class="text"><div class="filenameicon"></div>';
+						+ '<div class="text"><div class="filenameicon"></div>';
 					break;
 				}
-			} else {
+			}else{
 				str += '<div class="fileicon"></div>'
-						+ '<div class="text"><div class="filenameicon"></div>';
+					+ '<div class="text"><div class="filenameicon"></div>';
 			}
-			str += '<a class="filename" id="a' + (i + 1)
-					+ '"  style="padding-left: 6px;"'
-					+ 'href="javascript:getNextPath(' + '\'/' + path + '/\','
-					+ 1 + ')" title=' + path + '>' + path + '</a></div></li>'
-					+ '<li class="file-size" style="width: 16%;">'
-					+ pathData[i].filesize + 'KB</li>' + '<li>'
-					+ pathData[i].uploaddate + '</li></dd>';
+			str += '<a class="filename" id="a'+(i+1)+'"  style="padding-left: 6px;"'
+				+ 'href="javascript:getNextPath(' + '\'/' + path
+				+ '/\',' + 1 + ')" title=' + path + '>' + path
+				+ '</a></div></li>'
+				+ '<li class="file-size" style="width: 16%;">'
+				+ pathData[i].filesize + 'KB</li>' + '<li>'
+				+ pathData[i].uploaddate + '</li></dd>';
 		}
 		pass[i] = path;
 	}
@@ -637,100 +785,26 @@ function initView() {
 	}
 	$(".g-clearfix").html("").append($(str));
 }
-// 上传文件
+//上传文件
 function upFileLoad() {
-	if (nextpath.length == 0) {
-		nextpath = "/";
+	if(nextpath.length==0){
+		nextpath="/";
 	}
+	/*$("#dispath").val(nextpath);
+	$("#upload").submit();*/
 	$.ajaxFileUpload({
 		url : "uploadFile/VCFileLoad",
-		data : {
-			nextpath : nextpath
-		},
+		data:{nextpath:nextpath},
 		secureuri : false,
 		fileElementId : "h5Input0",
 		dataType : 'json',
 		success : function(data, status) {
-			alert(JSON.stringify(data));
-			var str = "";
-			var pass = new Array();
-			for (var i = 0; i < data.length; i++) {
-				var path = parseFilePath(data[i].filepath, 1);
-				alert("目前的路径"+path);
-				if ($.inArray(path, pass) == -1) {//说明数组中有path
-					str += '<dd class="open-enable">'
-							+ '<li class="file-name" style="width: 60%;"><span '
-							+ 'class="check-icon'
-							+ (i + 1)
-							+ '" onclick="filenameIcon('
-							+ (i + 1)
-							+ ')"'
-							+ 'style="background: rgba(0, 0, 0, 0) url(images/list-view_4e60b0c.png) no-repeat scroll -9px -12px;height: 14px; left: 11px; width: 14px; top: 20px; margin: 15px 10px; float: left;"></span>';
-					if (data[i].filepath.indexOf(".") != -1
-							&& data[i].isdir == 0) {
-						switch (path.substr(path.lastIndexOf(".") + 1)) {
-						case "doc":
-							str += '<div class="text"><div class="dir-tables fileicon-tables-doc"></div>';
-							break;
-						case "docx":
-							str += '<div class="text"><div class="dir-tables fileicon-tables-doc"></div>';
-							break;
-						case "xls":
-							str += '<div class="text"><div class="dir-tables fileicon-tables-xls"></div>';
-							break;
-						case "xlsx":
-							str += '<div class="text"><div class="dir-tables fileicon-tables-xls"></div>';
-							break;
-						case "png":
-							str += '<div class="text"><div class="dir-tables fileicon-tables-png"></div>';
-							break;
-						case "gif":
-							str += '<div class="text"><div class="dir-tables fileicon-tables-png"></div>';
-							break;
-						case "jpg":
-							str += '<div class="text"><div class="dir-tables fileicon-tables-png"></div>';
-							break;
-						case "txt":
-							str += '<div class="text"><div class="dir-tables fileicon-tables-txt"></div>';
-							break;
-						case "mp4":
-							str += '<div class="text"><div class="dir-tables fileicon-tables-mp4"></div>';
-							break;
-						case "mpg":
-							str += '<div class="text"><div class="dir-tables fileicon-tables-mp4"></div>';
-							break;
-						case "zip":
-							str += '<div class="text"><div class="dir-tables fileicon-tables-zip"></div>';
-							break;
-						case "mp3":
-							str += '<div class="text"><div class="dir-tables fileicon-tables-music"></div>';
-							break;
-						default:
-							str += '<div class="fileicon"></div>'
-									+ '<div class="text"><div class="filenameicon"></div>';
-							break;
-						}
-					} else {
-						str += '<div class="fileicon"></div>'
-								+ '<div class="text"><div class="filenameicon"></div>';
-					}
-					str += '<a class="filename" id="a' + (i + 1)
-							+ '"  style="padding-left: 6px;"'
-							+ 'href="javascript:getNextPath(' + '\'/' + nextpath + '/\','
-							+ 1 + ')" title=' + data[i].temp2 + '>' + data[i].temp2  + '</a></div></li>'
-							+ '<li class="file-size" style="width: 16%;">'
-							+ data[i].filesize + 'KB</li>' + '<li>'
-							+ data[i].uploaddate + '</li></dd>';
-				}
-				pass[i] = path;
+			if (data > 0) {
+				alert(data+"进来了")
 			}
-			$(".list-view").html("").append($(str));
-			// 右上角显示
-			var a = getFileNames();
-			$(".history-list-tips").html("").append("已全部加载，共" + (a.length) + "个文件");
-},
+		},
 		error : function(data, status, e) {
-			alert("文件上传失败...");
+			alert(e);
 		}
 	});
 }
@@ -743,21 +817,12 @@ function shareFile(){
 
 // 删除文件
 function deleteFile() {
-	var date = getDate();
-	$.post("uploadFile/delFile", {delpaths:delpaths,date:date}, function(data) {
-		if(data){
-			pathDataDel(delpaths);
-			init();
-			var a = getFileNames();
-			checked2 = 0;
-			for (var i = 0; i < a.length; i++) {
-				tcheckIcon[i] = false;
-			}
-			filenameIcon(-1);
-			delpaths.length = 0;
-			
-		}
-	});
+	alert(delpaths[0]);
+	
+	$.post("uploadFile/delFile", {delpaths:delpaths}, function(data) {
+		pathDataDel(delpaths);
+		init();
+	})
 }
 
 //从pathData中添加元素的方法
@@ -767,143 +832,47 @@ function pathDataAdd(path,date,filesize){
 	arr.uploaddate = date
 	arr.filesize = filesize;
 	pathData.push(arr);
+	alert(pathData[pathData.length-1].filepath);
 }
 
 //从pathData中删除元素的方法
 function pathDataDel(path){//上一级路径+当前路径
-	var n = 0;
-	var num = 0;
-	for(var i = 0;i<path.length;i++){
-		if(path[i] == null || ""==path[i]){
-			path.splice(i, 1);
+	alert(pathData.length);
+	console.info(pathData);
+	for(var i = 0;i<pathData.length;i++){
+		console.info(pathData[i].filepath);
+		if(pathData[i].filepath.indexOf(path[i])!=0){
+			alert(pathData[i].filepath);
+			pathData.splice(i, 1);
 		}
 	}
-	while(n<pathData.length){
-		if(pathData[n].filepath.indexOf(path[num])==0){
-			pathData.splice(n, 1);
-			num++;
-			n=0;
-		}else{
-			n++;
-		}
-		if(num == path.length){
-			return;
-		}
-	}
+	alert(pathData.length);
 	console.info(pathData);
 }
 
-//获取最大的标识数
-function getMaxNum(){
-	var a = new Array();
-	var idstr = "";
-	var ids = 0;
-	var icons = $(".open-enable li span");
-	for (var i = 0; i < icons.length; i++) {
-		idstr = $(icons[i]).attr("class");
-		ids = idstr.substr(idstr.lastIndexOf("n") + 1);
-		a[i] = ids;
-	}
-	var temp = 0;
-	for(var i = 0;i<a.length;i++){
-		for(var j=i;j<a.length;j++){
-			 if (a[i] > a[j]) {
-                 temp = a[i];
-                 a[i] = a[j];
-                 a[j] = temp;
-             }
+
+function surepwd(){
+	var pwd=$("#pwd").val();
+	$.post("uploadFile/surepwd/",{pwd:pwd}, function(data) {
+		if(data!=1){
+			$("#navbar").css({"display":"block"});
+			$(".content").css({"display":"block"});
+			$("#bg").css({"display":"none"});
+			$("#pwdinput").css({"display":"none"});
+			pathData = data;
+			init();
+		}else{
+			alert();
+			$("#pwdError").html("提取密码不正确");
+			$("#pwd").val("");
 		}
-	}
-	return a[a.length-1];
+	}, "json");
 }
 
-function showShare(){
-	$("#shareshow").css({"display":"block"});
-}
-
-function closeShare(){
-	$("#shareshow").css({"display":"none"});
-}
-function closeSharePath(){
-	$("#sharepath").css({"display":"none"});
-	$(".bg").css("display","none");
-}
-
-function closepublicsuc(){
-	$("#publicsuc").css({"display":"none"});
-	$(".bg").css("display","none");
-}
-
-function closepersonsuc(){
-	$("#personsuc").css({"display":"none"});
-	$(".bg").css("display","none");
-}
-
-function showpath(){
-	$("#shareshow").css({"display":"none"});
-	$("#sharepath").css({"display":"block"});
-}
-
-function showpublic(){
-	$.post("uploadFile/shareFile", {delpaths:delpaths}, function(data) {
-		$("#sharepath").css({"display":"none"});
-		$("#publicsuc input").val(data);
-		$("#publicsuc").css({"display":"block"});
-		
-	})
-}
-
-function showperson(){
-	var nums = "";
-	var num;
-	var ens = ['1','2','3','4','5','6','7','8','9','a','b','c','d','e','f','h','i','j','k','l','m','n'
-	           ,'o','p','q','r','s','t','u','v','w','x','y','z'];
-	for(var i=0;i<2;i++){
-		num = Math.ceil(Math.random()*10)-2;
-		if(num==-1){
-			num=0;
-		}
-		nums += ens[num];
-		num = Math.ceil(Math.random()*10)+10;
-		nums += ens[num];
-	}
-	$.post("uploadFile/shareFile", {delpaths:delpaths,password:nums}, function(data) {
-		$("#sharepath").css({"display":"none"});
-		$("#personpath-text").val(data);
-		$("#personpwd").val(nums);
-		$("#personsuc").css({"display":"block"});
-	})
-}
-
-//复制链接到粘贴板中
-function copypublicpath(){
-	/*alert(window.clipboardData.getData("text"));*/
-	$("#copypath").zclip({
-		path: "ZeroClipboard.swf", 
-		copy: function(){
-			return $("#publicpath-text").val();
-		},
-		afterCopy: function(){ //复制成功
-	       alert('复制成功');
-	    }
-	});
-}
-
-//生成提取码及复制
-function copypersonpath(){
-	var pwd=$("#personpwd").val();
-	var text = $("#personpath-text").val();
-	var str=text+","+pwd;
-	$("#copypath2").zclip({
-		path: "ZeroClipboard.swf", 
-		copy: function(){
-			return str;
-		},
-		afterCopy: function(){ //复制成功
-	       alert('复制成功');
-	    }
-	});
-} 
-
-
-
+$(function(){
+	 $('body').keypress(function(event){
+		 if(event.which==13){
+			 surepwd();
+		 }
+	 });
+});

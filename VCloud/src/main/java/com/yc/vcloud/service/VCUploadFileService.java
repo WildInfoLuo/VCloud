@@ -5,6 +5,7 @@ import java.util.List;
 import com.yc.vcloud.entity.VCShareFile;
 import com.yc.vcloud.entity.VCUploadCount;
 import com.yc.vcloud.entity.VCUploadFile;
+import com.yc.vcloud.entity.VCUser;
 
 public interface VCUploadFileService {
 	
@@ -38,5 +39,9 @@ public interface VCUploadFileService {
 	List<VCUploadFile> getAllFileWang(int userid,String filePath);
 
 	String surePwd(VCShareFile file);
+
+	List<VCUploadFile> findAllShareFile(VCUser user);
+
+	void cancelshareFile(VCShareFile sf);
 
 }

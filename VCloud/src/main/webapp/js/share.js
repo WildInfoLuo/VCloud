@@ -21,8 +21,12 @@ function closepersonsuc(){
 }
 
 function showpath(){
-	$("#shareshow").css({"display":"none"});
-	$("#sharepath").css({"display":"block"});
+	if(delpaths!=""){
+		$("#shareshow").css({"display":"none"});
+		$("#sharepath").css({"display":"block"});
+	}else{
+		alert("请选择您要分享的文件");
+	}
 }
 
 function showpublic(){
@@ -58,9 +62,9 @@ function showperson(){
 
 //复制链接到粘贴板中
 function copypublicpath(){
-	/*alert(window.clipboardData.getData("text"));*/
+	//alert(window.clipboardData.getData("text"));
 	$("#copypath").zclip({
-		path: "ZeroClipboard.swf", 
+		path: "js/ZeroClipboard.swf", 
 		copy: function(){
 			return $("#publicpath-text").val();
 		},
@@ -76,7 +80,7 @@ function copypersonpath(){
 	var text = $("#personpath-text").val();
 	var str=text+","+pwd;
 	$("#copypath2").zclip({
-		path: "ZeroClipboard.swf", 
+		path: "js/ZeroClipboard.swf", 
 		copy: function(){
 			return str;
 		},
@@ -163,17 +167,9 @@ $(function() {
 	$(".content-view").hide();
 	var str = "";
 	var pass = new Array();
-
-	$.post("uploadFile/findShareFile/", function(data) {
-		if(typeof(data)=="number"){
-			$("#navbar").css({"display":"none"});
-			$(".content").css({"display":"none"});
-			$("#bg").css({"display":"block"});
-			$("#pwdinput").css({"display":"block"});
-		}else{
-			pathData = data;
-			init();
-		}
+	$.post("uploadFile/getUserFiles/" + null, function(data) {
+		pathData = data;
+		init();
 	}, "json");
 });
 
@@ -732,7 +728,7 @@ function init() {
 		}
 		pass[i] = path;
 	}
-	$(".list-view").html("").append($(str));
+	$("#file2").html("").append($(str));
 	// 右上角显示
 	var a = getFileNames();
 	$(".history-list-tips").html("").append("已全部加载，共" + (a.length) + "个文件");
@@ -876,3 +872,7 @@ $(function(){
 		 }
 	 });
 });
+
+
+
+

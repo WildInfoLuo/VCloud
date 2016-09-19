@@ -1,6 +1,3 @@
-function uploadphoto(id){
-	$("#uploadfile").submit();
-} 
 var pathData = null;
 var nextpath = "";
 var newDirArr = new Array();
@@ -14,6 +11,13 @@ $(function() {
 	var str = "";
 	var pass = new Array();
 
+	$.post("uploadFile/findAllShareFile", function(data) {
+		if(data==""){
+			location.href="page/share.jsp";
+		}
+		pathData = data;
+		init();
+	}, "json");
 });
 
 var isdir = 0;
@@ -578,9 +582,8 @@ function init() {
 					+ '"  style="padding-left: 6px;"'
 					+ 'href="javascript:getNextPath(' + '\'/' + path + '/\','
 					+ 1 + ')" title=' + path + '>' + path + '</a></div></li>'
-					+ '<li class="file-size" style="width: 16%;">'
-					+ pathData[i].filesize + 'KB</li>' + '<li>'
-					+ pathData[i].uploaddate + '</li></dd>';
+					+ '<li>'
+					+ pathData[i].temp1 + '</li></dd>';
 		}
 		pass[i] = path;
 	}
@@ -657,7 +660,7 @@ function upFileLoad() {
 			for (var i = 0; i < data.length; i++) {
 				var path = parseFilePath(data[i].filepath, 1);
 				alert("目前的路径"+path);
-				if ($.inArray(path, pass) == -1) {//说明数组中有path
+				if ($.inArray(path, pass) == -1) {
 					str += '<dd class="open-enable">'
 							+ '<li class="file-name" style="width: 60%;"><span '
 							+ 'class="check-icon'
@@ -905,5 +908,14 @@ function copypersonpath(){
 	});
 } 
 
-
+//取消分享
+function cancelshareFile(){
+	$.post("uploadFile/cancelshareFile",{delpaths:delpaths}, function(data) {
+		if(data==""){
+			location.href="page/share.jsp";
+		}
+		pathData = data;
+		init();
+	}, "json");
+}
 

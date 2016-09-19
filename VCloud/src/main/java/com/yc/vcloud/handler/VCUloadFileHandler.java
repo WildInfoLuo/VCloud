@@ -135,10 +135,10 @@ public class VCUloadFileHandler {
 		VCUploadFile file = null;
 		if (filename.contains("png") || filename.contains("jpg") || filename.contains("JPG")
 				|| filename.contains("gif")) {
-			file = new VCUploadFile(user.getUserid(), nextpath + filename, length, sdf.format(new Date()), "图片",
+			file = new VCUploadFile(user.getUserid(), nextpath + filename+"/", length, sdf.format(new Date()), "图片",
 					filename, "0");
 		} else {
-			file = new VCUploadFile(user.getUserid(), nextpath + filename, length, sdf.format(new Date()), "文件",
+			file = new VCUploadFile(user.getUserid(), nextpath + filename+"/", length, sdf.format(new Date()), "文件",
 					filename, "0");
 		}
 		boolean flag = vCUploadFileService.uploadFile(file);
@@ -194,9 +194,9 @@ public class VCUloadFileHandler {
 					multipartFile.transferTo(f);
 					length = (int) (f.length() / 1024);
 				}
-				VCUploadFile file = new VCUploadFile(user.getUserid(), "/我的资源/新建文件夹/" + filename, length,
-						sbf.format(new Date()), "图片", filename, "0");
-				vCUploadFileService.uploadFile(file);
+				VCUploadFile file = new VCUploadFile(user.getUserid(), "/我的资源/新建文件夹/" + filename+"/", length,
+						sbf.format(new Date()), "图片", filename,"0");
+				 vCUploadFileService.uploadFile(file);
 			}
 		}
 
@@ -246,9 +246,9 @@ public class VCUloadFileHandler {
 					multipartFile.transferTo(f);
 					length = (int) (f.length() / 1024);
 				}
-				VCUploadFile file = new VCUploadFile(user.getUserid(), "/我的资源/新建文件夹/" + filename, length,
-						sbf.format(new Date()), "文档", filename, "0");
-				vCUploadFileService.uploadFile(file);
+				VCUploadFile file = new VCUploadFile(user.getUserid(), "/我的资源/新建文件夹/" + filename+"/", length,
+						sbf.format(new Date()), "文档", filename,"0");
+				 vCUploadFileService.uploadFile(file);
 			}
 
 		}
@@ -298,11 +298,10 @@ public class VCUloadFileHandler {
 					length = (int) (f.length() / 1024);
 				}
 				System.out.println(multipartFile.getOriginalFilename());
-				VCUploadFile file = new VCUploadFile(user.getUserid(), "/我的资源/新建文件夹/" + filename, length,
-						sbf.format(new Date()), "音乐", filename, "0");
-				vCUploadFileService.uploadFile(file);
+				VCUploadFile file = new VCUploadFile(user.getUserid(), "/我的资源/新建文件夹/" + filename+"/", length,
+						sbf.format(new Date()), "音乐", filename,"0");
+				 vCUploadFileService.uploadFile(file);
 			}
-
 		}
 
 		VCUploadFile file = new VCUploadFile(user.getUserid(), null);
@@ -416,10 +415,37 @@ public class VCUloadFileHandler {
 		}
 
 	}
-
-	@RequestMapping(value = "/surepwd", method = RequestMethod.POST)
-	public void surepwd(HttpSession session, HttpServletRequest request, PrintWriter out, String pwd, ModelMap map) {
-		String time = (String) session.getAttribute("shareFile");
+	
+	@RequestMapping(value="/findAllShareFile",method=RequestMethod.POST)
+	public void findAllShareFile(HttpSession session,HttpServletRequest request,PrintWriter out){
+		VCUser user = (VCUser) session.getAttribute(SessionAttribute.USERLOGIN);
+		List<VCUploadFile> files = vCUploadFileService.findAllShareFile(user);
+		Gson gs = new Gson();
+		String fileStr = gs.toJson(files);
+		out.println(fileStr);
+		out.flush();
+		out.close();
+	}
+	
+	@RequestMapping(value="/cancelshareFile",method=RequestMethod.POST)
+	public void cancelshareFile(@RequestParam(value="delpaths[]")  String[] delpaths,HttpSession session,HttpServletRequest request,PrintWriter out){
+		VCUser user = (VCUser) session.getAttribute(SessionAttribute.USERLOGIN);
+		VCShareFile sf;
+		for(String str:delpaths){
+				sf=new VCShareFile(0, user.getUserid(), str, "", "", "");
+				vCUploadFileService.cancelshareFile(sf);
+		}
+		List<VCUploadFile> files = vCUploadFileService.findAllShareFile(user);
+		Gson gs = new Gson();
+		String fileStr = gs.toJson(files);
+		out.println(fileStr);
+		out.flush();
+		out.close();
+	}
+	
+	@RequestMapping(value="/surepwd",method=RequestMethod.POST)
+	public void surepwd(HttpSession session,HttpServletRequest request,PrintWriter out,String pwd,ModelMap map){
+		String time =(String) session.getAttribute("shareFile");
 		VCShareFile file = new VCShareFile(0, 0, "", "", "", time);
 		String truepwd = vCUploadFileService.surePwd(file);
 		if (pwd.equals(truepwd)) {

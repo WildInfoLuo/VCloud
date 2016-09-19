@@ -6,7 +6,7 @@
 <head>
 <base href="/VCloud/">
 <meta charset="UTF-8">
-<title>分享</title>
+<title>VCloud__网盘</title>
 <!--右键菜单样式-->
 <link rel="stylesheet" href="css/base.css" />
 <link rel="stylesheet" href="css/gizmoMenu.css" />
@@ -19,7 +19,7 @@
 <script src="js/jquery-1.11.3.min.js">
 	
 </script>
-<script type="text/javascript" src="js/downloadshare.js"></script>
+<script src="js/myshare.js"></script>
 <script src="js/ajaxfileupload.js"></script>
 <script type="text/javascript" src="js/index.js"></script>
 
@@ -46,7 +46,7 @@
 		<div id="navbar_left">
 			<img alt="千度云盘" src="images/logo2.png">
 			<ul>
-				<li id="left_li"><a href="index.jsp">主页</a></li>
+				<li id="left_li"><a href="page/index.jsp">主页</a></li>
 				<li class="cjh" id="left_li" onmouseover="showH()"
 					onmouseout="hiddenH()">
 					<!--" --> <a href="page/Person_VCloud.jsp">网盘</a> <a><img
@@ -66,12 +66,12 @@
 										<span
 										style="font-size: 15px; margin-left: -20px; color: rgb(225, 230, 246);">视频</span></a>
 								</td>
-								<td><a href="#"> <i
+								<td><a href="page/docupload.jsp"> <i
 										style="display: block; width: 40px; height: 40px; background: url(images/word.png); background-size: cover;"></i>
 										<span
 										style="font-size: 15px; margin-left: -20px; color: rgb(225, 230, 246);">文档</span></a>
 								</td>
-								<td><a href="pic_currentupload_empty.jsp"> <i
+								<td><a href="page/pic_currentupload_empty.jsp"> <i
 										style="display: block; width: 40px; height: 40px; background: url(images/pic.png); background-size: cover;"></i>
 										<span
 										style="font-size: 15px; margin-left: -15px; color: rgb(225, 230, 246);">图片</span></a>
@@ -80,7 +80,7 @@
 						</table>
 					</div>
 				</li>
-				<li id="left_li"><a href="share.jsp">分享</a></li>
+				<li id="left_li"><a href="page/share.jsp">分享</a></li>
 				<li id="left_li"><a href="#">应用</a></li>
 			</ul>
 		</div>
@@ -91,7 +91,7 @@
 						<a>${userLogin.uname }，您好</a>
 					</c:if>
 					<c:if test="${userLogin == null }">
-						<a href="page/login.jsp">未登录</a>
+	 					<a href="page/login.jsp">未登录</a>
 					</c:if>
 				</li>
 				<li><a href="user/logout">注销</a></li>
@@ -108,9 +108,108 @@
 		</div>
 	</div>
 
-	<div class="content" style="margin-left: 80px;">
+	<div class="module-aside">
+		<ul class="menu-list">
+			<li class="list-item-all"><a class="b-no-ln"
+				href="javascript:chageBg(this,'list-item-all')"> <span
+					class="text"> <span class="img-ico-disk"></span> <span
+						class="item-title">全部</span>
+				</span>
+			</a></li>
+			<li class="list-item-pic"><a class="b-no-ln"
+				href="javascript:chageBg(this,'list-item-pic')"> <span
+					class="text"> <span class="img-ico-pic"></span> <span
+						class="item-title">图片</span>
+				</span>
+			</a></li>
+			<li class="list-item-doc"><a class="b-no-ln"
+				href="javascript:chageBg(this,'list-item-doc')"> <span
+					class="text"> <span class="img-ico-doc"></span> <span
+						class="item-title">文档</span>
+				</span>
+			</a></li>
+			<li class="list-item-video"><a class="b-no-ln"
+				href="javascript:chageBg(this,'list-item-video')"> <span
+					class="text"> <span class="img-ico-video"></span> <span
+						class="item-title">视频</span>
+				</span>
+			</a></li>
+			<li class="list-item-bt"><a class="b-no-ln"
+				href="javascript:chageBg(this,'list-item-bt')"> <span
+					class="text"> <span class="img-ico-bt"></span> <span
+						class="item-title">种子</span>
+				</span>
+			</a></li>
+			<li class="list-item-music"><a class="b-no-ln"
+				href="javascript:chageBg(this,'list-item-music')"> <span
+					class="text"> <span class="img-ico-music"></span> <span
+						class="item-title">音乐</span>
+				</span>
+			</a></li>
+			<li class="list-item-oth"><a class="b-no-ln"
+				href="javascript:chageBg(this,'list-item-oth')"> <span
+					class="text"> <span class="img-ico-oth"></span> <span
+						class="item-title">其它</span>
+				</span>
+			</a></li>
+		</ul>
+		<div class="item-separator" style="display: block;"></div>
+		<ul class="middle-button-container">
+			<a class="g-button" href="page/myshare.jsp" data-button-index="8"
+				data-button-id="b1" style=""> <span class="g-button-right">
+					<em class="icon-aside-share" title="我的分享"></em> <span class="text"
+					style="width: auto;">我的分享</span>
+			</span>
+			</a>
+			<span class="g-dropdown-button" style="display: none;"> <a
+				class="g-button" href="javascript:void(0);" data-button-index=""
+				data-button-id="b3"> <span class="g-button-right"> <span
+						class="text" style="width: auto;">更多</span>
+				</span>
+			</a> <span class="menu" style="width: 64px;"></span>
+		</ul>
+		<div class="item-separator" style="display: block;"></div>
+		<ul class="bottom-button-container">
+			<a class="g-button" href="backstore.jsp" data-button-index="9"
+				data-button-id="b5" style=""> <span class="g-button-right">
+					<em class="icon-aside-recyclebin" title="回收站"></em> <span
+					class="text" style="width: auto;">回收站</span>
+			</span>
+			</a>
+			<span class="g-dropdown-button" style="display: none;"> <a
+				class="g-button" href="javascript:void(0);" data-button-index=""
+				data-button-id="b7"> <span class="g-button-right"> <span
+						class="text" style="width: auto;">更多</span>
+				</span>
+			</a> <span class="menu" style="width: 64px;"> <a
+					class="g-button-menu g-menu-hasIcon" href="javascript:void(0);"
+					data-menu-id="b-menu0" style="display: none;"> <em
+						class="icon icon-aside-recyclebin"></em> 回收站
+				</a>
+			</span>
+			</span>
+		</ul>
+		<div class="item-separator" style="display: block;"></div>
+		<div
+			style="width: 100%; height: 236px; background: transparent none repeat scroll 0% 0%;">
+			<div class="aside-absolute-container"
+				style="visibility: visible; position: absolute; width: 100%; height: 155px; top: 460px; bottom: auto;">
+			</div>
+			<!-- 容量进度条 -->
+	         <div class="progressbar" data-perc="${countSize/1024/10 }">
+	            <div class="contain">容量:${countSize }MB/10G</div>
+				<div class="bar"><span></span></div>
+			</div>
+		</div>
+	</div>
+	<div class="content">
 		<div class="module-list">
-			<span class="history-list-dir">全部文件</span> <span
+			<div class="module-timeline-list">
+            	<ul class="clearfix">
+                    <li style="border-bottom: 5px solid blue; width: 90px; margin-left: 15px;"><span style="color: blue; font-size:16px;  margin-left: 15px;" >链接分享</span></li>
+                </ul>
+            </div>
+			<span class="history-list-dir" style="margin-left: 10px; font-size: 12px; font-weight: 300;">我分享的文件</span> <span
 				class="history-list-tips">已全部加载，共6个</span>
 			<div class="list-view-header">
 				<div class="list-header">
@@ -122,20 +221,18 @@
 									style="background: rgba(0, 0, 0, 0) url('images/list-view_4e60b0c.png') no-repeat scroll -9px -12px; height: 14px; left: 11px; width: 14px; top: 20px; margin: 15px 10px; float: left;"></span>
 								<span class="textCla" style="line-height: 43px;">文件名</span> <span
 									class="list-header-operatearea"> <span
-									class="count-tips" style="line-height: 43px;">已选中6个文件/文件夹</span>
-									 <a class="lg-button" href="javascript:void(0);"> <span
-										class="lg-button-right"> <em class="icon-download-gray"
-											title="下载"></em> <span class="text" style="width: auto;">下载</span>
+									class="count-tips" style="line-height: 43px;"></span>
+									<a class="lg-button" href="javascript:cancelshareFile();" > <span
+										class="lg-button-right" > <em  class="icon-share-gray"
+											title="分享"></em> <span class="text" style="width: auto;">取消</span>
 									</span>
 								</a> 
 								</span>
 							</div>
 						</li>
-						<li class="col" style="width: 15%; line-height: 43px;"><span
-							class="text">大小</span> <span class="order-icon"></span></li>
 						<li class="last-col"
 							style="width: 21%; cursor: pointer; line-height: 43px;"
-							onClick="lastColicon()"><span class="text">修改日期</span> <span
+							onClick="lastColicon()"><span class="text">分享日期</span> <span
 							class="order-icon"></span></li>
 					</ul>
 				</div>
@@ -159,20 +256,7 @@
 			</div>
 		</div>
 	</div>
-	<div id="pwdinput">
-		<span style="color: rgb(49,173,238);font-size:18px;font-family:monospace;margin-left:10px;margin-top:20px;display: inline-block;">请输入提取密码</span>
-		<div>
-			<span id="pwdError" style="margin-left:190px;font-size:12px;display: inline-block;font-family: monospace;color: red;">
-			</span>
-			<br>
-			<span style="margin-left:150px;font-size:12px;margin-top:10px;display: inline-block;font-family: monospace;">
-				提取密码
-			</span>
-			<input id="pwd" type="text"  style="width:83px;height:28px;margin-top:30px;margin-left:50px;"/>
-			<br><a id="surepwd" onclick="surepwd()"></a>
-		</div>
-	</div>
-	
+
 	<div class="gizmoMenu gizmoDropDown">
 		<ul>
 			<li><i class="fa fa-camera-retro"></i><a href="#">查看</a><img
