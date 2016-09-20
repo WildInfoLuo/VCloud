@@ -248,7 +248,7 @@
 	
 	<div id="returnsure">
 		<h3 id="shareh3">确认还原<img id="close" src="images/close.png" onclick="closeShare()"></h3>
-		<span style="display: block; text-align: center;margin-left:185px; margin-top:20px;position: absolute;">确认还原选中的文件??</span>
+		<span style="display: block; text-align: center;margin-left:185px; margin-top:20px;position: absolute;">确认删除选中的文件??</span>
 		<br/><div id="certain" onclick="returnFile()"></div>
 		<div id="cancel" onclick="closeShare()"></div>
 	</div>

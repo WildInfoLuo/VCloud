@@ -329,7 +329,6 @@ function parseFilePath(filePath, num) {
 }
 // 获取下一级路径
 function getNextPath(path, view) {
-	alert(path);
 	var pathName;//文件名
 	var paths = new Array();
 	paths = path.split("/");
@@ -337,6 +336,7 @@ function getNextPath(path, view) {
 	if(path.indexOf("jpg")!=-1||path.indexOf("gif")!=-1||path.indexOf("png")!=-1||path.indexOf("JPG")!=-1){//说明包含
 		pathName=parseFilePath(path,paths.length-2);
 		$("#shareshow").css({"display":"block"});
+		return;
 		$("#imgshow").html("").append('<img src="/VCloud/sources/'+pathName+'">');
 	}else if(path.indexOf("mpg")!=-1||path.indexOf("mp4")!=-1||path.indexOf("avi")!=-1){
 		pathName=parseFilePath(path,paths.length);
@@ -344,6 +344,7 @@ function getNextPath(path, view) {
 		$("#imgshow").html("").append('<video src=".../sources/'+pathName+'" width="auto" height="auto" controls autoplay loop><source type=video/mp4 /> Your browser does not support the video tag. </video>');
 		}else if(path.indexOf(".")!=-1){
 		alert("此类文件需安装VCloud管家!!!");
+		return;
 	}
 	checked2 = 0;
 	for (var i = 0; i < length; i++) {
@@ -366,7 +367,7 @@ function getNextPath(path, view) {
 	for (var i = 0; i < pathData.length; i++) {
 		if (pathData[i].filepath.indexOf(path) == 0) {
 			paths = pathData[i].filepath.split("/");	
-			paths.splice(paths.length-1,1);
+			//paths.splice(paths.length-1,1);
 			if ((num + 1 ) < paths.length && paths.length > 1){
 				if (view == 1) {
 					if ($.inArray(paths[num + 1], ps) == -1) {
@@ -935,7 +936,8 @@ function deleteFile() {
 			tcheckIcon.length = 0;
 			delpaths=new Array();
 			filenameIcon(-1);
-			
+			$("#returnsure").css({"display":"none"});
+			$("#bg").css({"display":"none"});
 		}
 	});
 }
@@ -1129,4 +1131,15 @@ function downloadFile(){
 		alert("下载完成!");
 	}, "json");
 }
+
+function closeShare(){
+	$("#returnsure").css({"display":"none"});
+	$("#bg").css({"display":"none"});
+}
+
+function showRecyle(){
+	$("#returnsure").css({"display":"block"});
+	$("#bg").css({"display":"block"});
+}
+
 
