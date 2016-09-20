@@ -337,12 +337,14 @@ function getNextPath(path, view) {
 		pathName=parseFilePath(path,paths.length-2);
 		$("#shareshow").css({"display":"block"});
 		$("#imgshow").html("").append('<img src="/VCloud/sources/'+pathName+'" style="width: 700px;height: 580px;float: left;overflow: hidden;">');
+		return;
 	}else if(path.indexOf("mpg")!=-1||path.indexOf("mp4")!=-1||path.indexOf("avi")!=-1){
 		pathName=parseFilePath(path,paths.length-2);
 		$("#shareshow").css({"display":"block"});
 		//$("#imgshow").html("").append('<video src="/VCloud/sources/'+pathName+'" width="auto" height="auto" controls autoplay loop><source type=video/mp4 /> Your browser does not support the video tag. </video>');
 		}else if(path.indexOf(".")!=-1){
 		alert("此类文件需安装VCloud管家!!!");
+		return;
 	}
 	checked2 = 0;
 	for (var i = 0; i < length; i++) {
