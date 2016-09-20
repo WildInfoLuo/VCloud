@@ -28,6 +28,10 @@ public class LoginInterceptor extends OncePerRequestFilter {
 		if(!file.exists()){
 			 file.mkdirs();
 		}
+		File file1=new File("D:/VCloudDownload/");
+		if(!file1.exists()){
+			file1.mkdirs();
+		}
 		// 不过滤的uri
 		String[] notFilter = new String[] { "login.jsp", "back/backlogin.jsp", "index.html", "register.jsp","page/share","downloadshare.jsp" };
 		// 请求的uri
