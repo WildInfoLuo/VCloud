@@ -2,6 +2,8 @@ package com.yc.vcloud.service;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.yc.vcloud.entity.VCShareFile;
 import com.yc.vcloud.entity.VCUploadCount;
 import com.yc.vcloud.entity.VCUploadFile;
@@ -39,6 +41,10 @@ public interface VCUploadFileService {
 	List<VCUploadFile> getAllFileWang(int userid,String filePath);
 
 	String surePwd(VCShareFile file);
+	
+	int getFileSize(int userid,String filepath);
+	
+	boolean reFile(String filepath);
 
 	List<VCUploadFile> findAllShareFile(VCUser user);
 

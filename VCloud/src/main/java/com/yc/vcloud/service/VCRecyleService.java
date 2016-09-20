@@ -6,4 +6,6 @@ import com.yc.vcloud.entity.VCRecyle;
 
 public interface VCRecyleService {
 	List<VCRecyle> getUserRecyle(int userid);
+
+	boolean returnFile(String deletepath);
 }

@@ -1,4 +1,12 @@
 
+function closeShare(){
+	$("#returnsure").css({"display":"none"});
+}
+
+function showRecyle(){
+	$("#returnsure").css({"display":"block"});
+}
+
 var pathData = new Array();
 $(function(){
 	$('.container').gizmoMenu({
@@ -29,8 +37,8 @@ function reinit(){
 	var str = "";
 	var pass = new Array();
 	for (var i = 0; i < pathData.length; i++) {
-		var path = parsedeletepath(pathData[i].deletepath, 1);
-		if ($.inArray(path, pass) == -1) {
+		var pp = pathData[i].deletepath.split("/");
+		var path = parsedeletepath(pathData[i].deletepath, pp.length-2);
 			str += '<dd class="open-enable"  onmouseenter="showimg('+(i+1)+')"  onmouseleave="hideimg('+(i+1)+')">'
 					+ '<li class="file-name" style="width: 42%;"><span '
 					+ 'class="check-icon'
@@ -39,8 +47,7 @@ function reinit(){
 					+ (i + 1)
 					+ ')"'
 					+ 'style="background: rgba(0, 0, 0, 0) url(images/list-view_4e60b0c.png) no-repeat scroll -9px -12px;height: 14px; left: 11px; width: 14px; top: 20px; margin: 15px 10px; float: left;"></span>';
-			if (pathData[i].deletepath.indexOf(".") != -1
-					&& pathData[i].isdir == 0) {
+			if (pathData[i].deletepath.indexOf(".") != -1) {
 				switch (path.substr(path.lastIndexOf(".") + 1)) {
 				case "doc":
 					str += '<div class="text"><div class="dir-tables fileicon-tables-doc"></div>';
@@ -84,17 +91,15 @@ function reinit(){
 				str += '<div class="fileicon"></div>'
 						+ '<div class="text"><div class="filenameicon"></div>';
 			}
-			str += '<a class="filename" id="a' + (i + 1)
+			str += '<label class="filename" id="a' + (i + 1)
 					+ '"  style="padding-left: 6px;"'
-					+ 'href="javascript:getNextPath(' + '\'/' + path + '/\','
-					+ 1 + ')" title=' + path + '>' + path + '</a>'+
+					+ 'title="'+pathData[i].deletepath+'">' + path + '</label>'+
 					'<img class="img_show'+(i+1)+'" style="margin-left: 250px; display:none; " width="20px;" src="images/img/return.png"/><img class="img_show'+(i+1)+'" style="margin-left: 20px; display:none;" src="images/img/rubbish.png"  width="20px;" /></div></li>'
 					+ '<li class="file-size" style="width: 17%;">'
-					+ pathData[i].filesize + 'KB</li>' + '<li style="width: 17%;">'
-					+ pathData[i].uploaddate + '</li>'+
+					+ pathData[i].temp2 + 'KB</li>' + '<li style="width: 17%;">'
+					+ pathData[i].deletedate + '</li>'+
 					'<li>10天</li>'
 					'</dd>';
-		}
 		pass[i] = path;
 	}
 	$(".list-view").html("").append($(str));
@@ -107,6 +112,7 @@ function reinit(){
 function parsedeletepath(deletepath, num) {
 	var paths = new Array();
 	paths = deletepath.split("/");
+	console.info(num+"--"+paths+"--"+paths.length);
 	if (paths.length == 1) {
 		return paths[0];
 	}
@@ -188,7 +194,7 @@ function filenameIcon(id) {
 	for (var i = 0; i <= l; i++) {
 		if (tcheckIcon[a[i]] == true) {
 			checked++;
-			delpaths[i] = path + $("#a" + a[i] + "").html()+"/";
+			delpaths[i] = $("#a" + a[i] + "").attr("title");
 			console.info(a[i]);
 			console.info(delpaths[i]);
 			$(".textCla").hide();
@@ -207,6 +213,7 @@ function filenameIcon(id) {
 		$(".check-icon0").css(divcss1);
 	}
 	$(".count-tips").text("已选中" + checked + "个文件/共" + a.length + "文件");
+	$(".list-header-operatearea").css("display","block");
 	checked2 = checked;
 }
 
@@ -233,6 +240,55 @@ function getMaxNum(){
 	}
 	return a[a.length-1];
 }
+
+//还原
+function returnFile(){
+	console.info(delpaths);
+	for(var i = 0;i<delpaths.length;i++){
+		if(delpaths[i] == "" || delpaths[i] == null){
+			delpaths.splice(i,1);
+		}
+	}
+	$.post("recyle/returnRe",{delpaths:delpaths},function(data){
+		if(data){
+			pathDataDel(delpaths);
+			$("#returnsure").css({"display":"none"});
+			checked2 = 0;
+			for (var i = 0; i < length; i++) {
+				tcheckIcon[i] = false;
+			}
+			filenameIcon(-1);
+			delpaths.length = 0;
+			reinit();
+		}
+	});
+}
+
+//从pathData中删除元素的方法
+function pathDataDel(path){//上一级路径+当前路径
+	var n = 0;
+	var num = 0;
+	for(var i = 0;i<path.length;i++){
+		if(path[i] == null || ""==path[i]){
+			path.splice(i, 1);
+		}
+	}
+	while(n<pathData.length){
+		if(pathData[n].deletepath.indexOf(path[num])==0){
+			pathData.splice(n, 1);
+			num++;
+			n=0;
+		}else{
+			n++;
+		}
+		if(num == path.length){
+			return;
+		}
+	}
+	console.info(pathData);
+}
+
+
 
 
 

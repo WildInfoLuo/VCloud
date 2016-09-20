@@ -206,9 +206,9 @@
 							<div class="check">
 								<span class="check-icon0" onclick="filenameIcon(0)"
 									style="background: rgba(0, 0, 0, 0) url('images/list-view_4e60b0c.png') no-repeat scroll -9px -12px; height: 14px; left: 11px; width: 14px; top: 20px; margin: 15px 10px; float: left;"></span>
-								<span class="textCla" style="line-height: 43px;">文件名</span> <span class="list-header-operatearea"> <span
-									class="count-tips" style="line-height: 43px;">已选中6个文件/文件夹</span>
-									  <a class="lg-button" href="javascript:void(0);"> <span
+								<span class="textCla" style="line-height: 43px;">文件名</span> <span class="list-header-operatearea" style="display: none;"> <span
+									class="count-tips" style="line-height: 43px;"></span>
+									  <a class="lg-button" href="javascript:showRecyle();"> <span
 										class="lg-button-right"> <em class="icon-return-gray"
 											title="还原"></em> <span class="text" style="width: auto;">还原</span>
 									</span>
@@ -230,53 +230,6 @@
 			<div class="list-view-container ">
 				<div class="module-list-view  container">
 					<div class="list-view">
-						<dd class="open-enable" onmouseenter="showimg(1)"  onmouseleave="hideimg(1)">
-							<li class="file-name" style="width: 42%;">
-								<span class="check-icon1" onclick="filenameIcon(1)"
-								style="background: rgba(0, 0, 0, 0) url('images/list-view_4e60b0c.png') no-repeat scroll -9px -12px; height: 14px; left: 11px; width: 14px; top: 20px; margin: 15px 10px; float: left;"></span>
-								<div class="fileicon"></div>
-								<div class="text">
-									<div class="filenameicon"></div>
-									<a class="filename" style="padding-left: 6px;"
-										href="javascript:void(0);" title="文件接收柜">文件接收柜</a>
-								<img class="img_show1" style="margin-left: 250px; display:none; " width="20px;" src="images/img/return.png"/><img class="img_show1" style="margin-left: 20px; display:none;" src="images/img/rubbish.png"  width="20px;" />
-								</div>
-							</li>
-							<li class="file-size" style="width: 17%;">2kb</li> 
-							<li style="width: 17%;">2015-11-15 11:31</li>
-							<li>10天</li>
-						</dd>
-						<dd class="open-enable" onmouseenter="showimg(2)"  onmouseleave="hideimg(2)">
-							<li class="file-name" style="width: 42%;"><span
-								class="check-icon2" onclick="filenameIcon(2)"
-								style="background: rgba(0, 0, 0, 0) url('images/list-view_4e60b0c.png') no-repeat scroll -9px -12px; height: 14px; left: 11px; width: 14px; top: 20px; margin: 15px 10px; float: left;"></span>
-								<div class="fileicon"></div>
-								<div class="text">
-									<div class="filenameicon"></div>
-									<a class="filename" style="padding-left: 6px;"
-										href="javascript:void(0);" title="我的项目">我的项目</a>
-								<img class="img_show2" style="margin-left: 250px; display:none; " width="20px;" src="images/img/return.png"/><img class="img_show2" style="margin-left: 20px; display:none;" src="images/img/rubbish.png"  width="20px;" />
-								</div>
-								</li>
-							<li class="file-size" style="width: 17%;">2kb</li> 
-							<li style="width: 17%;">2015-11-15 11:31</li>
-							<li>10天</li>
-						</dd>
-						<dd class="open-enable" onmouseenter="showimg(3)"  onmouseleave="hideimg(3)">
-							<li class="file-name" style="width: 42%;"><span
-								class="check-icon3" onclick="filenameIcon(3)"
-								style="background: rgba(0, 0, 0, 0) url('images/list-view_4e60b0c.png') no-repeat scroll -9px -12px; height: 14px; left: 11px; width: 14px; top: 20px; margin: 15px 10px; float: left;"></span>
-								<div class="fileicon"></div>
-								<div class="text">
-									<div class="filenameicon"></div>
-									<a class="filename" style="padding-left: 6px;"
-										href="javascript:void(0);" title="我的资源">我的资源</a>
-									<img class="img_show3" style="margin-left: 250px; display:none; " width="20px;" src="images/img/return.png"/><img class="img_show3" style="margin-left: 20px; display:none;" src="images/img/rubbish.png"  width="20px;" />
-								</div></li>
-							<li class="file-size" style="width: 17%;">2kb</li> 
-							<li style="width: 17%;">2015-11-15 11:31</li>
-							<li>10天</li>
-						</dd>
 						<div class="list-empty-tips" style="display: none;">
 						<div class="tip-text">正在加载，请稍候…</div>
 					</div>
@@ -284,6 +237,13 @@
 				</div>
 			</div>
 		</div>
+	</div>
+	
+	<div id="returnsure">
+		<h3 id="shareh3">确认还原<img id="close" src="images/close.png" onclick="closeShare()"></h3>
+		<span style="display: block; text-align: center;margin-left:185px; margin-top:20px;position: absolute;">确认还原选中的文件??</span>
+		<br/><div id="certain" onclick="returnFile()"></div>
+		<div id="cancel" onclick="closeShare()"></div>
 	</div>
 </body>
 </html>
