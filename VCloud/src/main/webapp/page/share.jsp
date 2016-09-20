@@ -11,17 +11,7 @@
 <link type="text/css" rel="stylesheet" href="css/index.css">
 <link type="text/css" rel="stylesheet" href="css/share.css">
 <link href="images/云准备.gif" rel="shortcut icon">
-<script src="js/jquery-1.11.3.min.js">
-	
-</script>
-<script type="text/javascript" src="js/index.js"></script>
-<script type="text/javascript" src="js/share.js"></script>
-<script type="text/javascript" src="js/ZeroClipboard.js"></script>
-<script type="text/javascript">
-	$(document).ready(function() {
-		  var clip = new ZeroClipboard($("#copypath"));
-	}); 
-</script>
+
 </head>
 <body>
 	<div id="navbar">
@@ -152,7 +142,7 @@
 		</ul>
 		<div class="item-separator" style="display: block;"></div>
 		<ul class="bottom-button-container">
-			<a class="g-button" href="/disk/recyclebin" data-button-index="9"
+			<a class="g-button" href="page/backstore.jsp" data-button-index="9"
 				data-button-id="b5" style=""> <span class="g-button-right">
 					<em class="icon-aside-recyclebin" title="回收站"></em> <span
 					class="text" style="width: auto;">回收站</span>
@@ -277,8 +267,13 @@
 		</div>
 	</div>
 	
+<script src="js/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="js/index.js"></script>
+<script type="text/javascript" src="js/share.js"></script>
+<script type="text/javascript" src="js/ZeroClipboard.js"></script>
+<script type="text/javascript">
+		  var clip = new ZeroClipboard($("#copypath"));
+</script>
+
 </body>
-
-<script type="text/javascript" src="js/jquery.zclip.min.js"></script>
-
 </html>
