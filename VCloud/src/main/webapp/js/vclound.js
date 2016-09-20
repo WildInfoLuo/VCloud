@@ -371,11 +371,11 @@ function getNextPath(path, view) {
 	var ps = new Array();
 	for (var i = 0; i < pathData.length; i++) {
 		paths = pathData[i].filepath.split("/");
-		paths.splice(paths.length-1,1);
+//		paths.splice(paths.length-1,1);
 		if (pathData[i].filepath.indexOf(path) == 0) {
 			if ((num + 1 ) < paths.length && paths.length > 1) {
 				if (view == 1) {
-					if ($.inArray(paths[num + 1], ps) == -1) {
+					if ($.inArray(paths[num + 1], ps) == -1 && paths[num + 1]!="") {
 						var filesize = getFileSize(nextpath+paths[num+1]+"/");
 						str += '<dd class="open-enable">'
 								+ '<li class="file-name" style="width: 60%;"><span '
@@ -437,7 +437,7 @@ function getNextPath(path, view) {
 						str += '<a class="filename" id="a' + (i + 1)
 								+ '" style="padding-left: 6px;"'
 								+ 'href="javascript:getNextPath(' + '\'' + path
-								+ paths[num + 1] + '/\',' + 1 + ')" title='
+								+ paths[num + 1]+ '/\',' + 1 + ')" title='
 								+ paths[num + 1] + '>' + paths[num + 1]
 								+ '</a></div></li>'
 								+ '<li class="file-size" style="width: 16%;">'
