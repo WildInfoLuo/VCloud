@@ -27,5 +27,12 @@ public class VCRecyleServiceImplTest {
 		LogManager.getLogger().debug(list);
 		assertNotNull(list);
 	}
+	
+	@Test
+	public void testReturnFile() {
+		boolean flag = vCRecyleService.returnFile("/新建文件夹(2)/");
+		LogManager.getLogger().debug(flag);
+		assertEquals(flag, true);
+	}
 
 }

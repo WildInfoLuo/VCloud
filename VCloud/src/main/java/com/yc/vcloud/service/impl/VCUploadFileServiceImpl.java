@@ -90,6 +90,15 @@ public class VCUploadFileServiceImpl implements VCUploadFileService {
 	}
 
 	@Override
+	public int getFileSize(int userid, String filepath) {
+		return vCUploadFileMapper.getFileSize(userid, filepath);
+	}
+
+	@Override
+	public boolean reFile(String filepath) {
+		return vCUploadFileMapper.reFile(filepath);
+	}
+	
 	public List<VCUploadFile> findAllShareFile(VCUser user) {
 		return vCUploadFileMapper.findAllShareFile(user);
 	}

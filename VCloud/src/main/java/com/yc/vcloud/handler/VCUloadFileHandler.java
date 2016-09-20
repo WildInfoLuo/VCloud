@@ -122,7 +122,7 @@ public class VCUloadFileHandler {
 				VCUploadFile file = null;
 				if (filename.contains("png") || filename.contains("jpg") || filename.contains("JPG")
 						|| filename.contains("gif")) {
-					file = new VCUploadFile(user.getUserid(), nextpath + filename, length, sdf.format(new Date()), "图片",
+					file = new VCUploadFile(user.getUserid(), nextpath + filename+"/", length, sdf.format(new Date()), "图片",
 							filename, "0");
 				} else if(filename.contains("doc") || filename.contains("docx") || filename.contains("txt")
 						|| filename.contains("xls")){
@@ -137,8 +137,9 @@ public class VCUloadFileHandler {
 				}
 				vCUploadFileService.uploadFile(file);
 				boolean flag = vCUploadFileService.uploadFile(file);
-				List<VCUploadFile> wangFile = vCUploadFileService.getAllFileWang(user.getUserid(), nextpath);
-				Gson gson = new Gson();
+				List<VCUploadFile> wangFile=vCUploadFileService.getAllFileWang(user.getUserid(),nextpath+ filename);
+				session.setAttribute(SessionAttribute.FILESESSION, wangFile);
+				Gson gson=new Gson();
 				out.print(gson.toJson(wangFile));
 				out.flush();
 				out.close();
@@ -477,6 +478,19 @@ public class VCUloadFileHandler {
 		return "Person_VCloud";
 	}
 	
+	//获取文件大小
+	@RequestMapping(value="/getFileSize/{path}",method=RequestMethod.POST)
+	public String getFileSize(@RequestParam(value="path")String path,
+							PrintWriter out, HttpSession session){
+		VCUser user = (VCUser) session.getAttribute(SessionAttribute.USERLOGIN);
+		boolean flag= false;
+		out.println(flag);
+		out.flush();
+		out.close();
+		return "Person_VCloud";
+	}
+	
+	
 	@RequestMapping(value="/downloadFile",method=RequestMethod.POST)
 	public void downloadFile(@RequestParam(value="delpaths[]")  String[] delpaths,HttpSession session,HttpServletRequest request,PrintWriter out){
 		String basePath=request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+request.getContextPath()+"/../sources/";
@@ -497,5 +511,4 @@ public class VCUloadFileHandler {
 		out.flush();
 		out.close();
 	}
-
 }

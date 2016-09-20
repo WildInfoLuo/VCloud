@@ -5,9 +5,8 @@
 <html>
 <head>
 <base href="/VCloud/">
-<meta charset=UTF-8">
+<meta charset="UTF-8">
 <title>VCloud__分享</title>
-
 <link type="text/css" rel="stylesheet" href="css/vclound.css" />
 <link type="text/css" rel="stylesheet" href="css/index.css">
 <link type="text/css" rel="stylesheet" href="css/share.css">

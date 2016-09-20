@@ -54,5 +54,13 @@ public class VCUploadFileServiceImplTest {
 		assertEquals(flag, true);
 	}
 	
+	@Test
+	public void testGetFileSize() {
+		//VCRecyle vr = new VCRecyle(10041, "2015-06-06 2:3:6","/新建文件夹/");
+		int flag = vCUploadFileService.getFileSize(10041, "/新建文件夹/");
+		System.out.println("===>"+flag);
+		assertNotNull(flag);
+	}
+	
 
 }
