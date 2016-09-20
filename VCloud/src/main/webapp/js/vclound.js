@@ -336,11 +336,11 @@ function getNextPath(path, view) {
 	if(path.indexOf("jpg")!=-1||path.indexOf("gif")!=-1||path.indexOf("png")!=-1||path.indexOf("JPG")!=-1){//说明包含
 		pathName=parseFilePath(path,paths.length-2);
 		$("#shareshow").css({"display":"block"});
-		$("#imgshow").html("").append('<img src="/VCloud/sources/'+pathName+'">');
+		$("#imgshow").html("").append('<img src="/VCloud/sources/'+pathName+'" style="width: 700px;height: 580px;float: left;overflow: hidden;">');
 	}else if(path.indexOf("mpg")!=-1||path.indexOf("mp4")!=-1||path.indexOf("avi")!=-1){
-		pathName=parseFilePath(path,paths.length);
+		pathName=parseFilePath(path,paths.length-2);
 		$("#shareshow").css({"display":"block"});
-		$("#imgshow").html("").append('<video src=".../sources/'+pathName+'" width="auto" height="auto" controls autoplay loop><source type=video/mp4 /> Your browser does not support the video tag. </video>');
+		//$("#imgshow").html("").append('<video src="/VCloud/sources/'+pathName+'" width="auto" height="auto" controls autoplay loop><source type=video/mp4 /> Your browser does not support the video tag. </video>');
 		}else if(path.indexOf(".")!=-1){
 		alert("此类文件需安装VCloud管家!!!");
 	}
@@ -408,6 +408,9 @@ function getNextPath(path, view) {
 								str += '<div class="text"><div class="dir-tables fileicon-tables-png"></div>';
 								break;
 							case "jpg":
+								str += '<div class="text"><div class="dir-tables fileicon-tables-png"></div>';
+								break;
+							case "JPG":
 								str += '<div class="text"><div class="dir-tables fileicon-tables-png"></div>';
 								break;
 							case "txt":
@@ -581,6 +584,9 @@ function init() {
 				case "jpg":
 					str += '<div class="text"><div class="dir-tables fileicon-tables-png"></div>';
 					break;
+				case "JPG":
+					str += '<div class="text"><div class="dir-tables fileicon-tables-png"></div>';
+					break;
 				case "txt":
 					str += '<div class="text"><div class="dir-tables fileicon-tables-txt"></div>';
 					break;
@@ -720,6 +726,9 @@ function upFileLoad() {
 						case "jpg":
 							str += '<div class="text"><div class="dir-tables fileicon-tables-png"></div>';
 							break;
+						case "JPG":
+							str += '<div class="text"><div class="dir-tables fileicon-tables-png"></div>';
+							break;
 						case "txt":
 							str += '<div class="text"><div class="dir-tables fileicon-tables-txt"></div>';
 							break;
@@ -753,7 +762,7 @@ function upFileLoad() {
 							+ data[i].uploaddate + '</li></dd>';
 				}
 				pass[i] = path;
-			pathDataAdd(nextpath+$("#h5Input0").val(),date,data.filesize,0);
+				pathDataAdd(nextpath+$("#h5Input0").val(),date,data.filesize,0);
 			if(nextpath == "/"){
 				init();
 			}else{

@@ -135,18 +135,36 @@ public class VCUloadFileHandler {
 							filename, "0");
 				}
 				vCUploadFileService.uploadFile(file);
-				boolean flag = vCUploadFileService.uploadFile(file);
-				List<VCUploadFile> wangFile=vCUploadFileService.getAllFileWang(user.getUserid(),nextpath+ filename);
-				session.setAttribute(SessionAttribute.FILESESSION, wangFile);
-				Gson gson=new Gson();
-				out.print(gson.toJson(wangFile));
-				out.flush();
-				out.close();
-				if (flag) {
-					long endTime = System.currentTimeMillis();
-					System.out.println("运行时间：" + String.valueOf(endTime - startTime) + "ms");
-					return "Person_VCloud";
-				}
+			}
+			VCUser user = (VCUser) session.getAttribute(SessionAttribute.USERLOGIN);
+			VCUploadFile file = null;
+			if (filename.contains("png") || filename.contains("jpg") || filename.contains("JPG")
+					|| filename.contains("gif")) {
+				file = new VCUploadFile(user.getUserid(), nextpath + filename+"/", length, sdf.format(new Date()), "图片",
+						filename, "0");
+			} else if(filename.contains("doc") || filename.contains("docx") || filename.contains("txt")
+					|| filename.contains("xls")){
+				file = new VCUploadFile(user.getUserid(), nextpath + filename+"/", length, sdf.format(new Date()), "文档",
+						filename, "0");
+			}else if(filename.contains("mp3")  ){
+				file = new VCUploadFile(user.getUserid(), nextpath + filename+"/", length, sdf.format(new Date()), "音乐",
+						filename, "0");
+			}else {
+				file = new VCUploadFile(user.getUserid(), nextpath + filename, length, sdf.format(new Date()), "文件",
+						filename, "0");
+			}
+			vCUploadFileService.uploadFile(file);
+			boolean flag = vCUploadFileService.uploadFile(file);
+			List<VCUploadFile> wangFile=vCUploadFileService.getAllFileWang(user.getUserid(),nextpath+ filename);
+			session.setAttribute(SessionAttribute.FILESESSION, wangFile);
+			Gson gson=new Gson();
+			out.print(gson.toJson(wangFile));
+			out.flush();
+			out.close();
+			if (flag) {
+				long endTime = System.currentTimeMillis();
+				System.out.println("运行时间：" + String.valueOf(endTime - startTime) + "ms");
+				return "Person_VCloud";
 			}
 		}
 		return null;

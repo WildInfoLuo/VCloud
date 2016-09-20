@@ -239,7 +239,7 @@
 					                </div>
             				<c:forEach items="${photo}" var="item">
             					<c:if test="${item1.uploaddate==item.uploaddate }">
-            						 <img class="img" src="../sources/${item.temp2 }">
+            						 <img class="img" src="/VCloud/sources/${item.temp2 }">
             					</c:if>
 	            			</c:forEach>
 				                </div>
