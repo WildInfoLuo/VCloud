@@ -779,23 +779,44 @@ function upFileLoad() {
 }
 
 
-// 删除文件
+//删除文件
 function deleteFile() {
 	var date = getDate();
-	$.post("uploadFile/delFile", {delpaths:delpaths,date:date}, function(data) {
+	var size = new Array();
+	var i = 0;
+	while(i<delpaths.length){
+		if(delpaths[i] == "" || delpaths[i] == null || delpaths[i]==" "){
+			console.info("i"+i);
+			delpaths.splice(i,1);
+			i=0;
+		}else{
+			i++;
+		}
+	}
+	for(var i = 0;i<delpaths.length;i++){
+		size[i] = getFileSize(delpaths[i]);
+	}
+	$.post("uploadFile/delFile", {delpaths:delpaths,date:date,size:size}, function(data) {
 		if(data){
-			pathDataDel(delpaths);
-			console.info(delpaths);
-			init();
-			var a = getFileNames();
-			checked2 = 0;
-			for (var i = 0; i < a.length; i++) {
-				tcheckIcon[i] = false;
+			var i = 0;
+			while(i<delpaths.length){
+				if(delpaths[i] == "" || delpaths[i] == null || delpaths[i]==" "){
+					console.info("i"+i);
+					delpaths.splice(i,1);
+					i=0;
+				}else{
+					i++;
+				}
 			}
+			pathDataDel(delpaths);
+			init();
+			var a = getMaxNum();
+			checked2 = 0;
+			tcheckIcon.length = 0;
+			delpaths=new Array();
 			filenameIcon(-1);
 			$("#returnsure").css({"display":"none"});
 			$("#bg").css({"display":"none"});
-			delpaths.length = 0;
 		}
 	});
 }

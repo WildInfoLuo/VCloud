@@ -468,6 +468,7 @@ public class VCUloadFileHandler {
 	}
 
 	// 删除文件的方法
+	@ResponseBody
 	@RequestMapping(value = "/delFile", method = RequestMethod.POST)
 	public String delFiles(@RequestParam(value = "delpaths[]") String[] delpaths,
 			@RequestParam(value = "date") String date,@RequestParam(value = "size[]") int[] size, PrintWriter out, HttpSession session) {
