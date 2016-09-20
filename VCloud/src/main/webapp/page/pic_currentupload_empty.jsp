@@ -160,7 +160,7 @@
         </ul>
         <div class="item-separator" style="display: block;"></div>
             <ul class="bottom-button-container">
-                <a class="g-button" href="/disk/recyclebin" data-button-index="9" data-button-id="b5" style="">
+                <a class="g-button" href="page/backstore.jsp" data-button-index="9" data-button-id="b5" style="">
                     <span class="g-button-right">
                         <em class="icon-aside-recyclebin" title="回收站"></em>
                         <span class="text" style="width: auto;">回收站</span>

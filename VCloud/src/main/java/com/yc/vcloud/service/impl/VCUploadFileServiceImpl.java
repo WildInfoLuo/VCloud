@@ -81,8 +81,8 @@ public class VCUploadFileServiceImpl implements VCUploadFileService {
 	}
 
 	@Override
-	public boolean insertRecyle(String filepath, String date,int userid) {
-		return vCUploadFileMapper.insertRecyle(filepath, date,userid);
+	public boolean insertRecyle(String filepath, String date,int userid, int temp2) {
+		return vCUploadFileMapper.insertRecyle(filepath, date,userid,temp2);
 	}
 	
 	public String surePwd(VCShareFile file) {

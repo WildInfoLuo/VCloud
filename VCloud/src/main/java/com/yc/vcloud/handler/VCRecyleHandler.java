@@ -29,11 +29,11 @@ public class VCRecyleHandler {
 	
 	@RequestMapping("/getAllRecyles")
 	public String getAll(HttpSession session,PrintWriter out){
-		System.out.println("in");
 		VCUser user = (VCUser)session.getAttribute(SessionAttribute.USERLOGIN);
 		List<VCRecyle> list = vCRecyleService.getUserRecyle(user.getUserid());
 		Gson gs = new Gson();
 		String rs = gs.toJson(list);
+		System.out.println("recyle===>"+rs);
 		out.println(rs);
 		out.flush();
 		out.close();

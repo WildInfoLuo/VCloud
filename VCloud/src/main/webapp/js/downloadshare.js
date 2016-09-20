@@ -558,6 +558,9 @@ function getNextPath(path, view) {
 							case "zip":
 								str+='<div class="text"><div class="dir-tables fileicon-tables-zip"></div>';
 								break;
+							case "mp3":
+								str += '<div class="text"><div class="dir-tables fileicon-tables-music"></div>';
+								break;
 							default:
 								str+='<div class="fileicon"></div>'
 									+ '<div class="text"><div class="filenameicon"></div>';
@@ -712,6 +715,9 @@ function init() {
 					break;
 				case "zip":
 					str += '<div class="text"><div class="dir-tables fileicon-tables-zip"></div>';
+					break;
+				case "mp3":
+					str += '<div class="text"><div class="dir-tables fileicon-tables-music"></div>';
 					break;
 				default:
 					str += '<div class="fileicon"></div>'
@@ -876,3 +882,18 @@ $(function(){
 		 }
 	 });
 });
+
+//下载文件
+function downloadFile(){
+	$("#download").css({"display":"block"});
+	$.post("uploadFile/downloadFile",{delpaths:delpaths},function(data) {
+		checked2 = 0;
+		for (var i = 0; i < length; i++) {
+			tcheckIcon[i] = false;
+		}
+		filenameIcon(-1);
+		delpaths.length = 0;
+		$("#download").css({"display":"none"});
+		alert("下载完成!");
+	}, "json");
+}

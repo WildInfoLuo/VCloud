@@ -72,8 +72,15 @@
 		</div>
 		<div id="navbar_right">
 			<ul>
-				<li style="width: 120px;"><a>用户名</a></li>
-				<li><a href="#">注销</a></li>
+				<li style="width:120px;">
+					<c:if test="${userLogin != null }">
+						<a>${userLogin.uname }，您好</a>
+					</c:if>
+					<c:if test="${userLogin == null }">
+	 					<a href="page/login.jsp">未登录</a>
+					</c:if>
+				</li>
+				<li><a href="user/logout">注销</a></li>
 				<li><a href="#">通知</a></li>
 				<li><a href="#">更多>></a></li>
 			</ul>
@@ -134,7 +141,7 @@
 		</ul>
 		<div class="item-separator" style="display: block;"></div>
 		<ul class="middle-button-container">
-			<a class="g-button" href="/share/manage" data-button-index="8"
+			<a class="g-button" href="page/share.jsp" data-button-index="8"
 				data-button-id="b1" style=""> <span class="g-button-right">
 					<em class="icon-aside-share" title="我的分享"></em> <span class="text"
 					style="width: auto;">我的分享</span>
@@ -149,7 +156,7 @@
 		</ul>
 		<div class="item-separator" style="display: block;"></div>
 		<ul class="bottom-button-container">
-			<a class="g-button" href="/disk/recyclebin" data-button-index="9"
+			<a class="g-button" href="page/backstore.jsp" data-button-index="9"
 				data-button-id="b5" style=""> <span class="g-button-right">
 					<em class="icon-aside-recyclebin" title="回收站"></em> <span
 					class="text" style="width: auto;">回收站</span>

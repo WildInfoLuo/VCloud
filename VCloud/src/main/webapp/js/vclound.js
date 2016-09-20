@@ -371,11 +371,11 @@ function getNextPath(path, view) {
 	var ps = new Array();
 	for (var i = 0; i < pathData.length; i++) {
 		paths = pathData[i].filepath.split("/");
-		paths.splice(paths.length-1,1);
+//		paths.splice(paths.length-1,1);
 		if (pathData[i].filepath.indexOf(path) == 0) {
 			if ((num + 1 ) < paths.length && paths.length > 1) {
 				if (view == 1) {
-					if ($.inArray(paths[num + 1], ps) == -1) {
+					if ($.inArray(paths[num + 1], ps) == -1 && paths[num + 1]!="") {
 						var filesize = getFileSize(nextpath+paths[num+1]+"/");
 						str += '<dd class="open-enable">'
 								+ '<li class="file-name" style="width: 60%;"><span '
@@ -440,7 +440,7 @@ function getNextPath(path, view) {
 						str += '<a class="filename" id="a' + (i + 1)
 								+ '" style="padding-left: 6px;"'
 								+ 'href="javascript:getNextPath(' + '\'' + path
-								+ paths[num + 1] + '/\',' + 1 + ')" title='
+								+ paths[num + 1]+ '/\',' + 1 + ')" title='
 								+ paths[num + 1] + '>' + paths[num + 1]
 								+ '</a></div></li>'
 								+ '<li class="file-size" style="width: 16%;">'
@@ -919,31 +919,42 @@ function showperson(){
 
 //复制链接到粘贴板中
 function copypublicpath(){
-	$("#copypath").zclip({
-		path: "ZeroClipboard.swf", 
-		copy: function(){
-			return $("#publicpath-text").val();
-		},
-		afterCopy: function(){ //复制成功
-	       alert('复制成功');
-	    }
-	});
+	checked2 = 0;
+	for (var i = 0; i < length; i++) {
+		tcheckIcon[i] = false;
+	}
+	filenameIcon(-1);
+	delpaths.length = 0;
+	$("#publicsuc").css({"display":"none"});
+	$("#bg").css({"display":"none"});
+	alert('复制成功');
 }
 
 //生成提取码及复制
 function copypersonpath(){
-	var pwd=$("#personpwd").val();
-	var text = $("#personpath-text").val();
-	var str=text+","+pwd;
-	$("#copypath2").zclip({
-		path: "ZeroClipboard.swf", 
-		copy: function(){
-			return str;
-		},
-		afterCopy: function(){ //复制成功
-	       alert('复制成功');
-	    }
-	});
+	 var clip1 = new ZeroClipboard($("#copypath2"));
+	 clip1.on('ready', function (event) {
+		 
+		 clip1.on('copy', function (event) {
+	        event.clipboardData.setData('text/plain',$("#personpath-text").val()+','+$("#personpwd").val());
+	        checked2 = 0;
+	    	for (var i = 0; i < length; i++) {
+	    		tcheckIcon[i] = false;
+	    	}
+	    	filenameIcon(-1);
+	    	delpaths.length = 0;
+	    	$("#personsuc").css({"display":"none"});
+	    	$("#bg").css({"display":"none"});
+	        alert("复制成功");
+	      });
+	 
+	    });
+	 
+	 clip1.on('error', function (event) {
+	      //出错的时候该干嘛
+	      // console.log( 'ZeroClipboard error of type "' + event.name + '": ' + event.message );
+	      ZeroClipboard.destroy();
+	    });
 } 
 
 //获取文件大小

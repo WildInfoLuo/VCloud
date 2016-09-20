@@ -22,6 +22,7 @@
 <script type="text/javascript" src="js/index.js"></script>
 
 <script type="text/javascript" src="js/gizmoMenu.js"></script>
+<script type="text/javascript" src="js/ZeroClipboard.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
 		$('.container').gizmoMenu({
@@ -35,6 +36,8 @@
 		$('#horizontal_example').gizmoMenu({
 			'menu' : 'gizmoHorizontal'
 		});
+		  var clip = new ZeroClipboard($("#copypath"));
+		 
 	});
 </script>
 </head>
@@ -168,7 +171,7 @@
 		</ul>
 		<div class="item-separator" style="display: block;"></div>
 		<ul class="bottom-button-container">
-			<a class="g-button" href="backstore.jsp" data-button-index="9"
+			<a class="g-button" href="page/backstore.jsp" data-button-index="9"
 				data-button-id="b5" style=""> <span class="g-button-right">
 					<em class="icon-aside-recyclebin" title="回收站"></em> <span
 					class="text" style="width: auto;">回收站</span>
@@ -335,7 +338,7 @@
 		<span style="color: rgb(49,173,238);font-size:18px;font-family:monospace;margin-left:10px;margin-top:20px;display: inline-block;">成功创建公开链接</span>
 		<div>
 			<br><input id="publicpath-text" type="text" value="" readonly="readonly" style="width:380px;height:30px;margin-top:10px;margin-left:10px;"/>
-			<a id="copypath" onclick="copypublicpath()"></a>  <br>
+			<a id="copypath" data-clipboard-target="publicpath-text" onclick="copypublicpath()"></a>  <br>
 			<span style="margin-left:10px;font-size:14px;font-family: cursive;margin-top:10px;display: inline-block;">
 			 1.生成文件下载链接</span> <br>
 			 <span style="margin-left:10px;font-size:14px;font-family: cursive;margin-top:8px;display: inline-block;">
@@ -354,7 +357,7 @@
 				提取密码
 			</span>
 			<br><input id="personpwd" type="text" readonly="readonly" style="width:83px;height:28px;margin-top:10px;margin-left:10px;"/>
-			<a id="copypath2" onclick="copypersonpath()"></a>  <br>
+			<a id="copypath2"  onclick="copypersonpath()"></a>  <br>
 			<span style="margin-left:10px;font-size:14px;font-family: cursive;margin-top:10px;display: inline-block;">
 				可以将链接发送给你的QQ好友等
 			</span>
@@ -370,6 +373,6 @@
 	<div id="shareshow">
 		<img id="close" src="images/close.png" onclick="closeShare()">
 		<div id="imgshow" style="width: 720px;height: 600px;float: left;overflow: hidden;"></div>
-	</div>
+	</div> 
 </body>
 </html>
