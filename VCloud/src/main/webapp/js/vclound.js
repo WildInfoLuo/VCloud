@@ -1,6 +1,10 @@
 var pathData = null;
 var nextpath = "";
 var newDirArr = new Array();
+var tcheckIcon = new Array();
+var checked2 = 0;
+var delpaths = new Array();
+var length = 0;
 $(function() {
 	/* 设置在初始化的时候将块隐藏 */
 	$(".list-header-operatearea").hide();
@@ -221,10 +225,7 @@ function lastColicon() {
 }
 
 // 选择文件
-var tcheckIcon = new Array();
-var checked2 = 0;
-var delpaths = new Array();
-var length = 0;
+
 function filenameIcon(id) {
 	var divcss1 = {// 未选中
 		background : "rgba(0, 0, 0, 0) url('images/list-view_4e60b0c.png') no-repeat  scroll -9px -12px",
@@ -286,9 +287,8 @@ function filenameIcon(id) {
 	for (var i = 0; i <= l; i++) {
 		if (tcheckIcon[a[i]] == true) {
 			checked++;
-			delpaths[i] = path + $("#a" + a[i] + "").html()+"/";
-			console.info(a[i]);
 			console.info(delpaths[i]);
+			delpaths[i] = path + $("#a" + a[i] + "").html()+"/";
 			$(".textCla").hide();
 			$(".list-header-operatearea").show();
 			$(".check-icon" + a[i]).css(divcss2);
@@ -329,6 +329,7 @@ function parseFilePath(filePath, num) {
 }
 // 获取下一级路径
 function getNextPath(path, view) {
+	alert(path);
 	var pathName;//文件名
 	var paths = new Array();
 	paths = path.split("/");
@@ -359,21 +360,14 @@ function getNextPath(path, view) {
 			num++;
 		}
 	}
-	if(nums[num].indexOf(".")!=-1){
-		for (var i = 0; i < pathData.length; i++) {
-			if(pathData[i].filepath == path && pathData[i].isdir == 0){
-				return;
-			}
-		}
-	}
 	var paths = new Array();
 	var str = "";
 	var ps = new Array();
 	for (var i = 0; i < pathData.length; i++) {
-		paths = pathData[i].filepath.split("/");
-		paths.splice(paths.length-1,1);
 		if (pathData[i].filepath.indexOf(path) == 0) {
-			if ((num + 1 ) < paths.length && paths.length > 1) {
+			paths = pathData[i].filepath.split("/");	
+			paths.splice(paths.length-1,1);
+			if ((num + 1 ) < paths.length && paths.length > 1){
 				if (view == 1) {
 					if ($.inArray(paths[num + 1], ps) == -1) {
 						var filesize = getFileSize(nextpath+paths[num+1]+"/");
@@ -442,12 +436,7 @@ function getNextPath(path, view) {
 								+ pathData[i].uploaddate + '</li></dd>';
 						ps[i] = paths[num + 1];
 					}
-					var up = '<a style="color:blue;" href="javascript:retrunPre('
-							+ '\'/'
-							+ paths[num - 1]
-							+ '/\','
-							+ 1
-							+ ')">返回上一级</a>';
+					var up = '<a style="color:blue;" href="javascript:retrunPre('+'\''+nextpath+'\''+','+'\'/'+paths[num-1]+'/\''+','+1+')">返回上一级</a>';
 					up += "<span id='path'>" + nextpath.replace(/\//gm, ">")
 							+ "</span>";
 					$(".list-view").html("").append($(str));
@@ -489,12 +478,7 @@ function getNextPath(path, view) {
 								+ paths[num + 1] + '</a>' + '</div>' + '</div>';
 					}
 					ps[i] = paths[num + 1];
-					var up = '<a style="color:blue;" href="javascript:retrunPre('
-							+ '\'/'
-							+ paths[num - 1]
-							+ '/\','
-							+ 2
-							+ ')">返回上一级</a>';
+					var up = '<a style="color:blue;" href="javascript:retrunPre('+'\''+nextpath+'\''+','+'\'/'+paths[num-1]+'/\''+','+1+')">返回上一级</a>';
 					up += "<span id='path'>" + path.replace(/\//gm, ">")
 							+ "</span>";
 					$(".g-clearfix").html("").append($(str));
@@ -530,8 +514,7 @@ function getFileNames() {
 }
 
 // 返回上一级
-function retrunPre(path, view) {
-	alert(path);
+function retrunPre(nextpath,path, view) {
 	if ($(".module-edit-name") != undefined) {
 		$(".module-edit-name").hide();
 	}
@@ -542,7 +525,150 @@ function retrunPre(path, view) {
 		initView();
 		$(".history-list-dir").html("").html("<span>全部文件</span>");
 	} else {
-		getNextPath(path, view);
+		var pathName;//文件名
+		var paths = new Array();
+		paths = nextpath.split("/");
+		checked2 = 0;
+		for (var i = 0; i < length; i++) {
+			tcheckIcon[i] = false;
+		}
+		filenameIcon(-1);
+		delpaths.length = 0;
+		var nums = new Array();
+		nums = path.split("/");
+		var num = 0;
+		for (var i = 0; i < nums.length; i++) {
+			if (nums[i] != null && nums[i] != "") {
+				num++;
+			}
+		}
+		var paths = new Array();
+		var str = "";
+		var ps = new Array();
+		for (var i = 0; i < pathData.length; i++) {
+			if (pathData[i].filepath.indexOf(nextpath) == 0) {
+				paths = pathData[i].filepath.split("/");	
+				paths.splice(paths.length-1,1);
+				if ((num + 1 ) < paths.length && paths.length > 1){
+					if (view == 1) {
+						if ($.inArray(paths[num + 1], ps) == -1) {
+							var filesize = getFileSize(nextpath+paths[num+1]+"/");
+							str += '<dd class="open-enable">'
+									+ '<li class="file-name" style="width: 60%;"><span '
+									+ 'class="check-icon'
+									+ (i + 1)
+									+ '" onclick="filenameIcon('
+									+ (i + 1)
+									+ ')"'
+									+ 'style="background: rgba(0, 0, 0, 0) url(images/list-view_4e60b0c.png) no-repeat scroll -9px -12px;height: 14px; left: 11px; width: 14px; top: 20px; margin: 15px 10px; float: left;"></span>'
+									+ '<div class="fileicon"></div>';
+							if (paths[num+1].lastIndexOf(".") != -1) {
+								switch (paths[num + 1].substr(paths[num + 1]
+										.lastIndexOf(".") + 1)) {
+								case "doc":
+									str += '<div class="text"><div class="dir-tables fileicon-tables-doc"></div>';
+									break;
+								case "docx":
+									str += '<div class="text"><div class="dir-tables fileicon-tables-doc"></div>';
+									break;
+								case "xls":
+									str += '<div class="text"><div class="dir-tables fileicon-tables-xls"></div>';
+									break;
+								case "xlsx":
+									str += '<div class="text"><div class="dir-tables fileicon-tables-xls"></div>';
+									break;
+								case "png":
+									str += '<div class="text"><div class="dir-tables fileicon-tables-png"></div>';
+									break;
+								case "gif":
+									str += '<div class="text"><div class="dir-tables fileicon-tables-png"></div>';
+									break;
+								case "jpg":
+									str += '<div class="text"><div class="dir-tables fileicon-tables-png"></div>';
+									break;
+								case "txt":
+									str += '<div class="text"><div class="dir-tables fileicon-tables-txt"></div>';
+									break;
+								case "mp4":
+									str += '<div class="text"><div class="dir-tables fileicon-tables-mp4"></div>';
+									break;
+								case "mpg":
+									str += '<div class="text"><div class="dir-tables fileicon-tables-mp4"></div>';
+									break;
+								case "zip":
+									str += '<div class="text"><div class="dir-tables fileicon-tables-zip"></div>';
+									break;
+								default:
+									str += '<div class="fileicon"></div>'
+											+ '<div class="text"><div class="filenameicon"></div>';
+									break;
+								}
+							} else {
+								str += '<div class="fileicon"></div>'
+										+ '<div class="text"><div class="filenameicon"></div>';
+							}
+							str += '<a class="filename" id="a' + (i + 1)
+									+ '" style="padding-left: 6px;"'
+									+ 'href="javascript:getNextPath(' + '\'' + path
+									+ paths[num + 1] + '/\',' + 1 + ')" title='
+									+ paths[num + 1] + '>' + paths[num + 1]
+									+ '</a></div></li>'
+									+ '<li class="file-size" style="width: 16%;">'
+									+ filesize + 'KB</li>' + '<li>'
+									+ pathData[i].uploaddate + '</li></dd>';
+							ps[i] = paths[num + 1];
+						}
+						var up = '<a style="color:blue;" href="javascript:retrunPre('+'\''+nextpath+'\''+','+'\'/'+paths[num-1]+'/\''+','+1+')">返回上一级</a>';
+						up += "<span id='path'>" + nextpath.substr(0,(nextpath.lastIndexOf("/")-paths[num+1].length)).replace(/\//gm, ">")
+								+ "</span>";
+						$(".list-view").html("").append($(str));
+						$(".history-list-dir").html("").html($(up));
+					} else if (view == 2) {
+						if ($.inArray(paths[num + 1], ps) == -1) {
+							str += '<div class="grid-view-item1"'
+									+ 'style="display: block; height: 122px; margin: 4px 4px 0 0; text-align: center; width: 142px; float: left;"'
+									+ 'onclick="filenameIcon(1)">';
+							if (paths[num + 1].lastIndexOf(".") != -1) {
+								switch (paths[num + 1].substr(paths[num + 1]
+										.lastIndexOf(".") + 1)) {
+								case "doc":
+									str += '<div class="dir-large fileicon-large-doc" title="">'
+											+ '<img class="thumb"> <span class="checkbox"></span>'
+											+ '</div>';
+									break;
+								case "xls":
+									str += '<div class="dir-large fileicon-large-xls" title="">'
+											+ '<img class="thumb"> <span class="checkbox"></span>'
+											+ '</div>';
+									break;
+								default:
+									str += '<div class="dir-large" title="">'
+											+ '<img class="thumb"> <span class="checkbox"></span>'
+											+ '</div>';
+									break;
+								}
+							} else {
+								str += '<div class="dir-large" title="">'
+										+ '<img class="thumb"> <span class="checkbox"></span>'
+										+ '</div>';
+							}
+							str += '<div class="file-name">'
+									+ '<a class="filename"  id="a' + (i + 1)
+									+ '" title=' + paths[num + 1]
+									+ ' href="javascript:getNextPath(' + '\''
+									+ path + paths[num + 1] + '/\',' + 2 + ')"">'
+									+ paths[num + 1] + '</a>' + '</div>' + '</div>';
+						}
+						ps[i] = paths[num + 1];
+						var up = '<a style="color:blue;" href="javascript:retrunPre('+'\''+nextpath+'\''+','+'\'/'+paths[num-1]+'/\''+','+1+')">返回上一级</a>';
+						up += "<span id='path'>" + path.replace(/\//gm, ">")
+								+ "</span>";
+						$(".g-clearfix").html("").append($(str));
+						$(".history-list-dir").html("").html($(up));
+					}
+				}
+			}
+		}
 	}
 	var a = getFileNames();
 	checked2 = 0;
@@ -694,10 +820,15 @@ function upFileLoad() {
 		fileElementId : "h5Input0",
 		dataType : 'json',
 		success : function(data, status) {
-			pathDataAdd(nextpath+$("#h5Input0").val(),date,data.filesize,0);
+			$.each(data,function(index,item){
+				pathDataAdd(item.filepath,date,item.filesize,0);
+			})
+			
 			if(nextpath == "/"){
 				init();
 			}else{
+				alert(nextpath);
+				console.info(pathData);
 				getNextPath(nextpath,1);
 			}
 		},
@@ -711,25 +842,46 @@ function upFileLoad() {
 // 删除文件
 function deleteFile() {
 	var date = getDate();
-	$.post("uploadFile/delFile", {delpaths:delpaths,date:date}, function(data) {
+	var size = new Array();
+	var i = 0;
+	while(i<delpaths.length){
+		if(delpaths[i] == "" || delpaths[i] == null || delpaths[i]==" "){
+			console.info("i"+i);
+			delpaths.splice(i,1);
+			i=0;
+		}else{
+			i++;
+		}
+	}
+	for(var i = 0;i<delpaths.length;i++){
+		size[i] = getFileSize(delpaths[i]);
+	}
+	$.post("uploadFile/delFile", {delpaths:delpaths,date:date,size:size}, function(data) {
 		if(data){
-			pathDataDel(delpaths);
-			console.info(delpaths);
-			init();
-			var a = getFileNames();
-			checked2 = 0;
-			for (var i = 0; i < a.length; i++) {
-				tcheckIcon[i] = false;
+			var i = 0;
+			while(i<delpaths.length){
+				if(delpaths[i] == "" || delpaths[i] == null || delpaths[i]==" "){
+					console.info("i"+i);
+					delpaths.splice(i,1);
+					i=0;
+				}else{
+					i++;
+				}
 			}
+			pathDataDel(delpaths);
+			init();
+			var a = getMaxNum();
+			checked2 = 0;
+			tcheckIcon.length = 0;
+			delpaths=new Array();
 			filenameIcon(-1);
-			delpaths.length = 0;
+			
 		}
 	});
 }
 
 //从pathData中添加元素的方法
 function pathDataAdd(path,date,size,isdir){
-	alert("文件的大小"+size);
 	var arr = new Object();
 	arr.filepath = path;
 	arr.uploaddate = date
@@ -742,13 +894,15 @@ function pathDataAdd(path,date,size,isdir){
 function pathDataDel(path){//上一级路径+当前路径
 	var n = 0;
 	var num = 0;
+	var p = new Array();
 	for(var i = 0;i<path.length;i++){
-		if(path[i] == null || ""==path[i]){
-			path.splice(i, 1);
+		alert(path[i] != undefined);
+		if(path[i] != undefined){
+			p[i] = path[i];
 		}
 	}
 	while(n<pathData.length){
-		if(pathData[n].filepath.indexOf(path[num])==0){
+		if(pathData[n].filepath.indexOf(p[num])==0){
 			pathData.splice(n, 1);
 			num++;
 			n=0;
@@ -759,7 +913,6 @@ function pathDataDel(path){//上一级路径+当前路径
 			return;
 		}
 	}
-	console.info(pathData);
 }
 
 //获取最大的标识数

@@ -49,7 +49,7 @@ public class VCUploadFileServiceImplTest {
 	@Test
 	public void testInsertinsertRecyle() {
 		//VCRecyle vr = new VCRecyle(10041, "2015-06-06 2:3:6","/新建文件夹/");
-		boolean flag = vCUploadFileService.insertRecyle("/新建文件夹/", "2015-06-06 2:3:6",10041);
+		boolean flag = vCUploadFileService.insertRecyle("/新建文件夹/", "2015-06-06 2:3:6",10041,78);
 		System.out.println("===>"+flag);
 		assertEquals(flag, true);
 	}

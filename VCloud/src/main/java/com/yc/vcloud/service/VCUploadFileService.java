@@ -24,7 +24,7 @@ public interface VCUploadFileService {
 	//删除文件夹的方法
 	boolean delFiles(String paths);
 	
-	boolean insertRecyle(String filepath,String date,int userid);
+	boolean insertRecyle(String filepath,String date,int userid, int temp2);
 
 	List<VCUploadFile> getAllDoc(VCUploadFile file);
 

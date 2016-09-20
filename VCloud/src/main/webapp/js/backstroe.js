@@ -22,6 +22,7 @@ $(function(){
 	});
 	$.post("recyle/getAllRecyles",function(data){
 		pathData = data;
+		console.info(data);
 		reinit();
 	},"json");
 });
