@@ -116,7 +116,7 @@
 								<span class="textCla" style="line-height: 43px;">文件名</span> <span
 									class="list-header-operatearea"> <span
 									class="count-tips" style="line-height: 43px;">已选中6个文件/文件夹</span>
-									 <a class="lg-button" href="javascript:void(0);"> <span
+									 <a class="lg-button" href="javascript:downloadFile();"> <span
 										class="lg-button-right"> <em class="icon-download-gray"
 											title="下载"></em> <span class="text" style="width: auto;">下载</span>
 									</span>
@@ -187,6 +187,11 @@
 				class="fa fa-arrow-right"></i><a href="#">新建文件夹</a></li>
 		</ul>
 	</div>
-	
+	<div id="download" >
+		<span style="color: rgb(49,173,238);font-size:18px;font-family:monospace;margin-left:150px;margin-top:20px;display: inline-block; ">文件正在下载中,请等待..</span>
+		<div>
+			<img src="images/wait.gif" style="width: 400px; height: 150px; margin-left: 50px;" >
+		</div>
+	</div>
 </body>
 </html>

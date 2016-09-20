@@ -11,13 +11,7 @@
 <link type="text/css" rel="stylesheet" href="css/index.css">
 <link type="text/css" rel="stylesheet" href="css/share.css">
 <link href="images/云准备.gif" rel="shortcut icon">
-<script src="js/jquery-1.11.3.min.js">
-	
-</script>
-<script src="js/vclound.js"></script>
-<script type="text/javascript" src="js/index.js"></script>
-<script type="text/javascript" src="js/share.js"></script>
-<script type="text/javascript" src="js/ZeroClipboard.js"></script>
+
 </head>
 <body>
 	<div id="navbar">
@@ -148,7 +142,7 @@
 		</ul>
 		<div class="item-separator" style="display: block;"></div>
 		<ul class="bottom-button-container">
-			<a class="g-button" href="/disk/recyclebin" data-button-index="9"
+			<a class="g-button" href="page/backstore.jsp" data-button-index="9"
 				data-button-id="b5" style=""> <span class="g-button-right">
 					<em class="icon-aside-recyclebin" title="回收站"></em> <span
 					class="text" style="width: auto;">回收站</span>
@@ -241,7 +235,7 @@
 		<span style="color: rgb(49,173,238);font-size:18px;font-family:monospace;margin-left:10px;margin-top:20px;display: inline-block;">成功创建公开链接</span>
 		<div>
 			<br><input id="publicpath-text" type="text" readonly="readonly" value="sd" style="width:380px;height:30px;margin-top:10px;margin-left:10px;"/>
-			<a id="copypath"  onclick="copypublicpath()"></a>  <br>
+			<a id="copypath"  data-clipboard-target="publicpath-text"  onclick="copypublicpath()"></a>  <br>
 			<span style="margin-left:10px;font-size:14px;font-family: cursive;margin-top:10px;display: inline-block;">
 			 可以发送给好友:</span> <br>
 			 <span style="margin-left:10px;font-size:14px;font-family: cursive;margin-top:8px;display: inline-block;">
@@ -273,8 +267,13 @@
 		</div>
 	</div>
 	
+<script src="js/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="js/index.js"></script>
+<script type="text/javascript" src="js/share.js"></script>
+<script type="text/javascript" src="js/ZeroClipboard.js"></script>
+<script type="text/javascript">
+		  var clip = new ZeroClipboard($("#copypath"));
+</script>
+
 </body>
-
-<script type="text/javascript" src="js/jquery.zclip.min.js"></script>
-
 </html>

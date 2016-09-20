@@ -876,3 +876,18 @@ $(function(){
 		 }
 	 });
 });
+
+//下载文件
+function downloadFile(){
+	$("#download").css({"display":"block"});
+	$.post("uploadFile/downloadFile",{delpaths:delpaths},function(data) {
+		checked2 = 0;
+		for (var i = 0; i < length; i++) {
+			tcheckIcon[i] = false;
+		}
+		filenameIcon(-1);
+		delpaths.length = 0;
+		$("#download").css({"display":"none"});
+		alert("下载完成!");
+	}, "json");
+}

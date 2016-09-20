@@ -337,7 +337,7 @@ function getNextPath(path, view) {
 	if(path.indexOf("jpg")!=-1||path.indexOf("gif")!=-1||path.indexOf("png")!=-1||path.indexOf("JPG")!=-1){//说明包含
 		pathName=parseFilePath(path,paths.length-2);
 		$("#shareshow").css({"display":"block"});
-		$("#imgshow").html("").append('<img src=".../sources/'+pathName+'">');
+		$("#imgshow").html("").append('<img src="/VCloud/sources/'+pathName+'">');
 	}else if(path.indexOf("mpg")!=-1||path.indexOf("mp4")!=-1||path.indexOf("avi")!=-1){
 		pathName=parseFilePath(path,paths.length);
 		$("#shareshow").css({"display":"block"});
@@ -416,6 +416,9 @@ function getNextPath(path, view) {
 							case "zip":
 								str += '<div class="text"><div class="dir-tables fileicon-tables-zip"></div>';
 								break;
+							case "mp3":
+								str += '<div class="text"><div class="dir-tables fileicon-tables-music"></div>';
+								break;
 							default:
 								str += '<div class="fileicon"></div>'
 										+ '<div class="text"><div class="filenameicon"></div>';
@@ -484,23 +487,7 @@ function getNextPath(path, view) {
 					$(".g-clearfix").html("").append($(str));
 					$(".history-list-dir").html("").html($(up));
 				}
-			}/* else if((num+1) == paths.length){
-				nextpath = path;
-				str = "";
-				var up = '<a style="color:blue;" href="javascript:retrunPre('
-					+ '\'/'
-					+ paths[num - 1]
-					+ '/\','
-					+ 2
-					+ ')">返回上一级</a>';
-				up += "<span id='path'>" + path.replace(/\//gm, ">")
-						+ "</span>";
-				$(".list-view").html("");
-				$(".history-list-dir").html("").html($(up));
-			} else{
-				str = "";
-				$(".list-view").html("");
-			}*/
+			}
 		}
 	}
 }
@@ -733,6 +720,9 @@ function init() {
 				case "zip":
 					str += '<div class="text"><div class="dir-tables fileicon-tables-zip"></div>';
 					break;
+				case "mp3":
+					str += '<div class="text"><div class="dir-tables fileicon-tables-music"></div>';
+					break;
 				default:
 					str += '<div class="fileicon"></div>'
 							+ '<div class="text"><div class="filenameicon"></div>';
@@ -823,13 +813,83 @@ function upFileLoad() {
 			$.each(data,function(index,item){
 				pathDataAdd(item.filepath,date,item.filesize,0);
 			})
-			
+			var str = "";
+			var pass = new Array();
+			for (var i = 0; i < data.length; i++) {
+				var path = parseFilePath(data[i].filepath, 1);
+				if ($.inArray(path, pass) == -1) {//说明数组中有path
+					str += '<dd class="open-enable">'
+							+ '<li class="file-name" style="width: 60%;"><span '
+							+ 'class="check-icon'
+							+ (i + 1)
+							+ '" onclick="filenameIcon('
+							+ (i + 1)
+							+ ')"'
+							+ 'style="background: rgba(0, 0, 0, 0) url(images/list-view_4e60b0c.png) no-repeat scroll -9px -12px;height: 14px; left: 11px; width: 14px; top: 20px; margin: 15px 10px; float: left;"></span>';
+					if (data[i].filepath.indexOf(".") != -1
+							&& data[i].isdir == 0) {
+						switch (path.substr(path.lastIndexOf(".") + 1)) {
+						case "doc":
+							str += '<div class="text"><div class="dir-tables fileicon-tables-doc"></div>';
+							break;
+						case "docx":
+							str += '<div class="text"><div class="dir-tables fileicon-tables-doc"></div>';
+							break;
+						case "xls":
+							str += '<div class="text"><div class="dir-tables fileicon-tables-xls"></div>';
+							break;
+						case "xlsx":
+							str += '<div class="text"><div class="dir-tables fileicon-tables-xls"></div>';
+							break;
+						case "png":
+							str += '<div class="text"><div class="dir-tables fileicon-tables-png"></div>';
+							break;
+						case "gif":
+							str += '<div class="text"><div class="dir-tables fileicon-tables-png"></div>';
+							break;
+						case "jpg":
+							str += '<div class="text"><div class="dir-tables fileicon-tables-png"></div>';
+							break;
+						case "txt":
+							str += '<div class="text"><div class="dir-tables fileicon-tables-txt"></div>';
+							break;
+						case "mp4":
+							str += '<div class="text"><div class="dir-tables fileicon-tables-mp4"></div>';
+							break;
+						case "mpg":
+							str += '<div class="text"><div class="dir-tables fileicon-tables-mp4"></div>';
+							break;
+						case "zip":
+							str += '<div class="text"><div class="dir-tables fileicon-tables-zip"></div>';
+							break;
+						case "mp3":
+							str += '<div class="text"><div class="dir-tables fileicon-tables-music"></div>';
+							break;
+						default:
+							str += '<div class="fileicon"></div>'
+									+ '<div class="text"><div class="filenameicon"></div>';
+							break;
+						}
+					} else {
+						str += '<div class="fileicon"></div>'
+								+ '<div class="text"><div class="filenameicon"></div>';
+					}
+					str += '<a class="filename" id="a' + (i + 1)
+							+ '"  style="padding-left: 6px;"'
+							+ 'href="javascript:getNextPath(' + '\'/' + path + '/\','
+							+ 1 + ')" title=' + data[i].temp2 + '>' + data[i].temp2  + '</a></div></li>'
+							+ '<li class="file-size" style="width: 16%;">'
+							+ data[i].filesize + 'KB</li>' + '<li>'
+							+ data[i].uploaddate + '</li></dd>';
+				}
+				pass[i] = path;
 			if(nextpath == "/"){
 				init();
 			}else{
 				alert(nextpath);
 				console.info(pathData);
 				getNextPath(nextpath,1);
+				}
 			}
 		},
 		error : function(data, status, e) {
@@ -1005,32 +1065,42 @@ function showperson(){
 
 //复制链接到粘贴板中
 function copypublicpath(){
-	/*alert(window.clipboardData.getData("text"));*/
-	$("#copypath").zclip({
-		path: "ZeroClipboard.swf", 
-		copy: function(){
-			return $("#publicpath-text").val();
-		},
-		afterCopy: function(){ //复制成功
-	       alert('复制成功');
-	    }
-	});
+	checked2 = 0;
+	for (var i = 0; i < length; i++) {
+		tcheckIcon[i] = false;
+	}
+	filenameIcon(-1);
+	delpaths.length = 0;
+	$("#publicsuc").css({"display":"none"});
+	$("#bg").css({"display":"none"});
+	alert('复制成功');
 }
 
 //生成提取码及复制
 function copypersonpath(){
-	var pwd=$("#personpwd").val();
-	var text = $("#personpath-text").val();
-	var str=text+","+pwd;
-	$("#copypath2").zclip({
-		path: "ZeroClipboard.swf", 
-		copy: function(){
-			return str;
-		},
-		afterCopy: function(){ //复制成功
-	       alert('复制成功');
-	    }
-	});
+	 var clip1 = new ZeroClipboard($("#copypath2"));
+	 clip1.on('ready', function (event) {
+		 
+		 clip1.on('copy', function (event) {
+	        event.clipboardData.setData('text/plain',$("#personpath-text").val()+','+$("#personpwd").val());
+	        checked2 = 0;
+	    	for (var i = 0; i < length; i++) {
+	    		tcheckIcon[i] = false;
+	    	}
+	    	filenameIcon(-1);
+	    	delpaths.length = 0;
+	    	$("#personsuc").css({"display":"none"});
+	    	$("#bg").css({"display":"none"});
+	        alert("复制成功");
+	      });
+	 
+	    });
+	 
+	 clip1.on('error', function (event) {
+	      //出错的时候该干嘛
+	      // console.log( 'ZeroClipboard error of type "' + event.name + '": ' + event.message );
+	      ZeroClipboard.destroy();
+	    });
 } 
 
 //获取文件大小

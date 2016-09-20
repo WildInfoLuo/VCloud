@@ -13,8 +13,8 @@
 .contain{
 	position:absolute;
 	color: black;
-	bottom: 65px;
 	width:120px;
+	bottom:15%;
 	left:20px;
 }
 .progressbar:before{
@@ -23,7 +23,7 @@
     content:"";
     width:100px;
     height:18px;
-    bottom:40px;
+    bottom:10%;
     left:20px;
 	-webkit-border-radius:20px;
     border-radius:20px;
