@@ -336,7 +336,7 @@ function getNextPath(path, view) {
 	if(path.indexOf("jpg")!=-1||path.indexOf("gif")!=-1||path.indexOf("png")!=-1||path.indexOf("JPG")!=-1){//说明包含
 		pathName=parseFilePath(path,paths.length-2);
 		$("#shareshow").css({"display":"block"});
-		$("#imgshow").html("").append('<img src=".../sources/'+pathName+'">');
+		$("#imgshow").html("").append('<img src="/VCloud/sources/'+pathName+'">');
 	}else if(path.indexOf("mpg")!=-1||path.indexOf("mp4")!=-1||path.indexOf("avi")!=-1){
 		pathName=parseFilePath(path,paths.length);
 		$("#shareshow").css({"display":"block"});
@@ -412,6 +412,9 @@ function getNextPath(path, view) {
 								break;
 							case "zip":
 								str += '<div class="text"><div class="dir-tables fileicon-tables-zip"></div>';
+								break;
+							case "mp3":
+								str += '<div class="text"><div class="dir-tables fileicon-tables-music"></div>';
 								break;
 							default:
 								str += '<div class="fileicon"></div>'
@@ -582,6 +585,9 @@ function init() {
 				case "zip":
 					str += '<div class="text"><div class="dir-tables fileicon-tables-zip"></div>';
 					break;
+				case "mp3":
+					str += '<div class="text"><div class="dir-tables fileicon-tables-music"></div>';
+					break;
 				default:
 					str += '<div class="fileicon"></div>'
 							+ '<div class="text"><div class="filenameicon"></div>';
@@ -668,12 +674,10 @@ function upFileLoad() {
 		fileElementId : "h5Input0",
 		dataType : 'json',
 		success : function(data, status) {
-			alert(JSON.stringify(data));
 			var str = "";
 			var pass = new Array();
 			for (var i = 0; i < data.length; i++) {
 				var path = parseFilePath(data[i].filepath, 1);
-				alert("目前的路径"+path);
 				if ($.inArray(path, pass) == -1) {//说明数组中有path
 					str += '<dd class="open-enable">'
 							+ '<li class="file-name" style="width: 60%;"><span '
@@ -683,10 +687,8 @@ function upFileLoad() {
 							+ (i + 1)
 							+ ')"'
 							+ 'style="background: rgba(0, 0, 0, 0) url(images/list-view_4e60b0c.png) no-repeat scroll -9px -12px;height: 14px; left: 11px; width: 14px; top: 20px; margin: 15px 10px; float: left;"></span>';
-					alert("文件夹////"+data[i].isdir);
 					if (data[i].filepath.indexOf(".") != -1
 							&& data[i].isdir == 0) {
-						alert("进来了判断文件的路径...");
 						switch (path.substr(path.lastIndexOf(".") + 1)) {
 						case "doc":
 							str += '<div class="text"><div class="dir-tables fileicon-tables-doc"></div>';
