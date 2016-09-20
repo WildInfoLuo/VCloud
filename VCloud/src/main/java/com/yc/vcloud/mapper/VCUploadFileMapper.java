@@ -38,7 +38,7 @@ public interface VCUploadFileMapper {
 	
 	List<VCUploadFile> getAllFileWang(@Param("userid")int userid,@Param("filepath")String filepath);
 
-	boolean insertRecyle(@Param("deletepath")String filepath,@Param("deletedate")String date,@Param("userid")int userid);
+	boolean insertRecyle(@Param("deletepath")String filepath,@Param("deletedate")String date,@Param("userid")int userid, @Param("temp2")int temp2);
 	
 	List<VCRecyle> getUserRecyle(int userid);
 	

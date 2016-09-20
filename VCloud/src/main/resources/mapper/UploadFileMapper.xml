@@ -64,12 +64,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 	
 	<insert id="insertRecyle" parameterType="VCRecyle">
-		insert into VCRecyle values(seq_rid.nextval,#{userid},to_date(#{deletedate},'yyyy-mm-dd HH24:MI:ss'),7,#{deletepath},null)
+		insert into VCRecyle values(seq_rid.nextval,#{userid},to_date(#{deletedate},'yyyy-mm-dd HH24:MI:ss'),7,#{deletepath},#{temp2})
 	</insert>
 	
 	<select id="getUserRecyle" parameterType="int" resultType="VCRecyle">
-		select rid,userid,to_char(deletedate,'yyyy-mm-dd HH24:MI:ss') deletedate,lefttime,deletepath from VCRecyle where userid=#{userid}
+		select * from VCRecyle where userid=#{userid}
 	</select>
+	
 	<insert id="shareFile" parameterType="VCShareFile">
 		insert into VCShare values(seq_shareid.nextval,#{userid},#{filepath},#{password},#{temp1},#{temp2})
 	</insert>
@@ -94,7 +95,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id="getAllFileWang" parameterType="VCUploadFile" resultType="VCUploadFile">
 		select ufid,userid,filepath,filesize,to_char(uploaddate,'yyyy-mm-dd HH:MI:ss') uploaddate,filestatus,stoppoingpath,status,isdir,temp1,temp2,rownum
-		 from uploadfile where userid=#{userid} and filepath =#{filepath} and isdir=0  order by uploaddate desc
+		 from uploadfile where userid=#{userid} and filepath like '${filepath}%' and isdir=0  order by uploaddate desc
 	</select>
 	
 	<!-- 查询文件大小 -->

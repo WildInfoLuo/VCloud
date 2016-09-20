@@ -62,6 +62,8 @@ create sequence seq_ufid start with 40001;
 alter table uploadfile add isdel varchar2(10)    --1.删除    0.未删除
 update UPLOADFILE set isdel=0;
 
+
+delete from uploadfile;
 insert into uploadfile values(seq_ufid.nextval,10041,'/我的资/新建文件夹/',564,sysdate,1,null,1,1,null,null,0);
 insert into uploadfile values(seq_ufid.nextval,10041,'/来自百度手机浏览器/hello/hello.doc/',456,sysdate,1,null,1,0,null,null,0);
 insert into uploadfile values(seq_ufid.nextval,10041,'/我的资源/新建文件夹/我的资源/',2342,sysdate,1,null,1,1,null,null,0);
@@ -70,7 +72,7 @@ insert into uploadfile values(seq_ufid.nextval,10041,'/我的资源/新建文件
 insert into uploadfile values(seq_ufid.nextval,10041,'/我的资源.xls/',876,sysdate,1,null,1,0,null,null,0);
 insert into uploadfile values(seq_ufid.nextval,10041,'/我的资源/新建文件夹2/我的资源3.xls/',6789,sysdate,1,null,1,1,null,null,0);
 
-delete from uploadfile;
+
 
 select * from UPLOADFILE;
 
