@@ -885,32 +885,42 @@ function showperson(){
 
 //复制链接到粘贴板中
 function copypublicpath(){
-	/*alert(window.clipboardData.getData("text"));*/
-	$("#copypath").zclip({
-		path: "ZeroClipboard.swf", 
-		copy: function(){
-			return $("#publicpath-text").val();
-		},
-		afterCopy: function(){ //复制成功
-	       alert('复制成功');
-	    }
-	});
+	checked2 = 0;
+	for (var i = 0; i < length; i++) {
+		tcheckIcon[i] = false;
+	}
+	filenameIcon(-1);
+	delpaths.length = 0;
+	$("#publicsuc").css({"display":"none"});
+	$("#bg").css({"display":"none"});
+	alert('复制成功');
 }
 
 //生成提取码及复制
 function copypersonpath(){
-	var pwd=$("#personpwd").val();
-	var text = $("#personpath-text").val();
-	var str=text+","+pwd;
-	$("#copypath2").zclip({
-		path: "ZeroClipboard.swf", 
-		copy: function(){
-			return str;
-		},
-		afterCopy: function(){ //复制成功
-	       alert('复制成功');
-	    }
-	});
+	 var clip1 = new ZeroClipboard($("#copypath2"));
+	 clip1.on('ready', function (event) {
+		 
+		 clip1.on('copy', function (event) {
+	        event.clipboardData.setData('text/plain',$("#personpath-text").val()+','+$("#personpwd").val());
+	        checked2 = 0;
+	    	for (var i = 0; i < length; i++) {
+	    		tcheckIcon[i] = false;
+	    	}
+	    	filenameIcon(-1);
+	    	delpaths.length = 0;
+	    	$("#personsuc").css({"display":"none"});
+	    	$("#bg").css({"display":"none"});
+	        alert("复制成功");
+	      });
+	 
+	    });
+	 
+	 clip1.on('error', function (event) {
+	      //出错的时候该干嘛
+	      // console.log( 'ZeroClipboard error of type "' + event.name + '": ' + event.message );
+	      ZeroClipboard.destroy();
+	    });
 } 
 
 //下载文件

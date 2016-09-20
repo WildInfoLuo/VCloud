@@ -15,10 +15,14 @@
 <script src="js/jquery-1.11.3.min.js">
 	
 </script>
-<script src="js/vclound.js"></script>
 <script type="text/javascript" src="js/index.js"></script>
 <script type="text/javascript" src="js/share.js"></script>
 <script type="text/javascript" src="js/ZeroClipboard.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		  var clip = new ZeroClipboard($("#copypath"));
+	}); 
+</script>
 </head>
 <body>
 	<div id="navbar">
@@ -242,7 +246,7 @@
 		<span style="color: rgb(49,173,238);font-size:18px;font-family:monospace;margin-left:10px;margin-top:20px;display: inline-block;">成功创建公开链接</span>
 		<div>
 			<br><input id="publicpath-text" type="text" readonly="readonly" value="sd" style="width:380px;height:30px;margin-top:10px;margin-left:10px;"/>
-			<a id="copypath"  onclick="copypublicpath()"></a>  <br>
+			<a id="copypath"  data-clipboard-target="publicpath-text"  onclick="copypublicpath()"></a>  <br>
 			<span style="margin-left:10px;font-size:14px;font-family: cursive;margin-top:10px;display: inline-block;">
 			 可以发送给好友:</span> <br>
 			 <span style="margin-left:10px;font-size:14px;font-family: cursive;margin-top:8px;display: inline-block;">
