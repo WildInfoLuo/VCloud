@@ -558,6 +558,9 @@ function getNextPath(path, view) {
 							case "zip":
 								str+='<div class="text"><div class="dir-tables fileicon-tables-zip"></div>';
 								break;
+							case "mp3":
+								str += '<div class="text"><div class="dir-tables fileicon-tables-music"></div>';
+								break;
 							default:
 								str+='<div class="fileicon"></div>'
 									+ '<div class="text"><div class="filenameicon"></div>';
@@ -712,6 +715,9 @@ function init() {
 					break;
 				case "zip":
 					str += '<div class="text"><div class="dir-tables fileicon-tables-zip"></div>';
+					break;
+				case "mp3":
+					str += '<div class="text"><div class="dir-tables fileicon-tables-music"></div>';
 					break;
 				default:
 					str += '<div class="fileicon"></div>'
