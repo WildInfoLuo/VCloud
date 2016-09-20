@@ -726,4 +726,11 @@ a {
 		this.clientHeight )/2 );
 }
 
+#returnsure{display:none;width:500px;min-height:160px;border:3px solid rgb(209,209,211);z-index:200;position: absolute;margin-top:150px;margin-left:460px;background-color: white;z-index:100;position: absolute;}
+#close{width:16px;height:16px;float:right;margin-right:5px;margin-top:11px;cursor:pointer;}
+#shareh3{border-bottom:1px solid rgb(210,210,210);height:40px;line-height:40px;width:100%;color: #333;font-size: 14px;font-weight: 700;text-indent: 1em;background: url("http://s1.pan.bdstatic.com/yun-static/common-cdn/images/dialog/globe-dlg-hd.png?t=1470210528913");}
+#certain{cursor:pointer;width:128px;height:38px;float:left;margin-left:115px;margin-top:40px;background-image: url(../images/resure.png);}
+#cancel{cursor:pointer;width:129px;height:38px;float:left;margin-left:35px;margin-top:40px;background-image: url(../images/recancel.png);}
+#certain:hover{opacity:0.7;}
+#cancel:hover{opacity:0.7;}
 

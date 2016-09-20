@@ -257,7 +257,7 @@
 										class="lg-button-right"> <em class="icon-download-gray"
 											title="下载"></em> <span class="text" style="width: auto;">下载</span>
 									</span>
-								</a> <a class="lg-button" href="javascript:deleteFile();"> <span
+								</a> <a class="lg-button" href="javascript:showRecyle();"> <span
 										class="lg-button-right"> <em class="icon-del-gray"
 											title="删除"></em> <span class="text" style="width: auto;">删除</span>
 									</span>
@@ -369,10 +369,18 @@
 			<img src="images/wait.gif" style="width: 400px; height: 150px; margin-left: 50px;" >
 		</div>
 	</div>
+	
+	<div id="returnsure">
+		<h3 id="shareh3">确认删除<img id="close" src="images/close.png" onclick="closeShare()"></h3>
+		<span style="display: block; text-align: center;margin-left:185px; margin-top:20px;position: absolute;">确认还原选中的文件??</span>
+		<br/><div id="certain" onclick="deleteFile()"></div>
+		<div id="cancel" onclick="closeShare()"></div>
+	</div>
+	
 	<!-- 显示图片 -->
 	<div id="shareshow">
 		<img id="close" src="images/close.png" onclick="closeShare()">
 		<div id="imgshow" style="width: 720px;height: 600px;float: left;overflow: hidden;"></div>
-	</div> 
+	</div>
 </body>
 </html>
