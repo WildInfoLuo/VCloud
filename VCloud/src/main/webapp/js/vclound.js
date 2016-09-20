@@ -503,23 +503,7 @@ function getNextPath(path, view) {
 					$(".g-clearfix").html("").append($(str));
 					$(".history-list-dir").html("").html($(up));
 				}
-			}/* else if((num+1) == paths.length){
-				nextpath = path;
-				str = "";
-				var up = '<a style="color:blue;" href="javascript:retrunPre('
-					+ '\'/'
-					+ paths[num - 1]
-					+ '/\','
-					+ 2
-					+ ')">返回上一级</a>';
-				up += "<span id='path'>" + path.replace(/\//gm, ">")
-						+ "</span>";
-				$(".list-view").html("");
-				$(".history-list-dir").html("").html($(up));
-			} else{
-				str = "";
-				$(".list-view").html("");
-			}*/
+			}
 		}
 	}
 }
@@ -534,7 +518,6 @@ function getFileNames() {
 
 // 返回上一级
 function retrunPre(path, view) {
-	alert(path);
 	if ($(".module-edit-name") != undefined) {
 		$(".module-edit-name").hide();
 	}
@@ -806,7 +789,6 @@ function deleteFile() {
 
 //从pathData中添加元素的方法
 function pathDataAdd(path,date,size,isdir){
-	alert("文件的大小"+size);
 	var arr = new Object();
 	arr.filepath = path;
 	arr.uploaddate = date
@@ -836,7 +818,6 @@ function pathDataDel(path){//上一级路径+当前路径
 			return;
 		}
 	}
-	console.info(pathData);
 }
 
 //获取最大的标识数
@@ -929,7 +910,6 @@ function showperson(){
 
 //复制链接到粘贴板中
 function copypublicpath(){
-	/*alert(window.clipboardData.getData("text"));*/
 	$("#copypath").zclip({
 		path: "ZeroClipboard.swf", 
 		copy: function(){

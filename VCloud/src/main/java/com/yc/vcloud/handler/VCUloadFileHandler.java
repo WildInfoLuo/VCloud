@@ -72,7 +72,6 @@ public class VCUloadFileHandler {
 	public String addDir(@RequestParam String name, @PathVariable String date, HttpSession session, PrintWriter out) {
 		VCUser user = (VCUser) session.getAttribute(SessionAttribute.USERLOGIN);
 		String n = "/" + name + "/";
-		System.out.println("===>" + n);
 		VCUploadFile file = new VCUploadFile(user.getUserid(), n, date);
 		boolean flag = vCUploadFileService.insertDir(file);
 		out.print(flag);
@@ -237,7 +236,6 @@ public class VCUloadFileHandler {
 					filename = multipartFile.getOriginalFilename();
 					String path = request.getServletContext().getRealPath("/") + uploadpath
 							+ multipartFile.getOriginalFilename();
-					System.out.println("path12" + path);
 					// 上传
 					File f = new File(path);
 					multipartFile.transferTo(f);
@@ -294,7 +292,6 @@ public class VCUloadFileHandler {
 					multipartFile.transferTo(f);
 					length = (int) (f.length() / 1024);
 				}
-				System.out.println(multipartFile.getOriginalFilename());
 				VCUploadFile file = new VCUploadFile(user.getUserid(), "/我的资源/新建文件夹/" + filename+"/", length,
 						sbf.format(new Date()), "音乐", filename,"0");
 				 vCUploadFileService.uploadFile(file);
@@ -400,7 +397,6 @@ public class VCUloadFileHandler {
 			out.println(1);
 			out.flush();
 			out.close();
-			// return "downloadshare";
 		} else {
 			List<VCUploadFile> files = vCUploadFileService.findShareFile(file);
 			Gson gs = new Gson();
@@ -408,7 +404,6 @@ public class VCUloadFileHandler {
 			out.println(fileStr);
 			out.flush();
 			out.close();
-			// return "downloadshare";
 		}
 
 	}
@@ -506,7 +501,6 @@ public class VCUloadFileHandler {
 				}
 			}
 		}
-		
 		out.println(1);
 		out.flush();
 		out.close();
