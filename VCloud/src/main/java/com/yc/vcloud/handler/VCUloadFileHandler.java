@@ -502,7 +502,7 @@ public class VCUloadFileHandler {
 	
 	@RequestMapping(value="/downloadFile",method=RequestMethod.POST)
 	public void downloadFile(@RequestParam(value="delpaths[]")  String[] delpaths,HttpSession session,HttpServletRequest request,PrintWriter out){
-		String basePath=request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+request.getContextPath()+"/../sources/";
+		String basePath=request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+request.getContextPath()+"/sources/";
 		
 		for(String str:delpaths){
 			if(str!=""){

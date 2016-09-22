@@ -21,6 +21,7 @@
 <script src="js/ajaxfileupload.js"></script>
 <script type="text/javascript" src="js/index.js"></script>
 
+
 <script type="text/javascript" src="js/gizmoMenu.js"></script>
 <script type="text/javascript" src="js/ZeroClipboard.js"></script>
 <script type="text/javascript">
@@ -39,6 +40,10 @@
 		  var clip = new ZeroClipboard($("#copypath"));
 		 
 	});
+	
+	function closeShares(){
+		$("#shareshow").css({"display":"none"});
+	}
 </script>
 </head>
 <body>
@@ -371,15 +376,15 @@
 	</div>
 	
 	<div id="returnsure">
-		<h3 id="shareh3">确认删除<img id="close" src="images/close.png" onclick="closeShare()"></h3>
+		<h3 id="shareh3">确认删除<img id="close" src="images/close.png" onclick="closeShares()"></h3>
 		<span style="display: block; text-align: center;margin-left:185px; margin-top:20px;position: absolute;">确认还原选中的文件??</span>
 		<br/><div id="certain" onclick="deleteFile()"></div>
-		<div id="cancel" onclick="closeShare()"></div>
+		<div id="cancel" onclick="closeShares()"></div>
 	</div>
 	
 	<!-- 显示图片 -->
 	<div id="shareshow">
-		<img id="close" src="images/close.png" onclick="closeShare()">
+		<img id="close" src="images/close.png" onclick="closeShares()">
 		<div id="imgshow" style="width: 720px;height: 600px;float: left;overflow: hidden;"></div>
 	</div>
 </body>
